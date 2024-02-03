@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34525.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogHealthTracker", "DogHealthTracker.csproj", "{803C8587-100E-4ED6-A38F-EDDC6C8EED6B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{803C8587-100E-4ED6-A38F-EDDC6C8EED6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{803C8587-100E-4ED6-A38F-EDDC6C8EED6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{803C8587-100E-4ED6-A38F-EDDC6C8EED6B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{803C8587-100E-4ED6-A38F-EDDC6C8EED6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{803C8587-100E-4ED6-A38F-EDDC6C8EED6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{803C8587-100E-4ED6-A38F-EDDC6C8EED6B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14F2788A-1069-4985-BBED-6E29DA4CF30F}
+	EndGlobalSection
+EndGlobal
