@@ -1,16 +1,32 @@
 ﻿@page "/dogs"
+@using DogHealthTracker.ViewModels.Dog
 
-<h1>Your Dogs</h1>
+<h3>Your Dogs</h3>
 
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<table class="table center" >
+    <thead>
+        <tr>
+            <th>DogID</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>View Dog</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dog in dogViewModel.Dogs)
+        {
+            <tr>
+                <td>@dog.DogID</td>
+                <td>@dog.Name</td>
+                <td>@dog.DateOfBirth</td>
+                <td><button>View Dog</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @code {
-    private int currentCount = 0;
 
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
+    private DogViewModel dogViewModel = new();
+
 }

@@ -1,0 +1,62 @@
+﻿using DogHealthTracker.Models.Dog;
+
+namespace DogHealthTracker.ViewModels.Dog
+{
+
+    public class DogViewModel
+    {
+
+        #region Fields
+
+        public ICollection<DogModel> m_Dogs;
+
+        #endregion
+
+        #region Constructors
+
+        public DogViewModel()
+            => this.OnInitialise();
+
+        #endregion
+
+        #region Properties
+
+        public ICollection<DogModel> Dogs
+        {
+            get => this.m_Dogs;
+            set => this.m_Dogs = value;
+        }
+
+        #endregion
+
+        #region Methods
+
+        public void OnInitialise()
+        {
+            this.Dogs = new List<DogModel>()
+            {
+                new()
+                {
+                    DogID = Guid.NewGuid(),
+                    DateOfBirth = new DateOnly(2013, 1, 31),
+                    Name = "Gigi"
+                },
+                new()
+                {
+                    DogID = Guid.NewGuid(),
+                    DateOfBirth = new DateOnly(2015, 6, 16),
+                    Name = "Daisy"
+                },
+                new()
+                {
+                    DogID = Guid.NewGuid(),
+                    DateOfBirth =new DateOnly(2005, 6, 5),
+                    Name = "Rubble"
+                }
+            };
+        }
+
+        #endregion
+    }
+
+}
