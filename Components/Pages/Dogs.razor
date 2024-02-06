@@ -20,7 +20,9 @@
                 <td>@dog.DogID</td>
                 <td>@dog.Name</td>
                 <td>@dog.DateOfBirth</td>
-                <td><button @onclick=InspectDog>View Dog</button></td>
+                <td><button @onclick=InspectDog 
+                            type="button" 
+                            class="btn btn-primary">View Dog</button></td>
             </tr>
         }
     </tbody>
@@ -31,6 +33,6 @@
     private DogViewModel dogViewModel = new();
 
     private void InspectDog()
-        => Navigation.NavigateTo("/dogoverview");
+        => Navigation.NavigateTo("/dogOverview");
 
 }

@@ -1,8 +1,17 @@
-﻿@page "/dogoverview"
+﻿@page "/dogOverview"
+@inject NavigationManager Navigation;
 
+<div class="d-flex flex-row gap-4">
+    <h3>Name of Dog Overview</h3>
+    <button @onclick="GoBack" 
+            type="button" 
+            class="btn btn-primary">Back</button>
+</div>
 
-<h3>Name of Dog Overview</h3>
 
 @code {
+
+    private void GoBack()
+            => Navigation.NavigateTo("/dogs");
 
 }
