@@ -4,14 +4,48 @@
 @inject NavigationManager m_Navigation;
 @inject DogOverviewViewModel m_DogOverviewViewModel;
 
-<div class="d-flex flex-row gap-4">
-    <h3>Name of Dog Overview</h3>
-    <button @onclick="GoBack" 
-            type="button" 
-            class="btn btn-primary">Back</button>
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <div class="form-group">
+                <button @onclick="GoBack"
+                        type="button"
+                        class="btn btn-primary btn-sm">
+                    Back
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <label>@this.m_DogOverviewViewModel.Dog.Name</label>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h4>Name of Dog</h4>
+                <label>@m_DogOverviewViewModel.Dog.Name</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h4>Date of Birth</h4>
+                <label>@m_DogOverviewViewModel.Dog.DateOfBirth</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h4>Breed</h4>
+                <label>@m_DogOverviewViewModel.Dog.Breed</label>
+            </div>
+        </div>
+    </div>
 </div>
 
 @code {

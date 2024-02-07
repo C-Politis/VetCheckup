@@ -38,19 +38,22 @@ namespace DogHealthTracker.ViewModels.Dog
                 new()
                 {
                     DogID = Guid.NewGuid(),
+                    Breed = "Moodle",
                     DateOfBirth = new DateOnly(2013, 1, 31),
                     Name = "Gigi"
                 },
                 new()
                 {
                     DogID = Guid.NewGuid(),
+                    Breed = "Moodle",
                     DateOfBirth = new DateOnly(2015, 6, 16),
                     Name = "Daisy"
                 },
                 new()
                 {
                     DogID = Guid.NewGuid(),
-                    DateOfBirth =new DateOnly(2005, 6, 5),
+                    Breed = "Chorkie",
+                    DateOfBirth = new DateOnly(2005, 6, 5),
                     Name = "Rubble"
                 }
             };

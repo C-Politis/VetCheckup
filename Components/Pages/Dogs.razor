@@ -5,6 +5,20 @@
 
 <h3>Your Dogs</h3>
 
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <div class="form-group">
+                <button @onclick="CreateDog"
+                        type="button"
+                        class="btn btn-primary btn-sm">
+                    Add Dog
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table class="table center" >
     <thead>
         <tr>
@@ -19,7 +33,7 @@
             <tr>
                 <td>@dog.Name</td>
                 <td>@dog.DateOfBirth</td>
-                <td><button @onclick=InspectDog 
+                <td><button @onclick="() => InspectDog(dog.DogID)" 
                             type="button" 
                             class="btn btn-primary">View Dog</button></td>
             </tr>
@@ -29,7 +43,12 @@
 
 @code {
 
-    private void InspectDog()
-        => Navigation.NavigateTo($"/dogs/dogOverview/{dogViewModel.Dogs.First().DogID}");
+    private void InspectDog(Guid dogID)
+        => Navigation.NavigateTo($"/dogs/dogOverview/{dogID}");
 
+
+    private void CreateDog()
+    {
+        return;
+    }
 }

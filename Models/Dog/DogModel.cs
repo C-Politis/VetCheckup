@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DogHealthTracker.Models.Dog
+﻿namespace DogHealthTracker.Models.Dog
 {
 
     public class DogModel
@@ -12,6 +6,8 @@ namespace DogHealthTracker.Models.Dog
         #region Properties
 
         public Guid DogID { get; set; }
+
+        public string Breed { get; set; }
 
         public DateOnly DateOfBirth { get; set; }
 
