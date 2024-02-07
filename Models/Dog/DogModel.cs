@@ -1,4 +1,4 @@
-﻿namespace DogHealthTracker.Models.Dog
+﻿namespace CanineCheckup.Models.Dog
 {
 
     public class DogModel

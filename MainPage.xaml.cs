@@ -1,4 +1,4 @@
-﻿namespace DogHealthTracker
+﻿namespace CanineCheckup
 {
     public partial class MainPage : ContentPage
     {

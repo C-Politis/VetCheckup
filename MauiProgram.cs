@@ -1,7 +1,7 @@
-﻿using DogHealthTracker.ViewModels.Dog;
+﻿using CanineCheckup.ViewModels.Dog;
 using Microsoft.Extensions.Logging;
 
-namespace DogHealthTracker
+namespace CanineCheckup
 {
     public static class MauiProgram
     {

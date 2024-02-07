@@ -1,12 +1,12 @@
-﻿namespace DogHealthTracker
+﻿namespace CanineCheckup
 {
     public partial class App : Application
     {
         public App()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            MainPage = new MainPage();
+            this.MainPage = new MainPage();
         }
     }
 }

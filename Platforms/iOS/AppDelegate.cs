@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace DogHealthTracker
+namespace CanineCheckup
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

@@ -1,6 +1,6 @@
-﻿using DogHealthTracker.Models.Dog;
+﻿using CanineCheckup.Models.Dog;
 
-namespace DogHealthTracker.ViewModels.Dog
+namespace CanineCheckup.ViewModels.Dog
 {
 
     public class DogViewModel
