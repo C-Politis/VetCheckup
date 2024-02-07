@@ -8,7 +8,7 @@ namespace DogHealthTracker.ViewModels.Dog
 
         #region Fields
 
-        public ICollection<DogModel> m_Dogs;
+        private ICollection<DogModel> m_Dogs;
 
         #endregion
 

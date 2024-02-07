@@ -1,5 +1,8 @@
-﻿@page "/dogOverview"
-@inject NavigationManager Navigation;
+﻿@page "/dogs/dogOverview/{dogID:guid}"
+@using DogHealthTracker.ViewModels.Dog
+@using System.Reflection.Metadata
+@inject NavigationManager m_Navigation;
+@inject DogOverviewViewModel m_DogOverviewViewModel;
 
 <div class="d-flex flex-row gap-4">
     <h3>Name of Dog Overview</h3>
@@ -7,11 +10,19 @@
             type="button" 
             class="btn btn-primary">Back</button>
 </div>
-
+<div>
+    <label>@this.m_DogOverviewViewModel.Dog.Name</label>
+</div>
 
 @code {
 
+    [Parameter]
+    public Guid dogID { get; set; }
+
     private void GoBack()
-            => Navigation.NavigateTo("/dogs");
+        => this.m_Navigation.NavigateTo("/dogs");
+
+    protected override async Task OnInitializedAsync()
+        => await m_DogOverviewViewModel.OnInitialised(dogID);
 
 }

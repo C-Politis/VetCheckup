@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DogHealthTracker.ViewModels.Dog;
+using Microsoft.Extensions.Logging;
 
 namespace DogHealthTracker
 {
@@ -15,11 +16,12 @@ namespace DogHealthTracker
                 });
 
             builder.Services.AddMauiBlazorWebView();
-
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<DogOverviewViewModel>();
+            builder.Services.AddSingleton<DogViewModel>();
 
             return builder.Build();
         }

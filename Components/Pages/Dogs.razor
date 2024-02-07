@@ -1,13 +1,13 @@
 ﻿@page "/dogs"
-@inject NavigationManager Navigation;
 @using DogHealthTracker.ViewModels.Dog
+@inject NavigationManager Navigation;
+@inject DogViewModel dogViewModel;
 
 <h3>Your Dogs</h3>
 
 <table class="table center" >
     <thead>
         <tr>
-            <th>DogID</th>
             <th>Name</th>
             <th>Date of Birth</th>
             <th>View Dog</th>
@@ -17,7 +17,6 @@
         @foreach (var dog in dogViewModel.Dogs)
         {
             <tr>
-                <td>@dog.DogID</td>
                 <td>@dog.Name</td>
                 <td>@dog.DateOfBirth</td>
                 <td><button @onclick=InspectDog 
@@ -30,9 +29,7 @@
 
 @code {
 
-    private DogViewModel dogViewModel = new();
-
     private void InspectDog()
-        => Navigation.NavigateTo("/dogOverview");
+        => Navigation.NavigateTo($"/dogs/dogOverview/{dogViewModel.Dogs.First().DogID}");
 
 }

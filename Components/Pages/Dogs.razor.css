@@ -24,8 +24,3 @@ button {
     button:active {
         background-color: #192e86;
     }
-
-table {
-    display: block;
-    margin-left: -1rem;
-}
