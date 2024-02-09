@@ -1,7 +1,10 @@
 ﻿@page "/dogs"
+@using Blazored.Modal.Services
+@using CanineCheckup.Components.Modals
 @using CanineCheckup.ViewModels.Dog
 @inject NavigationManager Navigation;
 @inject DogViewModel dogViewModel;
+@inject IModalService model;
 
 <h3>Your Dogs</h3>
 
@@ -9,7 +12,7 @@
     <div class="row justify-content-end">
         <div class="col-auto">
             <div class="form-group">
-                <button @onclick="CreateDog"
+                <button @onclick="@(() => model.Show<AddDogModal>("Add a Dog"))"
                         type="button"
                         class="btn btn-primary btn-sm">
                     Add Dog
@@ -23,7 +26,6 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Date of Birth</th>
             <th>View Dog</th>
         </tr>
     </thead>
@@ -32,7 +34,6 @@
         {
             <tr>
                 <td>@dog.Name</td>
-                <td>@dog.DateOfBirth</td>
                 <td><button @onclick="() => InspectDog(dog.DogID)" 
                             type="button" 
                             class="btn btn-primary">View Dog</button></td>
@@ -43,12 +44,10 @@
 
 @code {
 
+
     private void InspectDog(Guid dogID)
         => Navigation.NavigateTo($"/dogs/dogOverview/{dogID}");
 
+    private bool isModalVisible = false;
 
-    private void CreateDog()
-    {
-        return;
-    }
 }

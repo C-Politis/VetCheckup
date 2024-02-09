@@ -1,4 +1,6 @@
-﻿namespace CanineCheckup.Models.Dog
+﻿using CanineCheckup.Enums;
+
+namespace CanineCheckup.Models.Dog
 {
 
     public class DogModel
@@ -12,6 +14,8 @@
         public DateOnly DateOfBirth { get; set; }
 
         public string Name { get; set; }
+
+        public DogBiologicalSex Sex { get; set; }
 
         #endregion
 

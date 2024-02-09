@@ -40,21 +40,24 @@ namespace CanineCheckup.ViewModels.Dog
                     DogID = Guid.NewGuid(),
                     Breed = "Moodle",
                     DateOfBirth = new DateOnly(2013, 1, 31),
-                    Name = "Gigi"
+                    Name = "Gigi",
+                    Sex = Enums.DogBiologicalSex.Female
                 },
                 new()
                 {
                     DogID = Guid.NewGuid(),
                     Breed = "Moodle",
                     DateOfBirth = new DateOnly(2015, 6, 16),
-                    Name = "Daisy"
+                    Name = "Daisy",
+                    Sex = Enums.DogBiologicalSex.Female
                 },
                 new()
                 {
                     DogID = Guid.NewGuid(),
                     Breed = "Chorkie",
                     DateOfBirth = new DateOnly(2005, 6, 5),
-                    Name = "Rubble"
+                    Name = "Rubble",
+                    Sex = Enums.DogBiologicalSex.Male
                 }
             };
         }
