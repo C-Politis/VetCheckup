@@ -41,6 +41,9 @@ namespace CanineCheckup.ViewModels.Dog
             return Task.CompletedTask;
         }
 
+        public void RemoveDog(Guid dogID)
+            => this.DogViewModel.Dogs.Remove(this.DogViewModel.Dogs.FirstOrDefault(dog => dog.DogID == dogID));
+
         #endregion
 
     }

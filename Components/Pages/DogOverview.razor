@@ -58,6 +58,12 @@
     </div>
 </div>
 
+<button @onclick="RemoveDog"
+        type="button"
+        class="btn btn-danger btn-sm">
+    Delete Dog
+</button>
+
 @code {
 
     [Parameter]
@@ -68,5 +74,11 @@
 
     protected override async Task OnInitializedAsync()
         => await m_DogOverviewViewModel.OnInitialised(dogID);
+
+    private void RemoveDog()
+    {
+        this.m_DogOverviewViewModel.RemoveDog(this.dogID);
+        this.GoBack();
+    }
 
 }
