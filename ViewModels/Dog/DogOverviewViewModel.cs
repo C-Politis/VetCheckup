@@ -19,16 +19,16 @@ namespace CanineCheckup.ViewModels.Dog
 
         #region Properties
 
-        public DogViewModel DogViewModel
-        {
-            get => this.m_DogViewModel;
-            set => this.m_DogViewModel = value;
-        }
-
         public DogModel Dog
         {
             get => this.m_DogModel;
             set => this.m_DogModel = value;
+        }
+
+        public DogViewModel DogViewModel
+        {
+            get => this.m_DogViewModel;
+            set => this.m_DogViewModel = value;
         }
 
         #endregion
