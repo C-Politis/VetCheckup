@@ -1,5 +1,6 @@
 ﻿using Blazored.Modal;
 using CanineCheckup.ViewModels.Dog;
+using CanineCheckup.ViewModels.Modal;
 using Microsoft.Extensions.Logging;
 
 namespace CanineCheckup
@@ -22,6 +23,7 @@ namespace CanineCheckup
             builder.Logging.AddDebug();
 #endif
             builder.Services.AddBlazoredModal();
+            builder.Services.AddSingleton<AddDogModalViewModel>();
             builder.Services.AddSingleton<DogOverviewViewModel>();
             builder.Services.AddSingleton<DogViewModel>();
 
