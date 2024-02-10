@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace DogHealthTracker
+namespace CanineCheckup
 {
     public class Program
     {

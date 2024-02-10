@@ -1,0 +1,72 @@
+﻿@page "/dogs/dogOverview/{dogID:guid}"
+@using CanineCheckup.ViewModels.Dog
+@using System.Reflection.Metadata
+@inject NavigationManager m_Navigation;
+@inject DogOverviewViewModel m_DogOverviewViewModel;
+
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <div class="form-group">
+                <button @onclick="GoBack"
+                        type="button"
+                        class="btn btn-primary btn-sm">
+                    Back
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h4>Name</h4>
+                <label>@m_DogOverviewViewModel.Dog.Name</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h4>Sex</h4>
+                <label>@m_DogOverviewViewModel.Dog.Sex</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h4>Date of Birth</h4>
+                <label>@m_DogOverviewViewModel.Dog.DateOfBirth</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <h4>Breed</h4>
+                <label>@m_DogOverviewViewModel.Dog.Breed</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public Guid dogID { get; set; }
+
+    private void GoBack()
+        => this.m_Navigation.NavigateTo("/dogs");
+
+    protected override async Task OnInitializedAsync()
+        => await m_DogOverviewViewModel.OnInitialised(dogID);
+
+}

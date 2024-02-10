@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Blazored.Modal;
+using CanineCheckup.ViewModels.Dog;
+using CanineCheckup.ViewModels.Modal;
+using Microsoft.Extensions.Logging;
 
-namespace DogHealthTracker
+namespace CanineCheckup
 {
     public static class MauiProgram
     {
@@ -15,11 +18,14 @@ namespace DogHealthTracker
                 });
 
             builder.Services.AddMauiBlazorWebView();
-
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
+            builder.Services.AddBlazoredModal();
+            builder.Services.AddSingleton<AddDogModalViewModel>();
+            builder.Services.AddSingleton<DogOverviewViewModel>();
+            builder.Services.AddSingleton<DogViewModel>();
 
             return builder.Build();
         }
