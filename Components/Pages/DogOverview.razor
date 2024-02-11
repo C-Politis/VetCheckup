@@ -1,8 +1,12 @@
 ﻿@page "/dogs/dogOverview/{dogID:guid}"
+@using Blazored.Modal
+@using Blazored.Modal.Services
+@using CanineCheckup.Components.Modals
 @using CanineCheckup.ViewModels.Dog
 @using System.Reflection.Metadata
-@inject NavigationManager m_Navigation;
 @inject DogOverviewViewModel m_DogOverviewViewModel;
+@inject IModalService m_Model;
+@inject NavigationManager m_Navigation;
 
 <div class="container">
     <div class="row justify-content-end">
@@ -57,14 +61,24 @@
         </div>
     </div>
 </div>
-
-<button @onclick="RemoveDog"
-        type="button"
-        class="btn btn-danger btn-sm">
-    Delete Dog
-</button>
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <div class="form-group">
+                <button @onclick="@this.ConfirmDelete(this.m_DogOverviewViewModel.Dog.Name)"
+                        type="button"
+                        class="btn btn-danger btn-sm">
+                    Delete Dog
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
+
+    [Parameter]
+    public EventCallback OnDeleteConfirm { get; set; }
 
     [Parameter]
     public Guid dogID { get; set; }
@@ -74,6 +88,13 @@
 
     protected override async Task OnInitializedAsync()
         => await m_DogOverviewViewModel.OnInitialised(dogID);
+
+    private async Task ConfirmDelete(string dogName)
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("ConfirmAction", EventCallback.Factory.Create(this, OnDeleteConfirm));
+        // await this.m_Model.Show<AddDogModal>("Add a Dog");
+    }
 
     private void RemoveDog()
     {
