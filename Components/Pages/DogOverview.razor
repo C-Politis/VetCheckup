@@ -8,45 +8,39 @@
 @inject IModalService m_Model;
 @inject NavigationManager m_Navigation;
 
-<div class="container">
-
-    <div class="row">
-        <div class="col">
-            <div class="d-inline-block">
-                <h1>@this.m_DogOverviewViewModel.Dog.Name's Overview</h1>
-            </div>
-            <div class="d-inline-block float-right ms-6">
-                <button @onclick="GoBack"
-                        type="button"
-                        class="btn btn-primary btn-sm">
-                    Back
-                </button>
-            </div>
+<div class="row">
+    <div class="col">
+        <div class="d-inline-block">
+            <h1>@this.m_DogOverviewViewModel.Dog.Name's Overview</h1>
         </div>
-    </div>
-
-    <!-- Dog Information Card -->
-    <div class="card mb-3">
-        <div class="card-body">
-
-            <ul class="list-unstyled">
-                <li><strong>Breed:</strong> @this.m_DogOverviewViewModel.Dog.Breed</li>
-                <li><strong>Date Of Birth:</strong> @this.m_DogOverviewViewModel.Dog.DateOfBirth</li>
-                <li><strong>Microchip Number:</strong> @this.m_DogOverviewViewModel.Dog.MicrochipNumber</li>
-                <li><strong>Sex:</strong> @this.m_DogOverviewViewModel.Dog.Sex</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Confirmation Button -->
-    <div class="row justify-content-end">
-        <div class="col-auto">
-            <button @onclick="ShowConfirmModal"
+        <div class="d-inline-block float-right ms-6">
+            <button @onclick="GoBack"
                     type="button"
-                    class="btn btn-danger btn-sm">
-                Remove Dog
+                    class="btn btn-primary btn-sm">
+                Back
             </button>
         </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <ul class="list-unstyled">
+            <li><strong>Breed:</strong> @this.m_DogOverviewViewModel.Dog.Breed</li>
+            <li><strong>Date Of Birth:</strong> @this.m_DogOverviewViewModel.Dog.DateOfBirth</li>
+            <li><strong>Microchip Number:</strong> @this.m_DogOverviewViewModel.Dog.MicrochipNumber</li>
+            <li><strong>Sex:</strong> @this.m_DogOverviewViewModel.Dog.Sex</li>
+        </ul>
+    </div>
+</div>
+
+<div class="row justify-content-end">
+    <div class="col-auto">
+        <button @onclick="ShowConfirmModal"
+                type="button"
+                class="btn btn-danger btn-sm">
+            Remove Dog
+        </button>
     </div>
 </div>
 

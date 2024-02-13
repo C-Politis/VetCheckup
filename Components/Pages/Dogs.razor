@@ -6,19 +6,14 @@
 @inject IModalService m_Model;
 @inject NavigationManager m_Navigation;
 
-<h3>Your Dogs</h3>
-
-<div class="container">
-    <div class="row justify-content-end">
-        <div class="col-auto">
-            <div class="form-group">
-                <button @onclick="@(() => m_Model.Show<AddDogModal>("Add a Dog"))"
-                        type="button"
-                        class="btn btn-primary btn-sm">
-                    Add Dog
-                </button>
-            </div>
-        </div>
+<div class="row">
+    <div class="col d-flex justify-content-between">
+        <h3>Your Dogs</h3>
+        <button @onclick="@(() => m_Model.Show<AddDogModal>("Add a Dog"))"
+                type="button"
+                class="btn btn-primary btn-sm">
+            Add Dog
+        </button>
     </div>
 </div>
 

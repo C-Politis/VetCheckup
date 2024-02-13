@@ -5,6 +5,7 @@ namespace CanineCheckup.Models.Dog
 
     public class DogModel
     {
+
         #region Properties
 
         public Guid DogID { get; set; }
