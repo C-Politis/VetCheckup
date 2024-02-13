@@ -17,11 +17,10 @@
     </div>
 </div>
 
-<table class="table center" >
+<table class="table center">
     <thead>
         <tr>
             <th>Name</th>
-            <th>View Dog</th>
         </tr>
     </thead>
     <tbody>
@@ -29,9 +28,13 @@
         {
             <tr>
                 <td>@dog.Name</td>
-                <td><button @onclick="() => InspectDog(dog.DogID)" 
-                            type="button" 
-                            class="btn btn-primary">View Dog</button></td>
+                <td class="text-end">
+                    <button @onclick="() => InspectDog(dog.DogID)"
+                            type="button"
+                            class="btn btn-primary w-50">
+                        View
+                    </button>
+                </td>
             </tr>
         }
     </tbody>
