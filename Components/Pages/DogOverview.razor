@@ -9,9 +9,13 @@
 @inject NavigationManager m_Navigation;
 
 <div class="container">
-    <div class="row justify-content-end">
-        <div class="col-auto">
-            <div class="form-group">
+
+    <div class="row">
+        <div class="col">
+            <div class="d-inline-block">
+                <h1>@this.m_DogOverviewViewModel.Dog.Name's Overview</h1>
+            </div>
+            <div class="d-inline-block float-right ms-6">
                 <button @onclick="GoBack"
                         type="button"
                         class="btn btn-primary btn-sm">
@@ -20,57 +24,28 @@
             </div>
         </div>
     </div>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col">
-                <h4>Name</h4>
-                <label>@this.m_DogOverviewViewModel.Dog.Name</label>
-            </div>
+
+    <!-- Dog Information Card -->
+    <div class="card mb-3">
+        <div class="card-body">
+
+            <ul class="list-unstyled">
+                <li><strong>Breed:</strong> @this.m_DogOverviewViewModel.Dog.Breed</li>
+                <li><strong>Date Of Birth:</strong> @this.m_DogOverviewViewModel.Dog.DateOfBirth</li>
+                <li><strong>Microchip Number:</strong> @this.m_DogOverviewViewModel.Dog.MicrochipNumber</li>
+                <li><strong>Sex:</strong> @this.m_DogOverviewViewModel.Dog.Sex</li>
+            </ul>
         </div>
     </div>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col">
-                <h4>Sex</h4>
-                <label>@this.m_DogOverviewViewModel.Dog.Sex</label>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col">
-                <h4>Date of Birth</h4>
-                <label>@this.m_DogOverviewViewModel.Dog.DateOfBirth</label>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col">
-                <h4>Breed</h4>
-                <label>@this.m_DogOverviewViewModel.Dog.Breed</label>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
+
+    <!-- Confirmation Button -->
     <div class="row justify-content-end">
         <div class="col-auto">
-            <div class="form-group">
-                <button @onclick="ShowConfirmModal"
-                        type="button"
-                        class="btn btn-danger btn-sm">
-                    Remove Dog
-                </button>
-            </div>
+            <button @onclick="ShowConfirmModal"
+                    type="button"
+                    class="btn btn-danger btn-sm">
+                Remove Dog
+            </button>
         </div>
     </div>
 </div>

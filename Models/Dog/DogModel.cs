@@ -13,6 +13,8 @@ namespace CanineCheckup.Models.Dog
 
         public DateOnly DateOfBirth { get; set; }
 
+        public string MicrochipNumber { get; set; }
+
         public string Name { get; set; }
 
         public DogBiologicalSex Sex { get; set; }
