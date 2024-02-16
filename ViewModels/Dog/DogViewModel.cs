@@ -47,6 +47,18 @@ namespace CanineCheckup.ViewModels.Dog
                         new()
                         {
                             PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = DateOnly.FromDateTime(DateTime.Now),
+                            Duration = new TimeSpan(5, 6, 22)
+                        },
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
+                            Duration = new TimeSpan(5, 6, 22)
+                        },
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
                             PhysicalActivityDate = new DateOnly(2022, 1, 1),
                             Duration = new TimeSpan(5, 6, 22)
                         }
@@ -62,6 +74,18 @@ namespace CanineCheckup.ViewModels.Dog
                     Name = "Daisy",
                     PhysicalActivity = new List<PhysicalActivity>()
                     {
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
+                            Duration = new TimeSpan(5, 6, 22)
+                        },
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = DateOnly.FromDateTime(DateTime.Now),
+                            Duration = new TimeSpan(5, 6, 22)
+                        },
                         new()
                         {
                             PhysicalActivityID = Guid.NewGuid(),
@@ -84,6 +108,18 @@ namespace CanineCheckup.ViewModels.Dog
                         {
                             PhysicalActivityID = Guid.NewGuid(),
                             PhysicalActivityDate = new DateOnly(2022, 1, 1),
+                            Duration = new TimeSpan(5, 6, 22)
+                        },
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
+                            Duration = new TimeSpan(5, 6, 22)
+                        },
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = DateOnly.FromDateTime(DateTime.Now),
                             Duration = new TimeSpan(5, 6, 22)
                         }
                     },
