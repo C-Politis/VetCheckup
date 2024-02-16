@@ -18,6 +18,8 @@ namespace CanineCheckup.Models.Dog
 
         public string Name { get; set; }
 
+        public ICollection<PhysicalActivity> PhysicalActivity { get; set; }
+
         public DogBiologicalSex Sex { get; set; }
 
         #endregion

@@ -42,6 +42,15 @@ namespace CanineCheckup.ViewModels.Dog
                     DateOfBirth = new DateOnly(2013, 1, 31),
                     MicrochipNumber = "A123456789",
                     Name = "Gigi",
+                    PhysicalActivity = new List<PhysicalActivity>()
+                    {
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
+                            Duration = new TimeSpan(5, 6, 22)
+                        }
+                    },
                     Sex = Enums.DogBiologicalSex.Female
                 },
                 new()
@@ -51,6 +60,15 @@ namespace CanineCheckup.ViewModels.Dog
                     DateOfBirth = new DateOnly(2015, 6, 16),
                     MicrochipNumber = "A124356789",
                     Name = "Daisy",
+                    PhysicalActivity = new List<PhysicalActivity>()
+                    {
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
+                            Duration = new TimeSpan(5, 6, 22)
+                        }
+                    },
                     Sex = Enums.DogBiologicalSex.Female
                 },
                 new()
@@ -60,6 +78,15 @@ namespace CanineCheckup.ViewModels.Dog
                     DateOfBirth = new DateOnly(2005, 6, 5),
                     MicrochipNumber = "A123456879",
                     Name = "Rubble",
+                    PhysicalActivity = new List<PhysicalActivity>()
+                    {
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
+                            Duration = new TimeSpan(5, 6, 22)
+                        }
+                    },
                     Sex = Enums.DogBiologicalSex.Male
                 }
             };
