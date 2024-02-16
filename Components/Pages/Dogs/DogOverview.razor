@@ -71,10 +71,10 @@
     {
         var parameters = new ModalParameters();
         parameters.Add(nameof(ConfirmDeleteDogModal.OnConfirm), EventCallback.Factory.Create(this, this.RemoveDog));
-        var modal = m_Model.Show<ConfirmDeleteDogModal>($"Are you sure you want to remove {this.m_DogOverviewViewModel.Dog.Name}?", parameters);
+        var modal = this.m_Model.Show<ConfirmDeleteDogModal>($"Are you sure you want to remove {this.m_DogOverviewViewModel.Dog.Name}?", parameters);
     }
 
     private void ViewPhysicalActivity()
-        => this.m_Navigation.NavigateTo("/physicalactivity");
+        => this.m_Model.Show<PhysicalActivity>($"Physical Activity");
 
 }
