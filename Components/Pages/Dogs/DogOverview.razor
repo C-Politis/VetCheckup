@@ -34,7 +34,7 @@
     </div>
 </div>
 
-<div class="card mb-3">
+<div class="card mb-3" @onclick="ViewPhysicalActivity">
     <div class="card-body d-flex flex-column align-items-flex-start">
         <label>Physical Activity</label>
         <button type="button" class="btn btn-primary btn-sm record-activity-button">Record Activity</button>
@@ -73,5 +73,8 @@
         parameters.Add(nameof(ConfirmDeleteDogModal.OnConfirm), EventCallback.Factory.Create(this, this.RemoveDog));
         var modal = m_Model.Show<ConfirmDeleteDogModal>($"Are you sure you want to remove {this.m_DogOverviewViewModel.Dog.Name}?", parameters);
     }
+
+    private void ViewPhysicalActivity()
+        => this.m_Navigation.NavigateTo("/physicalactivity");
 
 }
