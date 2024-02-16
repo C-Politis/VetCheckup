@@ -1,0 +1,47 @@
+﻿@page "/physicalactivity"
+@using CanineCheckup.Models.Dog
+@using CanineCheckup.ViewModels.Dog
+@using CanineCheckup.ViewModels.Modal
+@inject PhysicalActivityModalViewModel m_PhysicalActivityModalViewModel;
+
+<div>
+    <MudChart ChartType="ChartType.Bar" 
+              ChartSeries="@Series" 
+              @bind-SelectedIndex="Index" 
+              XAxisLabels="@this.XAxisLabels" 
+              Width="100%" 
+              Height="350px">
+    </MudChart>
+</div>
+
+<MudText Typo="Typo.h6">Selected portion of the chart: @Index</MudText>
+
+@code {
+
+    [Parameter]
+    public DogModel Dog { get; set; }
+
+    private int Index = -1;
+
+    public List<ChartSeries> Series { get; set; }
+
+    public string[] XAxisLabels { get; set; }
+
+    protected override void OnParametersSet()
+    {
+
+        this.m_PhysicalActivityModalViewModel.Dog = this.Dog;
+
+        Series = new List<ChartSeries>()
+        {
+            new ChartSeries()
+            {
+                Name = "Physical Activity Duration",
+                Data = this.m_PhysicalActivityModalViewModel.InitialiseData()
+            },
+        };
+
+        XAxisLabels = this.m_PhysicalActivityModalViewModel.InitialiseLabels();
+    }
+
+}

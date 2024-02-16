@@ -72,6 +72,10 @@
     }
 
     private void ViewPhysicalActivity()
-        => this.m_Model.Show<PhysicalActivity>($"Physical Activity");
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("Dog", this.m_DogOverviewViewModel.Dog);
+        var modal = this.m_Model.Show<PhysicalActivityModal>(parameters);
+    }
 
 }

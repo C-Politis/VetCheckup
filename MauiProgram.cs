@@ -28,6 +28,7 @@ namespace CanineCheckup
             builder.Services.AddSingleton<AddDogModalViewModel>();
             builder.Services.AddSingleton<DogOverviewViewModel>();
             builder.Services.AddSingleton<DogViewModel>();
+            builder.Services.AddSingleton<PhysicalActivityModalViewModel>();
 
             return builder.Build();
         }

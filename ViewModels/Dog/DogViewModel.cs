@@ -47,6 +47,12 @@ namespace CanineCheckup.ViewModels.Dog
                         new()
                         {
                             PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = new DateOnly(2022, 1, 2),
+                            Duration = new TimeSpan(3, 2, 22)
+                        },
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
                             PhysicalActivityDate = DateOnly.FromDateTime(DateTime.Now),
                             Duration = new TimeSpan(5, 6, 22)
                         },
@@ -54,13 +60,7 @@ namespace CanineCheckup.ViewModels.Dog
                         {
                             PhysicalActivityID = Guid.NewGuid(),
                             PhysicalActivityDate = new DateOnly(2022, 1, 1),
-                            Duration = new TimeSpan(5, 6, 22)
-                        },
-                        new()
-                        {
-                            PhysicalActivityID = Guid.NewGuid(),
-                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
-                            Duration = new TimeSpan(5, 6, 22)
+                            Duration = new TimeSpan(1, 2, 32)
                         }
                     },
                     Sex = Enums.DogBiologicalSex.Female
@@ -77,8 +77,8 @@ namespace CanineCheckup.ViewModels.Dog
                         new()
                         {
                             PhysicalActivityID = Guid.NewGuid(),
-                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
-                            Duration = new TimeSpan(5, 6, 22)
+                            PhysicalActivityDate = new DateOnly(2022, 1, 2),
+                            Duration = new TimeSpan(3, 2, 22)
                         },
                         new()
                         {
@@ -90,7 +90,7 @@ namespace CanineCheckup.ViewModels.Dog
                         {
                             PhysicalActivityID = Guid.NewGuid(),
                             PhysicalActivityDate = new DateOnly(2022, 1, 1),
-                            Duration = new TimeSpan(5, 6, 22)
+                            Duration = new TimeSpan(1, 2, 32)
                         }
                     },
                     Sex = Enums.DogBiologicalSex.Female
@@ -107,20 +107,20 @@ namespace CanineCheckup.ViewModels.Dog
                         new()
                         {
                             PhysicalActivityID = Guid.NewGuid(),
-                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
-                            Duration = new TimeSpan(5, 6, 22)
-                        },
-                        new()
-                        {
-                            PhysicalActivityID = Guid.NewGuid(),
-                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
-                            Duration = new TimeSpan(5, 6, 22)
+                            PhysicalActivityDate = new DateOnly(2022, 1, 2),
+                            Duration = new TimeSpan(3, 2, 22)
                         },
                         new()
                         {
                             PhysicalActivityID = Guid.NewGuid(),
                             PhysicalActivityDate = DateOnly.FromDateTime(DateTime.Now),
                             Duration = new TimeSpan(5, 6, 22)
+                        },
+                        new()
+                        {
+                            PhysicalActivityID = Guid.NewGuid(),
+                            PhysicalActivityDate = new DateOnly(2022, 1, 1),
+                            Duration = new TimeSpan(1, 2, 32)
                         }
                     },
                     Sex = Enums.DogBiologicalSex.Male
