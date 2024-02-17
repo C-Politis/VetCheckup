@@ -33,7 +33,10 @@
 <div class="card mb-3" @onclick="ViewPhysicalActivity">
     <div class="card-body d-flex flex-column align-items-flex-start">
         <label>Physical Activity</label>
-        <label>Time Spent: @this.m_DogOverviewViewModel.Dog.PhysicalActivity.Where(pa => pa.PhysicalActivityDate == DateOnly.FromDateTime(DateTime.Now)).FirstOrDefault().Duration</label>
+        <label>Time Spent: @this.m_DogOverviewViewModel.Dog.PhysicalActivity.Where(pa => pa.PhysicalActivityDate == DateOnly.FromDateTime(DateTime.Now))
+                                                                            .FirstOrDefault()
+                                                                            .Duration
+        </label>
         <button type="button" class="btn btn-primary btn-sm record-activity-button">Record Activity</button>
     </div>
 </div>
@@ -68,7 +71,8 @@
     {
         var parameters = new ModalParameters();
         parameters.Add(nameof(ConfirmDeleteDogModal.OnConfirm), EventCallback.Factory.Create(this, this.RemoveDog));
-        var modal = this.m_Model.Show<ConfirmDeleteDogModal>($"Are you sure you want to remove {this.m_DogOverviewViewModel.Dog.Name}?", parameters);
+        var modal = this.m_Model
+                        .Show<ConfirmDeleteDogModal>($"Are you sure you want to remove {this.m_DogOverviewViewModel.Dog.Name}?", parameters);
     }
 
     private void ViewPhysicalActivity()
