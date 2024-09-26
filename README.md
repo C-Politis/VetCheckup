@@ -1,6 +1,6 @@
-﻿# CanineCheckup
+﻿# VetCheckup
 
-The project was generated using the [Clean.Architecture.Solution.Template](https://github.com/jasontaylordev/CanineCheckup) version 8.0.6.
+The project was generated using the [Clean.Architecture.Solution.Template](https://github.com/jasontaylordev/VetCheckup) version 8.0.6.
 
 ## Build
 
