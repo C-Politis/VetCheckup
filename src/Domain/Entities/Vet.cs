@@ -1,4 +1,5 @@
 ﻿namespace VetCheckup.Domain.Entities;
+
 public class Vet
 {
 
