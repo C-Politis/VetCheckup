@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using VetCheckup.Domain.Constants;
+﻿using VetCheckup.Domain.Constants;
 using VetCheckup.Domain.Entities;
 using VetCheckup.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
