@@ -5,6 +5,12 @@
         <AssemblyName>VetCheckup.Application.FunctionalTests</AssemblyName>
     </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Application\Application.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\VetCheckupWebApp\Web\Web.csproj" />
+  </ItemGroup>
+  
     <ItemGroup>
       <None Remove="appsettings.json" />
     </ItemGroup>
@@ -35,9 +41,5 @@
         <PackageReference Include="Respawn" />
         <PackageReference Include="Testcontainers.MsSql" />
     </ItemGroup>
-    
-    <ItemGroup>
-        <ProjectReference Include="..\..\src\Web\Web.csproj" />
-    </ItemGroup>
-
+   
 </Project>
