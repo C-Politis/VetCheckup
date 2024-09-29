@@ -1,6 +1,6 @@
-namespace VetCheckup.Domain.Entities;
+﻿namespace VetCheckup.Domain.Entities;
 
-public class Owner : BaseAuditableEntity
+public class Vet
 {
 
     #region Properties
@@ -9,7 +9,7 @@ public class Owner : BaseAuditableEntity
 
     public required string Name { get; set; }
 
-    public Guid OwnerId { get; set; } 
+    public Guid VetId { get; set; } 
 
     #endregion
 
