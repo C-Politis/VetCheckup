@@ -9,7 +9,7 @@ public enum Sex
     
     Male = 0,
 
-    Unknown = 2
+    Other = 2
 
     #endregion
 
