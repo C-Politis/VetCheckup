@@ -5,9 +5,9 @@ public class Contact
     
     #region Properties
     
-    public int ContactId { get; set; }
+    public Guid ContactId { get; set; }
 
-    public required string Email { get; set; }
+    public string? Email { get; set; }
 
     public int? Mobile { get; set; } 
     
