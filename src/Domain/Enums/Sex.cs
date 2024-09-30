@@ -5,9 +5,9 @@ public enum Sex
 
     #region Enums
     
-    Male = 0,
-    
     Female = 1,
+    
+    Male = 0,
 
     Unknown = 2
 
