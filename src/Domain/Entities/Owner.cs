@@ -1,6 +1,6 @@
 namespace VetCheckup.Domain.Entities;
 
-public class Owner : BaseAuditableEntity
+public class Owner
 {
 
     #region Properties
