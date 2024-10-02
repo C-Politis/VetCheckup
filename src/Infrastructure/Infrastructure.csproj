@@ -25,4 +25,11 @@
     <ProjectReference Include="..\Application\Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Configurations\" />
+    <Folder Include="Data\Interceptors\" />
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Identity\" />
+  </ItemGroup>
+
 </Project>
