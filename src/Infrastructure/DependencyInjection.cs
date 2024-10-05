@@ -1,14 +1,8 @@
-﻿using VetCheckup.Application.Common.Interfaces;
-using VetCheckup.Domain.Constants;
-using VetCheckup.Infrastructure.Data;
-using VetCheckup.Infrastructure.Data.Interceptors;
-using VetCheckup.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace VetCheckup.Infrastructure;
 
 public static class DependencyInjection
 {
@@ -18,30 +12,30 @@ public static class DependencyInjection
 
         Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
 
-        services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
-        services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+        //services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+        //services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
-        services.AddDbContext<ApplicationDbContext>((sp, options) =>
-        {
-            options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+        //services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        //{
+        //    options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
 
-            options.UseSqlServer(connectionString);
-        });
+        //    options.UseSqlServer(connectionString);
+        //});
 
-        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        //services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
-        services.AddScoped<ApplicationDbContextInitialiser>();
+        //services.AddScoped<ApplicationDbContextInitialiser>();
 
-        services
-            .AddDefaultIdentity<ApplicationUser>()
-            .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+        //services
+        //    .AddDefaultIdentity<ApplicationUser>()
+        //    .AddRoles<IdentityRole>()
+        //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        services.AddSingleton(TimeProvider.System);
-        services.AddTransient<IIdentityService, IdentityService>();
+        //services.AddSingleton(TimeProvider.System);
+        //services.AddTransient<IIdentityService, IdentityService>();
 
-        services.AddAuthorization(options =>
-            options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
+        //services.AddAuthorization(options =>
+        //    options.AddPolicy(Policies.CanPurge, policy => policy.RequireRole(Roles.Administrator)));
 
         return services;
     }
