@@ -1,0 +1,27 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace VetCheckup.Infrastructure.Configurations;
+public class VetPetConfiguration : IEntityTypeConfiguration<VetPet>
+{
+
+    #region Methods
+
+    public void Configure(EntityTypeBuilder<VetPet> builder)
+    {
+        builder.ToTable(nameof(VetPet));
+
+        builder.HasOne(e => e.Pet)
+            .WithMany()
+            .IsRequired();
+
+        builder.HasOne<Vet>()
+            .WithMany()
+            .IsRequired();
+
+        builder.HasKey(nameof(Vet.VetId), nameof(Pet.PetId));
+    }
+
+    #endregion
+
+}

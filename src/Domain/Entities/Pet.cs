@@ -11,7 +11,7 @@ public class Pet
 
     public required string Name { get; set; }
 
-    public Guid OwnerId { get; set; }
+    public required Owner Owner { get; set; }
 
     public Guid PetId { get; set; }
 
