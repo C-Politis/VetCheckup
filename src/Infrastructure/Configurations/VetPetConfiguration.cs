@@ -19,7 +19,7 @@ public class VetPetConfiguration : IEntityTypeConfiguration<VetPet>
             .WithMany()
             .IsRequired();
 
-        builder.HasKey(nameof(Vet.VetId), nameof(Pet.PetId));
+        builder.HasKey("VetId", "PetId");
     }
 
     #endregion
