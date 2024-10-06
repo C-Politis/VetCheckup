@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace VetCheckup.Infrastructure.Configurations;
@@ -14,13 +11,11 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
     {
         builder.ToTable(nameof(Owner));
 
-        builder.HasOne(e => e.Address)
-            .WithOne()
-            .IsRequired();
+        builder.OwnsOne(e => e.Address)
+            .WithOwner();
 
-        builder.HasOne(e => e.ContactDetails)
-            .WithOne()
-            .IsRequired();
+        builder.OwnsOne(e => e.ContactDetails)
+            .WithOwner();
 
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
