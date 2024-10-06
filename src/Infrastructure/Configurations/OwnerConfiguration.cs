@@ -18,6 +18,7 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
+            .HasForeignKey<Contact>("ContactId")
             .IsRequired();
 
         builder.Property(e => e.DateOfBirth)

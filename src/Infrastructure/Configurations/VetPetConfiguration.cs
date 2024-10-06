@@ -13,10 +13,12 @@ public class VetPetConfiguration : IEntityTypeConfiguration<VetPet>
 
         builder.HasOne(e => e.Pet)
             .WithMany()
+            .HasForeignKey("PetId")
             .IsRequired();
 
         builder.HasOne(e => e.Vet)
             .WithMany()
+            .HasForeignKey("VetId")
             .IsRequired();
 
         builder.HasKey("VetId", "PetId");

@@ -13,10 +13,12 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
 
         builder.HasOne(e => e.Address)
             .WithOne()
+            .HasForeignKey<Address>("AddressId")
             .IsRequired();
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
+            .HasForeignKey<Contact>("ContactId")
             .IsRequired();
 
         builder.Property(e => e.DateOfBirth)
