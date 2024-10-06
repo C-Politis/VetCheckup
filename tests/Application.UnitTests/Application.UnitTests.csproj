@@ -19,12 +19,15 @@
         </PackageReference>
         <PackageReference Include="FluentAssertions" />
         <PackageReference Include="Moq" />
-        <PackageReference Include="VetCheckup.Application" />
-        <PackageReference Include="VetCheckup.Infrastructure" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Common\Mappings\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Application\Application.csproj" />
+      <ProjectReference Include="..\..\src\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>
