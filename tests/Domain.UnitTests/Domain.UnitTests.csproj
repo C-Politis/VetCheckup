@@ -18,10 +18,7 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="FluentAssertions" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\src\Domain\Domain.csproj" />
+        <PackageReference Include="VetCheckup.Application" />
     </ItemGroup>
 
 </Project>

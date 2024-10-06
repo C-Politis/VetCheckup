@@ -3,6 +3,9 @@
   <PropertyGroup>
     <RootNamespace>VetCheckup.Domain</RootNamespace>
     <AssemblyName>VetCheckup.Domain</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Christian Politis, Jacob Tuckwell</Authors>
+    <Company>Christian Politis, Jacob Tuckwell</Company>
   </PropertyGroup>
 
   <ItemGroup>

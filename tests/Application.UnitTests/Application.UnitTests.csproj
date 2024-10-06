@@ -19,11 +19,8 @@
         </PackageReference>
         <PackageReference Include="FluentAssertions" />
         <PackageReference Include="Moq" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\src\Application\Application.csproj" />
-        <ProjectReference Include="..\..\src\Infrastructure\Infrastructure.csproj" />
+        <PackageReference Include="VetCheckup.Application" />
+        <PackageReference Include="VetCheckup.Infrastructure" />
     </ItemGroup>
 
     <ItemGroup>

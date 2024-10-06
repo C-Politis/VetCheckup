@@ -3,6 +3,9 @@
   <PropertyGroup>
     <RootNamespace>VetCheckup.Application</RootNamespace>
     <AssemblyName>VetCheckup.Application</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Christian Politis, Jacob Tuckwell</Authors>
+    <Company>Christian Politis, Jacob Tuckwell</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,10 +13,7 @@
     <PackageReference Include="AutoMapper" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <PackageReference Include="VetCheckup.Domain" />
   </ItemGroup>
 
 </Project>
