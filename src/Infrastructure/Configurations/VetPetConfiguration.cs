@@ -15,7 +15,7 @@ public class VetPetConfiguration : IEntityTypeConfiguration<VetPet>
             .WithMany()
             .IsRequired();
 
-        builder.HasOne<Vet>()
+        builder.HasOne(e => e.Vet)
             .WithMany()
             .IsRequired();
 

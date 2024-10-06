@@ -7,7 +7,7 @@ public class VetPet
 
     public required Pet Pet { get; set; }
 
-    public required Vet VetId { get; set; }
+    public required Vet Vet { get; set; }
 
     #endregion
 
