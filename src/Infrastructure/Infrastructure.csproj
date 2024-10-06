@@ -3,6 +3,9 @@
   <PropertyGroup>
     <RootNamespace>VetCheckup.Infrastructure</RootNamespace>
     <AssemblyName>VetCheckup.Infrastructure</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Christian Politis, Jacob Tuckwell</Authors>
+    <Company>Christian Politis, Jacob Tuckwell</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,6 +41,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

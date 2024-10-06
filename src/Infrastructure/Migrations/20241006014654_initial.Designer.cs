@@ -13,7 +13,7 @@ namespace VetCheckup.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20241006014654_initial")]
-    partial class initial
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

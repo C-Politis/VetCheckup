@@ -22,12 +22,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Application\Application.csproj" />
-        <ProjectReference Include="..\..\src\Infrastructure\Infrastructure.csproj" />
+      <Folder Include="Common\Mappings\" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Common\Mappings\" />
+      <ProjectReference Include="..\..\src\Application\Application.csproj" />
+      <ProjectReference Include="..\..\src\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>
