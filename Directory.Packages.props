@@ -42,8 +42,5 @@
     <PackageVersion Include="Microsoft.Maui.Controls" Version="8.0.3" />
     <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-    <PackageVersion Include="VetCheckup.Application" Version="1.0.0" />
-    <PackageVersion Include="VetCheckup.Domain" Version="1.0.0" />
-    <PackageVersion Include="VetCheckup.Infrastructure" Version="1.0.0" />
   </ItemGroup>
 </Project>
