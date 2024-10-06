@@ -11,11 +11,14 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
     {
         builder.ToTable(nameof(Owner));
 
-        builder.OwnsOne(e => e.Address)
-            .WithOwner();
+        builder.HasOne(e => e.Address)
+            .WithOne()
+            .HasForeignKey("AddressId")
+            .IsRequired();
 
-        builder.OwnsOne(e => e.ContactDetails)
-            .WithOwner();
+        builder.HasOne(e => e.ContactDetails)
+            .WithOne()
+            .IsRequired();
 
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
