@@ -5,7 +5,7 @@ public class Pet
 
     #region Properties
 
-    public DateOnly DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }
 
     public int? MicrochipId { get; set; }
 

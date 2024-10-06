@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VetCheckup.Infrastructure.Data;
 
 namespace VetCheckup.Infrastructure;
 
@@ -15,16 +17,12 @@ public static class DependencyInjection
         //services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         //services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
-        //services.AddDbContext<ApplicationDbContext>((sp, options) =>
-        //{
-        //    options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        {
+            options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
 
-        //    options.UseSqlServer(connectionString);
-        //});
-
-        //services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-
-        //services.AddScoped<ApplicationDbContextInitialiser>();
+            options.UseSqlServer(connectionString);
+        });
 
         //services
         //    .AddDefaultIdentity<ApplicationUser>()
