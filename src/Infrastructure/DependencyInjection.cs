@@ -24,6 +24,12 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString);
         });
 
+        using var _ServiceProvider = services.BuildServiceProvider();
+        {
+            var _DbContext = _ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            _DbContext.Database.Migrate();
+        }
+
         //services
         //    .AddDefaultIdentity<ApplicationUser>()
         //    .AddRoles<IdentityRole>()
