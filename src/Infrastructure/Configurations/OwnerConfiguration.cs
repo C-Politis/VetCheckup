@@ -13,7 +13,7 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
 
         builder.HasOne(e => e.Address)
             .WithOne()
-            .HasForeignKey<Owner>(e => e.Address.AddressId)
+            .HasForeignKey<Address>("AddressId")
             .IsRequired();
 
         builder.HasOne(e => e.ContactDetails)
