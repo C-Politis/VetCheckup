@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace VetCheckup.Infrastructure.Data;
+
 public class ApplicationDbContext : DbContext
 {
 
@@ -10,7 +10,7 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
-        
+
     }
 
     #region Methods

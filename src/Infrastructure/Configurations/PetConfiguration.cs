@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using VetCheckup.Domain.Enums;
 
 namespace VetCheckup.Infrastructure.Configurations;
+
 public class PetConfiguration : IEntityTypeConfiguration<Pet>
 {
 

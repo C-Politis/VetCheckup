@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace VetCheckup.Infrastructure.Configurations;
+
 public class VetConfiguration : IEntityTypeConfiguration<Vet>
 {
 

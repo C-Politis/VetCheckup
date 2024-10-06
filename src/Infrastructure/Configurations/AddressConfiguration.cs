@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Infrastructure.Configurations;
+
 public class AddressConfiguration : IEntityTypeConfiguration<Address>
 {
 
@@ -33,7 +30,7 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
         builder.Property(e => e.Suburb)
             .HasMaxLength(100);
 
-        builder.HasKey(e => e.AddressId);  
+        builder.HasKey(e => e.AddressId);
     }
 
     #endregion

@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 namespace VetCheckup.Infrastructure;
+
 public static class AssemblyUtility
 {
 
