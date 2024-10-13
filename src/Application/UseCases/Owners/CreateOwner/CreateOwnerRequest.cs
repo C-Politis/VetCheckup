@@ -7,7 +7,7 @@ public class CreateOwnerRequest : IRequest
 
     public required CreateAddressRequest Address { get; set; }
 
-    public required CreateContactRequest Contact { get; set; }
+    public required CreateContactRequest ContactDetails { get; set; }
 
     public required DateTime DateOfBirth { get; set; }
 
