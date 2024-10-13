@@ -1,6 +1,7 @@
 ﻿using VetCheckup.Application.Common.EntityRequestValidators;
 
 namespace VetCheckup.Application.UseCases.Owners.CreateOwner;
+
 public class CreateOwnerRequestValidator : AbstractValidator<CreateOwnerRequest>
 {
 

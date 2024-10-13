@@ -1,6 +1,7 @@
 ﻿using VetCheckup.Application.Common.EntityRequests;
 
 namespace VetCheckup.Application.UseCases.Owners.CreateOwner;
+
 public class CreateOwnerRequest : IRequest
 {
     #region Properties

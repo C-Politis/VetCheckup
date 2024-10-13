@@ -1,6 +1,7 @@
 ﻿using VetCheckup.Application.Common.EntityRequests;
 
 namespace VetCheckup.Application.Common.EntityRequestValidators;
+
 public class CreateAddressRequestValidator : AbstractValidator<CreateAddressRequest>
 {
 

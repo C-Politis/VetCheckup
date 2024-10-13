@@ -1,6 +1,7 @@
 ﻿using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Owners.CreateOwner;
+
 public class CreateOwnerProfile : Profile
 {
     #region Constructors

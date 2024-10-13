@@ -2,6 +2,7 @@
 using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.Common.Mappings;
+
 public class EntityRequestProfile : Profile
 {
 
