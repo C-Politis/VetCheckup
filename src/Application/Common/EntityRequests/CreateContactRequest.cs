@@ -7,7 +7,7 @@ public class CreateContactRequest
 
     public string? Email { get; set; }
 
-    public string? Mobile { get; set; }
+    public int? Mobile { get; set; }
 
     #endregion
 
