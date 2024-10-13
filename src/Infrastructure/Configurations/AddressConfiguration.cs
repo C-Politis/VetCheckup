@@ -13,7 +13,8 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
         builder.ToTable(nameof(Address));
 
         builder.Property(e => e.AddressId)
-            .IsRequired();
+            .IsRequired()
+            .ValueGeneratedOnAdd();
 
         builder.Property(e => e.Country)
             .HasMaxLength(100);

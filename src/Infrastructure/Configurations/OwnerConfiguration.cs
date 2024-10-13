@@ -31,7 +31,8 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
             .HasMaxLength(100);
 
         builder.Property(e => e.OwnerId)
-            .IsRequired();
+            .IsRequired()
+            .ValueGeneratedOnAdd();
 
         builder.HasKey(e => e.OwnerId);
     }

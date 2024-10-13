@@ -13,7 +13,8 @@ public class ContactConfiguration : IEntityTypeConfiguration<Contact>
         builder.ToTable(nameof(Contact));
 
         builder.Property(e => e.ContactId)
-            .IsRequired();
+            .IsRequired()
+            .ValueGeneratedOnAdd();
 
         builder.Property(e => e.Email)
             .HasMaxLength(100);
