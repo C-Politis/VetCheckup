@@ -30,7 +30,8 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
             .IsRequired();
 
         builder.Property(e => e.VetId)
-            .IsRequired();
+            .IsRequired()
+            .ValueGeneratedOnAdd();
 
         builder.HasKey(e => e.VetId);
     }
