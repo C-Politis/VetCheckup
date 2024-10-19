@@ -43,7 +43,7 @@ public class CreateAddressRequestValidatorTests
     [Test]
     public void Country_ExceedsMaxLength_ValidationFailure()
     {
-        _createAddressRequest.Country = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        _createAddressRequest.Country = new string('a', 101);
 
         var expectedFailure = new ValidationFailure()
         {
@@ -84,7 +84,7 @@ public class CreateAddressRequestValidatorTests
     [Test]
     public void PostalCode_ExceedsMaxLength_ValidationFailure()
     {
-        _createAddressRequest.PostalCode = "aaaaaaaaaaaaaaaaaaaaa";
+        _createAddressRequest.PostalCode = new string('a', 21); ;
 
         var expectedFailure = new ValidationFailure()
         {
@@ -125,7 +125,7 @@ public class CreateAddressRequestValidatorTests
     [Test]
     public void State_ExceedsMaxLength_ValidationFailure()
     {
-        _createAddressRequest.State = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        _createAddressRequest.State = new string('a', 101); ;
 
         var expectedFailure = new ValidationFailure()
         {
@@ -166,7 +166,7 @@ public class CreateAddressRequestValidatorTests
     [Test]
     public void StreetAddress_ExceedsMaxLength_ValidationFailure()
     {
-        _createAddressRequest.StreetAddress = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        _createAddressRequest.StreetAddress = new string('a', 251);
 
         var expectedFailure = new ValidationFailure()
         {
@@ -207,7 +207,7 @@ public class CreateAddressRequestValidatorTests
     [Test]
     public void Suburb_ExceedsMaxLength_ValidationFailure()
     {
-        _createAddressRequest.Suburb = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        _createAddressRequest.Suburb = new string('a', 101);
 
         var expectedFailure = new ValidationFailure()
         {

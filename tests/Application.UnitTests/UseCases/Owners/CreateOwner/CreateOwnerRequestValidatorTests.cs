@@ -38,7 +38,7 @@ public class CreateOwnerRequestValidatorTests
     [Test]
     public void Name_ExceedsMaxLength_ValidationFailures()
     {
-        _createOwnerRequest.Name = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        _createOwnerRequest.Name = new string('a', 101);
 
         var expectedFailure = new ValidationFailure()
         {
