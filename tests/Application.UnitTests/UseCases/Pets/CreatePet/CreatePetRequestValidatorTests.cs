@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Moq;
+using FluentAssertions;
+using FluentValidation;
+using FluentValidation.Results;
 using NUnit.Framework;
-using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.CreatePet;
-using VetCheckup.Domain.Entities;
 using VetCheckup.Domain.Enums;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
@@ -15,70 +13,126 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
     {
         #region Fields
 
-        private readonly Mock<IDbContext> _mockContext = new();
-        private readonly Mock<IMapper> _mockMapper = new();
-
-        private readonly IRequestHandler<CreatePetRequest> _createPetInteractor;
-        private readonly CreatePetRequest _createPetRequest;
-        private readonly Mock<DbSet<Pet>> _mockPetDbSet = new();
-
-        #endregion
-
-        #region Constructors
-
-        public CreatePetRequestValidatorTests()
+        private readonly IValidator<CreatePetRequest> _createPetRequestValidator = new CreatePetRequestValidator();
+        private readonly CreatePetRequest _createPetRequest = new()
         {
-            _createPetRequest = new CreatePetRequest()
-            {
-                Name = "New Pet",
-                DateOfBirth = new DateTime(2000, 01, 01),
-                Species = "Dog",
-                MicrochipId = 1234567890,
-                Sex = Sex.Male,
-                OwnerId = Guid.NewGuid()
-            };
-
-            _mockContext
-                .Setup(e => e.Get<Owner>())
-                .Returns(() => new List<Owner>()
-                {
-                    new()
-                    {
-                        OwnerId = _createPetRequest.OwnerId,
-                        Address = new Address { Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
-                        ContactDetails = new Contact(),
-                        Name = "Owner Name"
-                    }
-                }.AsQueryable());
-
-            _mockMapper
-                .Setup(e => e.Map<Pet>(It.IsAny<CreatePetRequest>()))
-                .Returns(() => new Pet()
-                {
-                    Name = _createPetRequest.Name,
-                    DateOfBirth = _createPetRequest.DateOfBirth,
-                    Species = _createPetRequest.Species,
-                    MicrochipId = _createPetRequest.MicrochipId,
-                    Owner = new Owner()
-                    {
-                        Address = new() { Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
-                        ContactDetails = new Contact(),
-                        Name = "Owner Name"
-                    }
-                });
-
-            _createPetInteractor = new CreatePetInteractor(this._mockContext.Object, this._mockMapper.Object);
-        }
+            Name = string.Empty,
+            Species = string.Empty,
+            Sex = Sex.Male,
+            OwnerId = Guid.Empty,
+            DateOfBirth = DateTime.MinValue
+        };
 
         #endregion
+
 
         #region Validator Tests
 
         [Test]
-        public async Task CreatingPet_AddsNewPetToContext()
+        public void Name_ValidInput_NoValidationFailures()
         {
-            await this._createPetInteractor.Handle(_createPetRequest, CancellationToken.None);
-            this._mockContext.Verify(mock => mock.Add(It.IsAny<Pet>()), Times.Once);
+            _createPetRequest.Name = "Valid Name";
+            var result = _createPetRequestValidator.Validate(_createPetRequest);
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
+                .Should().BeEmpty();
+        }
+
+        [Test]
+        public void Name_ExceedsMaxLength_ValidationFailures()
+        {
+            _createPetRequest.Name = new string('a', 101);
+            var expectedFailure = new ValidationFailure()
+            {
+                PropertyName = nameof(CreatePetRequest.Name),
+                AttemptedValue = _createPetRequest.Name,
+                ErrorMessage = "The length of 'Name' must be 100 characters or fewer. You entered 101 characters.",
+                ErrorCode = "MaximumLengthValidator"
+            };
+            var result = _createPetRequestValidator.Validate(_createPetRequest);
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
+                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
+        }
+
+        [Test]
+        public void Name_IsEmpty_ValidationFailures()
+        {
+            _createPetRequest.Name = string.Empty;
+            var expectedFailure = new ValidationFailure()
+            {
+                PropertyName = nameof(CreatePetRequest.Name),
+                AttemptedValue = _createPetRequest.Name,
+                ErrorMessage = "'Name' must not be empty.",
+                ErrorCode = "NotEmptyValidator"
+            };
+            var result = _createPetRequestValidator.Validate(_createPetRequest);
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
+                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
+        }
+
+        [Test]
+        public void Species_ValidInput_NoValidationFailures()
+        {
+            _createPetRequest.Species = "Valid Species";
+            var result = _createPetRequestValidator.Validate(_createPetRequest);
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
+                .Should().BeEmpty();
+        }
+
+        [Test]
+        public void Species_ExceedsMaxLength_ValidationFailures()
+        {
+            _createPetRequest.Species = new string('a', 51);
+            var expectedFailure = new ValidationFailure()
+            {
+                PropertyName = nameof(CreatePetRequest.Species),
+                AttemptedValue = _createPetRequest.Species,
+                ErrorMessage = "The length of 'Species' must be 50 characters or fewer. You entered 51 characters.",
+                ErrorCode = "MaximumLengthValidator"
+            };
+            var result = _createPetRequestValidator.Validate(_createPetRequest);
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
+                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
+        }
+
+        [Test]
+        public void Species_IsEmpty_ValidationFailures()
+        {
+            _createPetRequest.Species = string.Empty;
+            var expectedFailure = new ValidationFailure()
+            {
+                PropertyName = nameof(CreatePetRequest.Species),
+                AttemptedValue = _createPetRequest.Species,
+                ErrorMessage = "'Species' must not be empty.",
+                ErrorCode = "NotEmptyValidator"
+            };
+            var result = _createPetRequestValidator.Validate(_createPetRequest);
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
+                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
+        }
+
+        [Test]
+        public void OwnerId_ValidInput_NoValidationFailures()
+        {
+            _createPetRequest.OwnerId = Guid.NewGuid();
+            var result = _createPetRequestValidator.Validate(_createPetRequest);
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.OwnerId), StringComparison.OrdinalIgnoreCase))
+                .Should().BeEmpty();
+        }
+
+        [Test]
+        public void OwnerId_IsEmpty_ValidationFailures()
+        {
+            _createPetRequest.OwnerId = Guid.Empty;
+            var expectedFailure = new ValidationFailure()
+            {
+                PropertyName = nameof(CreatePetRequest.OwnerId),
+                AttemptedValue = _createPetRequest.OwnerId,
+                ErrorMessage = "'Owner Id' must not be empty.",
+                ErrorCode = "NotEmptyValidator"
+            };
+            var result = _createPetRequestValidator.Validate(_createPetRequest);
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.OwnerId), StringComparison.OrdinalIgnoreCase))
+                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
         #endregion
