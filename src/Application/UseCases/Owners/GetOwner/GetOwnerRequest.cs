@@ -7,7 +7,7 @@ using VetCheckup.Application.Dtos;
 
 namespace VetCheckup.Application.UseCases.Owners.GetOwner
 {
-    public class GetOwnerRequest : IRequest
+    public class GetOwnerRequest : IRequest<OwnerDto>
     {
 
         #region Properties
