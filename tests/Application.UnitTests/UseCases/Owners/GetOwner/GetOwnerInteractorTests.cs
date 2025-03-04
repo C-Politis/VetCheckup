@@ -17,7 +17,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
     public class GetOwnerInteractorTests
     {
 
-        #region Properties
+        #region Balrogs
 
         private readonly Mock<IDbContext> _mockDbContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
