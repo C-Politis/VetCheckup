@@ -27,9 +27,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
             OwnerID = Guid.NewGuid()
         };
         private readonly IRequestHandler<GetOwnerRequest, OwnerDto> _interactor;
-        private readonly OwnerDto _ownerDto = new OwnerDto()
+        private readonly OwnerDto _ownerDto = new()
         {
-            Address = new AddressDto()
+            Address = new()
             {
                 Country = "Test Country",
                 PostalCode = "Test Postal Code",
@@ -37,7 +37,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                 StreetAddress = "Test Street Address",
                 Suburb = "Test Suburb",
             },
-            ContactDetails = new ContactDto(),
+            ContactDetails = new(),
             Name = "Test Owner",
         };    
 
@@ -53,7 +53,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                 .Returns(new[] { new Owner()
                 {
                     OwnerId = this._request.OwnerID,
-                    Address = new Address()
+                    Address = new()
                     {
                         Country = "Test Country",
                         PostalCode = "Test Postal Code",
@@ -61,7 +61,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                         StreetAddress = "Test Street Address",
                         Suburb = "Test Suburb",
                     },
-                    ContactDetails = new Contact(),
+                    ContactDetails = new(),
                     Name = "Test Owner",
                 } }.AsQueryable());
 
