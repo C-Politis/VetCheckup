@@ -27,9 +27,6 @@ public class CreatePetRequestValidator : AbstractValidator<CreatePetRequest>
             .IsInEnum()
             .NotEmpty();
 
-        _ = this.RuleFor(e => e.OwnerId)
-            .NotEmpty();
-
     }
 
     #endregion

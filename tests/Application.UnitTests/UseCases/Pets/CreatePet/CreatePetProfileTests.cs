@@ -8,7 +8,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
 {
     public class CreatePetProfileTests
     {
-        #region MyRegion
+        #region MyPrecious
 
         [Test]
         public void CreatePetProfile_ProfileConfigurationValidation()
