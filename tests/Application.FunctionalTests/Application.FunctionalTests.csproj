@@ -6,7 +6,6 @@
     </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\VetCheckupWebApp\Web\Web.csproj" />
     <ProjectReference Include="..\..\src\Application\Application.csproj" />
     <ProjectReference Include="..\..\src\Domain\Domain.csproj" />
   </ItemGroup>
