@@ -4,6 +4,7 @@ namespace VetCheckup.Application.UseCases.Owners.CreateOwner;
 
 public class CreateOwnerRequest : IRequest
 {
+    
     #region Properties
 
     public required CreateAddressRequest Address { get; set; }
