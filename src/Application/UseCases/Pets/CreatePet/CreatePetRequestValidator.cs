@@ -28,7 +28,6 @@ public class CreatePetRequestValidator : AbstractValidator<CreatePetRequest>
             .NotEmpty();
 
         _ = this.RuleFor(e => e.OwnerId)
-            .NotNull()
             .NotEmpty();
 
     }

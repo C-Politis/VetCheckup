@@ -8,6 +8,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
 {
     public class CreatePetProfileTests
     {
+        #region MyRegion
+
         [Test]
         public void CreatePetProfile_ProfileConfigurationValidation()
             => new MapperConfiguration(cfg =>
@@ -15,5 +17,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 cfg.AddProfile<CreatePetProfile>();
                 cfg.AddProfile<EntityRequestProfile>();
             }).AssertConfigurationIsValid();
+        
+        #endregion
     }
 }
