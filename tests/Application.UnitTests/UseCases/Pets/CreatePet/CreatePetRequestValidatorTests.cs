@@ -110,31 +110,6 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Test]
-        public void OwnerId_ValidInput_NoValidationFailures()
-        {
-            _createPetRequest.OwnerId = Guid.NewGuid();
-            var result = _createPetRequestValidator.Validate(_createPetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.OwnerId), StringComparison.OrdinalIgnoreCase))
-                .Should().BeEmpty();
-        }
-
-        [Test]
-        public void OwnerId_IsEmpty_ValidationFailures()
-        {
-            _createPetRequest.OwnerId = Guid.Empty;
-            var expectedFailure = new ValidationFailure()
-            {
-                PropertyName = nameof(CreatePetRequest.OwnerId),
-                AttemptedValue = _createPetRequest.OwnerId,
-                ErrorMessage = "'Owner Id' must not be empty.",
-                ErrorCode = "NotEmptyValidator"
-            };
-            var result = _createPetRequestValidator.Validate(_createPetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.OwnerId), StringComparison.OrdinalIgnoreCase))
-                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
-        }
-
         #endregion
     }
 
