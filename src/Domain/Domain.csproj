@@ -6,6 +6,10 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Christian Politis, Jacob Tuckwell</Authors>
     <Company>Christian Politis, Jacob Tuckwell</Company>
+    <RepositoryUrl>https://github.com/C-Politis/VetCheckup</RepositoryUrl>
+    <FileVersion>1.0.1</FileVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <PackageVersion>1.0.1</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
