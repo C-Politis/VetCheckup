@@ -24,7 +24,7 @@ namespace VetCheckup.Application.UseCases.Pets.UpdatePet
 
             _ = this.RuleFor(e => e.Sex)
                 .IsInEnum()
-                .When(e => e.Species != null);
+                .When(e => e.Sex != null);
         }
 
         #endregion
