@@ -13,7 +13,7 @@ namespace VetCheckup.Application.UseCases.Pets.UpdatePet
         Task IRequestHandler<UpdatePetRequest>.Handle(UpdatePetRequest request, CancellationToken cancellationToken)
         {
             var pet = context.Get<Pet>().FirstOrDefault(e => e.PetId == request.PetId) ?? throw new Exception("Pet not found");
-            if (request.OwnerId != Guid.Empty)
+            if (request.OwnerId != null)
             {
                 var owner = context.Get<Owner>().FirstOrDefault(e => e.OwnerId == request.OwnerId) ?? throw new Exception("Owner not found");
                 pet.Owner = owner;
