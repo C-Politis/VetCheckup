@@ -124,23 +124,6 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
         }
 
         [Test]
-        public void OwnerId_IsEmpty_ValidationFailures()
-        {
-            _updatePetRequest.OwnerId = Guid.Empty;
-            var expectedFailure = new ValidationFailure()
-            {
-                PropertyName = nameof(UpdatePetRequest.OwnerId),
-                AttemptedValue = _updatePetRequest.OwnerId,
-                ErrorMessage = "'Owner Id' must not be empty.",
-                ErrorCode = "NotEmptyValidator"
-            };
-            var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.OwnerId), StringComparison.OrdinalIgnoreCase))
-                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
-        }
-
-
-        [Test]
         public void DateOfBirth_ValidInput_NoValidationFailures()
         {
             _updatePetRequest.DateOfBirth = new DateTime(2010, 01, 01);
@@ -157,23 +140,6 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
             result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.PetId), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
-
-        [Test]
-        public void PetID_IsEmpty_ValidationFailures()
-        {
-            _updatePetRequest.PetId = Guid.Empty;
-            var expectedFailure = new ValidationFailure()
-            {
-                PropertyName = nameof(UpdatePetRequest.PetId),
-                AttemptedValue = _updatePetRequest.PetId,
-                ErrorMessage = "'Pet Id' must not be empty.",
-                ErrorCode = "NotEmptyValidator"
-            };
-            var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.PetId), StringComparison.OrdinalIgnoreCase))
-                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
-        }
-
 
         [Test]
         public void Sex_ValidInput_NoValidationFailures()

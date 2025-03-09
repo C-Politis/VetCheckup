@@ -14,20 +14,16 @@ namespace VetCheckup.Application.UseCases.Pets.UpdatePet
         {
             _ = this.RuleFor(e => e.Name)
                 .MaximumLength(100)
-                .NotEmpty();
+                .NotEmpty()
+                .When(e => e.Name != null);
 
             _ = this.RuleFor(e => e.Species)
                 .MaximumLength(50)
-                .NotEmpty();
+                .NotEmpty()
+                .When(e => e.Species != null);
 
             _ = this.RuleFor(e => e.Sex)
                 .IsInEnum();
-
-            _ = this.RuleFor(e => e.PetId)
-                .NotEmpty();
-
-            _ = this.RuleFor(e => e.OwnerId)
-                .NotEmpty();
         }
 
         #endregion

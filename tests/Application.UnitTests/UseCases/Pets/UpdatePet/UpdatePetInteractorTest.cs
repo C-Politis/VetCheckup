@@ -53,7 +53,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                .Returns(() => new Pet
                {
                    PetId = _updatePetRequest.PetId,
-                   Name = _updatePetRequest.Name,
+                   Name = _updatePetRequest.Name ?? string.Empty,
                    DateOfBirth = (DateTime)_updatePetRequest.DateOfBirth,
                    Owner = new Owner
                    {
@@ -69,7 +69,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                        ContactDetails = new Contact(),
                        Name = "Owner Name"
                    },
-                   Species = _updatePetRequest.Species
+                   Species = _updatePetRequest.Species ?? string.Empty
                });
 
             _mockContext
@@ -118,7 +118,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                         Species = "Dog"
                     }
                 }.AsQueryable());
-        } 
+        }
 
         #endregion
 
