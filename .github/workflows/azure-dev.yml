@@ -2,10 +2,10 @@ name: Build and Test Dev
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "**" ]  # Triggers on all branches
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:  # Allows manual trigger from GitHub UI
+    branches: [ "**" ]  # Runs on PRs from any branch
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   build-and-test:
