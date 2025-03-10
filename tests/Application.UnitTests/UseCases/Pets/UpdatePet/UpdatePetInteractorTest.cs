@@ -57,7 +57,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                    DateOfBirth = (DateTime)_updatePetRequest.DateOfBirth,
                    Owner = new Owner
                    {
-                       OwnerId = _updatePetRequest.OwnerId,
+                       OwnerId = (Guid)_updatePetRequest.OwnerId,
                        Address = new Address
                        {
                            Country = "Country",
@@ -78,7 +78,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 {
                     new Owner
                     {
-                        OwnerId = _updatePetRequest.OwnerId,
+                        OwnerId = (Guid)_updatePetRequest.OwnerId,
                         Address = new Address
                         {
                             Country = "Country",
@@ -103,7 +103,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                         DateOfBirth = new DateTime(2010, 01, 01),
                         Owner = new Owner
                         {
-                            OwnerId = _updatePetRequest.OwnerId,
+                            OwnerId = (Guid)_updatePetRequest.OwnerId,
                             Address = new Address
                             {
                                 Country = "Country",
