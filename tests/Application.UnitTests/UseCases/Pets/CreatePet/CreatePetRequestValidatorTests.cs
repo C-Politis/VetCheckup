@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using NUnit.Framework;
 using VetCheckup.Application.UseCases.Pets.CreatePet;
 using VetCheckup.Domain.Enums;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
 {
@@ -27,18 +27,24 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
 
         #region Validator Tests
 
-        [Test]
+        [Fact]
         public void Name_ValidInput_NoValidationFailures()
         {
+            // Arrange
             _createPetRequest.Name = "Valid Name";
+
+            // Act
             var result = _createPetRequestValidator.Validate(_createPetRequest);
+
+            // Assert
             result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void Name_ExceedsMaxLength_ValidationFailures()
         {
+            // Arrange
             _createPetRequest.Name = new string('a', 101);
             var expectedFailure = new ValidationFailure()
             {
@@ -47,14 +53,19 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 ErrorMessage = "The length of 'Name' must be 100 characters or fewer. You entered 101 characters.",
                 ErrorCode = "MaximumLengthValidator"
             };
+
+            // Act
             var result = _createPetRequestValidator.Validate(_createPetRequest);
+
+            // Assert
             result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Test]
+        [Fact]
         public void Name_IsEmpty_ValidationFailures()
         {
+            // Arrange
             _createPetRequest.Name = string.Empty;
             var expectedFailure = new ValidationFailure()
             {
@@ -63,23 +74,33 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 ErrorMessage = "'Name' must not be empty.",
                 ErrorCode = "NotEmptyValidator"
             };
+
+            // Act
             var result = _createPetRequestValidator.Validate(_createPetRequest);
+
+            // Assert
             result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Test]
+        [Fact]
         public void Species_ValidInput_NoValidationFailures()
         {
+            // Arrange
             _createPetRequest.Species = "Valid Species";
+
+            // Act
             var result = _createPetRequestValidator.Validate(_createPetRequest);
+
+            // Assert
             result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void Species_ExceedsMaxLength_ValidationFailures()
         {
+            // Arrange
             _createPetRequest.Species = new string('a', 51);
             var expectedFailure = new ValidationFailure()
             {
@@ -88,14 +109,19 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 ErrorMessage = "The length of 'Species' must be 50 characters or fewer. You entered 51 characters.",
                 ErrorCode = "MaximumLengthValidator"
             };
+
+            // Act
             var result = _createPetRequestValidator.Validate(_createPetRequest);
+
+            // Assert
             result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Test]
+        [Fact]
         public void Species_IsEmpty_ValidationFailures()
         {
+            // Arrange
             _createPetRequest.Species = string.Empty;
             var expectedFailure = new ValidationFailure()
             {
@@ -104,7 +130,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 ErrorMessage = "'Species' must not be empty.",
                 ErrorCode = "NotEmptyValidator"
             };
+
+            // Act
             var result = _createPetRequestValidator.Validate(_createPetRequest);
+
+            // Assert
             result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }

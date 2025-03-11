@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
-using NUnit.Framework;
 using VetCheckup.Application.Dtos;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.GetPet;
 using VetCheckup.Domain.Entities;
 using VetCheckup.Domain.Enums;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
 {
@@ -43,7 +43,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
             },
             PetId = Guid.NewGuid(),
             Species = "Test Species"
-        }; 
+        };
 
         #endregion
 
@@ -89,23 +89,28 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
 
         #region Interactor Tests
 
-        [Test]
+        [Fact]
         public async Task GettingPet_PetExists()
         {
+            //Act
             var pet = await this._interactor.Handle(this._request, default);
-            
-            Assert.That(pet, Is.EqualTo(this._petDto));
+
+            //Assert
+            Assert.Equal(this._petDto, pet);
         }
 
 
-        [Test]
-        public void GettingPet_ThrowsExceptionWhenOwnerNotFound()
+        [Fact]
+        public async Task GettingPet_ThrowsExceptionWhenOwnerNotFound()
         {
+            //Arrange
             this._request.PetId = Guid.NewGuid();
 
+            //Act
             var handleMethod = async () => await this._interactor.Handle(this._request, default);
 
-            Assert.ThrowsAsync<Exception>(() => handleMethod(), "Pet not found.");
+            //Assert
+            await Assert.ThrowsAsync<Exception>(handleMethod);
         }
 
         #endregion

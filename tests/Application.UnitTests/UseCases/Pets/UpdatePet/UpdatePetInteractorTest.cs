@@ -3,10 +3,10 @@ using System.Threading;
 using AutoMapper;
 using MediatR;
 using Moq;
-using NUnit.Framework;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.UpdatePet;
 using VetCheckup.Domain.Entities;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
 {
@@ -35,75 +35,37 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 Species = "Dog"
             };
 
-            _updatePetInteractor = new UpdatePetInteractor(_mockContext.Object, _mockMapper.Object);
-        }
+            _mockContext
+                .Setup(e => e.Get<Pet>())
+                .Returns(new List<Pet> { new Pet
+                        {
+                            PetId = _updatePetRequest.PetId,
+                            Name = "Old Pet",
+                            DateOfBirth = new DateTime(2010, 01, 01),
+                            Owner = new Owner
+                            {
+                                OwnerId = _updatePetRequest.OwnerId ?? Guid.Empty,
+                                Address = new Address
+                                {
+                                    Country = "Country",
+                                    PostalCode = "PostalCode",
+                                    State = "State",
+                                    StreetAddress = "StreetAddress",
+                                    Suburb = "Suburb"
+                                },
+                                ContactDetails = new Contact(),
+                                Name = "Owner Name"
+                            },
+                            Species = "Dog"
+                        }
+            }.AsQueryable());
 
-        #endregion
-
-        #region Setup Method
-
-        [SetUp]
-        public void Setup()
-        {
-            _updatePetRequest.PetId = Guid.NewGuid();
-            _updatePetRequest.OwnerId = Guid.NewGuid();
-
-            _mockMapper
-               .Setup(e => e.Map<Pet>(It.IsAny<UpdatePetRequest>()))
-               .Returns(() => new Pet
-               {
-                   PetId = _updatePetRequest.PetId,
-                   Name = _updatePetRequest.Name ?? string.Empty,
-                   DateOfBirth = (DateTime)_updatePetRequest.DateOfBirth,
-                   Owner = new Owner
-                   {
-                       OwnerId = (Guid)_updatePetRequest.OwnerId,
-                       Address = new Address
-                       {
-                           Country = "Country",
-                           PostalCode = "PostalCode",
-                           State = "State",
-                           StreetAddress = "StreetAddress",
-                           Suburb = "Suburb"
-                       },
-                       ContactDetails = new Contact(),
-                       Name = "Owner Name"
-                   },
-                   Species = _updatePetRequest.Species ?? string.Empty
-               });
 
             _mockContext
                 .Setup(e => e.Get<Owner>())
-                .Returns(new List<Owner>
-                {
-                    new Owner
-                    {
-                        OwnerId = (Guid)_updatePetRequest.OwnerId,
-                        Address = new Address
+                .Returns(new List<Owner> { new Owner
                         {
-                            Country = "Country",
-                            PostalCode = "PostalCode",
-                            State = "State",
-                            StreetAddress = "StreetAddress",
-                            Suburb = "Suburb"
-                        },
-                        ContactDetails = new Contact(),
-                        Name = "Owner Name"
-                    }
-                }.AsQueryable());
-
-            _mockContext
-                .Setup(e => e.Get<Pet>())
-                .Returns(new List<Pet>
-                {
-                    new Pet
-                    {
-                        PetId = _updatePetRequest.PetId,
-                        Name = "Old Pet",
-                        DateOfBirth = new DateTime(2010, 01, 01),
-                        Owner = new Owner
-                        {
-                            OwnerId = (Guid)_updatePetRequest.OwnerId,
+                            OwnerId = _updatePetRequest.OwnerId ?? Guid.Empty,
                             Address = new Address
                             {
                                 Country = "Country",
@@ -114,38 +76,73 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                             },
                             ContactDetails = new Contact(),
                             Name = "Owner Name"
-                        },
-                        Species = "Dog"
-                    }
-                }.AsQueryable());
+                        } }.AsQueryable());
+
+            _mockMapper
+                .Setup(e => e.Map(It.IsAny<UpdatePetRequest>(), It.IsAny<Pet>()))
+                .Callback<UpdatePetRequest, Pet>((request, pet) =>
+                {
+                    pet.Name = request.Name ?? pet.Name;
+                    pet.DateOfBirth = request.DateOfBirth;
+                    pet.Species = request.Species ?? pet.Species;
+                });
+
+            _updatePetInteractor = new UpdatePetInteractor(this._mockContext.Object, this._mockMapper.Object);
+
         }
 
         #endregion
 
         #region Interactor Tests
 
-        [Test]
+        [Fact]
         public async Task UpdatingPet_UpdatesExistingPetToContextAsync()
         {
+            // Act
             await _updatePetInteractor.Handle(_updatePetRequest, CancellationToken.None);
-            var updatedPet = _mockContext.Object.Get<Pet>().First();
-            updatedPet.Name = "Cool Pet";
 
-            Assert.That(updatedPet.Name, Is.EqualTo("Cool Pet"));
+            // Assert
+            _mockContext.Verify(mock => mock.Get<Pet>(), Times.Once);
+            _mockContext.Verify(mock => mock.Get<Owner>(), Times.Once);
+            _mockMapper.Verify(mock => mock.Map(It.IsAny<UpdatePetRequest>(), It.IsAny<Pet>()), Times.Once);
         }
 
-        [Test]
-        public void UpdatingPet_ThrowsExceptionWhenOwnerNotFound()
+        [Fact]
+        public async Task UpdatingPet_ThrowsExceptionWhenOwnerNotFound()
         {
-            _updatePetRequest.OwnerId = Guid.NewGuid();
-            Assert.ThrowsAsync<Exception>(() => _updatePetInteractor.Handle(_updatePetRequest, CancellationToken.None));
+
+            // Arrange
+            var nonExistentOwnerRequest = new UpdatePetRequest
+            {
+                PetId = _updatePetRequest.PetId,
+                Name = "Non Existent Owner",
+                DateOfBirth = new DateTime(2010, 01, 01),
+                OwnerId = Guid.NewGuid(),
+                Species = "Dog"
+            };
+
+            // Act & Assert
+            await Assert.ThrowsAsync<Exception>(async () =>
+                await _updatePetInteractor.Handle(nonExistentOwnerRequest, CancellationToken.None));
+
         }
 
-        [Test]
-        public void UpdatingPet_ThrowsExceptionWhenPetNotFound()
+        [Fact]
+        public async Task UpdatingPet_ThrowsExceptionWhenPetNotFound()
         {
-            _updatePetRequest.PetId = Guid.NewGuid();
-            Assert.ThrowsAsync<Exception>(() => _updatePetInteractor.Handle(_updatePetRequest, CancellationToken.None));
+            // Arrange
+            var nonExistentPetRequest = new UpdatePetRequest
+            {
+                PetId = Guid.NewGuid(),
+                Name = "Non Existent Pet",
+                DateOfBirth = new DateTime(2010, 01, 01),
+                OwnerId = _updatePetRequest.OwnerId,
+                Species = "Dog"
+            };
+
+            // Act & Assert
+            await Assert.ThrowsAsync<Exception>(async () =>
+                await _updatePetInteractor.Handle(nonExistentPetRequest, CancellationToken.None));
         }
 
         #endregion
