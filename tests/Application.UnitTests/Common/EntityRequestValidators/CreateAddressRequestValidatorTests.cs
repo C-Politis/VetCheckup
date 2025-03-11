@@ -1,9 +1,9 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using NUnit.Framework;
 using VetCheckup.Application.Common.EntityRequests;
 using VetCheckup.Application.Common.EntityRequestValidators;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators;
 
@@ -18,33 +18,39 @@ public class CreateAddressRequestValidatorTests
 
     #region Constructor Tests
 
-    [Test]
+    [Fact]
     public void Country_ValidInput_NoValidationFailures()
     {
+        // Arrange
         _createAddressRequest.Country = "This is a Valid Country";
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.Country)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void Country_IsNull_NoValidationFailure()
     {
+        // Arrange
         _createAddressRequest.Country = null;
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.Country)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void Country_ExceedsMaxLength_ValidationFailure()
     {
+        // Arrange
         _createAddressRequest.Country = new string('a', 101);
-
         var expectedFailure = new ValidationFailure()
         {
             PropertyName = nameof(CreateAddressRequest.Country),
@@ -53,39 +59,47 @@ public class CreateAddressRequestValidatorTests
             ErrorCode = "MaximumLengthValidator"
         };
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.Country)))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Test]
+    [Fact]
     public void PostalCode_ValidInput_NoValidationFailures()
     {
+        // Arrange
         _createAddressRequest.PostalCode = "Valid PostalCode";
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.PostalCode)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void PostalCode_IsNull_NoValidationFailure()
     {
+        // Arrange
         _createAddressRequest.PostalCode = null;
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.PostalCode)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void PostalCode_ExceedsMaxLength_ValidationFailure()
     {
-        _createAddressRequest.PostalCode = new string('a', 21); ;
-
+        // Arrange
+        _createAddressRequest.PostalCode = new string('a', 21);
         var expectedFailure = new ValidationFailure()
         {
             PropertyName = nameof(CreateAddressRequest.PostalCode),
@@ -94,39 +108,47 @@ public class CreateAddressRequestValidatorTests
             ErrorCode = "MaximumLengthValidator"
         };
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.PostalCode)))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Test]
+    [Fact]
     public void State_ValidInput_NoValidationFailures()
     {
+        // Arrange
         _createAddressRequest.State = "Valid State";
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.State)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void State_IsNull_NoValidationFailure()
     {
+        // Arrange
         _createAddressRequest.State = null;
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.State)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void State_ExceedsMaxLength_ValidationFailure()
     {
-        _createAddressRequest.State = new string('a', 101); ;
-
+        // Arrange
+        _createAddressRequest.State = new string('a', 101);
         var expectedFailure = new ValidationFailure()
         {
             PropertyName = nameof(CreateAddressRequest.State),
@@ -135,39 +157,47 @@ public class CreateAddressRequestValidatorTests
             ErrorCode = "MaximumLengthValidator"
         };
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.State)))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Test]
+    [Fact]
     public void StreetAddress_ValidInput_NoValidationFailures()
     {
+        // Arrange
         _createAddressRequest.StreetAddress = "Valid StreetAddress";
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.StreetAddress)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void StreetAddress_IsNull_NoValidationFailure()
     {
+        // Arrange
         _createAddressRequest.StreetAddress = null;
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.StreetAddress)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void StreetAddress_ExceedsMaxLength_ValidationFailure()
     {
+        // Arrange
         _createAddressRequest.StreetAddress = new string('a', 251);
-
         var expectedFailure = new ValidationFailure()
         {
             PropertyName = nameof(CreateAddressRequest.StreetAddress),
@@ -176,39 +206,47 @@ public class CreateAddressRequestValidatorTests
             ErrorCode = "MaximumLengthValidator"
         };
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.StreetAddress)))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Test]
+    [Fact]
     public void Suburb_ValidInput_NoValidationFailures()
     {
+        // Arrange
         _createAddressRequest.StreetAddress = "Valid Suburb";
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.Suburb)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void Suburb_IsNull_NoValidationFailure()
     {
+        // Arrange
         _createAddressRequest.Suburb = null;
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.Suburb)))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void Suburb_ExceedsMaxLength_ValidationFailure()
     {
+        // Arrange
         _createAddressRequest.Suburb = new string('a', 101);
-
         var expectedFailure = new ValidationFailure()
         {
             PropertyName = nameof(CreateAddressRequest.Suburb),
@@ -217,8 +255,10 @@ public class CreateAddressRequestValidatorTests
             ErrorCode = "MaximumLengthValidator"
         };
 
+        // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
+        // Assert
         result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.Suburb)))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }

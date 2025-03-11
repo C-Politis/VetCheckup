@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using NUnit.Framework;
 using VetCheckup.Application.Common.Mappings;
 using VetCheckup.Application.UseCases.Pets.UpdatePet;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
 {
@@ -9,7 +9,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
     {
         #region Aragorns
 
-        [Test]
+        [Fact]
         public void UpdatePetProfile_ProfileConfigurationValidation()
             => new MapperConfiguration(cfg =>
             {

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
-using NUnit.Framework;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.CreatePet;
 using VetCheckup.Domain.Entities;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
 {
@@ -80,32 +80,39 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 }.AsQueryable());
 
             _createPetInteractor = new CreatePetInteractor(_mockContext.Object, _mockMapper.Object);
-        } 
+        }
 
         #endregion
 
 
         #region Interactor Tests
 
-        [Test]
+        [Fact]
         public async Task CreatingPet_AddsNewPetToContext()
         {
+            // Act
             await _createPetInteractor.Handle(_createPetRequest, default);
+
+            // Assert
             _mockContext.Verify(mock => mock.Add(It.IsAny<Pet>()), Times.Once);
         }
 
-        [Test]
-        public void CreatingPet_ThrowsExceptionWhenOwnerNotFound()
+        [Fact]
+        public async Task CreatingPet_ThrowsExceptionWhenOwnerNotFound()
         {
+            // Arrange
             _mockContext
                 .Setup(e => e.Get<Owner>())
                 .Returns(new List<Owner>().AsQueryable());
 
-            var exception = Assert.Throws<Exception>(()
+            // Act
+            var exception = await Assert.ThrowsAsync<Exception>(()
                 => _createPetInteractor.Handle(_createPetRequest, default));
 
-            Assert.That(exception.Message, Is.EqualTo("Owner not found"));
+            // Assert
+            Assert.Equal("Owner not found", exception.Message);
         }
+
 
         #endregion
 

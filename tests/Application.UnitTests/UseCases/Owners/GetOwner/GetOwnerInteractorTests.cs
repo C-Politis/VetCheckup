@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Moq;
-using NUnit.Framework;
 using VetCheckup.Application.Dtos;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Owners.GetOwner;
 using VetCheckup.Domain.Entities;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
 {
@@ -39,7 +34,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
             },
             ContactDetails = new(),
             Name = "Test Owner",
-        };    
+        };
 
         #endregion
 
@@ -76,22 +71,32 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
 
         #region Handle Tests
 
-        [Test]
+        [Fact]
         public async Task GettingOwner_OwnerExists()
         {
+            // Arrange
+            var expectedOwner = this._ownerDto;
+
+            // Act
             var owner = await this._interactor.Handle(this._request, default);
 
-            Assert.That(owner, Is.EqualTo(this._ownerDto));
+            // Assert
+            Assert.Equal(expectedOwner, owner);
         }
 
-        [Test]
-        public void GettingOwner_ThrowsExceptionWhenOwnerNotFound()
+
+        [Fact]
+        public async Task GettingOwner_ThrowsExceptionWhenOwnerNotFoundAsync()
         {
+            // Arrange
             this._request.OwnerID = Guid.NewGuid();
 
+            // Act
             var handleMethod = async () => await this._interactor.Handle(this._request, default);
-                
-            Assert.ThrowsAsync<Exception>(() => handleMethod(), "Owner not found.");
+
+            // Assert
+            var exception = await Assert.ThrowsAsync<Exception>(handleMethod);
+            Assert.Equal("Owner not found.", exception.Message);
         }
 
         #endregion

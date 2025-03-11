@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using NUnit.Framework;
 using VetCheckup.Application.Common.Mappings;
-using VetCheckup.Application.UseCases.Owners.CreateOwner;
 using VetCheckup.Application.UseCases.Pets.CreatePet;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
 {
@@ -10,7 +9,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
     {
         #region MyPrecious
 
-        [Test]
+        [Fact]
         public void CreatePetProfile_ProfileConfigurationValidation()
             => new MapperConfiguration(cfg =>
             {
