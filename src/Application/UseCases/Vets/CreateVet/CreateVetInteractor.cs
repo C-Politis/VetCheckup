@@ -7,7 +7,7 @@ public class CreateVetInteractor(IDbContext context, IMapper mapper) : IRequestH
 {
 
     #region Methods
-    
+
     Task IRequestHandler<CreateVetRequest>.Handle(CreateVetRequest request, CancellationToken cancellationToken)
     {
         context.Add(mapper.Map<Vet>(request));
