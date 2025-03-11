@@ -3,7 +3,6 @@
 //using VetCheckup.Application.TodoItems.Commands.CreateTodoItem;
 //using Microsoft.Extensions.Logging;
 //using Moq;
-//using NUnit.Framework;
 
 //namespace VetCheckup.Application.UnitTests.Common.Behaviours;
 

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using NUnit.Framework;
 using VetCheckup.Application.UseCases.Pets.UpdatePet;
 using VetCheckup.Domain.Enums;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
 {
@@ -32,18 +27,25 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
 
         #region Validator Tests
 
-        [Test]
+        [Fact]
         public void Name_ValidInput_NoValidationFailures()
         {
+            // Arrange
             _updatePetRequest.Name = "Valid Name";
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void Name_ExceedsMaxLength_ValidationFailures()
         {
+            // Arrange
             _updatePetRequest.Name = new string('a', 101);
             var expectedFailure = new ValidationFailure()
             {
@@ -52,14 +54,20 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 ErrorMessage = "The length of 'Name' must be 100 characters or fewer. You entered 101 characters.",
                 ErrorCode = "MaximumLengthValidator"
             };
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Test]
+        [Fact]
         public void Name_IsEmpty_ValidationFailures()
         {
+            // Arrange
             _updatePetRequest.Name = string.Empty;
             var expectedFailure = new ValidationFailure()
             {
@@ -68,23 +76,35 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 ErrorMessage = "'Name' must not be empty.",
                 ErrorCode = "NotEmptyValidator"
             };
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Test]
+        [Fact]
         public void Species_ValidInput_NoValidationFailures()
         {
+            // Arrange
             _updatePetRequest.Species = "Valid Species";
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void Species_ExceedsMaxLength_ValidationFailures()
         {
+            // Arrange
             _updatePetRequest.Species = new string('a', 101);
             var expectedFailure = new ValidationFailure()
             {
@@ -93,14 +113,20 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 ErrorMessage = "The length of 'Species' must be 50 characters or fewer. You entered 101 characters.",
                 ErrorCode = "MaximumLengthValidator"
             };
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Test]
+        [Fact]
         public void Species_IsEmpty_ValidationFailures()
         {
+            // Arrange
             _updatePetRequest.Species = string.Empty;
             var expectedFailure = new ValidationFailure()
             {
@@ -109,45 +135,76 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 ErrorMessage = "'Species' must not be empty.",
                 ErrorCode = "NotEmptyValidator"
             };
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Species), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Test]
+        [Fact]
         public void OwnerId_ValidInput_NoValidationFailures()
         {
+            // Arrange
             _updatePetRequest.OwnerId = Guid.NewGuid();
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.OwnerId), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.OwnerId), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void DateOfBirth_ValidInput_NoValidationFailures()
         {
+            // Arrange
             _updatePetRequest.DateOfBirth = new DateTime(2010, 01, 01);
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.DateOfBirth), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.DateOfBirth), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void PetID_ValidInput_NoValidationFailures()
         {
+            // Arrange
             _updatePetRequest.PetId = Guid.NewGuid();
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.PetId), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.PetId), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void Sex_ValidInput_NoValidationFailures()
         {
+            // Arrange
+
+            // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Sex), StringComparison.OrdinalIgnoreCase))
+
+            // Assert
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Sex), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
+
+
 
         #endregion
     }

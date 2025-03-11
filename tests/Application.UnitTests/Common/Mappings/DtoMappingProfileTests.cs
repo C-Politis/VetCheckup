@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Moq;
-using NUnit.Framework;
 using VetCheckup.Application.Common.Mappings;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.Common.Mappings
 {
@@ -15,7 +15,7 @@ namespace VetCheckup.Application.UnitTests.Common.Mappings
 
         #region Profile Configuration Tests
 
-        [Test]
+        [Fact]
         public void DtoMappingProfile_ProfileConfigurationValidation()
             => new MapperConfiguration(cfg => cfg.AddProfile<DtoMappingProfile>()).AssertConfigurationIsValid();
 

@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using NUnit.Framework;
 using VetCheckup.Application.UseCases.Owners.CreateOwner;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Owners.CreateOwner;
 
@@ -24,22 +24,26 @@ public class CreateOwnerRequestValidatorTests
 
     #region Constructor Tests
 
-    [Test]
+    [Fact]
     public void Name_ValidInput_NoValidationFailures()
     {
+        // Arrange
         _createOwnerRequest.Name = "Valid Name";
 
+        // Act
         var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
 
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Name), StringComparison.OrdinalIgnoreCase))
+        // Assert
+        result.Errors
+            .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Name), StringComparison.OrdinalIgnoreCase))
             .Should().BeEmpty();
     }
 
-    [Test]
+    [Fact]
     public void Name_ExceedsMaxLength_ValidationFailures()
     {
+        // Arrange
         _createOwnerRequest.Name = new string('a', 101);
-
         var expectedFailure = new ValidationFailure()
         {
             PropertyName = nameof(CreateOwnerRequest.Name),
@@ -48,17 +52,21 @@ public class CreateOwnerRequestValidatorTests
             ErrorCode = "MaximumLengthValidator"
         };
 
+        // Act
         var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
 
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Name), StringComparison.OrdinalIgnoreCase))
+        // Assert
+        result.Errors
+            .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Name), StringComparison.OrdinalIgnoreCase))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Test]
+
+    [Fact]
     public void Name_IsEmpty_ValidationFailures()
     {
+        // Arrange
         _createOwnerRequest.Name = string.Empty;
-
         var expectedFailure = new ValidationFailure()
         {
             PropertyName = nameof(CreateOwnerRequest.Name),
@@ -67,11 +75,15 @@ public class CreateOwnerRequestValidatorTests
             ErrorCode = "NotEmptyValidator"
         };
 
+        // Act
         var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
 
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Name), StringComparison.OrdinalIgnoreCase))
+        // Assert
+        result.Errors
+            .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Name), StringComparison.OrdinalIgnoreCase))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
+
 
     #endregion
 

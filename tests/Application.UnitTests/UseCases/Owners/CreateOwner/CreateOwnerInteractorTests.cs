@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
-using NUnit.Framework;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Owners.CreateOwner;
 using VetCheckup.Domain.Entities;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Owners.CreateOwner;
 
@@ -51,12 +51,13 @@ public class CreateOwnerInteractorTests
 
     #region Interactor Tests
 
-    [Test]
+    [Fact]
     public async Task CreatingOwner_AddsNewOwnerToContext()
     {
-
+        //Act
         await this._createOwnerInteractor.Handle(_createOwnerRequest, CancellationToken.None);
 
+        //Assert
         this._mockContext.Verify(mock => mock.Add(It.IsAny<Owner>()), Times.Once);
     }
 

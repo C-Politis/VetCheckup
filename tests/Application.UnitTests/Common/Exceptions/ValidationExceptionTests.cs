@@ -1,37 +1,46 @@
 ﻿using VetCheckup.Application.Common.Exceptions;
 using FluentAssertions;
 using FluentValidation.Results;
-using NUnit.Framework;
+using Xunit;
 
 namespace VetCheckup.Application.UnitTests.Common.Exceptions;
 
 public class ValidationExceptionTests
 {
-    [Test]
+    [Fact]
     public void DefaultConstructorCreatesAnEmptyErrorDictionary()
     {
-        var actual = new ValidationException().Errors;
+        // Arrange
+        var exception = new ValidationException();
 
+        // Act
+        var actual = exception.Errors;
+
+        // Assert
         actual.Keys.Should().BeEquivalentTo(Array.Empty<string>());
     }
 
-    [Test]
+    [Fact]
     public void SingleValidationFailureCreatesASingleElementErrorDictionary()
     {
+        // Arrange
         var failures = new List<ValidationFailure>
             {
                 new ValidationFailure("Age", "must be over 18"),
             };
 
+        // Act
         var actual = new ValidationException(failures).Errors;
 
+        // Assert
         actual.Keys.Should().BeEquivalentTo(new string[] { "Age" });
         actual["Age"].Should().BeEquivalentTo(new string[] { "must be over 18" });
     }
 
-    [Test]
+    [Fact]
     public void MulitpleValidationFailureForMultiplePropertiesCreatesAMultipleElementErrorDictionaryEachWithMultipleValues()
     {
+        // Arrange
         var failures = new List<ValidationFailure>
             {
                 new ValidationFailure("Age", "must be 18 or older"),
@@ -42,8 +51,10 @@ public class ValidationExceptionTests
                 new ValidationFailure("Password", "must contain lower case letter"),
             };
 
+        // Act
         var actual = new ValidationException(failures).Errors;
 
+        // Assert
         actual.Keys.Should().BeEquivalentTo(new string[] { "Password", "Age" });
 
         actual["Age"].Should().BeEquivalentTo(new string[]
@@ -60,4 +71,5 @@ public class ValidationExceptionTests
                 "must contain a digit",
         });
     }
+
 }
