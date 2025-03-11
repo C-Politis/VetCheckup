@@ -480,3 +480,7 @@ $RECYCLE.BIN/
 *.swp
 .azure
 *.config
+.idea/.idea.VetCheckup/.idea/indexLayout.xml
+.idea/.idea.VetCheckup/.idea/projectSettingsUpdater.xml
+.idea/.idea.VetCheckup/.idea/vcs.xml
+.idea/.idea.VetCheckup/.idea/workspace.xml
