@@ -13,7 +13,6 @@ public class CreateOwnerInteractorTests
 
     #region Fields
 
-
     private readonly Mock<IDbContext> _mockContext = new();
     private readonly Mock<IMapper> _mockMapper = new();
 
