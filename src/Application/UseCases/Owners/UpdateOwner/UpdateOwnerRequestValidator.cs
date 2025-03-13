@@ -9,6 +9,8 @@ namespace VetCheckup.Application.UseCases.Owners.UpdateOwner
 {
     public class UpdateOwnerRequestValidator : AbstractValidator<UpdateOwnerRequest>
     {
+    
+        #region Constructors
 
         public UpdateOwnerRequestValidator()
         {
@@ -22,5 +24,7 @@ namespace VetCheckup.Application.UseCases.Owners.UpdateOwner
 
         }
 
+        #endregion
+    
     }
 }

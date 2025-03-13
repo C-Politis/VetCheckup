@@ -10,6 +10,8 @@ namespace VetCheckup.Application.UseCases.Owners.UpdateOwner
     public class UpdateOwnerProfile : Profile
     {
 
+        #region Constructors
+
         public UpdateOwnerProfile()
         {
             _ = this.CreateMap<UpdateOwnerRequest, Owner>()
@@ -26,6 +28,8 @@ namespace VetCheckup.Application.UseCases.Owners.UpdateOwner
                 .ForMember(dest => dest.OwnerId, opts => opts.Ignore());
 
         }
+
+        #endregion
 
     }
 }
