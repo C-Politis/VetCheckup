@@ -10,7 +10,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.CreateVet;
 
 public class CreateVetInteractorTests
 {
-    #region Fields
+    #region Gandalf
 
     private readonly Mock<IDbContext> _mockContext = new();
     private readonly Mock<IMapper> _mockMapper = new();
