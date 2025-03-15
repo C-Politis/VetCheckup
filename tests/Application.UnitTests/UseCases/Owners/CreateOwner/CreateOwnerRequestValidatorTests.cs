@@ -97,7 +97,65 @@ public class CreateOwnerRequestValidatorTests
                         .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
                         .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
             }
+            
+            [Theory]
+            [MemberData(nameof(Title_ValidInput_NoValidationFailures_TestData))]
+            public void Title_ValidInput_NoValidationFailures(Title title)
+            {
+                // Arrange
+                _createOwnerRequest.Title = title;
+            
+                // Act
+                var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
+            
+                // Assert
+                result.Errors
+                    .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Title), StringComparison.OrdinalIgnoreCase))
+                    .Should().BeEmpty();
+            }
+            
+            [Theory]
+            [MemberData(nameof(Suffix_ValidInput_NoValidationFailures_TestData))]
+            public void Suffix_ValidInput_NoValidationFailures(Suffix suffix)
+            {
+                // Arrange
+                _createOwnerRequest.Suffix = suffix;
+            
+                // Act
+                var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
+            
+                // Assert
+                result.Errors
+                    .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Suffix), StringComparison.OrdinalIgnoreCase))
+                    .Should().BeEmpty();
+            }
+            
+            public static IEnumerable<object[]> Suffix_ValidInput_NoValidationFailures_TestData()
+                =>
+                [
+                    [Suffix.Dr], 
+                    [Suffix.Mr],
+                    [Suffix.Mrs],
+                    [Suffix.Ms],
+                    [Suffix.Miss],
+                    [Suffix.Prof],
+                    [Suffix.Rev],
+                    [Suffix.Hon],
+                    [Suffix.Other]
+                ];
 
-    #endregion
+            public static IEnumerable<object[]> Title_ValidInput_NoValidationFailures_TestData()
+                =>
+                [
+                    [Title.II], 
+                    [Title.III],
+                    [Title.IV],
+                    [Title.Jr],
+                    [Title.Sr],
+                    [Title.Esq],
+                    [Title.Other]
+                ];
+
+            #endregion
 
 }

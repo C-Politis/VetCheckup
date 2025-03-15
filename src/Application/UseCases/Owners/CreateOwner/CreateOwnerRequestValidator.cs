@@ -23,6 +23,12 @@ public class CreateOwnerRequestValidator : AbstractValidator<CreateOwnerRequest>
         _ = this.RuleFor(e => e.LastName)
             .MaximumLength(100)
             .NotEmpty();
+
+        _ = this.RuleFor(e => e.Title)
+            .IsInEnum();
+
+        _ = this.RuleFor(e => e.Suffix)
+            .IsInEnum();
     }
 
     #endregion
