@@ -1,9 +1,9 @@
 ﻿namespace VetCheckup.Application.Common.Validators;
 
-public class AbnValidator : AbstractValidator<string>
+public class AbnValidator : AbstractValidator<string?>
 {
 
-    #region constructors
+    #region Constructors
 
     public AbnValidator()
     {
