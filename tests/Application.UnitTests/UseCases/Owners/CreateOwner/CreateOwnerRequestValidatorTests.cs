@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
+using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.UseCases.Owners.CreateOwner;
 using Xunit;
 
@@ -16,74 +17,86 @@ public class CreateOwnerRequestValidatorTests
     {
         Address = new(),
         ContactDetails = new(),
-        Name = string.Empty,
+        FirstName = "Test",
+        LastName = "Owner",
+        MiddleName = "Middle",
+        Suffix = Suffix.Dr,
+        Title = Title.II,
         DateOfBirth = DateTime.MinValue
     };
 
     #endregion
 
-    #region Constructor Tests
+    #region The Shire
 
-    [Fact]
-    public void Name_ValidInput_NoValidationFailures()
-    {
-        // Arrange
-        _createOwnerRequest.Name = "Valid Name";
-
-        // Act
-        var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
-
-        // Assert
-        result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Name), StringComparison.OrdinalIgnoreCase))
-            .Should().BeEmpty();
-    }
-
-    [Fact]
-    public void Name_ExceedsMaxLength_ValidationFailures()
-    {
-        // Arrange
-        _createOwnerRequest.Name = new string('a', 101);
-        var expectedFailure = new ValidationFailure()
-        {
-            PropertyName = nameof(CreateOwnerRequest.Name),
-            AttemptedValue = _createOwnerRequest.Name,
-            ErrorMessage = "The length of 'Name' must be 100 characters or fewer. You entered 101 characters.",
-            ErrorCode = "MaximumLengthValidator"
-        };
-
-        // Act
-        var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
-
-        // Assert
-        result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Name), StringComparison.OrdinalIgnoreCase))
-            .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
-    }
-
-
-    [Fact]
-    public void Name_IsEmpty_ValidationFailures()
-    {
-        // Arrange
-        _createOwnerRequest.Name = string.Empty;
-        var expectedFailure = new ValidationFailure()
-        {
-            PropertyName = nameof(CreateOwnerRequest.Name),
-            AttemptedValue = _createOwnerRequest.Name,
-            ErrorMessage = "'Name' must not be empty.",
-            ErrorCode = "NotEmptyValidator"
-        };
-
-        // Act
-        var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
-
-        // Assert
-        result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Name), StringComparison.OrdinalIgnoreCase))
-            .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
-    }
-
+            [Theory]
+            [InlineData("ValidName", true, "")]
+            [InlineData("", false, "'First Name' must not be empty.")]
+            [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false, "The length of 'First Name' must be 100 characters or fewer. You entered 101 characters.")]
+            public void ValidateFirstName(string firstName, bool isValid, string expectedErrorMessage)
+            {
+                // Arrange
+                _createOwnerRequest.FirstName = firstName;
+            
+                // Act
+                var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
+            
+                // Assert
+                if (isValid)
+                    result.Errors
+                        .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
+                        .Should().BeEmpty();
+                else
+                    result.Errors
+                        .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
+                        .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
+            }
+            
+            [Theory]
+            [InlineData("ValidName", true, "")]
+            [InlineData("", false, "'Last Name' must not be empty.")]
+            [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false, "The length of 'Last Name' must be 100 characters or fewer. You entered 101 characters.")]
+            public void ValidateLastName(string lastName, bool isValid, string expectedErrorMessage)
+            {
+                // Arrange
+                _createOwnerRequest.LastName = lastName;
+            
+                // Act
+                var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
+            
+                // Assert
+                if (isValid)
+                    result.Errors
+                        .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.LastName), StringComparison.OrdinalIgnoreCase))
+                        .Should().BeEmpty();
+                else
+                    result.Errors
+                        .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.LastName), StringComparison.OrdinalIgnoreCase))
+                        .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
+            }
+            
+            [Theory]
+            [InlineData("ValidName", true, "")]
+            [InlineData("", false, "'Middle Name' must not be empty.")]
+            [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false, "The length of 'Middle Name' must be 100 characters or fewer. You entered 101 characters.")]
+            public void ValidateMiddleName(string middleName, bool isValid, string expectedErrorMessage)
+            {
+                // Arrange
+                _createOwnerRequest.MiddleName = middleName;
+            
+                // Act
+                var result = _createOwnerRequestValidator.Validate(_createOwnerRequest);
+            
+                // Assert
+                if (isValid)
+                    result.Errors
+                        .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
+                        .Should().BeEmpty();
+                else
+                    result.Errors
+                        .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
+                        .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
+            }
 
     #endregion
 

@@ -12,7 +12,15 @@ public class CreateOwnerRequestValidator : AbstractValidator<CreateOwnerRequest>
         _ = this.RuleFor(e => e.Address).SetValidator(new CreateAddressRequestValidator());
         _ = this.RuleFor(e => e.ContactDetails).SetValidator(new CreateContactRequestValidator());
 
-        _ = this.RuleFor(e => e.Name)
+        _ = this.RuleFor(e => e.FirstName)
+            .MaximumLength(100)
+            .NotEmpty();
+
+        _ = this.RuleFor(e => e.MiddleName)
+            .MaximumLength(100)
+            .NotEmpty();
+        
+        _ = this.RuleFor(e => e.LastName)
             .MaximumLength(100)
             .NotEmpty();
     }
