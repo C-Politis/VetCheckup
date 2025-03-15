@@ -8,8 +8,8 @@ public class CreateOrganisationRequest : IRequest
 
     #region Properties
 
-    public string? Abn { get; set;
-    }
+    public string? Abn { get; set; }
+
     public required CreateAddressRequest Address { get; set; }
 
     public required CreateContactRequest ContactDetails { get; set; }
