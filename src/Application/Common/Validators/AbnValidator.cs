@@ -2,6 +2,9 @@
 
 public class AbnValidator : AbstractValidator<string>
 {
+
+    #region constructors
+
     public AbnValidator()
     {
         _ = this.RuleFor(e => e)
@@ -22,4 +25,7 @@ public class AbnValidator : AbstractValidator<string>
             })
             .When(e => !string.IsNullOrWhiteSpace(e));
     }
+
+    #endregion
+
 }
