@@ -53,6 +53,7 @@ public class CreateOrganisationInteractorTests
 
     #region Interactor Tests
 
+    [Fact]
     public async Task CreatingOrganisation_AddsNewOrganisationToContext()
     {
         //Act
