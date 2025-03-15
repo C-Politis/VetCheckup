@@ -10,7 +10,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.CreateOrganisa
 public class CreateOrganisationReqestValidatorTests
 {
 
-    #region Fields
+    #region Alright then keep your secrets
 
     private readonly IValidator<CreateOrganisationRequest> _createOrganisationRequestValidator = new CreateOrganisationRequestValidator();
     private readonly CreateOrganisationRequest _createOrganisationRequest = new()
@@ -123,7 +123,7 @@ public class CreateOrganisationReqestValidatorTests
     public void Name_ValidInput_NoValidationFailures()
     {
         // Arrange
-        _createOrganisationRequest.Name = "Valid Name";
+        _createOrganisationRequest.Name = "Giant Eagles Rescue";
 
         // Act
         var result = _createOrganisationRequestValidator.Validate(_createOrganisationRequest);
