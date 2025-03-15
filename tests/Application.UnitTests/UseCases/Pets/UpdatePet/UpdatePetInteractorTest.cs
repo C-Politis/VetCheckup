@@ -3,6 +3,7 @@ using System.Threading;
 using AutoMapper;
 using MediatR;
 using Moq;
+using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.UpdatePet;
 using VetCheckup.Domain.Entities;
@@ -54,7 +55,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                     Suburb = "Suburb"
                                 },
                                 ContactDetails = new Contact(),
-                                Name = "Owner Name"
+                                FirstName = "Test",
+                                LastName = "Owner",
+                                MiddleName = "Middle",
+                                Suffix = Suffix.Dr,
+                                Title = Title.II
                             },
                             Species = "Dog"
                         }
@@ -75,7 +80,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 Suburb = "Suburb"
                             },
                             ContactDetails = new Contact(),
-                            Name = "Owner Name"
+                            FirstName = "Test",
+                            LastName = "Owner",
+                            MiddleName = "Middle",
+                            Suffix = Suffix.Dr,
+                            Title = Title.II
                         } }.AsQueryable());
 
             _mockMapper
