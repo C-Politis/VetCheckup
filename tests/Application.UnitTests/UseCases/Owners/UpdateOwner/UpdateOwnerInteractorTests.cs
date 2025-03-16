@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Moq;
+using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Owners.UpdateOwner;
 using VetCheckup.Domain.Entities;
@@ -32,7 +33,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
             _updateOwnerRequest = new UpdateOwnerRequest
             {
                 OwnerId = Guid.NewGuid(),
-                Name = "New Owner",
+                FirstName = "New Owner",
+                MiddleName = "New Owner",
+                LastName = "New Owner",
+                Title = Title.Dr,
+                Suffix = Suffix.III,
                 DateOfBirth = new DateTime(2010, 01, 01),
                 Address = new(),
                 ContactDetails = new(),
@@ -52,7 +57,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                             },
                             ContactDetails = new Contact(),
                             OwnerId = _updateOwnerRequest.OwnerId,
-                            Name = "Old Owner",
+                            FirstName = "Old Owner",
+                            MiddleName = "Old Owner",
+                            LastName = "Old Owner",
+                            Title = Title.Mrs,
+                            Suffix = Suffix.Jr,
                             DateOfBirth = new DateTime(2010, 01, 01)
                         }
             }.AsQueryable());
@@ -72,14 +81,22 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                                 Suburb = "Suburb"
                             },
                             ContactDetails = new Contact(),
-                            Name = "Owner Name"
+                            FirstName = "Owner Name",
+                            MiddleName = "Owner Name",
+                            LastName = "Owner Name",
+                            Title = Title.Miss,
+                            Suffix = Suffix.Esq
                         } }.AsQueryable());
 
             _mockMapper
                 .Setup(e => e.Map(It.IsAny<UpdateOwnerRequest>(), It.IsAny<Owner>()))
                 .Callback<UpdateOwnerRequest, Owner>((request, owner) =>
                 {
-                    owner.Name = request.Name ?? owner.Name;
+                    owner.FirstName = request.FirstName ?? owner.FirstName;
+                    owner.MiddleName = request.MiddleName ?? owner.MiddleName;
+                    owner.LastName = request.LastName ?? owner.LastName;
+                    owner.Title = request.Title ?? owner.Title;
+                    owner.Suffix = request.Suffix ?? owner.Suffix;
                     owner.DateOfBirth = request.DateOfBirth ?? owner.DateOfBirth;
                 });
 
@@ -111,7 +128,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
             var nonExistentOwnerRequest = new UpdateOwnerRequest
             {
                 OwnerId = Guid.NewGuid(),
-                Name = "Non Existent Owner",
+                FirstName = "Non Existent Owner",
                 DateOfBirth = new DateTime(2010, 01, 01),
                 Address = new(),
                 ContactDetails = new()
