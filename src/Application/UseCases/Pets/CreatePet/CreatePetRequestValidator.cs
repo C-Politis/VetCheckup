@@ -24,8 +24,7 @@ public class CreatePetRequestValidator : AbstractValidator<CreatePetRequest>
             .NotEmpty();
 
         _ = this.RuleFor(e => e.Sex)
-            .IsInEnum()
-            .NotEmpty();
+            .IsInEnum();
 
     }
 
