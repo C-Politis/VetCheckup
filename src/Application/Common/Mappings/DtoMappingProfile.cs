@@ -22,6 +22,8 @@ namespace VetCheckup.Application.Common.Mappings
             _ = this.CreateMap<Owner, OwnerDto>();
 
             _ = this.CreateMap<Pet, PetDto>();
+
+            _ = this.CreateMap<Organisation, OrganisationDto>();
         } 
 
         #endregion
