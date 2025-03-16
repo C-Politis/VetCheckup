@@ -37,8 +37,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
             FirstName = "Test",
             LastName = "Owner",
             MiddleName = "Middle",
-            Suffix = Suffix.Dr,
-            Title = Title.II
+            Suffix = Suffix.Esq,
+            Title = Title.Dr,
         };
 
         #endregion
@@ -65,8 +65,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                     FirstName = "Test",
                     LastName = "Owner",
                     MiddleName = "Middle",
-                    Suffix = Suffix.Dr,
-                    Title = Title.II
+                    Suffix = Suffix.Esq,
+                    Title = Title.Dr,
                 } }.AsQueryable());
 
             this._mockMapper

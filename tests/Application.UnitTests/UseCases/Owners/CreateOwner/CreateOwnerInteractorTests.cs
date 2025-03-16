@@ -33,8 +33,8 @@ public class CreateOwnerInteractorTests
             FirstName = "Test",
             LastName = "Owner",
             MiddleName = "Middle",
-            Suffix = Suffix.Dr,
-            Title = Title.II,
+            Suffix = Suffix.Esq,
+            Title = Title.Dr,
             DateOfBirth = new DateTime(2000, 01, 01)
         };
 

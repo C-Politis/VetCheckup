@@ -58,8 +58,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 FirstName = "Test",
                                 LastName = "Owner",
                                 MiddleName = "Middle",
-                                Suffix = Suffix.Dr,
-                                Title = Title.II
+                                Suffix = Suffix.Esq,
+                                Title = Title.Dr,
                             },
                             Species = "Dog"
                         }
@@ -83,8 +83,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                             FirstName = "Test",
                             LastName = "Owner",
                             MiddleName = "Middle",
-                            Suffix = Suffix.Dr,
-                            Title = Title.II
+                            Suffix = Suffix.Esq,
+                            Title = Title.Dr,
                         } }.AsQueryable());
 
             _mockMapper

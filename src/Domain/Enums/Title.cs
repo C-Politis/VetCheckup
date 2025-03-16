@@ -4,13 +4,15 @@ public enum Title
 {
     #region Enums
 
-    Jr = 0,
-    Sr = 1,
-    II = 2,
-    III = 3,
-    IV = 4,
-    Esq = 5,
-    Other = 6,
-
+    Mr = 0,
+    Mrs = 1,
+    Ms = 2,
+    Miss = 3,
+    Dr = 4,
+    Prof = 5,
+    Rev = 6,
+    Hon = 7,
+    Other = 8,
+    
     #endregion
 }

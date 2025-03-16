@@ -20,8 +20,8 @@ public class CreateOwnerRequestValidatorTests
         FirstName = "Test",
         LastName = "Owner",
         MiddleName = "Middle",
-        Suffix = Suffix.Dr,
-        Title = Title.II,
+        Suffix = Suffix.Esq,
+        Title = Title.Dr,
         DateOfBirth = DateTime.MinValue
     };
 
@@ -133,26 +133,26 @@ public class CreateOwnerRequestValidatorTests
             public static IEnumerable<object[]> Suffix_ValidInput_NoValidationFailures_TestData()
                 =>
                 [
-                    [Suffix.Dr], 
-                    [Suffix.Mr],
-                    [Suffix.Mrs],
-                    [Suffix.Ms],
-                    [Suffix.Miss],
-                    [Suffix.Prof],
-                    [Suffix.Rev],
-                    [Suffix.Hon],
+                    [Suffix.Esq],
+                    [Suffix.Jr],
+                    [Suffix.Sr],
+                    [Suffix.II],
+                    [Suffix.III],
+                    [Suffix.IV],
                     [Suffix.Other]
                 ];
 
             public static IEnumerable<object[]> Title_ValidInput_NoValidationFailures_TestData()
                 =>
                 [
-                    [Title.II], 
-                    [Title.III],
-                    [Title.IV],
-                    [Title.Jr],
-                    [Title.Sr],
-                    [Title.Esq],
+                    [Title.Mr],
+                    [Title.Mrs],
+                    [Title.Ms],
+                    [Title.Miss],
+                    [Title.Dr],
+                    [Title.Prof],
+                    [Title.Rev],
+                    [Title.Hon],
                     [Title.Other]
                 ];
 

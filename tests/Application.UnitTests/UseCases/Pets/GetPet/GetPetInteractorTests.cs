@@ -43,8 +43,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                 FirstName = "Test",
                 LastName = "Owner",
                 MiddleName = "Middle",
-                Suffix = Suffix.Dr,
-                Title = Title.II
+                Suffix = Suffix.Esq,
+                Title = Title.Dr,
             },
             PetId = Guid.NewGuid(),
             Species = "Test Species"
@@ -81,8 +81,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                         FirstName = "Test",
                         LastName = "Owner",
                         MiddleName = "Middle",
-                        Suffix = Suffix.Dr,
-                        Title = Title.II
+                        Suffix = Suffix.Esq,
+                        Title = Title.Dr,
                     }
                 } }.AsQueryable());
 
