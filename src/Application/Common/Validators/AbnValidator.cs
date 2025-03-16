@@ -3,6 +3,12 @@
 public class AbnValidator : AbstractValidator<string?>
 {
 
+    #region Fields
+
+    private static readonly int[] Weights = [10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+
+    #endregion
+
     #region Constructors
 
     public AbnValidator()
@@ -22,10 +28,9 @@ public class AbnValidator : AbstractValidator<string?>
 
     private bool IsValidAbn(string abn)
     {
-        int[] weights = [10, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
         int[] abnDigits = abn.Select(d => (int) char.GetNumericValue(d)).ToArray();
         abnDigits[0]--;
-        int sum = abnDigits.Zip(weights, (digit, weight) => digit * weight).Sum();
+        int sum = abnDigits.Zip(Weights, (digit, weight) => digit * weight).Sum();
 
         return sum % 89 == 0;
     }
