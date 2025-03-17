@@ -31,6 +31,8 @@ namespace VetCheckup.Application.Dtos
 
         public Guid OwnerId { get; set; }
 
+        public required ICollection<PetDto> Pets { get; set; }
+
         #endregion
 
     }

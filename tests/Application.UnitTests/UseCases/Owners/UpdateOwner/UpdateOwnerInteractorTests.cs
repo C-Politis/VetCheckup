@@ -62,7 +62,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                             LastName = "Old Owner",
                             Title = Title.Mrs,
                             Suffix = Suffix.Jr,
-                            DateOfBirth = new DateTime(2010, 01, 01)
+                            DateOfBirth = new DateTime(2010, 01, 01),
+                            Pets = new List<Pet>()
                         }
             }.AsQueryable());
 
@@ -85,7 +86,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                             MiddleName = "Owner Name",
                             LastName = "Owner Name",
                             Title = Title.Miss,
-                            Suffix = Suffix.Esq
+                            Suffix = Suffix.Esq,
+                            Pets = new List<Pet>()
                         } }.AsQueryable());
 
             _mockMapper

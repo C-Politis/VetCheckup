@@ -48,7 +48,8 @@ public class CreateOwnerInteractorTests
                 LastName = _createOwnerRequest.LastName,
                 MiddleName = _createOwnerRequest.MiddleName,
                 Suffix = _createOwnerRequest.Suffix,
-                DateOfBirth = _createOwnerRequest.DateOfBirth
+                DateOfBirth = _createOwnerRequest.DateOfBirth,
+                Pets = new List<Pet>()
             });
 
 
