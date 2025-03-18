@@ -45,7 +45,8 @@ namespace VetCheckup.Application.UseCases.Owners.UpdateOwner
                     opts.PreCondition(src => src.Suffix != null);
                     opts.MapFrom(src => src.Suffix);
                 })
-                .ForMember(dest => dest.OwnerId, opts => opts.Ignore());
+                .ForMember(dest => dest.OwnerId, opts => opts.Ignore())
+                .ForMember(dest => dest.Pets, opts => opts.Ignore());
 
         }
 

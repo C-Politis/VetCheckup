@@ -39,6 +39,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
             MiddleName = "Middle",
             Suffix = Suffix.Esq,
             Title = Title.Dr,
+            Pets = new List<PetDto>()
+
         };
 
         #endregion
@@ -67,6 +69,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                     MiddleName = "Middle",
                     Suffix = Suffix.Esq,
                     Title = Title.Dr,
+                    Pets = new List<Pet>()
                 } }.AsQueryable());
 
             this._mockMapper

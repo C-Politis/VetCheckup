@@ -45,6 +45,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                 MiddleName = "Middle",
                 Suffix = Suffix.Esq,
                 Title = Title.Dr,
+                Pets = new List<PetDto>()
             },
             PetId = Guid.NewGuid(),
             Species = "Test Species"
@@ -83,6 +84,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                         MiddleName = "Middle",
                         Suffix = Suffix.Esq,
                         Title = Title.Dr,
+                        Pets = new List<Pet>()
                     }
                 } }.AsQueryable());
 

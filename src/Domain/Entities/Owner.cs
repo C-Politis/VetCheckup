@@ -25,7 +25,8 @@ public class Owner
 
     public Guid OwnerId { get; set; }
 
-    
+    public required ICollection<Pet> Pets { get; set; }
+
     #endregion
 
 }

@@ -60,6 +60,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 MiddleName = "Middle",
                                 Suffix = Suffix.Esq,
                                 Title = Title.Dr,
+                                Pets = new List<Pet>()
                             },
                             Species = "Dog"
                         }
@@ -85,6 +86,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                             MiddleName = "Middle",
                             Suffix = Suffix.Esq,
                             Title = Title.Dr,
+                            Pets = new List<Pet>()
                         } }.AsQueryable());
 
             _mockMapper
