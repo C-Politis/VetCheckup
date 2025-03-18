@@ -69,7 +69,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 Pets = new List<Pet>()
                             },
                             Species = "Dog",
-                            Sex = Sex.None
+                            Sex = Sex.Male
                         }
             }.AsQueryable());
 

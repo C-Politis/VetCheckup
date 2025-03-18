@@ -144,6 +144,7 @@ public class CreateOwnerRequestValidatorTests
             public static IEnumerable<object[]> Suffix_ValidInput_NoValidationFailures_TestData()
                 =>
                 [
+                    [Suffix.None],
                     [Suffix.Esq],
                     [Suffix.Jr],
                     [Suffix.Sr],
@@ -156,6 +157,7 @@ public class CreateOwnerRequestValidatorTests
             public static IEnumerable<object[]> Title_ValidInput_NoValidationFailures_TestData()
                 =>
                 [
+                    [Title.None],
                     [Title.Mr],
                     [Title.Mrs],
                     [Title.Ms],

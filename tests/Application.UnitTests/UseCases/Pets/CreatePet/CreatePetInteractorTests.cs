@@ -35,7 +35,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 DateOfBirth = new DateTime(2010, 01, 01),
                 OwnerId = Guid.NewGuid(),
                 Species = "Dog",
-                Sex = Sex.None
+                Sex = Sex.Male
             };
 
             var ownerId = _createPetRequest.OwnerId;
@@ -71,7 +71,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                         Pets = new List<Pet>()
                     },
                     Species = _createPetRequest.Species,
-                    Sex = Sex.None
+                    Sex = Sex.Male
                 });
 
             _mockContext

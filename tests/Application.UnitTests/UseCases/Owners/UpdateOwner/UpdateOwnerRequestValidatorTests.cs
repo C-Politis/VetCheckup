@@ -96,9 +96,10 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
         }
 
         [Theory]
+        [InlineData(null)]
         [InlineData("")]
         [InlineData("Valid Name")]
-        public void MiddleName_ValidInput_NoValidationFailures(string name)
+        public void MiddleName_ValidInput_NoValidationFailures(string? name)
         {
             // Arrange
             _updateOwnerRequest.MiddleName = name;
