@@ -23,23 +23,14 @@ public class CreateContactRequestValidatorTests
 
     #region Constructor Tests
 
-    [Fact]
-    public void Email_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("Valid@Email.Com.Au")]
+    [InlineData("")]
+    public void Email_ValidInput_NoValidationFailures(string email)
     {
         // Arrange
-        _createContactRequest.Email = "Valid@Email.Com.Au";
+        _createContactRequest.Email = email;
 
-        // Act
-        var result = _createContactRequestValidator.Validate(_createContactRequest);
-
-        // Assert
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateContactRequest.Email), StringComparison.OrdinalIgnoreCase))
-            .Should().BeEmpty();
-    }
-
-    [Fact]
-    public void Email_IsEmpty_NoValidationFailures()
-    {
         // Act
         var result = _createContactRequestValidator.Validate(_createContactRequest);
 
@@ -69,11 +60,13 @@ public class CreateContactRequestValidatorTests
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Fact]
-    public void Mobile_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("0420123456")]
+    [InlineData("")]
+    public void Mobile_ValidInput_NoValidationFailures(string mobile)
     {
         // Arrange
-        _createContactRequest.Mobile = "0420123456";
+        _createContactRequest.Mobile = mobile;
 
         // Act
         var result = _createContactRequestValidator.Validate(_createContactRequest);
@@ -84,7 +77,7 @@ public class CreateContactRequestValidatorTests
     }
 
     [Fact]
-    public void Mobile_IsNotANumber_NoValidationFailures()
+    public void Mobile_IsNotANumber_ValidationFailures()
     {
         // Arrange
         _createContactRequest.Mobile = "WrongNumber";

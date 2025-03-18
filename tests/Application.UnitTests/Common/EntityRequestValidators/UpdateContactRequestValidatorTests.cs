@@ -24,25 +24,14 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
 
         #region Constructor Tests
 
-        [Fact]
-        public void Email_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("Valid@Email.Com.Au")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void Email_ValidInput_NoValidationFailures(string? email)
         {
             // Arrange
-            _updateContactRequest.Email = "Valid@Email.Com.Au";
-
-            // Act
-            var result = _updateContactRequestValidator.Validate(_updateContactRequest);
-
-            // Assert
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdateContactRequest.Email), StringComparison.OrdinalIgnoreCase))
-                .Should().BeEmpty();
-        }
-
-        [Fact]
-        public void Email_IsEmpty_NoValidationFailures()
-        {
-            // Arrange
-            _updateContactRequest.Email = null;
+            _updateContactRequest.Email = email;
 
             // Act
             var result = _updateContactRequestValidator.Validate(_updateContactRequest);
@@ -73,11 +62,14 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Fact]
-        public void Mobile_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("0420123456")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void Mobile_ValidInput_NoValidationFailures(string? mobile)
         {
             // Arrange
-            _updateContactRequest.Mobile = "0420123456";
+            _updateContactRequest.Mobile = mobile;
 
             // Act
             var result = _updateContactRequestValidator.Validate(_updateContactRequest);
@@ -88,7 +80,7 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
         }
 
         [Fact]
-        public void Mobile_IsNotANumber_NoValidationFailures()
+        public void Mobile_IsNotANumber_ValidationFailures()
         {
             // Arrange
             _updateContactRequest.Mobile = "WrongNumber";
