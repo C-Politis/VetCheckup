@@ -7,7 +7,7 @@ public class Pet
 
     public DateTime DateOfBirth { get; set; }
 
-    public int? MicrochipId { get; set; }
+    public required int MicrochipId { get; set; }
 
     public required string Name { get; set; }
 
@@ -15,7 +15,7 @@ public class Pet
 
     public Guid PetId { get; set; }
 
-    public Sex Sex { get; set; }
+    public required Sex Sex { get; set; }
 
     public required string Species { get; set; }
 
