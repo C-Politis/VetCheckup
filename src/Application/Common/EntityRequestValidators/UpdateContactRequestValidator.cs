@@ -14,7 +14,7 @@ public class UpdateContactRequestValidator : AbstractValidator<UpdateContactRequ
             .When(e => !string.IsNullOrWhiteSpace(e.Email));
 
         _ = this.RuleFor(e => e.Mobile)
-            .MaximumLength(15)
+            .Matches("\\d{1,15}")
             .When(e => !string.IsNullOrWhiteSpace(e.Mobile));
     }
 
