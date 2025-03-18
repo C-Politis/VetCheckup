@@ -4,20 +4,18 @@ public enum OrganisationType
 {
 
     #region Enums
-
-    None = 0,
     
-    Clinic = 1,
+    Clinic = 0,
 
-    Daycare = 2,
+    Daycare = 1,
 
-    Hospital = 3,
+    Hospital = 2,
 
-    Rescues = 4,
+    Rescues = 3,
 
-    Shelter = 5,
+    Shelter = 4,
 
-    Other = 6
+    Other = 5
 
     #endregion
 
