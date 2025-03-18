@@ -5,11 +5,13 @@ public enum Sex
 
     #region Enums
     
-    Female = 1,
-    
-    Male = 0,
+    None = 0,
 
-    Other = 2
+    Female = 2,
+    
+    Male = 1,
+
+    Other = 3
 
     #endregion
 

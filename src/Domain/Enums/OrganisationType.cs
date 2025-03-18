@@ -5,17 +5,19 @@ public enum OrganisationType
 
     #region Enums
 
-    Clinic = 0,
+    None = 0,
+    
+    Clinic = 1,
 
-    Daycare = 1,
+    Daycare = 2,
 
-    Hospital = 2,
+    Hospital = 3,
 
-    Rescues = 3,
+    Rescues = 4,
 
-    Shelter = 4,
+    Shelter = 5,
 
-    Other = 5
+    Other = 6
 
     #endregion
 
