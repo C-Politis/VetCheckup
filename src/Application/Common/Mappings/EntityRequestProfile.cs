@@ -19,7 +19,9 @@ public class EntityRequestProfile : Profile
             .ForMember(destination => destination.Suburb, source => source.MapFrom(e => e.Suburb ?? string.Empty));
 
         _ = this.CreateMap<CreateContactRequest, Contact>()
-            .ForMember(destination => destination.ContactId, source => source.Ignore());
+            .ForMember(destination => destination.ContactId, source => source.Ignore())
+            .ForMember(destination => destination.Mobile, source => source.MapFrom(e => e.Mobile ?? string.Empty))
+            .ForMember(destination => destination.Email, source => source.MapFrom(e => e.Email ?? string.Empty));
 
         _ = this.CreateMap<UpdateAddressRequest, Address>()
             .ForMember(destination => destination.AddressId, source => source.Ignore())
