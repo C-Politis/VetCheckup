@@ -39,7 +39,7 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
         }
 
         [Fact]
-        public void Email_IsNull_NoValidationFailures()
+        public void Email_IsEmpty_NoValidationFailures()
         {
             // Arrange
             _updateContactRequest.Email = null;

@@ -38,7 +38,7 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
         }
 
         [Fact]
-        public void Country_IsNull_NoValidationFailure()
+        public void Country_IsEmpty_NoValidationFailure()
         {
             // Arrange
             _updateAddressRequest.Country = null;
@@ -87,7 +87,7 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
         }
 
         [Fact]
-        public void PostalCode_IsNull_NoValidationFailure()
+        public void PostalCode_IsEmpty_NoValidationFailure()
         {
             // Arrange
             _updateAddressRequest.PostalCode = null;
@@ -136,7 +136,7 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
         }
 
         [Fact]
-        public void State_IsNull_NoValidationFailure()
+        public void State_IsEmpty_NoValidationFailure()
         {
             // Arrange
             _updateAddressRequest.State = null;
@@ -185,7 +185,7 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
         }
 
         [Fact]
-        public void StreetAddress_IsNull_NoValidationFailure()
+        public void StreetAddress_IsEmpty_NoValidationFailure()
         {
             // Arrange
             _updateAddressRequest.StreetAddress = null;
@@ -234,7 +234,7 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
         }
 
         [Fact]
-        public void Suburb_IsNull_NoValidationFailure()
+        public void Suburb_IsEmpty_NoValidationFailure()
         {
             // Arrange
             _updateAddressRequest.Suburb = null;

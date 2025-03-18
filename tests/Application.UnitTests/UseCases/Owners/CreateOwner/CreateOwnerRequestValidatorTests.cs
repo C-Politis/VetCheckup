@@ -15,8 +15,19 @@ public class CreateOwnerRequestValidatorTests
     private readonly IValidator<CreateOwnerRequest> _createOwnerRequestValidator = new CreateOwnerRequestValidator();
     private readonly CreateOwnerRequest _createOwnerRequest = new()
     {
-        Address = new(),
-        ContactDetails = new(),
+        Address = new()
+        {
+            StreetAddress = string.Empty,
+            Country = string.Empty,
+            PostalCode = string.Empty,
+            State = string.Empty,
+            Suburb = string.Empty,
+        },
+        ContactDetails = new()
+        {
+            Email = string.Empty,
+            Mobile = string.Empty
+        },
         FirstName = "Test",
         LastName = "Owner",
         MiddleName = "Middle",

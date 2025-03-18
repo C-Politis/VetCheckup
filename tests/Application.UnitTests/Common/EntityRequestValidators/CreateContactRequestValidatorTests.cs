@@ -13,7 +13,11 @@ public class CreateContactRequestValidatorTests
     #region Fields
 
     private readonly IValidator<CreateContactRequest> _createContactRequestValidator = new CreateContactRequestValidator();
-    private readonly CreateContactRequest _createContactRequest = new();
+    private readonly CreateContactRequest _createContactRequest = new()
+    {
+        Email = string.Empty,
+        Mobile = string.Empty
+    };
 
     #endregion
 
@@ -34,11 +38,8 @@ public class CreateContactRequestValidatorTests
     }
 
     [Fact]
-    public void Email_IsNull_NoValidationFailures()
+    public void Email_IsEmpty_NoValidationFailures()
     {
-        // Arrange
-        _createContactRequest.Email = null;
-
         // Act
         var result = _createContactRequestValidator.Validate(_createContactRequest);
 

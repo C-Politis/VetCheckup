@@ -28,8 +28,19 @@ public class CreateOrganisationInteractorTests
         _createOrganisationRequest = new CreateOrganisationRequest()
         {
             Abn = "02110000000",
-            Address = new(),
-            ContactDetails = new(),
+            Address = new()
+            {
+                StreetAddress = string.Empty,
+                Country = string.Empty,
+                PostalCode = string.Empty,
+                State = string.Empty,
+                Suburb = string.Empty,
+            },
+            ContactDetails = new()
+            {
+                Email = string.Empty,
+                Mobile = string.Empty
+            },
             Name = "Giant Eagles Rescue",
             OrganisationType = Domain.Enums.OrganisationType.Rescues
         };

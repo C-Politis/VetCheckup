@@ -12,7 +12,14 @@ public class CreateAddressRequestValidatorTests
     #region Fields
 
     private readonly IValidator<CreateAddressRequest> _createAddressRequestValidator = new CreateAddressRequestValidator();
-    private readonly CreateAddressRequest _createAddressRequest = new CreateAddressRequest();
+    private readonly CreateAddressRequest _createAddressRequest = new CreateAddressRequest()
+    {
+        StreetAddress = string.Empty,
+        Country = string.Empty,
+        PostalCode= string.Empty,
+        State = string.Empty,
+        Suburb = string.Empty,
+    };
 
     #endregion
 
@@ -33,11 +40,8 @@ public class CreateAddressRequestValidatorTests
     }
 
     [Fact]
-    public void Country_IsNull_NoValidationFailure()
+    public void Country_IsEmpty_NoValidationFailure()
     {
-        // Arrange
-        _createAddressRequest.Country = null;
-
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
@@ -82,11 +86,8 @@ public class CreateAddressRequestValidatorTests
     }
 
     [Fact]
-    public void PostalCode_IsNull_NoValidationFailure()
+    public void PostalCode_IsEmpty_NoValidationFailure()
     {
-        // Arrange
-        _createAddressRequest.PostalCode = null;
-
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
@@ -131,11 +132,8 @@ public class CreateAddressRequestValidatorTests
     }
 
     [Fact]
-    public void State_IsNull_NoValidationFailure()
+    public void State_IsEmpty_NoValidationFailure()
     {
-        // Arrange
-        _createAddressRequest.State = null;
-
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
@@ -180,11 +178,8 @@ public class CreateAddressRequestValidatorTests
     }
 
     [Fact]
-    public void StreetAddress_IsNull_NoValidationFailure()
+    public void StreetAddress_IsEmpty_NoValidationFailure()
     {
-        // Arrange
-        _createAddressRequest.StreetAddress = null;
-
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 
@@ -229,11 +224,8 @@ public class CreateAddressRequestValidatorTests
     }
 
     [Fact]
-    public void Suburb_IsNull_NoValidationFailure()
+    public void Suburb_IsEmpty_NoValidationFailure()
     {
-        // Arrange
-        _createAddressRequest.Suburb = null;
-
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
 

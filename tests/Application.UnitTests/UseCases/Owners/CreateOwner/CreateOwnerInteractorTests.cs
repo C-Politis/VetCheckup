@@ -28,8 +28,19 @@ public class CreateOwnerInteractorTests
     {
         _createOwnerRequest = new CreateOwnerRequest()
         {
-            Address = new(),
-            ContactDetails = new(),
+            Address = new()
+            {
+                StreetAddress = string.Empty,
+                Country = string.Empty,
+                PostalCode = string.Empty,
+                State = string.Empty,
+                Suburb = string.Empty,
+            },
+            ContactDetails = new()
+            {
+                Email = string.Empty,
+                Mobile = string.Empty
+            },
             FirstName = "Test",
             LastName = "Owner",
             MiddleName = "Middle",
