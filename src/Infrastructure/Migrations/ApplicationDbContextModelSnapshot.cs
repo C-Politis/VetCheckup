@@ -25,6 +25,7 @@ namespace VetCheckup.Infrastructure.Migrations
             modelBuilder.Entity("VetCheckup.Domain.Entities.Address", b =>
                 {
                     b.Property<Guid>("AddressId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Country")
@@ -60,6 +61,7 @@ namespace VetCheckup.Infrastructure.Migrations
             modelBuilder.Entity("VetCheckup.Domain.Entities.Contact", b =>
                 {
                     b.Property<Guid>("ContactId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
@@ -84,10 +86,28 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Suffix")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("varchar(5)");
 
                     b.HasKey("OwnerId");
 
@@ -114,6 +134,9 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("OwnerId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
@@ -125,6 +148,8 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.HasKey("PetId");
 
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("OwnerId1");
 
                     b.ToTable("Pet", (string)null);
                 });
@@ -201,6 +226,10 @@ namespace VetCheckup.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("VetCheckup.Domain.Entities.Owner", null)
+                        .WithMany("Pets")
+                        .HasForeignKey("OwnerId1");
+
                     b.Navigation("Owner");
                 });
 
@@ -230,6 +259,8 @@ namespace VetCheckup.Infrastructure.Migrations
 
                     b.Navigation("ContactDetails")
                         .IsRequired();
+
+                    b.Navigation("Pets");
                 });
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Vet", b =>

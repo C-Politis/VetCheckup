@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
+using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Owners.CreateOwner;
 using VetCheckup.Domain.Entities;
@@ -29,7 +30,11 @@ public class CreateOwnerInteractorTests
         {
             Address = new(),
             ContactDetails = new(),
-            Name = "New Owner",
+            FirstName = "Test",
+            LastName = "Owner",
+            MiddleName = "Middle",
+            Suffix = Suffix.Esq,
+            Title = Title.Dr,
             DateOfBirth = new DateTime(2000, 01, 01)
         };
 
@@ -39,8 +44,12 @@ public class CreateOwnerInteractorTests
             {
                 Address = new() { Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
                 ContactDetails = new() { Email = string.Empty, Mobile = 1 },
-                Name = _createOwnerRequest.Name,
-                DateOfBirth = _createOwnerRequest.DateOfBirth
+                FirstName = _createOwnerRequest.FirstName,
+                LastName = _createOwnerRequest.LastName,
+                MiddleName = _createOwnerRequest.MiddleName,
+                Suffix = _createOwnerRequest.Suffix,
+                DateOfBirth = _createOwnerRequest.DateOfBirth,
+                Pets = new List<Pet>()
             });
 
 
