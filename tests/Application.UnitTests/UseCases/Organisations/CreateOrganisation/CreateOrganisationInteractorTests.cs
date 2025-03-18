@@ -40,7 +40,7 @@ public class CreateOrganisationInteractorTests
             {
                 Abn = _createOrganisationRequest.Abn,
                 Address = new() { Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
-                ContactDetails = new() { Email = string.Empty, Mobile = 1 },
+                ContactDetails = new() { Email = string.Empty, Mobile = "1" },
                 Name = _createOrganisationRequest.Name,
                 OrganisationType = _createOrganisationRequest.OrganisationType
             });

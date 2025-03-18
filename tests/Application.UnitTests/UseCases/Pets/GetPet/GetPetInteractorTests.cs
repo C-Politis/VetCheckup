@@ -27,7 +27,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
         private readonly PetDto _petDto = new()
         {
             DateOfBirth = DateTime.Now,
-            MicrochipId = 123456,
+            MicrochipId = "123456",
             Name = "Test Pet",
             Owner = new()
             {
@@ -39,7 +39,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                     StreetAddress = "Test Street Address",
                     Suburb = "Test Suburb",
                 },
-                ContactDetails = new(),
+                ContactDetails = new()
+                {
+                    Email = string.Empty,
+                    Mobile = string.Empty
+                },
                 FirstName = "Test",
                 LastName = "Owner",
                 MiddleName = "Middle",
@@ -63,7 +67,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                 {
                     PetId = this._request.PetId,
                     DateOfBirth = DateTime.Now,
-                    MicrochipId = 1234,
+                    MicrochipId = "123456",
                     Name = "Test Pet",
                     Sex = Sex.Male,
                     Species = "Test Species",
@@ -78,7 +82,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                             StreetAddress = "Test Street Address",
                             Suburb = "Test Suburb",
                         },
-                        ContactDetails = new(),
+                        ContactDetails = new()
+                        {
+                            Email = string.Empty,
+                            Mobile = string.Empty
+                        },
                         FirstName = "Test",
                         LastName = "Owner",
                         MiddleName = "Middle",

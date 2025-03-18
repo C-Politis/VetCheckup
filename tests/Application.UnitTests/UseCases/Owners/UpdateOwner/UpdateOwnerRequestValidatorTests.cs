@@ -96,9 +96,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
         }
 
         [Theory]
-        [InlineData(null)]
+        [InlineData("")]
         [InlineData("Valid Name")]
-        public void MiddleName_ValidInput_NoValidationFailures(string? name)
+        public void MiddleName_ValidInput_NoValidationFailures(string name)
         {
             // Arrange
             _updateOwnerRequest.MiddleName = name;
@@ -134,27 +134,6 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Fact]
-        public void MiddleName_IsEmpty_ValidationFailures()
-        {
-            // Arrange
-            _updateOwnerRequest.MiddleName = string.Empty;
-            var expectedFailure = new ValidationFailure()
-            {
-                PropertyName = nameof(CreateOwnerRequest.MiddleName),
-                AttemptedValue = _updateOwnerRequest.MiddleName,
-                ErrorMessage = "'Middle Name' must not be empty.",
-                ErrorCode = "NotEmptyValidator"
-            };
-
-            // Act
-            var result = _updateOwnerRequestValidator.Validate(_updateOwnerRequest);
-
-            // Assert
-            result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
-                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
-        }
 
         [Theory]
         [InlineData(null)]

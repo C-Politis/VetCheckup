@@ -42,8 +42,9 @@ public class CreateOwnerInteractorTests
             .Setup(e => e.Map<Owner>(It.IsAny<CreateOwnerRequest>()))
             .Returns(() => new Owner()
             {
+                Title = Title.None,
                 Address = new() { Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
-                ContactDetails = new() { Email = string.Empty, Mobile = 1 },
+                ContactDetails = new() { Email = string.Empty, Mobile = "1" },
                 FirstName = _createOwnerRequest.FirstName,
                 LastName = _createOwnerRequest.LastName,
                 MiddleName = _createOwnerRequest.MiddleName,

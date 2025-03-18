@@ -33,7 +33,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                 StreetAddress = "Test Street Address",
                 Suburb = "Test Suburb",
             },
-            ContactDetails = new(),
+            ContactDetails = new()
+            {
+                Email = string.Empty,
+                Mobile = string.Empty
+            },
             FirstName = "Test",
             LastName = "Owner",
             MiddleName = "Middle",
@@ -63,7 +67,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                         StreetAddress = "Test Street Address",
                         Suburb = "Test Suburb",
                     },
-                    ContactDetails = new(),
+                    ContactDetails = new()
+                    {
+                        Email = string.Empty,
+                        Mobile = string.Empty
+                    },
                     FirstName = "Test",
                     LastName = "Owner",
                     MiddleName = "Middle",

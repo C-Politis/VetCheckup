@@ -77,7 +77,7 @@ public class CreateOwnerRequestValidatorTests
             
             [Theory]
             [InlineData("ValidName", true, "")]
-            [InlineData("", false, "'Middle Name' must not be empty.")]
+            [InlineData("", true, "")]
             [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false, "The length of 'Middle Name' must be 100 characters or fewer. You entered 101 characters.")]
             public void ValidateMiddleName(string middleName, bool isValid, string expectedErrorMessage)
             {

@@ -6,6 +6,7 @@ using Moq;
 using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.UpdatePet;
+using VetCheckup.Domain.Enums;
 using VetCheckup.Domain.Entities;
 using Xunit;
 
@@ -41,6 +42,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 .Returns(new List<Pet> { new Pet
                         {
                             PetId = _updatePetRequest.PetId,
+                            MicrochipId = "12345",
                             Name = "Old Pet",
                             DateOfBirth = new DateTime(2010, 01, 01),
                             Owner = new Owner
@@ -54,7 +56,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                     StreetAddress = "StreetAddress",
                                     Suburb = "Suburb"
                                 },
-                                ContactDetails = new Contact(),
+                                ContactDetails = new Contact()
+                                {
+                                    Email = string.Empty,
+                                    Mobile = string.Empty
+                                },
                                 FirstName = "Test",
                                 LastName = "Owner",
                                 MiddleName = "Middle",
@@ -62,7 +68,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 Title = Title.Dr,
                                 Pets = new List<Pet>()
                             },
-                            Species = "Dog"
+                            Species = "Dog",
+                            Sex = Sex.None
                         }
             }.AsQueryable());
 
@@ -80,7 +87,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 StreetAddress = "StreetAddress",
                                 Suburb = "Suburb"
                             },
-                            ContactDetails = new Contact(),
+                            ContactDetails = new Contact()
+                            {
+                                Email = string.Empty,
+                                Mobile = string.Empty
+                            },
                             FirstName = "Test",
                             LastName = "Owner",
                             MiddleName = "Middle",

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
+using VetCheckup.Domain.Enums;
 using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.CreatePet;
@@ -29,10 +30,12 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
         {
             _createPetRequest = new CreatePetRequest
             {
+                MicrochipId = "12345",
                 Name = "New Pet",
                 DateOfBirth = new DateTime(2010, 01, 01),
                 OwnerId = Guid.NewGuid(),
-                Species = "Dog"
+                Species = "Dog",
+                Sex = Sex.None
             };
 
             var ownerId = _createPetRequest.OwnerId;
@@ -41,6 +44,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 .Setup(e => e.Map<Pet>(It.IsAny<CreatePetRequest>()))
                 .Returns(() => new Pet
                 {
+                    MicrochipId = "12345",
                     Name = _createPetRequest.Name,
                     DateOfBirth = _createPetRequest.DateOfBirth,
                     Owner = new Owner
@@ -54,7 +58,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                             StreetAddress = "StreetAddress",
                             Suburb = "Suburb"
                         },
-                        ContactDetails = new Contact(),
+                        ContactDetails = new Contact()
+                        { 
+                            Email = string.Empty,
+                            Mobile = string.Empty
+                        },
                         FirstName = "Test",
                         LastName = "Owner",
                         MiddleName = "Middle",
@@ -62,7 +70,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                         Title = Title.Dr,
                         Pets = new List<Pet>()
                     },
-                    Species = _createPetRequest.Species
+                    Species = _createPetRequest.Species,
+                    Sex = Sex.None
                 });
 
             _mockContext
@@ -80,7 +89,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                             StreetAddress = "StreetAddress",
                             Suburb = "Suburb"
                         },
-                        ContactDetails = new Contact(),
+                        ContactDetails = new Contact()
+                        {
+                            Email = string.Empty,
+                            Mobile = string.Empty
+                        },
                         FirstName = "Test",
                         LastName = "Owner",
                         MiddleName = "Middle",

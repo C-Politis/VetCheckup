@@ -72,7 +72,7 @@ public class CreateContactRequestValidatorTests
     public void Mobile_ValidInput_NoValidationFailures()
     {
         // Arrange
-        _createContactRequest.Mobile = 0420123456;
+        _createContactRequest.Mobile = "0420123456";
 
         // Act
         var result = _createContactRequestValidator.Validate(_createContactRequest);
@@ -83,16 +83,16 @@ public class CreateContactRequestValidatorTests
     }
 
     [Fact]
-    public void Mobile_IsLessThanZero_NoValidationFailures()
+    public void Mobile_IsNotANumber_NoValidationFailures()
     {
         // Arrange
-        _createContactRequest.Mobile = -1;
+        _createContactRequest.Mobile = "WrongNumber";
         var expectedFailure = new ValidationFailure()
         {
             PropertyName = nameof(CreateContactRequest.Mobile),
             AttemptedValue = _createContactRequest.Mobile,
-            ErrorMessage = "'Mobile' must be greater than '0'.",
-            ErrorCode = "GreaterThanValidator"
+            ErrorMessage = "'Mobile' is not in the correct format.",
+            ErrorCode = "RegularExpressionValidator"
         };
 
         // Act

@@ -55,7 +55,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                                 StreetAddress = "StreetAddress",
                                 Suburb = "Suburb"
                             },
-                            ContactDetails = new Contact(),
+                            ContactDetails = new Contact()
+                            {
+                                Email = string.Empty,
+                                Mobile = string.Empty
+                            },
                             OwnerId = _updateOwnerRequest.OwnerId,
                             FirstName = "Old Owner",
                             MiddleName = "Old Owner",
@@ -81,7 +85,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                                 StreetAddress = "StreetAddress",
                                 Suburb = "Suburb"
                             },
-                            ContactDetails = new Contact(),
+                            ContactDetails = new Contact() 
+                            { 
+                                Email = string.Empty,
+                                Mobile = string.Empty
+                            },
                             FirstName = "Owner Name",
                             MiddleName = "Owner Name",
                             LastName = "Owner Name",

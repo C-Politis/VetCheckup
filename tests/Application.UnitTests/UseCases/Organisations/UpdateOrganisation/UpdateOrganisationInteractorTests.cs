@@ -50,7 +50,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
                                 StreetAddress = "StreetAddress",
                                 Suburb = "Suburb"
                             },
-                             ContactDetails = new Contact(),
+                             ContactDetails = new Contact()
+                             {
+                                Email = string.Empty,
+                                Mobile = string.Empty
+                             },
                              Name = "Old name",
                              OrganisationType = OrganisationType.Clinic
                         }

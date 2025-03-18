@@ -24,6 +24,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
         private readonly IRequestHandler<GetOrganisationRequest, OrganisationDto> _interactor;
         private readonly OrganisationDto _organisationDto = new()
         {
+            Abn = string.Empty,
             Address = new()
             {
                 Country = "Test Country",
@@ -32,7 +33,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
                 StreetAddress = "Test Street Address",
                 Suburb = "Test Suburb",
             },
-            ContactDetails = new(),
+            ContactDetails = new()
+            {
+                Email = string.Empty,
+                Mobile = string.Empty
+            },
             Name = "Hobbiton Rescue",
             OrganisationType = Domain.Enums.OrganisationType.Other
         };
@@ -49,6 +54,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
                 .Returns(new[] { new Organisation()
                 {
                     OrganisationId = this._request.OrganisationId,
+                    Abn = string.Empty,
                     Address = new()
                     {
                         Country = "Test Country",
@@ -57,7 +63,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
                         StreetAddress = "Test Street Address",
                         Suburb = "Test Suburb",
                     },
-                    ContactDetails = new(),
+                    ContactDetails = new()
+                    {
+                        Email = string.Empty,
+                        Mobile = string.Empty
+                    },
                     Name = "Hobbiton Rescue",
                     OrganisationType = Domain.Enums.OrganisationType.Other
                 } }.AsQueryable());
