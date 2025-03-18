@@ -14,7 +14,8 @@ public class CreateContactRequestValidator : AbstractValidator<CreateContactRequ
             .When(e => !string.IsNullOrWhiteSpace(e.Email));
 
         _ = this.RuleFor(e => e.Mobile)
-            .GreaterThan(0);
+            .MaximumLength(15)
+            .When(e => !string.IsNullOrWhiteSpace(e.Mobile));
     }
 
     #endregion
