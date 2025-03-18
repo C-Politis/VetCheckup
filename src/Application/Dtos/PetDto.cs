@@ -24,7 +24,7 @@ namespace VetCheckup.Application.Dtos
 
         public required string Species { get; set; }
 
-        public int? MicrochipId { get; set; }
+        public required string MicrochipId { get; set; }
 
         #endregion
 

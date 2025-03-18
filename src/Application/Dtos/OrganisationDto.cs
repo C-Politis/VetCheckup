@@ -8,7 +8,7 @@ namespace VetCheckup.Application.Dtos
 
         #region Properties
 
-        public string? Abn { get; set; }
+        public required string Abn { get; set; }
 
         public required Address Address { get; set; }
 
