@@ -11,23 +11,23 @@ public class UpdateAddressRequestValidator : AbstractValidator<UpdateAddressRequ
     {
         _ = this.RuleFor(e => e.Country)
             .MaximumLength(100)
-            .When(e => !string.IsNullOrWhiteSpace(e.Country));
+            .When(e => e.Country != null);
 
         _ = this.RuleFor(e => e.PostalCode)
             .MaximumLength(20)
-            .When(e => !string.IsNullOrWhiteSpace(e.PostalCode));
+            .When(e => e.PostalCode != null);
 
         _ = this.RuleFor(e => e.State)
             .MaximumLength(100)
-            .When(e => !string.IsNullOrWhiteSpace(e.State));
+            .When(e => e.State != null);
 
         _ = this.RuleFor(e => e.StreetAddress)
             .MaximumLength(250)
-            .When(e => !string.IsNullOrWhiteSpace(e.StreetAddress));
+            .When(e => e.StreetAddress != null);
 
         _ = this.RuleFor(e => e.Suburb)
             .MaximumLength(100)
-            .When(e => !string.IsNullOrWhiteSpace(e.Suburb));
+            .When(e => e.Suburb != null);
     }
 
     #endregion
