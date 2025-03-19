@@ -10,7 +10,7 @@ public class UpdateVetInteractor(IDbContext dbContext, IMapper mapper) : IReques
 
     Task IRequestHandler<UpdateVetRequest>.Handle(UpdateVetRequest request, CancellationToken cancellationToken)
     {
-        var vet = dbContext.Get<Vet>().SingleOrDefault(v => v.VetId == request.VetId);
+        var vet = dbContext.Get<Vet>().SingleOrDefault(v => v.VetId == request.VetId) ?? throw new Exception("Vet not found.");
 
         _ = mapper.Map(request, vet);
 
