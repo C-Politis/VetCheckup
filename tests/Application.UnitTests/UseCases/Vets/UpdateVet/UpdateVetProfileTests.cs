@@ -15,7 +15,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
             => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<UpdateVetProfile>();
-                cfg.AddProfile < EntityRequestProfile>();
+                cfg.AddProfile <EntityRequestProfile>();
             }).AssertConfigurationIsValid();
 
         #endregion
