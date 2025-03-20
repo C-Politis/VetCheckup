@@ -5,7 +5,7 @@ public class Address
 
     #region Properties
 
-    public Guid AddressId { get; set; }
+    public required Guid AddressId { get; set; }
 
     public required string Country { get; set; }
 

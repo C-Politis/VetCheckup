@@ -13,7 +13,7 @@ public class Organisation
 
     public required string Name { get; set; }
 
-    public Guid OrganisationId { get; set; }
+    public required Guid OrganisationId { get; set; }
 
     public required OrganisationType OrganisationType { get; set; } 
 

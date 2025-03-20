@@ -11,7 +11,7 @@ public class Owner
 
     public required Contact ContactDetails { get; set; }
 
-    public DateTime DateOfBirth { get; set; }
+    public required DateTime DateOfBirth { get; set; }
 
     public required Title Title { get; set; }
     
@@ -23,7 +23,7 @@ public class Owner
 
     public required Suffix Suffix { get; set; }
 
-    public Guid OwnerId { get; set; }
+    public required Guid OwnerId { get; set; }
 
     public required ICollection<Pet> Pets { get; set; }
 
