@@ -49,9 +49,10 @@ public class CreateOrganisationInteractorTests
             .Setup(e => e.Map<Organisation>(It.IsAny<CreateOrganisationRequest>()))
             .Returns(() => new Organisation()
             {
+                OrganisationId = Guid.NewGuid(),
                 Abn = _createOrganisationRequest.Abn,
-                Address = new() { Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
-                ContactDetails = new() { Email = string.Empty, Mobile = "1" },
+                Address = new() { AddressId = Guid.NewGuid(), Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
+                ContactDetails = new() { ContactId = Guid.NewGuid(), Email = string.Empty, Mobile = "1" },
                 Name = _createOrganisationRequest.Name,
                 OrganisationType = _createOrganisationRequest.OrganisationType
             });

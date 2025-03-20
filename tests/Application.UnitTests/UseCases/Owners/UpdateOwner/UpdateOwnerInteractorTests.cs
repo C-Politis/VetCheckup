@@ -49,6 +49,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                         {
                             Address = new Address()
                             {
+                                AddressId = Guid.NewGuid(),
                                 Country = "Country",
                                 PostalCode = "PostalCode",
                                 State = "State",
@@ -57,6 +58,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                             },
                             ContactDetails = new Contact()
                             {
+                                ContactId = Guid.NewGuid(),
                                 Email = string.Empty,
                                 Mobile = string.Empty
                             },
@@ -71,32 +73,6 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                         }
             }.AsQueryable());
 
-
-            _mockContext
-                .Setup(e => e.Get<Owner>())
-                .Returns(new List<Owner> { new Owner
-                        {
-                            OwnerId = _updateOwnerRequest.OwnerId,
-                            Address = new Address
-                            {
-                                Country = "Country",
-                                PostalCode = "PostalCode",
-                                State = "State",
-                                StreetAddress = "StreetAddress",
-                                Suburb = "Suburb"
-                            },
-                            ContactDetails = new Contact() 
-                            { 
-                                Email = string.Empty,
-                                Mobile = string.Empty
-                            },
-                            FirstName = "Owner Name",
-                            MiddleName = "Owner Name",
-                            LastName = "Owner Name",
-                            Title = Title.Miss,
-                            Suffix = Suffix.Esq,
-                            Pets = new List<Pet>()
-                        } }.AsQueryable());
 
             _mockMapper
                 .Setup(e => e.Map(It.IsAny<UpdateOwnerRequest>(), It.IsAny<Owner>()))

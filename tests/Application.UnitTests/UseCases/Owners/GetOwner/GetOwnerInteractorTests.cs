@@ -18,15 +18,14 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
         private readonly Mock<IDbContext> _mockDbContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
 
-        private readonly GetOwnerRequest _request = new()
-        {
-            OwnerID = Guid.NewGuid()
-        };
+        private readonly GetOwnerRequest _request;
         private readonly IRequestHandler<GetOwnerRequest, OwnerDto> _interactor;
         private readonly OwnerDto _ownerDto = new()
         {
+            OwnerId = Guid.NewGuid(),
             Address = new()
             {
+                AddressId = Guid.NewGuid(),
                 Country = "Test Country",
                 PostalCode = "Test Postal Code",
                 State = "Test State",
@@ -34,7 +33,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                 Suburb = "Test Suburb",
             },
             ContactDetails = new()
-            {
+            {  
+                ContactId = Guid.NewGuid(),
                 Email = string.Empty,
                 Mobile = string.Empty
             },
@@ -43,8 +43,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
             MiddleName = "Middle",
             Suffix = Suffix.Esq,
             Title = Title.Dr,
-            Pets = new List<PetDto>()
-
+            Pets = new List<PetDto>(),
+            DateOfBirth = DateTime.MinValue
         };
 
         #endregion
@@ -53,14 +53,19 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
 
         public GetOwnerInteractorTests()
         {
+            this._request = new()
+            {
+                OwnerID = _ownerDto.OwnerId
+            };
 
             this._mockDbContext
                 .Setup(mock => mock.Get<Owner>())
                 .Returns(new[] { new Owner()
                 {
-                    OwnerId = this._request.OwnerID,
+                    OwnerId = _ownerDto.OwnerId,
                     Address = new()
                     {
+                        AddressId = _ownerDto.Address.AddressId,
                         Country = "Test Country",
                         PostalCode = "Test Postal Code",
                         State = "Test State",
@@ -69,6 +74,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                     },
                     ContactDetails = new()
                     {
+                        ContactId = _ownerDto.ContactDetails.ContactId,
                         Email = string.Empty,
                         Mobile = string.Empty
                     },
@@ -77,7 +83,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                     MiddleName = "Middle",
                     Suffix = Suffix.Esq,
                     Title = Title.Dr,
-                    Pets = new List<Pet>()
+                    Pets = new List<Pet>(),
+                    DateOfBirth = DateTime.MinValue
                 } }.AsQueryable());
 
             this._mockMapper

@@ -38,20 +38,23 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 Sex = Sex.Male
             };
 
-            var ownerId = _createPetRequest.OwnerId;
+            Guid AddressId = Guid.NewGuid();
+            Guid ContactId = Guid.NewGuid();
 
             _mockMapper
                 .Setup(e => e.Map<Pet>(It.IsAny<CreatePetRequest>()))
                 .Returns(() => new Pet
                 {
+                    PetId = Guid.NewGuid(),
                     MicrochipId = "12345",
                     Name = _createPetRequest.Name,
                     DateOfBirth = _createPetRequest.DateOfBirth,
                     Owner = new Owner
                     {
-                        OwnerId = ownerId,
+                        OwnerId = _createPetRequest.OwnerId,
                         Address = new Address
                         {
+                            AddressId = AddressId,
                             Country = "Country",
                             PostalCode = "PostalCode",
                             State = "State",
@@ -60,6 +63,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                         },
                         ContactDetails = new Contact()
                         { 
+                            ContactId = ContactId,
                             Email = string.Empty,
                             Mobile = string.Empty
                         },
@@ -68,7 +72,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                         MiddleName = "Middle",
                         Suffix = Suffix.Esq,
                         Title = Title.Dr,
-                        Pets = new List<Pet>()
+                        Pets = new List<Pet>(),
+                        DateOfBirth = DateTime.MinValue
                     },
                     Species = _createPetRequest.Species,
                     Sex = Sex.Male
@@ -80,9 +85,10 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 {
                     new Owner
                     {
-                        OwnerId = ownerId,
+                        OwnerId = _createPetRequest.OwnerId,
                         Address = new Address
                         {
+                            AddressId = AddressId,
                             Country = "Country",
                             PostalCode = "PostalCode",
                             State = "State",
@@ -91,6 +97,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                         },
                         ContactDetails = new Contact()
                         {
+                            ContactId = ContactId,
                             Email = string.Empty,
                             Mobile = string.Empty
                         },
@@ -99,7 +106,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                         MiddleName = "Middle",
                         Suffix = Suffix.Esq,
                         Title = Title.Dr,
-                        Pets = new List<Pet>()
+                        Pets = new List<Pet>(),
+                        DateOfBirth = DateTime.MinValue
                     }
                 }.AsQueryable());
 

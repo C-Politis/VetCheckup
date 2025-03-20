@@ -50,6 +50,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 OwnerId = _updatePetRequest.OwnerId ?? Guid.Empty,
                                 Address = new Address
                                 {
+                                    AddressId = Guid.NewGuid(),
                                     Country = "Country",
                                     PostalCode = "PostalCode",
                                     State = "State",
@@ -58,6 +59,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 },
                                 ContactDetails = new Contact()
                                 {
+                                    ContactId = Guid.NewGuid(),
                                     Email = string.Empty,
                                     Mobile = string.Empty
                                 },
@@ -66,7 +68,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 MiddleName = "Middle",
                                 Suffix = Suffix.Esq,
                                 Title = Title.Dr,
-                                Pets = new List<Pet>()
+                                Pets = new List<Pet>(),
+                                DateOfBirth = DateTime.MinValue
                             },
                             Species = "Dog",
                             Sex = Sex.Male
@@ -78,27 +81,31 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 .Setup(e => e.Get<Owner>())
                 .Returns(new List<Owner> { new Owner
                         {
-                            OwnerId = _updatePetRequest.OwnerId ?? Guid.Empty,
-                            Address = new Address
-                            {
-                                Country = "Country",
-                                PostalCode = "PostalCode",
-                                State = "State",
-                                StreetAddress = "StreetAddress",
-                                Suburb = "Suburb"
-                            },
-                            ContactDetails = new Contact()
-                            {
-                                Email = string.Empty,
-                                Mobile = string.Empty
-                            },
-                            FirstName = "Test",
-                            LastName = "Owner",
-                            MiddleName = "Middle",
-                            Suffix = Suffix.Esq,
-                            Title = Title.Dr,
-                            Pets = new List<Pet>()
-                        } }.AsQueryable());
+                                OwnerId = _updatePetRequest.OwnerId ?? Guid.Empty,
+                                Address = new Address
+                                {
+                                    AddressId = Guid.NewGuid(),
+                                    Country = "Country",
+                                    PostalCode = "PostalCode",
+                                    State = "State",
+                                    StreetAddress = "StreetAddress",
+                                    Suburb = "Suburb"
+                                },
+                                ContactDetails = new Contact()
+                                {
+                                    ContactId = Guid.NewGuid(),
+                                    Email = string.Empty,
+                                    Mobile = string.Empty
+                                },
+                                FirstName = "Test",
+                                LastName = "Owner",
+                                MiddleName = "Middle",
+                                Suffix = Suffix.Esq,
+                                Title = Title.Dr,
+                                Pets = new List<Pet>(),
+                                DateOfBirth = DateTime.MinValue
+                            }
+                }.AsQueryable());
 
             _mockMapper
                 .Setup(e => e.Map(It.IsAny<UpdatePetRequest>(), It.IsAny<Pet>()))

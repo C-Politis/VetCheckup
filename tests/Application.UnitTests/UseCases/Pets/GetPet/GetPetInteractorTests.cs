@@ -31,8 +31,10 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
             Name = "Test Pet",
             Owner = new()
             {
+                OwnerId = Guid.NewGuid(),
                 Address = new()
                 {
+                    AddressId = Guid.NewGuid(),
                     Country = "Test Country",
                     PostalCode = "Test Postal Code",
                     State = "Test State",
@@ -41,6 +43,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                 },
                 ContactDetails = new()
                 {
+                    ContactId = Guid.NewGuid(),
                     Email = string.Empty,
                     Mobile = string.Empty
                 },
@@ -49,10 +52,12 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                 MiddleName = "Middle",
                 Suffix = Suffix.Esq,
                 Title = Title.Dr,
-                Pets = new List<PetDto>()
+                Pets = new List<PetDto>(),
+                DateOfBirth = DateTime.MinValue
             },
             PetId = Guid.NewGuid(),
-            Species = "Test Species"
+            Species = "Test Species",
+            Sex = Sex.Female
         };
 
         #endregion
@@ -76,6 +81,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                         OwnerId = _petDto.Owner.OwnerId,
                         Address = new()
                         {
+                            AddressId = _petDto.Owner.Address.AddressId,
                             Country = "Test Country",
                             PostalCode = "Test Postal Code",
                             State = "Test State",
@@ -84,6 +90,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                         },
                         ContactDetails = new()
                         {
+                            ContactId = _petDto.Owner.ContactDetails.ContactId,
                             Email = string.Empty,
                             Mobile = string.Empty
                         },
@@ -92,7 +99,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                         MiddleName = "Middle",
                         Suffix = Suffix.Esq,
                         Title = Title.Dr,
-                        Pets = new List<Pet>()
+                        Pets = new List<Pet>(),
+                        DateOfBirth = DateTime.MinValue
                     }
                 } }.AsQueryable());
 

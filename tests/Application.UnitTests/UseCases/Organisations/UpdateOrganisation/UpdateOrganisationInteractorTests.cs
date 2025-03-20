@@ -44,6 +44,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
                             Abn = "02110000000",
                             Address = new Address()
                             {
+                                AddressId = Guid.NewGuid(),
                                 Country = "Country",
                                 PostalCode = "PostalCode",
                                 State = "State",
@@ -52,6 +53,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
                             },
                              ContactDetails = new Contact()
                              {
+                                ContactId = Guid.NewGuid(),
                                 Email = string.Empty,
                                 Mobile = string.Empty
                              },
