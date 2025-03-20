@@ -10,12 +10,10 @@ public class CreateContactRequestValidator : AbstractValidator<CreateContactRequ
     public CreateContactRequestValidator()
     {
         _ = this.RuleFor(e => e.Email)
-            .MaximumLength(100)
-            .When(e => !string.IsNullOrWhiteSpace(e.Email));
+            .MaximumLength(100);
 
         _ = this.RuleFor(e => e.Mobile)
-            .Matches("^\\d{1,15}$")
-            .When(e => !string.IsNullOrWhiteSpace(e.Mobile));
+            .Matches("^\\d{0,15}$");
     }
 
     #endregion
