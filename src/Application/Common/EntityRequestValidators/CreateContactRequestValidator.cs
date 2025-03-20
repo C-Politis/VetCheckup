@@ -13,7 +13,7 @@ public class CreateContactRequestValidator : AbstractValidator<CreateContactRequ
             .MaximumLength(100);
 
         _ = this.RuleFor(e => e.Mobile)
-            .Matches("^\\d{0,15}$");
+            .Matches("^\\d{0,20}$");
     }
 
     #endregion
