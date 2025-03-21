@@ -41,7 +41,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
                 .Returns(new List<Organisation> { new Organisation
                         {
                             OrganisationId = _updateOrganisationRequest.OrganisationId,
-                            Abn = "02110000000",
+                            Abn = "48123123124",
                             Address = new Address()
                             {
                                 Country = "Country",
