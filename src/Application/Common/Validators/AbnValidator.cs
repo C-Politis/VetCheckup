@@ -16,7 +16,7 @@ public class AbnValidator : AbstractValidator<string?>
         _ = this.RuleFor(e => e)
             .Cascade(CascadeMode.Stop)
             .Matches("^[1-9]\\d{10}$")
-            .WithMessage("ABN must be an 11 digit number")
+            .WithMessage("ABN must be an 11 digit number and cannot begin with 0.")
             .Must(IsValidAbn)
             .WithMessage("ABN is invalid")
             .When(e => !string.IsNullOrWhiteSpace(e));
