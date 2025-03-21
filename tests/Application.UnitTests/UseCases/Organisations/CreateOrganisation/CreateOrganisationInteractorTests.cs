@@ -27,7 +27,7 @@ public class CreateOrganisationInteractorTests
     {
         _createOrganisationRequest = new CreateOrganisationRequest()
         {
-            Abn = "02110000000",
+            Abn = "48123123124",
             Address = new(),
             ContactDetails = new(),
             Name = "Giant Eagles Rescue",

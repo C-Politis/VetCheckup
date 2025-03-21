@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
+using VetCheckup.Application.Common.Models;
 using VetCheckup.Application.UseCases.Organisations.CreateOrganisation;
 using VetCheckup.Domain.Enums;
 using Xunit;
@@ -62,7 +63,7 @@ public class CreateOrganisationReqestValidatorTests
         {
             AttemptedValue = _createOrganisationRequest.Abn,
             ErrorCode = "RegularExpressionValidator",
-            ErrorMessage = "ABN must be an 11 digit number"
+            ErrorMessage = "ABN must be an 11 digit number and cannot begin with 0."
         };
 
         // Act
@@ -84,7 +85,29 @@ public class CreateOrganisationReqestValidatorTests
         {
             AttemptedValue = _createOrganisationRequest.Abn,
             ErrorCode = "RegularExpressionValidator",
-            ErrorMessage = "ABN must be an 11 digit number"
+            ErrorMessage = "ABN must be an 11 digit number and cannot begin with 0."
+        };
+
+        // Act
+        var result = _createOrganisationRequestValidator.Validate(_createOrganisationRequest);
+
+        // Assert
+        result.Errors
+            .Should().ContainEquivalentOf(expectedFailure, cfg => cfg
+            .Excluding(e => e.FormattedMessagePlaceholderValues)
+            .Excluding(e => e.PropertyName));
+    }
+
+    [Fact]
+    public void Abn_ZeroLeadingDigit_ValidationFailures()
+    {
+        // Arrange
+        _createOrganisationRequest.Abn = "02110000000";
+        var expectedFailure = new ValidationFailure()
+        {
+            AttemptedValue = _createOrganisationRequest.Abn,
+            ErrorCode = "RegularExpressionValidator",
+            ErrorMessage = "ABN must be an 11 digit number and cannot begin with 0."
         };
 
         // Act
