@@ -63,7 +63,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
             {
                 AttemptedValue = _updateOrganisationRequest.Abn,
                 ErrorCode = "RegularExpressionValidator",
-                ErrorMessage = "ABN must be an 11 digit number and cannot begin with 0."
+                ErrorMessage = "ABN must be a valid 11 digit number and cannot begin with 0."
             };
 
             // Act
@@ -85,7 +85,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
             {
                 AttemptedValue = _updateOrganisationRequest.Abn,
                 ErrorCode = "RegularExpressionValidator",
-                ErrorMessage = "ABN must be an 11 digit number and cannot begin with 0."
+                ErrorMessage = "ABN must be a valid 11 digit number and cannot begin with 0."
             };
 
             // Act
@@ -107,7 +107,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
             {
                 AttemptedValue = _updateOrganisationRequest.Abn,
                 ErrorCode = "RegularExpressionValidator",
-                ErrorMessage = "ABN must be an 11 digit number and cannot begin with 0."
+                ErrorMessage = "ABN must be a valid 11 digit number and cannot begin with 0."
             };
 
             // Act
@@ -129,7 +129,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
             {
                 AttemptedValue = _updateOrganisationRequest.Abn,
                 ErrorCode = "PredicateValidator",
-                ErrorMessage = "ABN is invalid"
+                ErrorMessage = "ABN is invalid."
             };
 
             // Act
