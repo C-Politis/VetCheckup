@@ -41,6 +41,29 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 .Should().BeEmpty();
         }
 
+        [Theory]
+        [MemberData(nameof(Sex_ValidInput_NoValidationFailures_TestData))]
+        public void Sex_ValidInput_NoValidationFailures(Sex sex)
+        {
+            // Arrange
+            _createPetRequest.Sex = sex;
+
+            // Act
+            var result = _createPetRequestValidator.Validate(_createPetRequest);
+
+            // Assert
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Sex), StringComparison.OrdinalIgnoreCase))
+                .Should().BeEmpty();
+        }
+
+        public static IEnumerable<object[]> Sex_ValidInput_NoValidationFailures_TestData()
+            => new[]
+            {
+                new object[] { Sex.Male },
+                new object[] { Sex.Female },
+                new object[] { Sex.Other }
+            };
+
         [Fact]
         public void Name_ExceedsMaxLength_ValidationFailures()
         {
