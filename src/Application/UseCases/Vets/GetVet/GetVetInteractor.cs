@@ -11,7 +11,7 @@ namespace VetCheckup.Application.UseCases.Vets.GetVet
 
         Task<VetDto> IRequestHandler<GetVetRequest, VetDto>.Handle(GetVetRequest request, CancellationToken cancellationToken)
         {
-            var vet = dbContext.Get<Vet>().SingleOrDefault(v => v.VetId == request.VetId) ?? throw new Exception($"Vet not found.");
+            var vet = dbContext.Get<Vet>().SingleOrDefault(v => v.VetId == request.VetId) ?? throw new Exception("Vet not found.");
 
             return Task.FromResult(mapper.Map<VetDto>(vet));
         }
