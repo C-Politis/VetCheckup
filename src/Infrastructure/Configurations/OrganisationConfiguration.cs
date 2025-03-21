@@ -15,7 +15,7 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
         
         builder.Property(e => e.Abn)
             .HasMaxLength(11)
-            .IsRequired(false);
+            .IsRequired();
         
         builder.HasOne(e => e.Address)
             .WithOne()
