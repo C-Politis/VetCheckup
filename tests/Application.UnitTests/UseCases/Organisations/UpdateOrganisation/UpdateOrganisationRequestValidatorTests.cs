@@ -54,7 +54,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
             {
                 AttemptedValue = _updateOrganisationRequest.Abn,
                 ErrorCode = "RegularExpressionValidator",
-                ErrorMessage = "ABN must be an 11 digit number"
+                ErrorMessage = "ABN must be a valid 11 digit number and cannot begin with 0."
             };
 
             // Act
@@ -76,7 +76,29 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
             {
                 AttemptedValue = _updateOrganisationRequest.Abn,
                 ErrorCode = "RegularExpressionValidator",
-                ErrorMessage = "ABN must be an 11 digit number"
+                ErrorMessage = "ABN must be a valid 11 digit number and cannot begin with 0."
+            };
+
+            // Act
+            var result = _updateOrganisationRequestValidator.Validate(_updateOrganisationRequest);
+
+            // Assert
+            result.Errors
+                .Should().ContainEquivalentOf(expectedFailure, cfg => cfg
+                .Excluding(e => e.FormattedMessagePlaceholderValues)
+                .Excluding(e => e.PropertyName));
+        }
+
+        [Fact]
+        public void Abn_ZeroLeadingDigit_ValidationFailures()
+        {
+            // Arrange
+            _updateOrganisationRequest.Abn = "02110000000";
+            var expectedFailure = new ValidationFailure()
+            {
+                AttemptedValue = _updateOrganisationRequest.Abn,
+                ErrorCode = "RegularExpressionValidator",
+                ErrorMessage = "ABN must be a valid 11 digit number and cannot begin with 0."
             };
 
             // Act
@@ -98,7 +120,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
             {
                 AttemptedValue = _updateOrganisationRequest.Abn,
                 ErrorCode = "PredicateValidator",
-                ErrorMessage = "ABN is invalid"
+                ErrorMessage = "ABN is invalid."
             };
 
             // Act

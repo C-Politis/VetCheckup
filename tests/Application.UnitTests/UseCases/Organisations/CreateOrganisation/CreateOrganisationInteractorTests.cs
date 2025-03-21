@@ -27,7 +27,7 @@ public class CreateOrganisationInteractorTests
     {
         _createOrganisationRequest = new CreateOrganisationRequest()
         {
-            Abn = "02110000000",
+            Abn = "51824753556",
             Address = new()
             {
                 StreetAddress = string.Empty,
