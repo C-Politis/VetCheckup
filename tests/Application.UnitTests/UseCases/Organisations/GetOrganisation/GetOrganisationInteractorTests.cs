@@ -4,6 +4,7 @@ using Moq;
 using VetCheckup.Application.Dtos;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Organisations.GetOrganisation;
+using VetCheckup.Domain.Enums;
 using VetCheckup.Domain.Entities;
 using Xunit;
 
@@ -17,24 +18,29 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
         private readonly Mock<IDbContext> _mockDbContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
 
-        private readonly GetOrganisationRequest _request = new()
-        {
-            OrganisationId = Guid.NewGuid()
-        };
+        private readonly GetOrganisationRequest _request;
         private readonly IRequestHandler<GetOrganisationRequest, OrganisationDto> _interactor;
         private readonly OrganisationDto _organisationDto = new()
         {
+            OrganisationId = Guid.NewGuid(),
+            Abn = string.Empty,
             Address = new()
             {
+                AddressId = Guid.NewGuid(),
                 Country = "Test Country",
                 PostalCode = "Test Postal Code",
                 State = "Test State",
                 StreetAddress = "Test Street Address",
                 Suburb = "Test Suburb",
             },
-            ContactDetails = new(),
+            ContactDetails = new()
+            {   
+                ContactId = Guid.NewGuid(),
+                Email = string.Empty,
+                Mobile = string.Empty
+            },
             Name = "Hobbiton Rescue",
-            OrganisationType = Domain.Enums.OrganisationType.Other
+            OrganisationType = OrganisationType.Other
         };
 
         #endregion
@@ -43,23 +49,34 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
 
         public GetOrganisationInteractorTests()
         {
+            this._request = new() 
+            { 
+                OrganisationId = _organisationDto.OrganisationId
+            };
 
             this._mockDbContext
                 .Setup(mock => mock.Get<Organisation>())
                 .Returns(new[] { new Organisation()
                 {
-                    OrganisationId = this._request.OrganisationId,
+                    OrganisationId = _organisationDto.OrganisationId,
+                    Abn = string.Empty,
                     Address = new()
                     {
+                        AddressId = _organisationDto.Address.AddressId,
                         Country = "Test Country",
                         PostalCode = "Test Postal Code",
                         State = "Test State",
                         StreetAddress = "Test Street Address",
                         Suburb = "Test Suburb",
                     },
-                    ContactDetails = new(),
+                    ContactDetails = new()
+                    {
+                        ContactId = _organisationDto.ContactDetails.ContactId,
+                        Email = string.Empty,
+                        Mobile = string.Empty
+                    },
                     Name = "Hobbiton Rescue",
-                    OrganisationType = Domain.Enums.OrganisationType.Other
+                    OrganisationType = OrganisationType.Other
                 } }.AsQueryable());
 
             this._mockMapper

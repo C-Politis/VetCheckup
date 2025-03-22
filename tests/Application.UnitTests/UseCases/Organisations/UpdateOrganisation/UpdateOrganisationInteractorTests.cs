@@ -44,13 +44,19 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
                             Abn = "48123123124",
                             Address = new Address()
                             {
+                                AddressId = Guid.NewGuid(),
                                 Country = "Country",
                                 PostalCode = "PostalCode",
                                 State = "State",
                                 StreetAddress = "StreetAddress",
                                 Suburb = "Suburb"
                             },
-                             ContactDetails = new Contact(),
+                             ContactDetails = new Contact()
+                             {
+                                ContactId = Guid.NewGuid(),
+                                Email = string.Empty,
+                                Mobile = string.Empty
+                             },
                              Name = "Old name",
                              OrganisationType = OrganisationType.Clinic
                         }

@@ -23,6 +23,7 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
             .IsRequired();
 
         builder.Property(e => e.DateOfBirth)
+            .IsRequired()
             .HasColumnType("datetime2");
 
         builder.Property(e => e.Name)

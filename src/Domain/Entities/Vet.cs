@@ -9,11 +9,11 @@ public class Vet
 
     public required Contact ContactDetails { get; set; }
 
-    public DateTime DateOfBirth { get; set; }
+    public required DateTime DateOfBirth { get; set; }
 
     public required string Name { get; set; }
 
-    public Guid VetId { get; set; }
+    public required Guid VetId { get; set; }
 
     #endregion
 

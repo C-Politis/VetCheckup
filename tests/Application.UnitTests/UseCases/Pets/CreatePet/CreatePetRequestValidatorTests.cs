@@ -15,6 +15,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
         private readonly IValidator<CreatePetRequest> _createPetRequestValidator = new CreatePetRequestValidator();
         private readonly CreatePetRequest _createPetRequest = new()
         {
+            MicrochipId = "12345",
             Name = string.Empty,
             Species = string.Empty,
             Sex = Sex.Male,

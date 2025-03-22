@@ -6,6 +6,7 @@ using Moq;
 using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.UpdatePet;
+using VetCheckup.Domain.Enums;
 using VetCheckup.Domain.Entities;
 using Xunit;
 
@@ -41,6 +42,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 .Returns(new List<Pet> { new Pet
                         {
                             PetId = _updatePetRequest.PetId,
+                            MicrochipId = "12345",
                             Name = "Old Pet",
                             DateOfBirth = new DateTime(2010, 01, 01),
                             Owner = new Owner
@@ -48,21 +50,29 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                 OwnerId = _updatePetRequest.OwnerId ?? Guid.Empty,
                                 Address = new Address
                                 {
+                                    AddressId = Guid.NewGuid(),
                                     Country = "Country",
                                     PostalCode = "PostalCode",
                                     State = "State",
                                     StreetAddress = "StreetAddress",
                                     Suburb = "Suburb"
                                 },
-                                ContactDetails = new Contact(),
+                                ContactDetails = new Contact()
+                                {
+                                    ContactId = Guid.NewGuid(),
+                                    Email = string.Empty,
+                                    Mobile = string.Empty
+                                },
                                 FirstName = "Test",
                                 LastName = "Owner",
                                 MiddleName = "Middle",
                                 Suffix = Suffix.Esq,
                                 Title = Title.Dr,
-                                Pets = new List<Pet>()
+                                Pets = new List<Pet>(),
+                                DateOfBirth = DateTime.MinValue
                             },
-                            Species = "Dog"
+                            Species = "Dog",
+                            Sex = Sex.Male
                         }
             }.AsQueryable());
 
@@ -71,23 +81,31 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 .Setup(e => e.Get<Owner>())
                 .Returns(new List<Owner> { new Owner
                         {
-                            OwnerId = _updatePetRequest.OwnerId ?? Guid.Empty,
-                            Address = new Address
-                            {
-                                Country = "Country",
-                                PostalCode = "PostalCode",
-                                State = "State",
-                                StreetAddress = "StreetAddress",
-                                Suburb = "Suburb"
-                            },
-                            ContactDetails = new Contact(),
-                            FirstName = "Test",
-                            LastName = "Owner",
-                            MiddleName = "Middle",
-                            Suffix = Suffix.Esq,
-                            Title = Title.Dr,
-                            Pets = new List<Pet>()
-                        } }.AsQueryable());
+                                OwnerId = _updatePetRequest.OwnerId ?? Guid.Empty,
+                                Address = new Address
+                                {
+                                    AddressId = Guid.NewGuid(),
+                                    Country = "Country",
+                                    PostalCode = "PostalCode",
+                                    State = "State",
+                                    StreetAddress = "StreetAddress",
+                                    Suburb = "Suburb"
+                                },
+                                ContactDetails = new Contact()
+                                {
+                                    ContactId = Guid.NewGuid(),
+                                    Email = string.Empty,
+                                    Mobile = string.Empty
+                                },
+                                FirstName = "Test",
+                                LastName = "Owner",
+                                MiddleName = "Middle",
+                                Suffix = Suffix.Esq,
+                                Title = Title.Dr,
+                                Pets = new List<Pet>(),
+                                DateOfBirth = DateTime.MinValue
+                            }
+                }.AsQueryable());
 
             _mockMapper
                 .Setup(e => e.Map(It.IsAny<UpdatePetRequest>(), It.IsAny<Pet>()))

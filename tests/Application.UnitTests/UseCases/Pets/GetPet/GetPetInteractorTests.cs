@@ -27,28 +27,37 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
         private readonly PetDto _petDto = new()
         {
             DateOfBirth = DateTime.Now,
-            MicrochipId = 123456,
+            MicrochipId = "123456",
             Name = "Test Pet",
             Owner = new()
             {
+                OwnerId = Guid.NewGuid(),
                 Address = new()
                 {
+                    AddressId = Guid.NewGuid(),
                     Country = "Test Country",
                     PostalCode = "Test Postal Code",
                     State = "Test State",
                     StreetAddress = "Test Street Address",
                     Suburb = "Test Suburb",
                 },
-                ContactDetails = new(),
+                ContactDetails = new()
+                {
+                    ContactId = Guid.NewGuid(),
+                    Email = string.Empty,
+                    Mobile = string.Empty
+                },
                 FirstName = "Test",
                 LastName = "Owner",
                 MiddleName = "Middle",
                 Suffix = Suffix.Esq,
                 Title = Title.Dr,
-                Pets = new List<PetDto>()
+                Pets = new List<PetDto>(),
+                DateOfBirth = DateTime.MinValue
             },
             PetId = Guid.NewGuid(),
-            Species = "Test Species"
+            Species = "Test Species",
+            Sex = Sex.Female
         };
 
         #endregion
@@ -63,7 +72,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                 {
                     PetId = this._request.PetId,
                     DateOfBirth = DateTime.Now,
-                    MicrochipId = 1234,
+                    MicrochipId = "123456",
                     Name = "Test Pet",
                     Sex = Sex.Male,
                     Species = "Test Species",
@@ -72,19 +81,26 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                         OwnerId = _petDto.Owner.OwnerId,
                         Address = new()
                         {
+                            AddressId = _petDto.Owner.Address.AddressId,
                             Country = "Test Country",
                             PostalCode = "Test Postal Code",
                             State = "Test State",
                             StreetAddress = "Test Street Address",
                             Suburb = "Test Suburb",
                         },
-                        ContactDetails = new(),
+                        ContactDetails = new()
+                        {
+                            ContactId = _petDto.Owner.ContactDetails.ContactId,
+                            Email = string.Empty,
+                            Mobile = string.Empty
+                        },
                         FirstName = "Test",
                         LastName = "Owner",
                         MiddleName = "Middle",
                         Suffix = Suffix.Esq,
                         Title = Title.Dr,
-                        Pets = new List<Pet>()
+                        Pets = new List<Pet>(),
+                        DateOfBirth = DateTime.MinValue
                     }
                 } }.AsQueryable());
 

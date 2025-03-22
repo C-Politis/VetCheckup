@@ -17,7 +17,7 @@ public class UpdatePetRequest : IRequest
 
     public string? Species { get; set; }
 
-    public int? MicrochipId { get; set; }
+    public string? MicrochipId { get; set; }
 
     public Guid? OwnerId { get; set; }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetCheckup.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using VetCheckup.Infrastructure.Data;
 namespace VetCheckup.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250320121956_RemoveNullSupport")]
+    partial class RemoveNullSupport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,30 +80,6 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.HasKey("ContactId");
 
                     b.ToTable("Contact", (string)null);
-                });
-
-            modelBuilder.Entity("VetCheckup.Domain.Entities.Organisation", b =>
-                {
-                    b.Property<Guid>("OrganisationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Abn")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("OrganisationType")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrganisationId");
-
-                    b.ToTable("Organisation", (string)null);
                 });
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Owner", b =>
@@ -217,12 +196,6 @@ namespace VetCheckup.Infrastructure.Migrations
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Address", b =>
                 {
-                    b.HasOne("VetCheckup.Domain.Entities.Organisation", null)
-                        .WithOne("Address")
-                        .HasForeignKey("VetCheckup.Domain.Entities.Address", "AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("VetCheckup.Domain.Entities.Owner", null)
                         .WithOne("Address")
                         .HasForeignKey("VetCheckup.Domain.Entities.Address", "AddressId")
@@ -238,12 +211,6 @@ namespace VetCheckup.Infrastructure.Migrations
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Contact", b =>
                 {
-                    b.HasOne("VetCheckup.Domain.Entities.Organisation", null)
-                        .WithOne("ContactDetails")
-                        .HasForeignKey("VetCheckup.Domain.Entities.Contact", "ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("VetCheckup.Domain.Entities.Owner", null)
                         .WithOne("ContactDetails")
                         .HasForeignKey("VetCheckup.Domain.Entities.Contact", "ContactId")
@@ -289,15 +256,6 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.Navigation("Pet");
 
                     b.Navigation("Vet");
-                });
-
-            modelBuilder.Entity("VetCheckup.Domain.Entities.Organisation", b =>
-                {
-                    b.Navigation("Address")
-                        .IsRequired();
-
-                    b.Navigation("ContactDetails")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Owner", b =>

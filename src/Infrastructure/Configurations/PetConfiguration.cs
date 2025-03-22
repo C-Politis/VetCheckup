@@ -16,7 +16,8 @@ public class PetConfiguration : IEntityTypeConfiguration<Pet>
         builder.Property(e => e.DateOfBirth)
             .HasColumnType("datetime2");
 
-        builder.Property(e => e.MicrochipId);
+        builder.Property(e => e.MicrochipId)
+            .IsRequired();
 
         builder.Property(e => e.Name)
             .HasMaxLength(100)

@@ -13,7 +13,7 @@ namespace VetCheckup.Application.Common.EntityRequests
 
         public string? Email { get; set; }
 
-        public int? Mobile { get; set; }
+        public string? Mobile { get; set; }
 
         #endregion
 

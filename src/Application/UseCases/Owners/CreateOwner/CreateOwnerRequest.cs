@@ -16,13 +16,13 @@ public class CreateOwnerRequest : IRequest
 
     public required string FirstName { get; set; }
 
-    public string? MiddleName { get; set; }
+    public required string MiddleName { get; set; }
 
     public required string LastName { get; set; }
 
-    public Suffix? Suffix { get; set; }
+    public required Suffix Suffix { get; set; }
 
-    public Title? Title { get; set; }
+    public required Title Title { get; set; }
 
     #endregion
 

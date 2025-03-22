@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
+using VetCheckup.Domain.Enums;
 using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.CreatePet;
@@ -29,40 +30,53 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
         {
             _createPetRequest = new CreatePetRequest
             {
+                MicrochipId = "12345",
                 Name = "New Pet",
                 DateOfBirth = new DateTime(2010, 01, 01),
                 OwnerId = Guid.NewGuid(),
-                Species = "Dog"
+                Species = "Dog",
+                Sex = Sex.Male
             };
 
-            var ownerId = _createPetRequest.OwnerId;
+            Guid AddressId = Guid.NewGuid();
+            Guid ContactId = Guid.NewGuid();
 
             _mockMapper
                 .Setup(e => e.Map<Pet>(It.IsAny<CreatePetRequest>()))
                 .Returns(() => new Pet
                 {
+                    PetId = Guid.NewGuid(),
+                    MicrochipId = "12345",
                     Name = _createPetRequest.Name,
                     DateOfBirth = _createPetRequest.DateOfBirth,
                     Owner = new Owner
                     {
-                        OwnerId = ownerId,
+                        OwnerId = _createPetRequest.OwnerId,
                         Address = new Address
                         {
+                            AddressId = AddressId,
                             Country = "Country",
                             PostalCode = "PostalCode",
                             State = "State",
                             StreetAddress = "StreetAddress",
                             Suburb = "Suburb"
                         },
-                        ContactDetails = new Contact(),
+                        ContactDetails = new Contact()
+                        { 
+                            ContactId = ContactId,
+                            Email = string.Empty,
+                            Mobile = string.Empty
+                        },
                         FirstName = "Test",
                         LastName = "Owner",
                         MiddleName = "Middle",
                         Suffix = Suffix.Esq,
                         Title = Title.Dr,
-                        Pets = new List<Pet>()
+                        Pets = new List<Pet>(),
+                        DateOfBirth = DateTime.MinValue
                     },
-                    Species = _createPetRequest.Species
+                    Species = _createPetRequest.Species,
+                    Sex = Sex.Male
                 });
 
             _mockContext
@@ -71,22 +85,29 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                 {
                     new Owner
                     {
-                        OwnerId = ownerId,
+                        OwnerId = _createPetRequest.OwnerId,
                         Address = new Address
                         {
+                            AddressId = AddressId,
                             Country = "Country",
                             PostalCode = "PostalCode",
                             State = "State",
                             StreetAddress = "StreetAddress",
                             Suburb = "Suburb"
                         },
-                        ContactDetails = new Contact(),
+                        ContactDetails = new Contact()
+                        {
+                            ContactId = ContactId,
+                            Email = string.Empty,
+                            Mobile = string.Empty
+                        },
                         FirstName = "Test",
                         LastName = "Owner",
                         MiddleName = "Middle",
                         Suffix = Suffix.Esq,
                         Title = Title.Dr,
-                        Pets = new List<Pet>()
+                        Pets = new List<Pet>(),
+                        DateOfBirth = DateTime.MinValue
                     }
                 }.AsQueryable());
 

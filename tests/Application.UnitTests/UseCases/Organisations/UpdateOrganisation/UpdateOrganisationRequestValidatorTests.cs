@@ -27,24 +27,15 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
 
         #region Handle Tests
 
-        [Fact]
-        public void Abn_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("51824753556")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void Abn_ValidInput_NoValidationFailures(string? abn)
         {
             // Arrange
-            _updateOrganisationRequest.Abn = "51824753556";
+            _updateOrganisationRequest.Abn = abn;
 
-            // Act
-            var result = _updateOrganisationRequestValidator.Validate(_updateOrganisationRequest);
-
-            // Assert
-            result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationRequest.Abn), StringComparison.OrdinalIgnoreCase))
-                .Should().BeEmpty();
-        }
-
-        [Fact]
-        public void Abn_IsEmpty_NoValidationFailures()
-        {
             // Act
             var result = _updateOrganisationRequestValidator.Validate(_updateOrganisationRequest);
 
