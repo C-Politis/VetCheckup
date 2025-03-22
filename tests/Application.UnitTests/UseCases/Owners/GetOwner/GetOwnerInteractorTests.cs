@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
+using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Dtos;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Owners.GetOwner;
@@ -33,7 +34,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                 Suburb = "Test Suburb",
             },
             ContactDetails = new(),
-            Name = "Test Owner",
+            FirstName = "Test",
+            LastName = "Owner",
+            MiddleName = "Middle",
+            Suffix = Suffix.Esq,
+            Title = Title.Dr,
+            Pets = new List<PetDto>()
+
         };
 
         #endregion
@@ -57,7 +64,12 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                         Suburb = "Test Suburb",
                     },
                     ContactDetails = new(),
-                    Name = "Test Owner",
+                    FirstName = "Test",
+                    LastName = "Owner",
+                    MiddleName = "Middle",
+                    Suffix = Suffix.Esq,
+                    Title = Title.Dr,
+                    Pets = new List<Pet>()
                 } }.AsQueryable());
 
             this._mockMapper

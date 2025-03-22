@@ -9,7 +9,8 @@ public class CreateOwnerProfile : Profile
     public CreateOwnerProfile()
     {
         _ = CreateMap<CreateOwnerRequest, Owner>()
-            .ForMember(destination => destination.OwnerId, source => source.Ignore());
+            .ForMember(destination => destination.OwnerId, source => source.Ignore())
+            .ForMember(destination => destination.Pets, source => source.Ignore());
     }
 
     #endregion

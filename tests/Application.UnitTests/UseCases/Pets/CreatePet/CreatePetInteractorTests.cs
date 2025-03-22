@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
+using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.CreatePet;
 using VetCheckup.Domain.Entities;
@@ -54,7 +55,12 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                             Suburb = "Suburb"
                         },
                         ContactDetails = new Contact(),
-                        Name = "Owner Name"
+                        FirstName = "Test",
+                        LastName = "Owner",
+                        MiddleName = "Middle",
+                        Suffix = Suffix.Esq,
+                        Title = Title.Dr,
+                        Pets = new List<Pet>()
                     },
                     Species = _createPetRequest.Species
                 });
@@ -75,7 +81,12 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                             Suburb = "Suburb"
                         },
                         ContactDetails = new Contact(),
-                        Name = "Owner Name"
+                        FirstName = "Test",
+                        LastName = "Owner",
+                        MiddleName = "Middle",
+                        Suffix = Suffix.Esq,
+                        Title = Title.Dr,
+                        Pets = new List<Pet>()
                     }
                 }.AsQueryable());
 
