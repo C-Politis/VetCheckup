@@ -49,7 +49,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                 {
                     ContactId = Guid.NewGuid(),
                     Email = "Gimli.Gloin@Erebor.mine",
-                    Mobile = 0 // TODO change to string
+                    Mobile = "0"
                 },
                 Name = "Gimli, son of Gloin",
                 DateOfBirth = DateTime.MinValue
