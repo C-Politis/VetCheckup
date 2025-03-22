@@ -5,9 +5,9 @@ public class CreateContactRequest
 
     #region Properties
 
-    public string? Email { get; set; }
+    public required string Email { get; set; }
 
-    public int? Mobile { get; set; }
+    public required string Mobile { get; set; }
 
     #endregion
 

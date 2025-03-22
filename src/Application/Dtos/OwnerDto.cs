@@ -17,19 +17,19 @@ namespace VetCheckup.Application.Dtos
 
         public required ContactDto ContactDetails { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public required DateTime DateOfBirth { get; set; }
 
-        public Title? Title { get; set; }
+        public required Title Title { get; set; }
         
         public required string FirstName { get; set; }
 
-        public string? MiddleName { get; set; }
+        public required string MiddleName { get; set; }
 
         public required string LastName { get; set; }
 
-        public Suffix? Suffix { get; set; }
+        public required Suffix Suffix { get; set; }
 
-        public Guid OwnerId { get; set; }
+        public required Guid OwnerId { get; set; }
 
         public required ICollection<PetDto> Pets { get; set; }
 

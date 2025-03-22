@@ -15,8 +15,19 @@ public class CreateOwnerRequestValidatorTests
     private readonly IValidator<CreateOwnerRequest> _createOwnerRequestValidator = new CreateOwnerRequestValidator();
     private readonly CreateOwnerRequest _createOwnerRequest = new()
     {
-        Address = new(),
-        ContactDetails = new(),
+        Address = new()
+        {
+            StreetAddress = string.Empty,
+            Country = string.Empty,
+            PostalCode = string.Empty,
+            State = string.Empty,
+            Suburb = string.Empty,
+        },
+        ContactDetails = new()
+        {
+            Email = string.Empty,
+            Mobile = string.Empty
+        },
         FirstName = "Test",
         LastName = "Owner",
         MiddleName = "Middle",
@@ -77,7 +88,7 @@ public class CreateOwnerRequestValidatorTests
             
             [Theory]
             [InlineData("ValidName", true, "")]
-            [InlineData("", false, "'Middle Name' must not be empty.")]
+            [InlineData("", true, "")]
             [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false, "The length of 'Middle Name' must be 100 characters or fewer. You entered 101 characters.")]
             public void ValidateMiddleName(string middleName, bool isValid, string expectedErrorMessage)
             {
@@ -133,6 +144,7 @@ public class CreateOwnerRequestValidatorTests
             public static IEnumerable<object[]> Suffix_ValidInput_NoValidationFailures_TestData()
                 =>
                 [
+                    [Suffix.None],
                     [Suffix.Esq],
                     [Suffix.Jr],
                     [Suffix.Sr],
@@ -145,6 +157,7 @@ public class CreateOwnerRequestValidatorTests
             public static IEnumerable<object[]> Title_ValidInput_NoValidationFailures_TestData()
                 =>
                 [
+                    [Title.None],
                     [Title.Mr],
                     [Title.Mrs],
                     [Title.Ms],

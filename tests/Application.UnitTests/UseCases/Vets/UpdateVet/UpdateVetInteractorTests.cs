@@ -39,13 +39,19 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                         VetId = _updateVetRequest.VetId,
                         Address = new()
                         {
+                            AddressId = Guid.NewGuid(),
                             Country = "Country",
                             PostalCode = "PostalCode",
                             State = "State",
                             StreetAddress = "StreetAddress",
                             Suburb = "Suburb"
                         },
-                        ContactDetails = new(),
+                        ContactDetails = new()
+                        {
+                            ContactId = Guid.NewGuid(),
+                            Email = string.Empty,
+                            Mobile = string.Empty
+                        },
                         Name = "Old Name",
                         DateOfBirth = DateTime.MinValue
                     }

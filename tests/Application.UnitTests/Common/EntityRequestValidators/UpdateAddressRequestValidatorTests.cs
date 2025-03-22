@@ -23,25 +23,14 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
 
         #region Constructor Tests
 
-        [Fact]
-        public void Country_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("This is a Valid Country")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void Country_ValidInput_NoValidationFailures(string? country)
         {
             // Arrange
-            _updateAddressRequest.Country = "This is a Valid Country";
-
-            // Act
-            var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);
-
-            // Assert
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdateAddressRequest.Country)))
-                .Should().BeEmpty();
-        }
-
-        [Fact]
-        public void Country_IsNull_NoValidationFailure()
-        {
-            // Arrange
-            _updateAddressRequest.Country = null;
+            _updateAddressRequest.Country = country;
 
             // Act
             var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);
@@ -72,25 +61,14 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Fact]
-        public void PostalCode_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("Valid PostalCode")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void PostalCode_ValidInput_NoValidationFailures(string? postalCode)
         {
             // Arrange
-            _updateAddressRequest.PostalCode = "Valid PostalCode";
-
-            // Act
-            var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);
-
-            // Assert
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdateAddressRequest.PostalCode)))
-                .Should().BeEmpty();
-        }
-
-        [Fact]
-        public void PostalCode_IsNull_NoValidationFailure()
-        {
-            // Arrange
-            _updateAddressRequest.PostalCode = null;
+            _updateAddressRequest.PostalCode = postalCode;
 
             // Act
             var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);
@@ -121,25 +99,14 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Fact]
-        public void State_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("Valid State")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void State_ValidInput_NoValidationFailures(string? state)
         {
             // Arrange
-            _updateAddressRequest.State = "Valid State";
-
-            // Act
-            var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);
-
-            // Assert
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdateAddressRequest.State)))
-                .Should().BeEmpty();
-        }
-
-        [Fact]
-        public void State_IsNull_NoValidationFailure()
-        {
-            // Arrange
-            _updateAddressRequest.State = null;
+            _updateAddressRequest.State = state;
 
             // Act
             var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);
@@ -170,25 +137,14 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Fact]
-        public void StreetAddress_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("Valid StreetAddress")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void StreetAddress_ValidInput_NoValidationFailures(string? streetAddress)
         {
             // Arrange
-            _updateAddressRequest.StreetAddress = "Valid StreetAddress";
-
-            // Act
-            var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);
-
-            // Assert
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdateAddressRequest.StreetAddress)))
-                .Should().BeEmpty();
-        }
-
-        [Fact]
-        public void StreetAddress_IsNull_NoValidationFailure()
-        {
-            // Arrange
-            _updateAddressRequest.StreetAddress = null;
+            _updateAddressRequest.StreetAddress = streetAddress;
 
             // Act
             var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);
@@ -219,25 +175,14 @@ namespace VetCheckup.Application.UnitTests.Common.EntityRequestValidators
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Fact]
-        public void Suburb_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("Valid Suburb")]
+        [InlineData("")]
+        [InlineData(null)]
+        public void Suburb_ValidInput_NoValidationFailures(string? suburb)
         {
             // Arrange
-            _updateAddressRequest.StreetAddress = "Valid Suburb";
-
-            // Act
-            var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);
-
-            // Assert
-            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdateAddressRequest.Suburb)))
-                .Should().BeEmpty();
-        }
-
-        [Fact]
-        public void Suburb_IsNull_NoValidationFailure()
-        {
-            // Arrange
-            _updateAddressRequest.Suburb = null;
+            _updateAddressRequest.StreetAddress = suburb;
 
             // Act
             var result = _updateAddressRequestValidator.Validate(_updateAddressRequest);

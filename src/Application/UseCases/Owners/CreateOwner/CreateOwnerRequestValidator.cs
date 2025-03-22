@@ -17,8 +17,7 @@ public class CreateOwnerRequestValidator : AbstractValidator<CreateOwnerRequest>
             .NotEmpty();
 
         _ = this.RuleFor(e => e.MiddleName)
-            .MaximumLength(100)
-            .NotEmpty();
+            .MaximumLength(100);
         
         _ = this.RuleFor(e => e.LastName)
             .MaximumLength(100)

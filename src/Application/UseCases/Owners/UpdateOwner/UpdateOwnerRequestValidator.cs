@@ -25,7 +25,6 @@ namespace VetCheckup.Application.UseCases.Owners.UpdateOwner
 
             _ = this.RuleFor(e => e.MiddleName)
                 .MaximumLength(100)
-                .NotEmpty()
                 .When(e => e.MiddleName != null);
 
             _ = this.RuleFor(e => e.LastName)

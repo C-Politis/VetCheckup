@@ -4,7 +4,7 @@ public enum OrganisationType
 {
 
     #region Enums
-
+    
     Clinic = 0,
 
     Daycare = 1,

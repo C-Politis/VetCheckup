@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
+using VetCheckup.Application.UseCases.Pets.CreatePet;
 using VetCheckup.Application.UseCases.Pets.UpdatePet;
 using VetCheckup.Domain.Enums;
 using Xunit;
@@ -27,11 +28,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
 
         #region Validator Tests
 
-        [Fact]
-        public void Name_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("Valid Name")]
+        [InlineData(null)]
+        public void Name_ValidInput_NoValidationFailures(string? name)
         {
             // Arrange
-            _updatePetRequest.Name = "Valid Name";
+            _updatePetRequest.Name = name;
 
             // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
@@ -86,11 +89,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
         }
 
-        [Fact]
-        public void Species_ValidInput_NoValidationFailures()
+        [Theory]
+        [InlineData("Valid Species")]
+        [InlineData(null)]
+        public void Species_ValidInput_NoValidationFailures(string? species)
         {
             // Arrange
-            _updatePetRequest.Species = "Valid Species";
+            _updatePetRequest.Species = species;
 
             // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
@@ -190,21 +195,28 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                 .Should().BeEmpty();
         }
 
-        [Fact]
-        public void Sex_ValidInput_NoValidationFailures()
+        [Theory]
+        [MemberData(nameof(Sex_ValidInput_NoValidationFailures_TestData))]
+        public void Sex_ValidInput_NoValidationFailures(Sex sex)
         {
             // Arrange
+            _updatePetRequest.Sex = sex;
 
             // Act
             var result = _updatePetRequestValidator.Validate(_updatePetRequest);
 
             // Assert
-            result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Sex), StringComparison.OrdinalIgnoreCase))
+            result.Errors.Where(e => e.PropertyName.Equals(nameof(UpdatePetRequest.Sex), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         }
 
-
+        public static IEnumerable<object[]> Sex_ValidInput_NoValidationFailures_TestData()
+            => new[]
+            {
+                new object[] { Sex.Male },
+                new object[] { Sex.Female },
+                new object[] { Sex.Other }
+            };
 
         #endregion
     }
