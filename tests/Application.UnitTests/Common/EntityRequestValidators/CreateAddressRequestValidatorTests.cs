@@ -12,31 +12,26 @@ public class CreateAddressRequestValidatorTests
     #region Fields
 
     private readonly IValidator<CreateAddressRequest> _createAddressRequestValidator = new CreateAddressRequestValidator();
-    private readonly CreateAddressRequest _createAddressRequest = new CreateAddressRequest();
+    private readonly CreateAddressRequest _createAddressRequest = new CreateAddressRequest()
+    {
+        StreetAddress = string.Empty,
+        Country = string.Empty,
+        PostalCode= string.Empty,
+        State = string.Empty,
+        Suburb = string.Empty,
+    };
 
     #endregion
 
     #region Constructor Tests
 
-    [Fact]
-    public void Country_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("This is a Valid Country")]
+    [InlineData("")]
+    public void Country_ValidInput_NoValidationFailures(string country)
     {
         // Arrange
-        _createAddressRequest.Country = "This is a Valid Country";
-
-        // Act
-        var result = _createAddressRequestValidator.Validate(_createAddressRequest);
-
-        // Assert
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.Country)))
-            .Should().BeEmpty();
-    }
-
-    [Fact]
-    public void Country_IsNull_NoValidationFailure()
-    {
-        // Arrange
-        _createAddressRequest.Country = null;
+        _createAddressRequest.Country = country;
 
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
@@ -67,25 +62,13 @@ public class CreateAddressRequestValidatorTests
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Fact]
-    public void PostalCode_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("Valid PostalCode")]
+    [InlineData("")]
+    public void PostalCode_ValidInput_NoValidationFailures(string postalCode)
     {
         // Arrange
-        _createAddressRequest.PostalCode = "Valid PostalCode";
-
-        // Act
-        var result = _createAddressRequestValidator.Validate(_createAddressRequest);
-
-        // Assert
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.PostalCode)))
-            .Should().BeEmpty();
-    }
-
-    [Fact]
-    public void PostalCode_IsNull_NoValidationFailure()
-    {
-        // Arrange
-        _createAddressRequest.PostalCode = null;
+        _createAddressRequest.PostalCode = postalCode;
 
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
@@ -116,25 +99,13 @@ public class CreateAddressRequestValidatorTests
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Fact]
-    public void State_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("Valid State")]
+    [InlineData("")]
+    public void State_ValidInput_NoValidationFailures(string state)
     {
         // Arrange
-        _createAddressRequest.State = "Valid State";
-
-        // Act
-        var result = _createAddressRequestValidator.Validate(_createAddressRequest);
-
-        // Assert
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.State)))
-            .Should().BeEmpty();
-    }
-
-    [Fact]
-    public void State_IsNull_NoValidationFailure()
-    {
-        // Arrange
-        _createAddressRequest.State = null;
+        _createAddressRequest.State = state;
 
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
@@ -165,25 +136,13 @@ public class CreateAddressRequestValidatorTests
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Fact]
-    public void StreetAddress_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("Valid StreetAddress")]
+    [InlineData("")]
+    public void StreetAddress_ValidInput_NoValidationFailures(string streetAddress)
     {
         // Arrange
-        _createAddressRequest.StreetAddress = "Valid StreetAddress";
-
-        // Act
-        var result = _createAddressRequestValidator.Validate(_createAddressRequest);
-
-        // Assert
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.StreetAddress)))
-            .Should().BeEmpty();
-    }
-
-    [Fact]
-    public void StreetAddress_IsNull_NoValidationFailure()
-    {
-        // Arrange
-        _createAddressRequest.StreetAddress = null;
+        _createAddressRequest.StreetAddress = streetAddress;
 
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);
@@ -214,25 +173,13 @@ public class CreateAddressRequestValidatorTests
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Fact]
-    public void Suburb_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("Valid Suburb")]
+    [InlineData("")]
+    public void Suburb_ValidInput_NoValidationFailures(string suburb)
     {
         // Arrange
-        _createAddressRequest.StreetAddress = "Valid Suburb";
-
-        // Act
-        var result = _createAddressRequestValidator.Validate(_createAddressRequest);
-
-        // Assert
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateAddressRequest.Suburb)))
-            .Should().BeEmpty();
-    }
-
-    [Fact]
-    public void Suburb_IsNull_NoValidationFailure()
-    {
-        // Arrange
-        _createAddressRequest.Suburb = null;
+        _createAddressRequest.StreetAddress = suburb;
 
         // Act
         var result = _createAddressRequestValidator.Validate(_createAddressRequest);

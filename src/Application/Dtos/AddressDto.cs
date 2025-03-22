@@ -11,7 +11,7 @@ namespace VetCheckup.Application.Dtos
        
         #region Properties
 
-        public Guid AddressId { get; set; }
+        public required Guid AddressId { get; set; }
 
         public required string Country { get; set; }
 

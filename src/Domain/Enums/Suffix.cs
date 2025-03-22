@@ -4,13 +4,14 @@ public enum Suffix
 {
     #region Enums
     
-    Jr = 0,
-    Sr = 1,
-    II = 2,
-    III = 3,
-    IV = 4,
-    Esq = 5,
-    Other = 6,
+    None = 0,
+    Jr = 1,
+    Sr = 2,
+    II = 3,
+    III = 4,
+    IV = 5,
+    Esq = 6,
+    Other = 7,
 
     #endregion
 }

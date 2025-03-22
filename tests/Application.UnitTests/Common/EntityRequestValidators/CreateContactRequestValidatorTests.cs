@@ -13,31 +13,23 @@ public class CreateContactRequestValidatorTests
     #region Fields
 
     private readonly IValidator<CreateContactRequest> _createContactRequestValidator = new CreateContactRequestValidator();
-    private readonly CreateContactRequest _createContactRequest = new();
+    private readonly CreateContactRequest _createContactRequest = new()
+    {
+        Email = string.Empty,
+        Mobile = string.Empty
+    };
 
     #endregion
 
     #region Constructor Tests
 
-    [Fact]
-    public void Email_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("Valid@Email.Com.Au")]
+    [InlineData("")]
+    public void Email_ValidInput_NoValidationFailures(string email)
     {
         // Arrange
-        _createContactRequest.Email = "Valid@Email.Com.Au";
-
-        // Act
-        var result = _createContactRequestValidator.Validate(_createContactRequest);
-
-        // Assert
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateContactRequest.Email), StringComparison.OrdinalIgnoreCase))
-            .Should().BeEmpty();
-    }
-
-    [Fact]
-    public void Email_IsNull_NoValidationFailures()
-    {
-        // Arrange
-        _createContactRequest.Email = null;
+        _createContactRequest.Email = email;
 
         // Act
         var result = _createContactRequestValidator.Validate(_createContactRequest);
@@ -68,11 +60,13 @@ public class CreateContactRequestValidatorTests
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
 
-    [Fact]
-    public void Mobile_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("0420123456")]
+    [InlineData("")]
+    public void Mobile_ValidInput_NoValidationFailures(string mobile)
     {
         // Arrange
-        _createContactRequest.Mobile = 0420123456;
+        _createContactRequest.Mobile = mobile;
 
         // Act
         var result = _createContactRequestValidator.Validate(_createContactRequest);
@@ -83,16 +77,16 @@ public class CreateContactRequestValidatorTests
     }
 
     [Fact]
-    public void Mobile_IsLessThanZero_NoValidationFailures()
+    public void Mobile_IsNotANumber_ValidationFailures()
     {
         // Arrange
-        _createContactRequest.Mobile = -1;
+        _createContactRequest.Mobile = "WrongNumber";
         var expectedFailure = new ValidationFailure()
         {
             PropertyName = nameof(CreateContactRequest.Mobile),
             AttemptedValue = _createContactRequest.Mobile,
-            ErrorMessage = "'Mobile' must be greater than '0'.",
-            ErrorCode = "GreaterThanValidator"
+            ErrorMessage = "'Mobile' is not in the correct format.",
+            ErrorCode = "RegularExpressionValidator"
         };
 
         // Act

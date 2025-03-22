@@ -11,11 +11,11 @@ public class CreatePetRequest : IRequest
 
     public required string Name { get; set; }
 
-    public Sex Sex { get; set; }
+    public required Sex Sex { get; set; }
 
     public required string Species { get; set; }
 
-    public int? MicrochipId { get; set; }
+    public required string MicrochipId { get; set; }
 
     public required Guid OwnerId { get; set; }
 

@@ -17,8 +17,19 @@ public class CreateOrganisationReqestValidatorTests
     private readonly CreateOrganisationRequest _createOrganisationRequest = new()
     {
         Abn = string.Empty,
-        Address = new(),
-        ContactDetails = new(),
+        Address = new()
+        {
+            StreetAddress = string.Empty,
+            Country = string.Empty,
+            PostalCode = string.Empty,
+            State = string.Empty,
+            Suburb = string.Empty,
+        },
+        ContactDetails = new()
+        {
+            Email = string.Empty,
+            Mobile = string.Empty
+        },
         Name = string.Empty,
         OrganisationType = Domain.Enums.OrganisationType.Clinic
     };
@@ -27,24 +38,14 @@ public class CreateOrganisationReqestValidatorTests
 
     #region Constructor Tests
 
-    [Fact]
-    public void Abn_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("51824753556")]
+    [InlineData("")]
+    public void Abn_ValidInput_NoValidationFailures(string abn)
     {
         // Arrange
-        _createOrganisationRequest.Abn = "51824753556";
+        _createOrganisationRequest.Abn = abn;
 
-        // Act
-        var result = _createOrganisationRequestValidator.Validate(_createOrganisationRequest);
-
-        // Assert
-        result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationRequest.Abn), StringComparison.OrdinalIgnoreCase))
-            .Should().BeEmpty();
-    }
-
-    [Fact]
-    public void Abn_IsEmpty_NoValidationFailures()
-    {
         // Act
         var result = _createOrganisationRequestValidator.Validate(_createOrganisationRequest);
 
