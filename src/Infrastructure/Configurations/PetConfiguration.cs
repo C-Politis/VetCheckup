@@ -25,9 +25,9 @@ public class PetConfiguration : IEntityTypeConfiguration<Pet>
 
         builder.HasOne(e => e.Owner)
             .WithMany()
-            .HasForeignKey(e => e.PetId)
+            .HasForeignKey("OwnerId")
             .IsRequired();
-
+        
         builder.Property(e => e.PetId)
             .IsRequired()
             .ValueGeneratedOnAdd();
