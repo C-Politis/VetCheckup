@@ -4,15 +4,15 @@ public class CreateAddressRequest
 {
     #region Properties
 
-    public string? Country { get; set; }
+    public required string Country { get; set; }
 
-    public string? PostalCode { get; set; }
+    public required string PostalCode { get; set; }
 
-    public string? State { get; set; }
+    public required string State { get; set; }
 
-    public string? StreetAddress { get; set; }
+    public required string StreetAddress { get; set; }
 
-    public string? Suburb { get; set; }
+    public required string Suburb { get; set; }
 
     #endregion
 

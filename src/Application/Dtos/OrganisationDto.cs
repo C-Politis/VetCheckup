@@ -8,7 +8,7 @@ namespace VetCheckup.Application.Dtos
 
         #region Properties
 
-        public string? Abn { get; set; }
+        public required string Abn { get; set; }
 
         public required Address Address { get; set; }
 
@@ -16,7 +16,7 @@ namespace VetCheckup.Application.Dtos
 
         public required string Name { get; set; }
 
-        public Guid OrganisationId { get; set; }
+        public required Guid OrganisationId { get; set; }
 
         public required OrganisationType OrganisationType { get; set; }
 

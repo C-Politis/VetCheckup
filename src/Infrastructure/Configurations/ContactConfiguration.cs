@@ -17,9 +17,11 @@ public class ContactConfiguration : IEntityTypeConfiguration<Contact>
             .ValueGeneratedOnAdd();
 
         builder.Property(e => e.Email)
+            .IsRequired()
             .HasMaxLength(100);
 
         builder.Property(e => e.Mobile)
+            .IsRequired()
             .HasMaxLength(20);
 
         builder.HasKey(e => e.ContactId);

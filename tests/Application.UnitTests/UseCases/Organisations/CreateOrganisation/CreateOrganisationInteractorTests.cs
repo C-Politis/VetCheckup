@@ -27,9 +27,20 @@ public class CreateOrganisationInteractorTests
     {
         _createOrganisationRequest = new CreateOrganisationRequest()
         {
-            Abn = "48123123124",
-            Address = new(),
-            ContactDetails = new(),
+            Abn = "51824753556",
+            Address = new()
+            {
+                StreetAddress = string.Empty,
+                Country = string.Empty,
+                PostalCode = string.Empty,
+                State = string.Empty,
+                Suburb = string.Empty,
+            },
+            ContactDetails = new()
+            {
+                Email = string.Empty,
+                Mobile = string.Empty
+            },
             Name = "Giant Eagles Rescue",
             OrganisationType = Domain.Enums.OrganisationType.Rescues
         };
@@ -38,9 +49,10 @@ public class CreateOrganisationInteractorTests
             .Setup(e => e.Map<Organisation>(It.IsAny<CreateOrganisationRequest>()))
             .Returns(() => new Organisation()
             {
+                OrganisationId = Guid.NewGuid(),
                 Abn = _createOrganisationRequest.Abn,
-                Address = new() { Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
-                ContactDetails = new() { Email = string.Empty, Mobile = 1 },
+                Address = new() { AddressId = Guid.NewGuid(), Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
+                ContactDetails = new() { ContactId = Guid.NewGuid(), Email = string.Empty, Mobile = "1" },
                 Name = _createOrganisationRequest.Name,
                 OrganisationType = _createOrganisationRequest.OrganisationType
             });
