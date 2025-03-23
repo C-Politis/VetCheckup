@@ -20,7 +20,9 @@ public class UpdateOrganisationRequest : IRequest
     public required UpdateAddressRequest Address { get; set; }
 
     public required UpdateContactRequest ContactDetails { get; set; }
-
+    
+    public List<Guid>? VetIds { get; set; }
+    
     #endregion
 
 }

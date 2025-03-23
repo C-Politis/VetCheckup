@@ -20,6 +20,8 @@ namespace VetCheckup.Application.Dtos
 
         public required OrganisationType OrganisationType { get; set; }
 
+        public required ICollection<VetOrganisation> VetOrganisations { get; set; }
+
         #endregion
 
     }

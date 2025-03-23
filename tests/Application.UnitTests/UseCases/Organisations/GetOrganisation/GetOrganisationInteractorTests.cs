@@ -40,7 +40,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
                 Mobile = string.Empty
             },
             Name = "Hobbiton Rescue",
-            OrganisationType = OrganisationType.Other
+            OrganisationType = OrganisationType.Other,
+            VetOrganisations = new List<VetOrganisation>()
         };
 
         #endregion

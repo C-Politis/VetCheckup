@@ -21,11 +21,17 @@ public class UpdateVetInteractor(IDbContext dbContext, IMapper mapper) : IReques
                 throw new Exception($"The following OrganisationIds do not exist: {string.Join(", ", nonExistentOrganisationIds)}");
         }
            
-        vet.VetOrganisations = organisations.Select(o => new VetOrganisation
+        vet.VetOrganisations = organisations.Select(o =>
         {
-            Organisation = o,
-            Vet = vet,
-            IsPrimaryOrganisation = o.OrganisationId == request.PrimaryOrganisationId
+            if (vet.VetOrganisations.Any(vo => vo.Organisation.OrganisationId == o.OrganisationId))
+                return vet.VetOrganisations.First(vo => vo.Organisation.OrganisationId == o.OrganisationId);
+
+            return new VetOrganisation
+            {
+                Organisation = o,
+                Vet = vet,
+                IsPrimaryOrganisation = request.PrimaryOrganisationId == o.OrganisationId
+            };
         }).ToList();
 
         _ = mapper.Map(request, vet);    

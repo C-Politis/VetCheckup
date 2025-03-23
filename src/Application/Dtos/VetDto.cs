@@ -16,6 +16,8 @@ namespace VetCheckup.Application.Dtos
         public required string Name { get; set; }
 
         public Guid VetId { get; set; }
+        
+        public required ICollection<VetOrganisation> VetOrganisations { get; set; }
 
         #endregion
 

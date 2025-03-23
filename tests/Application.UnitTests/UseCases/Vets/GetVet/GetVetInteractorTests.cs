@@ -52,7 +52,8 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                     Mobile = "0"
                 },
                 Name = "Gimli, son of Gloin",
-                DateOfBirth = DateTime.MinValue
+                DateOfBirth = DateTime.MinValue,
+                VetOrganisations = new List<VetOrganisation>()
             };
 
             this._mockDbContext
