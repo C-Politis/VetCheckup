@@ -4,6 +4,7 @@ using Moq;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Vets.UpdateVet;
 using VetCheckup.Domain.Entities;
+using VetCheckup.Domain.Enums;
 using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
@@ -53,7 +54,59 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                             Mobile = string.Empty
                         },
                         Name = "Old Name",
-                        DateOfBirth = DateTime.MinValue
+                        DateOfBirth = DateTime.MinValue,
+                        VetOrganisations = new List<VetOrganisation>()
+                        {
+                            new VetOrganisation
+                            {
+                                Organisation = new Organisation
+                                {
+                                    OrganisationId = Guid.NewGuid(),
+                                    Name = "Organisation",
+                                    Address = new()
+                                    {
+                                        AddressId = Guid.NewGuid(),
+                                        Country = "Country",
+                                        PostalCode = "PostalCode",
+                                        State = "State",
+                                        StreetAddress = "StreetAddress",
+                                        Suburb = "Suburb"
+                                    },
+                                    ContactDetails = new()
+                                    {
+                                        ContactId = Guid.NewGuid(),
+                                        Email = string.Empty,
+                                        Mobile = string.Empty
+                                    },
+                                    Abn = "51824753556",
+                                    OrganisationType = OrganisationType.Clinic,
+                                    VetOrganisations = new List<VetOrganisation>()
+                                },
+                                IsPrimaryOrganisation = true,
+                                Vet = new Vet
+                                {
+                                    VetId = _updateVetRequest.VetId,
+                                    Address = new()
+                                    {
+                                        AddressId = Guid.NewGuid(),
+                                        Country = "Country",
+                                        PostalCode = "PostalCode",
+                                        State = "State",
+                                        StreetAddress = "StreetAddress",
+                                        Suburb = "Suburb"
+                                    },
+                                    ContactDetails = new()
+                                    {
+                                        ContactId = Guid.NewGuid(),
+                                        Email = string.Empty,
+                                        Mobile = string.Empty
+                                    },
+                                    Name = "Old Name",
+                                    DateOfBirth = DateTime.MinValue,
+                                    VetOrganisations = new List<VetOrganisation>()
+                            }
+                        } 
+                        }
                     }
                 }.AsQueryable());
 
@@ -99,6 +152,30 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
             // Act & Assert
             await Assert.ThrowsAsync<Exception>(async () =>
                 await _updateVetInteractor.Handle(nonExistentVetRequest, CancellationToken.None));
+        }
+        
+        [Fact]
+        public async Task UpdatingVet_ThrowsExceptionWhenOrganisationIdsDoNotExist()
+        {
+            // Arrange
+            var nonExistentOrganisationId = Guid.NewGuid();
+            var nonExistentOrganisationRequest = new UpdateVetRequest
+            {
+                VetId = _updateVetRequest.VetId,
+                Name = "Non Existent Organisation",
+                Address = new(),
+                ContactDetails = new(),
+                DateOfBirth = new DateTime(2010, 01, 01),
+                OrganisationIds = new List<Guid> { nonExistentOrganisationId }
+            };
+
+            _mockContext
+                .Setup(e => e.Get<Organisation>())
+                .Returns(new List<Organisation>().AsQueryable());
+
+            // Act & Assert
+            await Assert.ThrowsAsync<Exception>(async () =>
+                await _updateVetInteractor.Handle(nonExistentOrganisationRequest, CancellationToken.None));
         }
 
         #endregion

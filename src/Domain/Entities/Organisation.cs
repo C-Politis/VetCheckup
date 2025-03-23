@@ -15,8 +15,10 @@ public class Organisation
 
     public required Guid OrganisationId { get; set; }
 
-    public required OrganisationType OrganisationType { get; set; } 
+    public required OrganisationType OrganisationType { get; set; }
 
+    public required ICollection<VetOrganisation> VetOrganisations { get; set; }
+    
     #endregion
 
 }
