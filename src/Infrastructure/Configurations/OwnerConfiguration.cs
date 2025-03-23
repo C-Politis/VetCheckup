@@ -51,7 +51,7 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
             .ValueGeneratedOnAdd();
 
         builder.HasMany(e => e.Pets)
-            .WithOne()
+            .WithOne(e => e.Owner)
             .HasForeignKey(e => e.PetId)
             .IsRequired();
 
