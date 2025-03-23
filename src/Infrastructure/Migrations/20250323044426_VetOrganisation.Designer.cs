@@ -12,8 +12,8 @@ using VetCheckup.Infrastructure.Data;
 namespace VetCheckup.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241006014654_initial")]
-    partial class Initial
+    [Migration("20250323044426_VetOrganisation")]
+    partial class VetOrganisation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,6 +28,7 @@ namespace VetCheckup.Infrastructure.Migrations
             modelBuilder.Entity("VetCheckup.Domain.Entities.Address", b =>
                 {
                     b.Property<Guid>("AddressId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Country")
@@ -63,19 +64,46 @@ namespace VetCheckup.Infrastructure.Migrations
             modelBuilder.Entity("VetCheckup.Domain.Entities.Contact", b =>
                 {
                     b.Property<Guid>("ContactId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("Mobile")
+                    b.Property<string>("Mobile")
+                        .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("ContactId");
 
                     b.ToTable("Contact", (string)null);
+                });
+
+            modelBuilder.Entity("VetCheckup.Domain.Entities.Organisation", b =>
+                {
+                    b.Property<Guid>("OrganisationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Abn")
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("OrganisationType")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrganisationId");
+
+                    b.ToTable("Organisation", (string)null);
                 });
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Owner", b =>
@@ -87,10 +115,28 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Suffix")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("varchar(5)");
 
                     b.HasKey("OwnerId");
 
@@ -106,8 +152,9 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MicrochipId")
-                        .HasColumnType("int");
+                    b.Property<string>("MicrochipId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -151,6 +198,24 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.ToTable("Vet", (string)null);
                 });
 
+            modelBuilder.Entity("VetCheckup.Domain.Entities.VetOrganisation", b =>
+                {
+                    b.Property<Guid>("VetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("OrganisationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsPrimaryOrganisation")
+                        .HasColumnType("bit");
+
+                    b.HasKey("VetId", "OrganisationId");
+
+                    b.HasIndex("OrganisationId");
+
+                    b.ToTable("VetOrganisation", (string)null);
+                });
+
             modelBuilder.Entity("VetCheckup.Domain.Entities.VetPet", b =>
                 {
                     b.Property<Guid>("VetId")
@@ -168,6 +233,12 @@ namespace VetCheckup.Infrastructure.Migrations
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Address", b =>
                 {
+                    b.HasOne("VetCheckup.Domain.Entities.Organisation", null)
+                        .WithOne("Address")
+                        .HasForeignKey("VetCheckup.Domain.Entities.Address", "AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("VetCheckup.Domain.Entities.Owner", null)
                         .WithOne("Address")
                         .HasForeignKey("VetCheckup.Domain.Entities.Address", "AddressId")
@@ -183,6 +254,12 @@ namespace VetCheckup.Infrastructure.Migrations
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Contact", b =>
                 {
+                    b.HasOne("VetCheckup.Domain.Entities.Organisation", null)
+                        .WithOne("ContactDetails")
+                        .HasForeignKey("VetCheckup.Domain.Entities.Contact", "ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("VetCheckup.Domain.Entities.Owner", null)
                         .WithOne("ContactDetails")
                         .HasForeignKey("VetCheckup.Domain.Entities.Contact", "ContactId")
@@ -199,12 +276,31 @@ namespace VetCheckup.Infrastructure.Migrations
             modelBuilder.Entity("VetCheckup.Domain.Entities.Pet", b =>
                 {
                     b.HasOne("VetCheckup.Domain.Entities.Owner", "Owner")
-                        .WithMany()
+                        .WithMany("Pets")
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("VetCheckup.Domain.Entities.VetOrganisation", b =>
+                {
+                    b.HasOne("VetCheckup.Domain.Entities.Organisation", "Organisation")
+                        .WithMany("VetOrganisations")
+                        .HasForeignKey("OrganisationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetCheckup.Domain.Entities.Vet", "Vet")
+                        .WithMany("VetOrganisations")
+                        .HasForeignKey("VetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organisation");
+
+                    b.Navigation("Vet");
                 });
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.VetPet", b =>
@@ -226,6 +322,17 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.Navigation("Vet");
                 });
 
+            modelBuilder.Entity("VetCheckup.Domain.Entities.Organisation", b =>
+                {
+                    b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("ContactDetails")
+                        .IsRequired();
+
+                    b.Navigation("VetOrganisations");
+                });
+
             modelBuilder.Entity("VetCheckup.Domain.Entities.Owner", b =>
                 {
                     b.Navigation("Address")
@@ -233,6 +340,8 @@ namespace VetCheckup.Infrastructure.Migrations
 
                     b.Navigation("ContactDetails")
                         .IsRequired();
+
+                    b.Navigation("Pets");
                 });
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Vet", b =>
@@ -242,6 +351,8 @@ namespace VetCheckup.Infrastructure.Migrations
 
                     b.Navigation("ContactDetails")
                         .IsRequired();
+
+                    b.Navigation("VetOrganisations");
                 });
 #pragma warning restore 612, 618
         }

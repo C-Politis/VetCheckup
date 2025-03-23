@@ -15,6 +15,8 @@ public class Vet
 
     public required Guid VetId { get; set; }
 
+    public required ICollection<VetOrganisation> VetOrganisations { get; set; }
+
     #endregion
 
 }

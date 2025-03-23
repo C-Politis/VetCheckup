@@ -54,7 +54,8 @@ public class CreateOrganisationInteractorTests
                 Address = new() { AddressId = Guid.NewGuid(), Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
                 ContactDetails = new() { ContactId = Guid.NewGuid(), Email = string.Empty, Mobile = "1" },
                 Name = _createOrganisationRequest.Name,
-                OrganisationType = _createOrganisationRequest.OrganisationType
+                OrganisationType = _createOrganisationRequest.OrganisationType,
+                VetOrganisations = new List<VetOrganisation>()
             });
 
 

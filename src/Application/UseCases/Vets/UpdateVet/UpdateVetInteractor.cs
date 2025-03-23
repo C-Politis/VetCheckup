@@ -11,8 +11,30 @@ public class UpdateVetInteractor(IDbContext dbContext, IMapper mapper) : IReques
     Task IRequestHandler<UpdateVetRequest>.Handle(UpdateVetRequest request, CancellationToken cancellationToken)
     {
         var vet = dbContext.Get<Vet>().SingleOrDefault(v => v.VetId == request.VetId) ?? throw new Exception("Vet not found.");
+        var organisations = dbContext.Get<Organisation>().Where(o => request.OrganisationIds != null && request.OrganisationIds.Contains(o.OrganisationId)).ToList();
+        var existingOrganisationIds = organisations.Select(o => o.OrganisationId).ToList();
+        if (request.OrganisationIds != null)
+        {
+            var nonExistentOrganisationIds = request.OrganisationIds.Except(existingOrganisationIds).ToList();
+           
+            if (nonExistentOrganisationIds.Any())
+                throw new Exception($"The following OrganisationIds do not exist: {string.Join(", ", nonExistentOrganisationIds)}");
+        }
+           
+        vet.VetOrganisations = organisations.Select(o =>
+        {
+            if (vet.VetOrganisations.Any(vo => vo.Organisation.OrganisationId == o.OrganisationId))
+                return vet.VetOrganisations.First(vo => vo.Organisation.OrganisationId == o.OrganisationId);
 
-        _ = mapper.Map(request, vet);
+            return new VetOrganisation
+            {
+                Organisation = o,
+                Vet = vet,
+                IsPrimaryOrganisation = request.PrimaryOrganisationId == o.OrganisationId
+            };
+        }).ToList();
+
+        _ = mapper.Map(request, vet);    
 
         return Task.CompletedTask;
     }

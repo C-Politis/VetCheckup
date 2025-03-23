@@ -16,6 +16,10 @@ public class UpdateVetRequest : IRequest
 
     public string? Name { get; set; }
 
+    public List<Guid>? OrganisationIds { get; set; }
+
+    public Guid? PrimaryOrganisationId { get; set; }
+
     #endregion
 
 }
