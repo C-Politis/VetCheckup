@@ -6,18 +6,36 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VetCheckup.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Organisation",
+                columns: table => new
+                {
+                    OrganisationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Abn = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    OrganisationType = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Organisation", x => x.OrganisationId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Owner",
                 columns: table => new
                 {
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Title = table.Column<string>(type: "varchar(5)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Suffix = table.Column<string>(type: "varchar(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,7 +61,7 @@ namespace VetCheckup.Infrastructure.Migrations
                 {
                     PetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MicrochipId = table.Column<int>(type: "int", nullable: true),
+                    MicrochipId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Sex = table.Column<int>(type: "int", nullable: false),
@@ -75,6 +93,12 @@ namespace VetCheckup.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Address", x => x.AddressId);
                     table.ForeignKey(
+                        name: "FK_Address_Organisation_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Organisation",
+                        principalColumn: "OrganisationId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Address_Owner_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Owner",
@@ -93,12 +117,18 @@ namespace VetCheckup.Infrastructure.Migrations
                 columns: table => new
                 {
                     ContactId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Mobile = table.Column<int>(type: "int", maxLength: 20, nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contact", x => x.ContactId);
+                    table.ForeignKey(
+                        name: "FK_Contact_Organisation_ContactId",
+                        column: x => x.ContactId,
+                        principalTable: "Organisation",
+                        principalColumn: "OrganisationId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Contact_Owner_ContactId",
                         column: x => x.ContactId,
@@ -159,6 +189,9 @@ namespace VetCheckup.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "VetPet");
+
+            migrationBuilder.DropTable(
+                name: "Organisation");
 
             migrationBuilder.DropTable(
                 name: "Pet");

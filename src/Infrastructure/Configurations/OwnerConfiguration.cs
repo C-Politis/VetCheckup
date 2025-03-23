@@ -52,7 +52,7 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
 
         builder.HasMany(e => e.Pets)
             .WithOne(e => e.Owner)
-            .HasForeignKey("OwnerId")
+            .HasForeignKey(e => e.PetId)
             .IsRequired();
 
         builder.HasKey(e => e.OwnerId);
