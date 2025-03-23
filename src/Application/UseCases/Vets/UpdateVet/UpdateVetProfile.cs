@@ -20,7 +20,8 @@ public class UpdateVetProfile : Profile
                 opts.PreCondition(src => src.DateOfBirth.HasValue);
                 opts.MapFrom(src => src.DateOfBirth);
             })
-            .ForMember(dest => dest.VetId, opts => opts.Ignore());
+            .ForMember(dest => dest.VetId, opts => opts.Ignore())
+            .ForMember(dest => dest.VetOrganisations, opts => opts.Ignore());
     }
 
     #endregion

@@ -60,6 +60,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
                 {
                     OrganisationId = _organisationDto.OrganisationId,
                     Abn = string.Empty,
+                    VetOrganisations = new List<VetOrganisation>(),
                     Address = new()
                     {
                         AddressId = _organisationDto.Address.AddressId,

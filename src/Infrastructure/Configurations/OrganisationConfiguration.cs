@@ -30,13 +30,17 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
         builder.Property(e => e.Name)
             .HasMaxLength(100)
             .IsRequired();
-        
-        builder.HasKey(e => e.OrganisationId);
 
         builder.Property(e => e.OrganisationType)
             .HasConversion(propVal => (int)propVal, dbVal => (OrganisationType)dbVal)
             .HasColumnType("int")
             .IsRequired();
+        
+        builder.Property(e => e.OrganisationId)
+            .IsRequired()
+            .ValueGeneratedOnAdd();
+        
+        builder.HasKey(e => e.OrganisationId);
     }
 
     #endregion
