@@ -14,14 +14,16 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
 
         builder.HasOne(e => e.Address)
             .WithOne()
-            .HasForeignKey<Address>("AddressId")
-            .IsRequired();
+            .HasForeignKey<Owner>("AddressId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
-            .HasForeignKey<Contact>("ContactId")
-            .IsRequired();
-
+            .HasForeignKey<Owner>("ContactId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
+        
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
             .HasColumnType("datetime2");
