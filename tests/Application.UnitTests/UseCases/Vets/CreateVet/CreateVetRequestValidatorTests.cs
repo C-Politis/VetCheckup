@@ -2,6 +2,7 @@ using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
 using VetCheckup.Application.UseCases.Vets.CreateVet;
+using VetCheckup.Domain.Enums;
 using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Vets.CreateVet;
@@ -27,7 +28,11 @@ public class CreateVetRequestValidatorTests
             Email = String.Empty,
             Mobile = String.Empty
         },
-        Name = string.Empty,
+        Title = Title.None,
+        FirstName = "Test",
+        MiddleName = "Middle",
+        LastName = "Vet",
+        Suffix = Suffix.None,
         DateOfBirth = DateTime.MinValue,
         OrganisationIds = new List<Guid>()
         {
@@ -40,66 +45,135 @@ public class CreateVetRequestValidatorTests
 
     #region Constructor Tests
 
-    [Fact]
-    public void Name_ValidInput_NoValidationFailures()
+    [Theory]
+    [InlineData("ValidName", true, "")]
+    [InlineData("", false, "'First Name' must not be empty.")]
+    [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false, "The length of 'First Name' must be 100 characters or fewer. You entered 101 characters.")]
+    public void ValidateFirstName(string firstName, bool isValid, string expectedErrorMessage)
     {
         // Arrange
-        _createVetRequest.Name = "Valid Name";
+        _createVetRequest.FirstName = firstName;
+
+        // Act
+        var result = _createVetRequestValidator.Validate(_createVetRequest);
+
+        // Assert
+        if (isValid)
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.FirstName), StringComparison.OrdinalIgnoreCase))
+                .Should().BeEmpty();
+        else
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.FirstName), StringComparison.OrdinalIgnoreCase))
+                .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
+    }
+
+    [Theory]
+    [InlineData("ValidName", true, "")]
+    [InlineData("", false, "'Last Name' must not be empty.")]
+    [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false, "The length of 'Last Name' must be 100 characters or fewer. You entered 101 characters.")]
+    public void ValidateLastName(string lastName, bool isValid, string expectedErrorMessage)
+    {
+        // Arrange
+        _createVetRequest.LastName = lastName;
+
+        // Act
+        var result = _createVetRequestValidator.Validate(_createVetRequest);
+
+        // Assert
+        if (isValid)
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.LastName), StringComparison.OrdinalIgnoreCase))
+                .Should().BeEmpty();
+        else
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.LastName), StringComparison.OrdinalIgnoreCase))
+                .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
+    }
+
+    [Theory]
+    [InlineData("ValidName", true, "")]
+    [InlineData("", true, "")]
+    [InlineData("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", false, "The length of 'Middle Name' must be 100 characters or fewer. You entered 101 characters.")]
+    public void ValidateMiddleName(string middleName, bool isValid, string expectedErrorMessage)
+    {
+        // Arrange
+        _createVetRequest.MiddleName = middleName;
+
+        // Act
+        var result = _createVetRequestValidator.Validate(_createVetRequest);
+
+        // Assert
+        if (isValid)
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
+                .Should().BeEmpty();
+        else
+            result.Errors
+                .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
+                .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
+    }
+
+    [Theory]
+    [MemberData(nameof(Title_ValidInput_NoValidationFailures_TestData))]
+    public void Title_ValidInput_NoValidationFailures(Title title)
+    {
+        // Arrange
+        _createVetRequest.Title = title;
 
         // Act
         var result = _createVetRequestValidator.Validate(_createVetRequest);
 
         // Assert
         result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.Name), StringComparison.OrdinalIgnoreCase))
+            .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.Title), StringComparison.OrdinalIgnoreCase))
             .Should().BeEmpty();
     }
 
-    [Fact]
-    public void Name_ExceedsMaxLength_ValidationFailures()
+    [Theory]
+    [MemberData(nameof(Suffix_ValidInput_NoValidationFailures_TestData))]
+    public void Suffix_ValidInput_NoValidationFailures(Suffix suffix)
     {
         // Arrange
-        _createVetRequest.Name = new string('a', 101);
-        var expectedFailure = new ValidationFailure()
-        {
-            PropertyName = nameof(CreateVetRequest.Name),
-            AttemptedValue = _createVetRequest.Name,
-            ErrorMessage = "The length of 'Name' must be 100 characters or fewer. You entered 101 characters.",
-            ErrorCode = "MaximumLengthValidator"
-        };
+        _createVetRequest.Suffix = suffix;
 
         // Act
         var result = _createVetRequestValidator.Validate(_createVetRequest);
 
         // Assert
         result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.Name), StringComparison.OrdinalIgnoreCase))
-            .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
+            .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.Suffix), StringComparison.OrdinalIgnoreCase))
+            .Should().BeEmpty();
     }
 
+    public static IEnumerable<object[]> Suffix_ValidInput_NoValidationFailures_TestData()
+        =>
+        [
+            [Suffix.None],
+                    [Suffix.Esq],
+                    [Suffix.Jr],
+                    [Suffix.Sr],
+                    [Suffix.II],
+                    [Suffix.III],
+                    [Suffix.IV],
+                    [Suffix.Other]
+        ];
 
-    [Fact]
-    public void Name_IsEmpty_ValidationFailures()
-    {
-        // Arrange
-        _createVetRequest.Name = string.Empty;
-        var expectedFailure = new ValidationFailure()
-        {
-            PropertyName = nameof(CreateVetRequest.Name),
-            AttemptedValue = _createVetRequest.Name,
-            ErrorMessage = "'Name' must not be empty.",
-            ErrorCode = "NotEmptyValidator"
-        };
+    public static IEnumerable<object[]> Title_ValidInput_NoValidationFailures_TestData()
+        =>
+        [
+            [Title.None],
+                    [Title.Mr],
+                    [Title.Mrs],
+                    [Title.Ms],
+                    [Title.Miss],
+                    [Title.Dr],
+                    [Title.Prof],
+                    [Title.Rev],
+                    [Title.Hon],
+                    [Title.Other]
+        ];
 
-        // Act
-        var result = _createVetRequestValidator.Validate(_createVetRequest);
-
-        // Assert
-        result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.Name), StringComparison.OrdinalIgnoreCase))
-            .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
-    }
-    
 
     #endregion
 

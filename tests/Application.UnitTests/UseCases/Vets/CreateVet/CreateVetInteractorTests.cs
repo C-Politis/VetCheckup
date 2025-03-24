@@ -41,7 +41,11 @@ public class CreateVetInteractorTests
                 Email = String.Empty,
                 Mobile = String.Empty
             },
-            Name = "New Vet",
+            Title = Title.Dr,
+            FirstName = "New",
+            MiddleName = string.Empty,
+            LastName = "Vet",
+            Suffix = Suffix.None,
             OrganisationIds = new List<Guid>()
             {
                 Guid.NewGuid(),
@@ -70,7 +74,11 @@ public class CreateVetInteractorTests
                 Email = "Gimli.Gloin@Erebor.mine",
                 Mobile = "0"
             },
-            Name = "Gimli, son of Gloin",
+            Title = Title.Dr,
+            FirstName = "New",
+            MiddleName = string.Empty,
+            LastName = "Vet",
+            Suffix = Suffix.None,
             DateOfBirth = DateTime.MinValue,
             VetOrganisations = new List<VetOrganisation>()
         };
@@ -95,7 +103,11 @@ public class CreateVetInteractorTests
                         Email = String.Empty,
                         Mobile = String.Empty
                     },
-                    Name = "Gimli, son of Gloin",
+                    Title = Title.Dr,
+                    FirstName = "New",
+                    MiddleName = string.Empty,
+                    LastName = "Vet",
+                    Suffix = Suffix.None,
                     DateOfBirth = DateTime.MinValue,
                     VetOrganisations = new List<VetOrganisation>()
                 }
