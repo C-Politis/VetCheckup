@@ -15,9 +15,9 @@ public class CreateVetRequest : IRequest
 
     public required string Name { get; set; }
     
-    public List<Guid>? OrganisationIds { get; set; }
+    public required List<Guid> OrganisationIds { get; set; }
 
-    public Guid? PrimaryOrganisationId { get; set; }
+    public required Guid PrimaryOrganisationId { get; set; }
 
     #endregion
 

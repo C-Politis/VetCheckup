@@ -28,7 +28,12 @@ public class CreateVetRequestValidatorTests
             Mobile = String.Empty
         },
         Name = string.Empty,
-        DateOfBirth = DateTime.MinValue
+        DateOfBirth = DateTime.MinValue,
+        OrganisationIds = new List<Guid>()
+        {
+            Guid.NewGuid(),
+        },        
+        PrimaryOrganisationId = Guid.Empty
     };
 
     #endregion
@@ -94,7 +99,7 @@ public class CreateVetRequestValidatorTests
             .Where(e => e.PropertyName.Equals(nameof(CreateVetRequest.Name), StringComparison.OrdinalIgnoreCase))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
-
+    
 
     #endregion
 
