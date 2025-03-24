@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VetCheckup.Application.Common.EntityRequests;
-using VetCheckup.Application.Common.Enums;
-using VetCheckup.Domain.Entities;
+﻿using VetCheckup.Application.Common.EntityRequests;
+using VetCheckup.Domain.Enums;
 
 namespace VetCheckup.Application.UseCases.Owners.UpdateOwner
 {
