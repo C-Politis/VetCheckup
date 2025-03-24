@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VetCheckup.Application.Common.Enums;
+using VetCheckup.Domain.Enums;
 using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.Dtos

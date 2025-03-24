@@ -1,5 +1,3 @@
-using VetCheckup.Application.Common.Enums;
-
 namespace VetCheckup.Domain.Entities;
 
 public class Owner

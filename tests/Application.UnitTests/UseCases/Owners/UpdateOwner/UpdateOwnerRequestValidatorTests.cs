@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.UseCases.Owners.CreateOwner;
 using VetCheckup.Application.UseCases.Owners.UpdateOwner;
+using VetCheckup.Domain.Enums;
 using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
@@ -183,7 +183,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
             var expectedFailure = new ValidationFailure()
             {
                 PropertyName = nameof(CreateOwnerRequest.LastName),
-                AttemptedValue = _updateOwnerRequest.MiddleName,
+                AttemptedValue = _updateOwnerRequest.LastName,
                 ErrorMessage = "'Last Name' must not be empty.",
                 ErrorCode = "NotEmptyValidator"
             };

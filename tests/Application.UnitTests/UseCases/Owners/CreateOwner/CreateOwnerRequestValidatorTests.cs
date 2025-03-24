@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using VetCheckup.Application.Common.Enums;
+using VetCheckup.Domain.Enums;
 using VetCheckup.Application.UseCases.Owners.CreateOwner;
 using Xunit;
 

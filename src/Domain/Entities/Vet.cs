@@ -11,7 +11,15 @@ public class Vet
 
     public required DateTime DateOfBirth { get; set; }
 
-    public required string Name { get; set; }
+    public required Title Title { get; set; }
+
+    public required string FirstName { get; set; }
+
+    public required string MiddleName { get; set; }
+
+    public required string LastName { get; set; }
+
+    public required Suffix Suffix { get; set; }
 
     public required Guid VetId { get; set; }
 

@@ -5,6 +5,7 @@ using VetCheckup.Application.Dtos;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Vets.GetVet;
 using VetCheckup.Domain.Entities;
+using VetCheckup.Domain.Enums;
 using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
@@ -51,7 +52,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                     Email = "Gimli.Gloin@Erebor.mine",
                     Mobile = "0"
                 },
-                Name = "Gimli, son of Gloin",
+                Title = Title.Mr,
+                FirstName = "Gimli",
+                MiddleName = "son of",
+                LastName = "Gloin",
+                Suffix = Suffix.None,
                 DateOfBirth = DateTime.MinValue,
                 VetOrganisations = new List<VetOrganisation>()
             };
@@ -63,7 +68,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                         VetId = _request.VetId,
                         Address = _vetDto.Address,
                         ContactDetails = _vetDto.ContactDetails,
-                        Name = "Gimli, son of Gloin",
+                        Title = Title.Mr,
+                        FirstName = "Gimli",
+                        MiddleName = "son of",
+                        LastName = "Gloin",
+                        Suffix = Suffix.None,
                         DateOfBirth = DateTime.MinValue,
                         VetOrganisations = new List<VetOrganisation>()
                     }

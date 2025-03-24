@@ -53,7 +53,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                             Email = string.Empty,
                             Mobile = string.Empty
                         },
-                        Name = "Old Name",
+                        Title = Title.None,
+                        FirstName = "Old First",
+                        MiddleName = string.Empty,
+                        LastName = "Old Last",
+                        Suffix = Suffix.None,
                         DateOfBirth = DateTime.MinValue,
                         VetOrganisations = new List<VetOrganisation>()
                         {
@@ -101,7 +105,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                         Email = string.Empty,
                                         Mobile = string.Empty
                                     },
-                                    Name = "Old Name",
+                                    Title = Title.None,
+                                    FirstName = "Old First",
+                                    MiddleName = string.Empty,
+                                    LastName = "Old Last",
+                                    Suffix = Suffix.None,
                                     DateOfBirth = DateTime.MinValue,
                                     VetOrganisations = new List<VetOrganisation>()
                             }
@@ -114,7 +122,11 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                 .Setup(e => e.Map(It.IsAny<UpdateVetRequest>(), It.IsAny<Vet>()))
                 .Callback<UpdateVetRequest, Vet>((request, vet) =>
                 {
-                    vet.Name = request.Name ?? vet.Name;
+                    vet.FirstName = request.FirstName ?? vet.FirstName;
+                    vet.MiddleName = request.MiddleName ?? vet.MiddleName;
+                    vet.LastName = request.LastName ?? vet.LastName;
+                    vet.Title = request.Title ?? vet.Title;
+                    vet.Suffix = request.Suffix ?? vet.Suffix;
                     vet.DateOfBirth = request.DateOfBirth ?? vet.DateOfBirth;
                 });
 
@@ -143,7 +155,6 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
             var nonExistentVetRequest = new UpdateVetRequest
             {
                 VetId = Guid.NewGuid(),
-                Name = "Non Existent Vet",
                 Address = new(),
                 ContactDetails = new(),
                 DateOfBirth = new DateTime(2010, 01, 01)
@@ -162,7 +173,6 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
             var nonExistentOrganisationRequest = new UpdateVetRequest
             {
                 VetId = _updateVetRequest.VetId,
-                Name = "Non Existent Organisation",
                 Address = new(),
                 ContactDetails = new(),
                 DateOfBirth = new DateTime(2010, 01, 01),

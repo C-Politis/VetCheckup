@@ -1,4 +1,4 @@
-﻿namespace VetCheckup.Application.Common.Enums;
+﻿namespace VetCheckup.Domain.Enums;
 
 public enum Title
 {

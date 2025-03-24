@@ -1,4 +1,5 @@
 ﻿using VetCheckup.Application.Common.EntityRequests;
+using VetCheckup.Domain.Enums;  
 
 namespace VetCheckup.Application.UseCases.Vets.UpdateVet;
 
@@ -14,7 +15,15 @@ public class UpdateVetRequest : IRequest
 
     public DateTime? DateOfBirth { get; set; }
 
-    public string? Name { get; set; }
+    public string? FirstName { get; set; }
+
+    public string? MiddleName { get; set; }
+
+    public string? LastName { get; set; }
+
+    public Title? Title { get; set; }
+
+    public Suffix? Suffix { get; set; }
 
     public List<Guid>? OrganisationIds { get; set; }
 

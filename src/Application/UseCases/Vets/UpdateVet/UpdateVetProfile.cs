@@ -10,10 +10,30 @@ public class UpdateVetProfile : Profile
     public UpdateVetProfile()
     {
         _ = this.CreateMap<UpdateVetRequest, Vet>()
-            .ForMember(dest => dest.Name, opts =>
+            .ForMember(dest => dest.FirstName, opts =>
             {
-                opts.PreCondition(src => src.Name != null);
-                opts.MapFrom(src => src.Name);
+                opts.PreCondition(src => src.FirstName != null);
+                opts.MapFrom(src => src.FirstName);
+            })
+            .ForMember(dest => dest.MiddleName, opts =>
+            {
+                opts.PreCondition(src => src.MiddleName != null);
+                opts.MapFrom(src => src.MiddleName);
+            })
+            .ForMember(dest => dest.LastName, opts =>
+            {
+                opts.PreCondition(src => src.LastName != null);
+                opts.MapFrom(src => src.LastName);
+            })
+            .ForMember(dest => dest.Title, opts =>
+            {
+                opts.PreCondition(src => src.Title != null);
+                opts.MapFrom(src => src.Title);
+            })
+            .ForMember(dest => dest.Suffix, opts =>
+            {
+                opts.PreCondition(src => src.Suffix != null);
+                opts.MapFrom(src => src.Suffix);
             })
             .ForMember(dest => dest.DateOfBirth, opts =>
             {

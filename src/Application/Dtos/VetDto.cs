@@ -1,4 +1,5 @@
-﻿using VetCheckup.Domain.Entities;
+﻿using VetCheckup.Domain.Enums;
+using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.Dtos
 {
@@ -13,7 +14,15 @@ namespace VetCheckup.Application.Dtos
 
         public DateTime DateOfBirth { get; set; }
 
-        public required string Name { get; set; }
+        public required Title Title { get; set; }
+
+        public required string FirstName { get; set; }
+
+        public required string MiddleName { get; set; }
+
+        public required string LastName { get; set; }
+
+        public required Suffix Suffix { get; set; }
 
         public Guid VetId { get; set; }
         
