@@ -1,6 +1,4 @@
-﻿using VetCheckup.Application.Common.Enums;
-
-namespace VetCheckup.Domain.Entities;
+﻿namespace VetCheckup.Domain.Entities;
 
 public class Vet
 {

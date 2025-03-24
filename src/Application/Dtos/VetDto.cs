@@ -1,4 +1,4 @@
-﻿using VetCheckup.Application.Common.Enums;
+﻿using VetCheckup.Domain.Enums;
 using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.Dtos
