@@ -183,7 +183,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
             var expectedFailure = new ValidationFailure()
             {
                 PropertyName = nameof(CreateOwnerRequest.LastName),
-                AttemptedValue = _updateOwnerRequest.MiddleName,
+                AttemptedValue = _updateOwnerRequest.LastName,
                 ErrorMessage = "'Last Name' must not be empty.",
                 ErrorCode = "NotEmptyValidator"
             };

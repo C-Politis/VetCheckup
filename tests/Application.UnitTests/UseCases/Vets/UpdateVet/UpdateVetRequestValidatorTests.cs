@@ -173,7 +173,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
             var expectedFailure = new ValidationFailure()
             {
                 PropertyName = nameof(UpdateVetRequest.LastName),
-                AttemptedValue = _updateVetRequest.MiddleName,
+                AttemptedValue = _updateVetRequest.LastName,
                 ErrorMessage = "'Last Name' must not be empty.",
                 ErrorCode = "NotEmptyValidator"
             };
