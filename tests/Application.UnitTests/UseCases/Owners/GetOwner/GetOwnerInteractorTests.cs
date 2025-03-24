@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
-using VetCheckup.Application.Common.Enums;
+using VetCheckup.Domain.Enums;
 using VetCheckup.Application.Dtos;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Owners.GetOwner;

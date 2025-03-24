@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using Moq;
-using VetCheckup.Domain.Enums;
-using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.CreatePet;
 using VetCheckup.Domain.Entities;
+using VetCheckup.Domain.Enums;
 using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet

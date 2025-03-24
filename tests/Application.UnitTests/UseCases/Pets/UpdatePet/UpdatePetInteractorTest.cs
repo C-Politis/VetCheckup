@@ -3,7 +3,6 @@ using System.Threading;
 using AutoMapper;
 using MediatR;
 using Moq;
-using VetCheckup.Application.Common.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Pets.UpdatePet;
 using VetCheckup.Domain.Enums;
