@@ -129,7 +129,7 @@ public class CreateVetInteractorTests
                 }.AsQueryable());
         
         this._mockMapper
-            .Setup(mock => mock.Map<Vet>(It.IsAny<Vet>()))
+            .Setup(mock => mock.Map<Vet>(It.IsAny<CreateVetRequest>()))
             .Returns(this._vet);
         
         _createVetInteractor = new CreateVetInteractor(this._mockContext.Object, this._mockMapper.Object);

@@ -21,7 +21,7 @@ public class CreateVetInteractor(IDbContext context, IMapper mapper) : IRequestH
                 throw new Exception($"The following OrganisationIds do not exist: {string.Join(", ", nonExistentOrganisationIds)}");
         }
 
-        var vet = mapper.Map<Domain.Entities.Vet>(request);
+        var vet = mapper.Map<Vet>(request);
         
         vet.VetOrganisations = organisations.Select(o => new VetOrganisation
         {
