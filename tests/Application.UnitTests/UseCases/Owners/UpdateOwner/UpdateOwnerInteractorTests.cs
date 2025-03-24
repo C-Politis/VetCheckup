@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Moq;
-using VetCheckup.Application.Common.Enums;
+using VetCheckup.Domain.Enums;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Owners.UpdateOwner;
 using VetCheckup.Domain.Entities;
