@@ -14,8 +14,19 @@ public class CreateVetRequestValidatorTests
     private readonly IValidator<CreateVetRequest> _createVetRequestValidator = new CreateVetRequestValidator();
     private readonly CreateVetRequest _createVetRequest = new()
     {
-        Address = new(),
-        ContactDetails = new(),
+        Address = new()
+        {
+            Country = String.Empty,
+            PostalCode = String.Empty,
+            State = String.Empty,
+            StreetAddress = String.Empty,
+            Suburb = String.Empty
+        },
+        ContactDetails = new()
+        {
+            Email = String.Empty,
+            Mobile = String.Empty
+        },
         Name = string.Empty,
         DateOfBirth = DateTime.MinValue
     };

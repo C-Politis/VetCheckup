@@ -10,7 +10,8 @@ public class CreateVetProfile : Profile
     public CreateVetProfile()
     {
         _ = CreateMap<CreateVetRequest, Vet>()
-            .ForMember(destination => destination.VetId, source => source.Ignore());
+            .ForMember(destination => destination.VetId, source => source.Ignore())
+            .ForMember(destination => destination.VetOrganisations, source => source.Ignore());
     }
 
     #endregion

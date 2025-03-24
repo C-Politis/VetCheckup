@@ -14,6 +14,10 @@ public class CreateVetRequest : IRequest
     public required DateTime DateOfBirth { get; set; }
 
     public required string Name { get; set; }
+    
+    public List<Guid>? OrganisationIds { get; set; }
+
+    public Guid? PrimaryOrganisationId { get; set; }
 
     #endregion
 
