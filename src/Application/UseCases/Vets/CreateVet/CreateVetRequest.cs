@@ -1,5 +1,5 @@
 using VetCheckup.Application.Common.EntityRequests;
-using VetCheckup.Application.Common.Enums;
+using VetCheckup.Domain.Enums;
 
 namespace VetCheckup.Application.UseCases.Vets.CreateVet;
 
