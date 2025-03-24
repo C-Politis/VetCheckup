@@ -4,12 +4,12 @@
     <RootNamespace>VetCheckup.Domain</RootNamespace>
     <AssemblyName>VetCheckup.Domain</AssemblyName>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Authors>Christian Politis, Jacob Tuckwell</Authors>
-    <Company>Christian Politis, Jacob Tuckwell</Company>
+    <Authors>Christian Politis, Jacob Tuckwell, Leon Sun, Ahmed El-Sayed</Authors>
+    <Company>Vet Checkup</Company>
     <RepositoryUrl>https://github.com/C-Politis/VetCheckup</RepositoryUrl>
-    <FileVersion>1.0.1</FileVersion>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <PackageVersion>1.0.1</PackageVersion>
+    <FileVersion>1.0.2</FileVersion>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <PackageVersion>1.0.2</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
