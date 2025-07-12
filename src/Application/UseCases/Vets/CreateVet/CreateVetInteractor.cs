@@ -25,6 +25,8 @@ public class CreateVetInteractor(IDbContext context, IMapper mapper) : IRequestH
         
         vet.VetOrganisations = organisations.Select(o => new VetOrganisation
         {
+            VetId = vet.VetId,
+            OrganisationId = o.OrganisationId,
             Organisation = o,
             Vet = vet,
             IsPrimaryOrganisation = request.PrimaryOrganisationId == o.OrganisationId

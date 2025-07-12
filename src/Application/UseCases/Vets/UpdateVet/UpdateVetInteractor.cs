@@ -23,17 +23,22 @@ public class UpdateVetInteractor(IDbContext dbContext, IMapper mapper) : IReques
            
         vet.VetOrganisations = organisations.Select(o =>
         {
-            if (vet.VetOrganisations.Any(vo => vo.Organisation.OrganisationId == o.OrganisationId))
-                return vet.VetOrganisations.First(vo => vo.Organisation.OrganisationId == o.OrganisationId);
+            var existingVo = vet.VetOrganisations
+                .FirstOrDefault(vo => vo.Organisation != null && vo.Organisation.OrganisationId == o.OrganisationId);
+
+            if (existingVo != null)
+                return existingVo;
 
             return new VetOrganisation
             {
                 Organisation = o,
+                OrganisationId = o.OrganisationId,
                 Vet = vet,
+                VetId = vet.VetId,
                 IsPrimaryOrganisation = request.PrimaryOrganisationId == o.OrganisationId
             };
         }).ToList();
-
+        
         _ = mapper.Map(request, vet);    
 
         return Task.CompletedTask;

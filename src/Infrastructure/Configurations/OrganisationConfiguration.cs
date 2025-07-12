@@ -19,12 +19,12 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
         
         builder.HasOne(e => e.Address)
             .WithOne()
-            .HasForeignKey<Address>("AddressId")
+            .HasForeignKey<Address>(e => e.AddressId)
             .IsRequired();
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
-            .HasForeignKey<Contact>("ContactId")
+            .HasForeignKey<Contact>(e => e.ContactId)
             .IsRequired();
 
         builder.Property(e => e.Name)

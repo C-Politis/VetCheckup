@@ -32,15 +32,20 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                 Address = new(),
                 ContactDetails = new(),
             };
+            
+            var addressId = Guid.NewGuid();
+            var contactId = Guid.NewGuid();               
 
             _mockContext
                 .Setup(e => e.Get<Vet>())
                 .Returns(new List<Vet> { new Vet
                     {
                         VetId = _updateVetRequest.VetId,
+                        AddressId = addressId,
+                        ContactId = contactId,
                         Address = new()
                         {
-                            AddressId = Guid.NewGuid(),
+                            AddressId = addressId,
                             Country = "Country",
                             PostalCode = "PostalCode",
                             State = "State",
@@ -49,7 +54,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                         },
                         ContactDetails = new()
                         {
-                            ContactId = Guid.NewGuid(),
+                            ContactId = contactId,
                             Email = string.Empty,
                             Mobile = string.Empty
                         },
@@ -61,61 +66,67 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                         DateOfBirth = DateTime.MinValue,
                         VetOrganisations = new List<VetOrganisation>()
                         {
-                            new VetOrganisation
                             {
-                                Organisation = new Organisation
-                                {
-                                    OrganisationId = Guid.NewGuid(),
-                                    Name = "Organisation",
-                                    Address = new()
-                                    {
-                                        AddressId = Guid.NewGuid(),
-                                        Country = "Country",
-                                        PostalCode = "PostalCode",
-                                        State = "State",
-                                        StreetAddress = "StreetAddress",
-                                        Suburb = "Suburb"
-                                    },
-                                    ContactDetails = new()
-                                    {
-                                        ContactId = Guid.NewGuid(),
-                                        Email = string.Empty,
-                                        Mobile = string.Empty
-                                    },
-                                    Abn = "51824753556",
-                                    OrganisationType = OrganisationType.Clinic,
-                                    VetOrganisations = new List<VetOrganisation>()
-                                },
-                                IsPrimaryOrganisation = true,
-                                Vet = new Vet
+                                new VetOrganisation
                                 {
                                     VetId = _updateVetRequest.VetId,
-                                    Address = new()
+                                    OrganisationId = Guid.NewGuid(),
+                                    Organisation = new Organisation
                                     {
-                                        AddressId = Guid.NewGuid(),
-                                        Country = "Country",
-                                        PostalCode = "PostalCode",
-                                        State = "State",
-                                        StreetAddress = "StreetAddress",
-                                        Suburb = "Suburb"
+                                        OrganisationId = Guid.NewGuid(),
+                                        Name = "Organisation",
+                                        Address = new()
+                                        {
+                                            AddressId = Guid.NewGuid(),
+                                            Country = "Country",
+                                            PostalCode = "PostalCode",
+                                            State = "State",
+                                            StreetAddress = "StreetAddress",
+                                            Suburb = "Suburb"
+                                        },
+                                        ContactDetails = new()
+                                        {
+                                            ContactId = Guid.NewGuid(),
+                                            Email = string.Empty,
+                                            Mobile = string.Empty
+                                        },
+                                        Abn = "51824753556",
+                                        OrganisationType = OrganisationType.Clinic,
+                                        VetOrganisations = new List<VetOrganisation>()
                                     },
-                                    ContactDetails = new()
+                                    IsPrimaryOrganisation = true,
+                                    Vet = new Vet
                                     {
-                                        ContactId = Guid.NewGuid(),
-                                        Email = string.Empty,
-                                        Mobile = string.Empty
-                                    },
-                                    Title = Title.None,
-                                    FirstName = "Old First",
-                                    MiddleName = string.Empty,
-                                    LastName = "Old Last",
-                                    Suffix = Suffix.None,
-                                    DateOfBirth = DateTime.MinValue,
-                                    VetOrganisations = new List<VetOrganisation>()
+                                        VetId = _updateVetRequest.VetId,
+                                        AddressId = addressId,
+                                        ContactId = contactId,
+                                        Address = new()
+                                        {
+                                            AddressId = addressId,
+                                            Country = "Country",
+                                            PostalCode = "PostalCode",
+                                            State = "State",
+                                            StreetAddress = "StreetAddress",
+                                            Suburb = "Suburb"
+                                        },
+                                        ContactDetails = new()
+                                        {
+                                            ContactId = contactId,
+                                            Email = string.Empty,
+                                            Mobile = string.Empty
+                                        },
+                                        Title = Title.None,
+                                        FirstName = "Old First",
+                                        MiddleName = string.Empty,
+                                        LastName = "Old Last",
+                                        Suffix = Suffix.None,
+                                        DateOfBirth = DateTime.MinValue,
+                                        VetOrganisations = new List<VetOrganisation>()
+                                    }
+                                }
                             }
-                        } 
+                            }
                         }
-                    }
                 }.AsQueryable());
 
             _mockMapper

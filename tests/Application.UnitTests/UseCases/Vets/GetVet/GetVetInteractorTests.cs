@@ -61,10 +61,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                 VetOrganisations = new List<VetOrganisation>()
             };
 
+            
             this._mockDbContext
                 .Setup(mock => mock.Get<Vet>())
                 .Returns(new[] { new Vet()
                     {
+                        AddressId = _vetDto.Address.AddressId,
+                        ContactId = _vetDto.ContactDetails.ContactId,
                         VetId = _request.VetId,
                         Address = _vetDto.Address,
                         ContactDetails = _vetDto.ContactDetails,

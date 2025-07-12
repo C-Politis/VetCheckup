@@ -55,24 +55,29 @@ public class CreateVetInteractorTests
         };
         
         var vetId = Guid.NewGuid();
+        var addressId = Guid.NewGuid();
+        var contactId = Guid.NewGuid();
         
         _vet = new()
         {
             VetId = vetId,
+            AddressId = addressId,
+            ContactId = contactId,
             Address = new()
             {
-                AddressId = Guid.NewGuid(),
                 StreetAddress = string.Empty,
                 State = string.Empty,
                 Suburb = string.Empty,
                 Country = string.Empty,
-                PostalCode = string.Empty
+                PostalCode = string.Empty,
+                AddressId = addressId
+                
             },
             ContactDetails = new()
             {
-                ContactId = Guid.NewGuid(),
+                ContactId = contactId,
                 Email = "Gimli.Gloin@Erebor.mine",
-                Mobile = "0"
+                Mobile = "0",
             },
             Title = Title.Dr,
             FirstName = "New",
@@ -88,6 +93,8 @@ public class CreateVetInteractorTests
             .Returns(new[] { new Vet()
                 {
                     VetId = vetId,
+                    ContactId = default,
+                    AddressId = default,
                     Address = new Address
                     {
                         AddressId = default,

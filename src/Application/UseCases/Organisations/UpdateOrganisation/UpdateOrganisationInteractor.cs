@@ -21,15 +21,20 @@ public class UpdateOrganisationInteractor(IDbContext context, IMapper mapper) : 
                 throw new Exception($"The following VetIds do not exist: {string.Join(", ", nonExistentVetIds)}");
         }
         
-        organisation.VetOrganisations = vet.Select(v => 
+        organisation.VetOrganisations = vet.Select(v =>
         {
-            if (organisation.VetOrganisations.Any(vo => vo.Vet.VetId == v.VetId))
-                return organisation.VetOrganisations.First(vo => vo.Vet.VetId == v.VetId);
+            var existingVo = organisation.VetOrganisations
+                .FirstOrDefault(vo => vo.Vet != null && vo.Vet.VetId == v.VetId);
+
+            if (existingVo != null)
+                return existingVo;
 
             return new VetOrganisation
             {
                 Organisation = organisation,
+                OrganisationId = organisation.OrganisationId,
                 Vet = v,
+                VetId = v.VetId,
                 IsPrimaryOrganisation = false
             };
         }).ToList();

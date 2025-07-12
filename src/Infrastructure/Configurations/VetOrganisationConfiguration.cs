@@ -11,18 +11,17 @@ public class VetOrganisationConfiguration : IEntityTypeConfiguration<VetOrganisa
     {
         builder.ToTable(nameof(VetOrganisation));
 
-        builder.HasKey("VetId", "OrganisationId");
+        builder.HasKey(e => new { e.VetId, e.OrganisationId });
 
-        builder.HasOne(vo => vo.Vet)
+        builder.HasOne(e => e.Vet)
             .WithMany(v => v.VetOrganisations)
-            .HasForeignKey("VetId");
-        
-        builder.HasOne(vo => vo.Organisation)
+            .HasForeignKey(e => e.VetId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(e => e.Organisation)
             .WithMany(o => o.VetOrganisations)
-            .HasForeignKey("OrganisationId");
-        
-        builder.Property(vo => vo.IsPrimaryOrganisation)
-            .IsRequired();
+            .HasForeignKey(e => e.OrganisationId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
     
     #endregion

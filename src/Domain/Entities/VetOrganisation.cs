@@ -3,14 +3,11 @@
 public class VetOrganisation
 {
     
-    #region Properties
+    public required Guid VetId { get; set; }
+    public Vet? Vet { get; set; }
 
-    public required Vet Vet { get; set; } 
-    
-    public required Organisation Organisation { get; set; }
+    public required Guid OrganisationId { get; set; }
+    public Organisation? Organisation { get; set; }
 
     public required bool IsPrimaryOrganisation { get; set; }
-
-    #endregion
-    
 }

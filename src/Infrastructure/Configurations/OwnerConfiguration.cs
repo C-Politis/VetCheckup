@@ -14,15 +14,15 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
 
         builder.HasOne(e => e.Address)
             .WithOne()
-            .HasForeignKey<Owner>("AddressId")
+            .HasForeignKey<Address>(e => e.AddressId)
             .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
-            .HasForeignKey<Owner>("ContactId")
+            .HasForeignKey<Contact>(e => e.ContactId)
             .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
         
         builder.Property(e => e.DateOfBirth)
             .IsRequired()

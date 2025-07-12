@@ -7,7 +7,11 @@ public class Vet
 
     public required Address Address { get; set; }
 
+    public required Guid AddressId { get; set; }
+
     public required Contact ContactDetails { get; set; }
+    
+    public required Guid ContactId { get; set; }
 
     public required DateTime DateOfBirth { get; set; }
 

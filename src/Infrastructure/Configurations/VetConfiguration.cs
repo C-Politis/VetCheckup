@@ -14,16 +14,16 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
 
         builder.HasOne(e => e.Address)
             .WithOne()
-            .HasForeignKey<Vet>("AddressId")
+            .HasForeignKey<Address>(e => e.AddressId)
             .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
-            .HasForeignKey<Vet>("ContactId")
+            .HasForeignKey<Contact>(e => e.ContactId)
             .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
-
+            .OnDelete(DeleteBehavior.Cascade);
+            
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
             .HasColumnType("datetime2");
