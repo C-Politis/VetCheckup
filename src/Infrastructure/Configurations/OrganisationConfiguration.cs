@@ -16,16 +16,6 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
         builder.Property(e => e.Abn)
             .HasMaxLength(11)
             .IsRequired();
-        
-        builder.HasOne(e => e.Address)
-            .WithOne()
-            .HasForeignKey<Address>("AddressId")
-            .IsRequired();
-
-        builder.HasOne(e => e.ContactDetails)
-            .WithOne()
-            .HasForeignKey<Contact>("ContactId")
-            .IsRequired();
 
         builder.Property(e => e.Name)
             .HasMaxLength(100)

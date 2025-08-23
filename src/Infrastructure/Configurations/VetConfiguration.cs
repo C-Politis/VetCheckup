@@ -12,18 +12,6 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
     {
         builder.ToTable(nameof(Vet));
 
-        builder.HasOne(e => e.Address)
-            .WithOne()
-            .HasForeignKey<Vet>("AddressId")
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasOne(e => e.ContactDetails)
-            .WithOne()
-            .HasForeignKey<Vet>("ContactId")
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
-
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
             .HasColumnType("datetime2");
