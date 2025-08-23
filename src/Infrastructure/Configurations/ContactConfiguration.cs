@@ -15,13 +15,16 @@ namespace VetCheckup.Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.Property(e => e.ContactId)
-                .IsRequired();
+                .IsRequired()
+                .ValueGeneratedOnAdd();
             
             builder.Property(e => e.Email)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(100);
             
             builder.Property(e => e.Mobile)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(20);
 
             builder.HasKey(e => e.ContactId);
         }

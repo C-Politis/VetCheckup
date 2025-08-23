@@ -15,22 +15,28 @@ namespace VetCheckup.Infrastructure.Configurations
         {
 
             builder.Property(e => e.AddressId)
-                .IsRequired();
+                .IsRequired()
+                .ValueGeneratedOnAdd();
 
             builder.Property(e => e.Country)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(100);
 
             builder.Property(e => e.PostalCode)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(20);
 
             builder.Property(e => e.State)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(100);
 
             builder.Property(e => e.StreetAddress)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(250);
 
             builder.Property(e => e.Suburb)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(100);
 
             builder.HasKey(e => e.AddressId);
         }
