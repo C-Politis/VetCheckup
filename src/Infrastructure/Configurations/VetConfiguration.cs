@@ -11,18 +11,6 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
     public void Configure(EntityTypeBuilder<Vet> builder)
     {
         builder.ToTable(nameof(Vet));
-
-        builder.HasOne(e => e.Address)
-            .WithOne()
-            .HasForeignKey<Address>(e => e.AddressId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasOne(e => e.ContactDetails)
-            .WithOne()
-            .HasForeignKey<Contact>(e => e.ContactId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
             
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
