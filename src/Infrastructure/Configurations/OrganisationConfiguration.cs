@@ -17,6 +17,24 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
             .HasMaxLength(11)
             .IsRequired();
 
+        builder.Property<Guid>("AddressId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired();
+
+        builder.HasOne(e => e.Address)
+            .WithOne()
+            .HasForeignKey<Organisation>("AddressId")
+            .IsRequired();
+
+        builder.Property<Guid>("ContactId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired();
+
+        builder.HasOne(e => e.ContactDetails)
+            .WithOne()
+            .HasForeignKey<Organisation>("ContactId")
+            .IsRequired();
+
         builder.Property(e => e.Name)
             .HasMaxLength(100)
             .IsRequired();

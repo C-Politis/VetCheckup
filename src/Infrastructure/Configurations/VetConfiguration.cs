@@ -12,6 +12,28 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
     {
         builder.ToTable(nameof(Vet));
 
+        builder.Property<Guid>("AddressId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired();
+
+        // This should be Cascade delete, But EF Core will not let us.
+        builder.HasOne(e => e.Address)
+            .WithOne()
+            .HasForeignKey<Vet>("AddressId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder.Property<Guid>("ContactId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired();
+
+        // This should be Cascade delete, But EF Core will not let us.
+        builder.HasOne(e => e.ContactDetails)
+            .WithOne()
+            .HasForeignKey<Vet>("ContactId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.NoAction);
+
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
             .HasColumnType("datetime2");
