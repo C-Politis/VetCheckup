@@ -24,7 +24,8 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
         builder.HasOne(e => e.Address)
             .WithOne()
             .HasForeignKey<Organisation>("AddressId")
-            .IsRequired();
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property<Guid>("ContactId")
             .HasColumnType("uniqueidentifier")
@@ -33,7 +34,8 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
             .HasForeignKey<Organisation>("ContactId")
-            .IsRequired();
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(e => e.Name)
             .HasMaxLength(100)

@@ -19,7 +19,8 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
         builder.HasOne(e => e.Address)
             .WithOne()
             .HasForeignKey<Owner>("AddressId")
-            .IsRequired();
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property<Guid>("ContactId")
             .HasColumnType("uniqueidentifier")
@@ -28,7 +29,8 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
             .HasForeignKey<Owner>("ContactId")
-            .IsRequired();
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(e => e.DateOfBirth)
             .IsRequired()

@@ -11,6 +11,9 @@ namespace VetCheckup.Infrastructure.Configurations
 {
     public class AddressConfiguration : IEntityTypeConfiguration<Address>
     {
+
+        #region Methods
+
         public void Configure(EntityTypeBuilder<Address> builder)
         {
 
@@ -40,5 +43,8 @@ namespace VetCheckup.Infrastructure.Configurations
 
             builder.HasKey(e => e.AddressId);
         }
+
+        #endregion
+
     }
 }

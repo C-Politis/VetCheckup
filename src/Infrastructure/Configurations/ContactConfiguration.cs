@@ -12,6 +12,9 @@ namespace VetCheckup.Infrastructure.Configurations
 {
     public class ContactConfiguration : IEntityTypeConfiguration<Contact>
     {
+
+        #region Methods
+
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.Property(e => e.ContactId)
@@ -28,5 +31,8 @@ namespace VetCheckup.Infrastructure.Configurations
 
             builder.HasKey(e => e.ContactId);
         }
+
+        #endregion
+
     }
 }
