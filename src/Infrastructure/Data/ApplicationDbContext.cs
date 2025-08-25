@@ -65,6 +65,8 @@ public class ApplicationDbContext : DbContext, IDbContext
         {
             using var _Transaction = await this.Database.BeginTransactionAsync(cancellationToken);
             {
+                DeleteVetAddressAndContact();
+
                 await base.SaveChangesAsync(cancellationToken);
             }
         }
@@ -72,6 +74,20 @@ public class ApplicationDbContext : DbContext, IDbContext
         {
             await this.Database.RollbackTransactionAsync(cancellationToken);
             throw;
+        }
+    }
+    
+    private void DeleteVetAddressAndContact()
+    {
+        var deletedEntities = this.ChangeTracker.Entries().Where(e => e.State == EntityState.Deleted);
+        foreach (var deletedVet in deletedEntities.Where(e => e.Entity is Vet))
+        {
+            var vet = deletedVet.Entity as Vet;
+            if (vet == null)
+                continue;
+
+            this.Remove(vet.ContactDetails);
+            this.Remove(vet.Address);
         }
     }
 

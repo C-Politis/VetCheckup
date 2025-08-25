@@ -16,16 +16,26 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
         builder.Property(e => e.Abn)
             .HasMaxLength(11)
             .IsRequired();
-        
+
+        builder.Property<Guid>("AddressId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired();
+
         builder.HasOne(e => e.Address)
             .WithOne()
-            .HasForeignKey<Address>("AddressId")
+            .HasForeignKey<Organisation>("AddressId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Property<Guid>("ContactId")
+            .HasColumnType("uniqueidentifier")
             .IsRequired();
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
-            .HasForeignKey<Contact>("ContactId")
-            .IsRequired();
+            .HasForeignKey<Organisation>("ContactId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(e => e.Name)
             .HasMaxLength(100)

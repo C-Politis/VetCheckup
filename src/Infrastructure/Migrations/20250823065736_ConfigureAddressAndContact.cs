@@ -6,27 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VetCheckup.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddressAndContactFKFix : Migration
+    public partial class ConfigureAddressAndContact : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Address_Owner_AddressId",
-                table: "Address");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Address_Vet_AddressId",
-                table: "Address");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Contact_Owner_ContactId",
-                table: "Contact");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Contact_Vet_ContactId",
-                table: "Contact");
-
             migrationBuilder.AddColumn<Guid>(
                 name: "AddressId",
                 table: "Vet",
@@ -54,6 +38,49 @@ namespace VetCheckup.Infrastructure.Migrations
                 type: "uniqueidentifier",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+
+            migrationBuilder.AddColumn<Guid>(
+                name: "AddressId",
+                table: "Organisation",
+                type: "uniqueidentifier",
+                nullable: false,
+                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+
+            migrationBuilder.AddColumn<Guid>(
+                name: "ContactId",
+                table: "Organisation",
+                type: "uniqueidentifier",
+                nullable: false,
+                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
+
+            migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Suburb = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.AddressId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contact",
+                columns: table => new
+                {
+                    ContactId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mobile = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contact", x => x.ContactId);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vet_AddressId",
@@ -79,13 +106,41 @@ namespace VetCheckup.Infrastructure.Migrations
                 column: "ContactId",
                 unique: true);
 
+            migrationBuilder.CreateIndex(
+                name: "IX_Organisation_AddressId",
+                table: "Organisation",
+                column: "AddressId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Organisation_ContactId",
+                table: "Organisation",
+                column: "ContactId",
+                unique: true);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Organisation_Address_AddressId",
+                table: "Organisation",
+                column: "AddressId",
+                principalTable: "Address",
+                principalColumn: "AddressId",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Organisation_Contact_ContactId",
+                table: "Organisation",
+                column: "ContactId",
+                principalTable: "Contact",
+                principalColumn: "ContactId",
+                onDelete: ReferentialAction.Cascade);
+
             migrationBuilder.AddForeignKey(
                 name: "FK_Owner_Address_AddressId",
                 table: "Owner",
                 column: "AddressId",
                 principalTable: "Address",
                 principalColumn: "AddressId",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Owner_Contact_ContactId",
@@ -93,29 +148,35 @@ namespace VetCheckup.Infrastructure.Migrations
                 column: "ContactId",
                 principalTable: "Contact",
                 principalColumn: "ContactId",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Vet_Address_AddressId",
                 table: "Vet",
                 column: "AddressId",
                 principalTable: "Address",
-                principalColumn: "AddressId",
-                onDelete: ReferentialAction.Restrict);
+                principalColumn: "AddressId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Vet_Contact_ContactId",
                 table: "Vet",
                 column: "ContactId",
                 principalTable: "Contact",
-                principalColumn: "ContactId",
-                onDelete: ReferentialAction.Restrict);
+                principalColumn: "ContactId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
+                name: "FK_Organisation_Address_AddressId",
+                table: "Organisation");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Organisation_Contact_ContactId",
+                table: "Organisation");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Owner_Address_AddressId",
                 table: "Owner");
 
@@ -130,6 +191,12 @@ namespace VetCheckup.Infrastructure.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_Vet_Contact_ContactId",
                 table: "Vet");
+
+            migrationBuilder.DropTable(
+                name: "Address");
+
+            migrationBuilder.DropTable(
+                name: "Contact");
 
             migrationBuilder.DropIndex(
                 name: "IX_Vet_AddressId",
@@ -147,6 +214,14 @@ namespace VetCheckup.Infrastructure.Migrations
                 name: "IX_Owner_ContactId",
                 table: "Owner");
 
+            migrationBuilder.DropIndex(
+                name: "IX_Organisation_AddressId",
+                table: "Organisation");
+
+            migrationBuilder.DropIndex(
+                name: "IX_Organisation_ContactId",
+                table: "Organisation");
+
             migrationBuilder.DropColumn(
                 name: "AddressId",
                 table: "Vet");
@@ -163,37 +238,13 @@ namespace VetCheckup.Infrastructure.Migrations
                 name: "ContactId",
                 table: "Owner");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Address_Owner_AddressId",
-                table: "Address",
-                column: "AddressId",
-                principalTable: "Owner",
-                principalColumn: "OwnerId",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.DropColumn(
+                name: "AddressId",
+                table: "Organisation");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Address_Vet_AddressId",
-                table: "Address",
-                column: "AddressId",
-                principalTable: "Vet",
-                principalColumn: "VetId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Contact_Owner_ContactId",
-                table: "Contact",
-                column: "ContactId",
-                principalTable: "Owner",
-                principalColumn: "OwnerId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Contact_Vet_ContactId",
-                table: "Contact",
-                column: "ContactId",
-                principalTable: "Vet",
-                principalColumn: "VetId",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.DropColumn(
+                name: "ContactId",
+                table: "Organisation");
         }
     }
 }

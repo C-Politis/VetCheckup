@@ -11,6 +11,7 @@ namespace VetCheckup.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+          
             migrationBuilder.CreateTable(
                 name: "Organisation",
                 columns: table => new
@@ -48,7 +49,11 @@ namespace VetCheckup.Infrastructure.Migrations
                 {
                     VetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Title = table.Column<string>(type: "varchar(5)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Suffix = table.Column<string>(type: "varchar(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,65 +84,25 @@ namespace VetCheckup.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Address",
+                name: "VetOrganisation",
                 columns: table => new
                 {
-                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    State = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StreetAddress = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Suburb = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    VetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrganisationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsPrimaryOrganisation = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => x.AddressId);
+                    table.PrimaryKey("PK_VetOrganisation", x => new { x.VetId, x.OrganisationId });
                     table.ForeignKey(
-                        name: "FK_Address_Organisation_AddressId",
-                        column: x => x.AddressId,
+                        name: "FK_VetOrganisation_Organisation_OrganisationId",
+                        column: x => x.OrganisationId,
                         principalTable: "Organisation",
                         principalColumn: "OrganisationId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Address_Owner_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Owner",
-                        principalColumn: "OwnerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Address_Vet_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Vet",
-                        principalColumn: "VetId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Contact",
-                columns: table => new
-                {
-                    ContactId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contact", x => x.ContactId);
-                    table.ForeignKey(
-                        name: "FK_Contact_Organisation_ContactId",
-                        column: x => x.ContactId,
-                        principalTable: "Organisation",
-                        principalColumn: "OrganisationId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Contact_Owner_ContactId",
-                        column: x => x.ContactId,
-                        principalTable: "Owner",
-                        principalColumn: "OwnerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Contact_Vet_ContactId",
-                        column: x => x.ContactId,
+                        name: "FK_VetOrganisation_Vet_VetId",
+                        column: x => x.VetId,
                         principalTable: "Vet",
                         principalColumn: "VetId",
                         onDelete: ReferentialAction.Cascade);
@@ -173,6 +138,11 @@ namespace VetCheckup.Infrastructure.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_VetOrganisation_OrganisationId",
+                table: "VetOrganisation",
+                column: "OrganisationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VetPet_PetId",
                 table: "VetPet",
                 column: "PetId");
@@ -182,10 +152,7 @@ namespace VetCheckup.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Address");
-
-            migrationBuilder.DropTable(
-                name: "Contact");
+                name: "VetOrganisation");
 
             migrationBuilder.DropTable(
                 name: "VetPet");

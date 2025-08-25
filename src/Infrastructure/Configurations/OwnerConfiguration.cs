@@ -12,18 +12,26 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
     {
         builder.ToTable(nameof(Owner));
 
+        builder.Property<Guid>("AddressId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired();
+
         builder.HasOne(e => e.Address)
             .WithOne()
             .HasForeignKey<Owner>("AddressId")
             .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Property<Guid>("ContactId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired();
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
             .HasForeignKey<Owner>("ContactId")
             .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
-        
+            .OnDelete(DeleteBehavior.Cascade);
+
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
             .HasColumnType("datetime2");
