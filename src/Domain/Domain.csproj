@@ -12,8 +12,4 @@
     <PackageVersion>1.0.2</PackageVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MediatR" />
-  </ItemGroup>
-
 </Project>
