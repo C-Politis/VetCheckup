@@ -55,7 +55,14 @@ public class CreateOrganisationInteractorTests
                 ContactDetails = new() { ContactId = Guid.NewGuid(), Email = string.Empty, Mobile = "1" },
                 Name = _createOrganisationRequest.Name,
                 OrganisationType = _createOrganisationRequest.OrganisationType,
-                VetOrganisations = new List<VetOrganisation>()
+                VetOrganisations = new List<VetOrganisation>(),
+                OrganisationManager = new OrganisationManager()
+                {
+                    FirstName = "Bob",
+                    LastName = "Bobson",
+                    DateOfBirth = DateTime.MaxValue,
+                    OrganisationManagerId = Guid.NewGuid(),
+                }
             });
 
 

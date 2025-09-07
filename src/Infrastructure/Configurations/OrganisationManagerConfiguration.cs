@@ -16,37 +16,23 @@ public class OrganisationManagerConfiguration : IEntityTypeConfiguration<Organis
             .IsRequired()
             .ValueGeneratedOnAdd();
 
-        // Address relationship
-        builder.Property<Guid>("AddressId")
-            .HasColumnType("uniqueidentifier")
-            .IsRequired();
-
         builder.HasOne(e => e.Address)
             .WithOne()
             .HasForeignKey<OrganisationManager>("AddressId")
             .IsRequired()
-            .OnDelete(DeleteBehavior.NoAction);
-
-        // Contact relationship
-        builder.Property<Guid>("ContactId")
-            .HasColumnType("uniqueidentifier")
-            .IsRequired();
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
             .HasForeignKey<OrganisationManager>("ContactId")
             .IsRequired()
-            .OnDelete(DeleteBehavior.NoAction);
-
-        // Organisation relationship
-        builder.Property<Guid>("OrganisationId")
-            .HasColumnType("uniqueidentifier")
-            .IsRequired();
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(e => e.Organisation)
-            .WithMany()
-            .HasForeignKey("OrganisationId")
-            .IsRequired();
+            .WithOne()
+            .HasForeignKey<OrganisationManager>("OrganisationId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.ClientCascade);
 
         // Personal details
         builder.Property(e => e.DateOfBirth)

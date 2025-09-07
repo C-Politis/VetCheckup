@@ -59,7 +59,14 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
                                 Mobile = string.Empty
                              },
                              Name = "Old name",
-                             OrganisationType = OrganisationType.Clinic
+                             OrganisationType = OrganisationType.Clinic,
+                             OrganisationManager = new OrganisationManager()
+                             {
+                                 FirstName = "Bob",
+                                 LastName = "Bobson",
+                                 DateOfBirth = DateTime.MaxValue,
+                                 OrganisationManagerId = Guid.NewGuid(),
+                             }
                         }
                 }.AsQueryable());
 

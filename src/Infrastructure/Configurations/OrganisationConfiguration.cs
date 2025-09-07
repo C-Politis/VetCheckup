@@ -45,6 +45,12 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
             .HasConversion(propVal => (int)propVal, dbVal => (OrganisationType)dbVal)
             .HasColumnType("int")
             .IsRequired();
+
+        builder.HasOne(e => e.OrganisationManager)
+            .WithOne()
+            .HasForeignKey<Organisation>("OrganisationManagerId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.NoAction);
         
         builder.Property(e => e.OrganisationId)
             .IsRequired()
