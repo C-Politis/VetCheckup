@@ -11,7 +11,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        // The fallback of ConnectionStrings.DefaultConnection matches the JSON section in the consumers appsettings.json. If the file does not have it, this will be null.
+        var connectionString = configuration.GetConnectionString("DefaultConnection") ?? configuration.GetSection("ConnectionStrings")["DefaultConnection"];
 
         Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
 
