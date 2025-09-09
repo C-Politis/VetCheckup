@@ -66,6 +66,24 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
                                  LastName = "Bobson",
                                  DateOfBirth = DateTime.MaxValue,
                                  OrganisationManagerId = Guid.NewGuid(),
+                                 Address = new Address()
+                                 {
+                                    AddressId = Guid.NewGuid(),
+                                    Country = string.Empty,
+                                    PostalCode = string.Empty,
+                                    State = string.Empty,
+                                    StreetAddress = string.Empty,
+                                    Suburb = string.Empty
+                                 },
+                                 MiddleName = string.Empty,
+                                 Suffix = Suffix.None,
+                                 ContactDetails = new Contact()
+                                 {
+                                     Email = "",
+                                     Mobile = "",
+                                     ContactId = Guid.NewGuid(),
+                                 },
+                                 Title = Title.Dr
                              }
                         }
                 }.AsQueryable());

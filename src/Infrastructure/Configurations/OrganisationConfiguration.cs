@@ -19,7 +19,8 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
 
         builder.Property<Guid>("AddressId")
             .HasColumnType("uniqueidentifier")
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.Address)
             .WithOne()
@@ -29,7 +30,8 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
 
         builder.Property<Guid>("ContactId")
             .HasColumnType("uniqueidentifier")
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
@@ -45,6 +47,11 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
             .HasConversion(propVal => (int)propVal, dbVal => (OrganisationType)dbVal)
             .HasColumnType("int")
             .IsRequired();
+        
+        builder.Property<Guid>("OrganisationManagerId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.OrganisationManager)
             .WithOne()
@@ -54,7 +61,8 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
         
         builder.Property(e => e.OrganisationId)
             .IsRequired()
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .HasDefaultValueSql("NEWID()");
         
         builder.HasKey(e => e.OrganisationId);
     }

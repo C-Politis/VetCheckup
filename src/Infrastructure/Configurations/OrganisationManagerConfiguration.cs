@@ -5,22 +5,35 @@ namespace VetCheckup.Infrastructure.Configurations;
 
 public class OrganisationManagerConfiguration : IEntityTypeConfiguration<OrganisationManager>
 {
+    
+    #region Methods
+
     public void Configure(EntityTypeBuilder<OrganisationManager> builder)
     {
         builder.ToTable(nameof(OrganisationManager));
 
-        // Primary Key
         builder.HasKey(e => e.OrganisationManagerId);
 
         builder.Property(e => e.OrganisationManagerId)
             .IsRequired()
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .HasDefaultValueSql("NEWID()");
+        
+        builder.Property<Guid>("AddressId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.Address)
             .WithOne()
             .HasForeignKey<OrganisationManager>("AddressId")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.Property<Guid>("ContactId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
@@ -28,13 +41,17 @@ public class OrganisationManagerConfiguration : IEntityTypeConfiguration<Organis
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
+        builder.Property<Guid>("OrganisationId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
+        
         builder.HasOne(e => e.Organisation)
             .WithOne()
             .HasForeignKey<OrganisationManager>("OrganisationId")
             .IsRequired()
             .OnDelete(DeleteBehavior.ClientCascade);
-
-        // Personal details
+        
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
             .HasColumnType("datetime2");
@@ -59,4 +76,7 @@ public class OrganisationManagerConfiguration : IEntityTypeConfiguration<Organis
             .IsRequired()
             .HasColumnType("varchar(10)");
     }
+
+    #endregion
+    
 }

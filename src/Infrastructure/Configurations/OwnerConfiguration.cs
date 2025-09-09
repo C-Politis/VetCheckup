@@ -14,7 +14,8 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
 
         builder.Property<Guid>("AddressId")
             .HasColumnType("uniqueidentifier")
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.Address)
             .WithOne()
@@ -24,7 +25,8 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
 
         builder.Property<Guid>("ContactId")
             .HasColumnType("uniqueidentifier")
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.ContactDetails)
             .WithOne()
@@ -58,7 +60,8 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
 
         builder.Property(e => e.OwnerId)
             .IsRequired()
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .HasDefaultValueSql("NEWID()");
 
         builder.HasMany(e => e.Pets)
             .WithOne(e => e.Owner)

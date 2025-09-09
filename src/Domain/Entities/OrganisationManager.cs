@@ -20,7 +20,7 @@ public class OrganisationManager
 
     public required Suffix Suffix { get; set; }
     
-    public required Organisation Organisation { get; set; }
+    public Organisation? Organisation { get; set; }
     
     public required Guid OrganisationManagerId { get; set; }
     

@@ -14,7 +14,8 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
 
         builder.Property<Guid>("AddressId")
             .HasColumnType("uniqueidentifier")
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
 
         // This should be Cascade delete, But EF Core will not let us.
         builder.HasOne(e => e.Address)
@@ -25,7 +26,8 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
 
         builder.Property<Guid>("ContactId")
             .HasColumnType("uniqueidentifier")
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
 
         // This should be Cascade delete, But EF Core will not let us.
         builder.HasOne(e => e.ContactDetails)
@@ -60,7 +62,8 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
 
         builder.Property(e => e.VetId)
             .IsRequired()
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .HasDefaultValueSql("NEWID()");
 
         builder.HasKey(e => e.VetId);
     }

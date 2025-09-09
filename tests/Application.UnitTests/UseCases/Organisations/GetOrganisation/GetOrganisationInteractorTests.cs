@@ -78,7 +78,33 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
                         Mobile = string.Empty
                     },
                     Name = "Hobbiton Rescue",
-                    OrganisationType = OrganisationType.Other
+                    OrganisationType = OrganisationType.Other,
+                    OrganisationManager = new OrganisationManager()
+                    {
+                        OrganisationManagerId = Guid.NewGuid(),
+                        FirstName = "Frodo",
+                        LastName = "Baggins",
+                        DateOfBirth = DateTime.MinValue,
+                        Address = new Address()
+                        {
+                            AddressId = Guid.NewGuid(),
+                            Country = string.Empty,
+                            PostalCode = string.Empty,
+                            State = string.Empty,
+                            StreetAddress = string.Empty,
+                            Suburb = string.Empty
+                        },
+                        ContactDetails = new Contact()
+                        {
+                            ContactId = Guid.NewGuid(),
+                            Email = string.Empty,
+                            Mobile = string.Empty
+                        },
+                        Organisation = null,
+                        Title = Title.Dr,
+                        MiddleName = "Joe",
+                        Suffix = Suffix.None,
+                    },
                 } }.AsQueryable());
 
             this._mockMapper

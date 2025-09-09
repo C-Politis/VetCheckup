@@ -4,6 +4,7 @@ using Moq;
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Application.UseCases.Organisations.CreateOrganisation;
 using VetCheckup.Domain.Entities;
+using VetCheckup.Domain.Enums;
 using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.Organisations.CreateOrganisation;
@@ -62,7 +63,27 @@ public class CreateOrganisationInteractorTests
                     LastName = "Bobson",
                     DateOfBirth = DateTime.MaxValue,
                     OrganisationManagerId = Guid.NewGuid(),
+                    Address = new Address()
+                    {
+                        AddressId = Guid.NewGuid(),
+                        Country = string.Empty,
+                        PostalCode = string.Empty,
+                        State = string.Empty,
+                        StreetAddress = string.Empty,
+                        Suburb = string.Empty
+                    },
+                    ContactDetails = new Contact()
+                    {
+                        ContactId = Guid.NewGuid(),
+                        Email = string.Empty,
+                        Mobile = string.Empty
+                    },
+                    Title = Title.Dr,
+                    MiddleName = "A.",
+                    Suffix = Suffix.II,
+                    Organisation = null
                 }
+
             });
 
 
