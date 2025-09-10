@@ -62,6 +62,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                                 Email = string.Empty,
                                 Mobile = string.Empty
                             },
+                            User = new()
+                            {
+                                UserId = Guid.NewGuid(),
+                                UserName = "MyUser",
+                                Password = "Password",
+                                UserType = UserType.Organisation
+                            },
                             OwnerId = _updateOwnerRequest.OwnerId,
                             FirstName = "Old Owner",
                             MiddleName = "Old Owner",
