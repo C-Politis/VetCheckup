@@ -2,6 +2,7 @@ using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
 using VetCheckup.Application.UseCases.Vets.CreateVet;
+using VetCheckup.Domain.Entities;
 using VetCheckup.Domain.Enums;
 using Xunit;
 
@@ -27,6 +28,12 @@ public class CreateVetRequestValidatorTests
         {
             Email = String.Empty,
             Mobile = String.Empty
+        },
+        User = new()
+        {
+            UserName = "MyUser",
+            Password = "Password",
+            UserType = UserType.Organisation
         },
         Title = Title.None,
         FirstName = "Test",

@@ -53,6 +53,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                             Email = string.Empty,
                             Mobile = string.Empty
                         },
+                        User = new User()
+                        {
+                            UserId = Guid.NewGuid(),
+                            UserName = "MyUser",
+                            Password = "Password",
+                            UserType = UserType.Organisation
+                        },
                         Title = Title.None,
                         FirstName = "Old First",
                         MiddleName = string.Empty,
@@ -106,6 +113,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                             Email = string.Empty,
                                             Mobile = string.Empty
                                         },
+                                        User = new User()
+                                        {
+                                            UserId = Guid.NewGuid(),
+                                            UserName = "MyUser",
+                                            Password = "Password",
+                                            UserType = UserType.Organisation
+                                        },
                                         Title = Title.Dr,
                                         MiddleName = "A.",
                                         Suffix = Suffix.II,
@@ -130,6 +144,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                         ContactId = Guid.NewGuid(),
                                         Email = string.Empty,
                                         Mobile = string.Empty
+                                    },
+                                    User = new User()
+                                    {
+                                        UserId = Guid.NewGuid(),
+                                        UserName = "MyUser",
+                                        Password = "Password",
+                                        UserType = UserType.Organisation
                                     },
                                     Title = Title.None,
                                     FirstName = "Old First",

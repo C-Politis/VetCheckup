@@ -87,7 +87,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                     },
                     User = new()
                     {
-                        UserId = Guid.NewGuid(),
+                        UserId =_ownerDto.User.UserId,
                         UserName = "MyUser",
                         Password = "Password",
                         UserType = UserType.Organisation

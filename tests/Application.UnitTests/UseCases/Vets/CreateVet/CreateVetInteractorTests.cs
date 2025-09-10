@@ -41,6 +41,12 @@ public class CreateVetInteractorTests
                 Email = String.Empty,
                 Mobile = String.Empty
             },
+            User = new()
+            {
+                UserName = "MyUser",
+                Password = "Password",
+                UserType = UserType.Organisation
+            },
             Title = Title.Dr,
             FirstName = "New",
             MiddleName = string.Empty,
@@ -74,6 +80,13 @@ public class CreateVetInteractorTests
                 Email = "Gimli.Gloin@Erebor.mine",
                 Mobile = "0"
             },
+            User = new User()
+            {
+                UserId = Guid.NewGuid(),
+                UserName = "MyUser",
+                Password = "Password",
+                UserType = UserType.Organisation
+            },
             Title = Title.Dr,
             FirstName = "New",
             MiddleName = string.Empty,
@@ -102,6 +115,13 @@ public class CreateVetInteractorTests
                         ContactId = default,
                         Email = String.Empty,
                         Mobile = String.Empty
+                    },
+                    User = new User()
+                    {
+                        UserId = default,
+                        UserName = "MyUser",
+                        Password = "Password",
+                        UserType = UserType.Organisation
                     },
                     Title = Title.Dr,
                     FirstName = "New",
@@ -157,6 +177,13 @@ public class CreateVetInteractorTests
                             ContactId = default,
                             Email = String.Empty,
                             Mobile = String.Empty
+                        },
+                        User = new User()
+                        {
+                            UserId = default,
+                            UserName = "MyUser",
+                            Password = "Password",
+                            UserType = UserType.Organisation
                         },
                         Title = Title.Dr,
                         MiddleName = string.Empty,

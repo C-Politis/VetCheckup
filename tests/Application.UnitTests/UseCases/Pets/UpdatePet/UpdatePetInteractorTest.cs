@@ -62,6 +62,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                     Email = string.Empty,
                                     Mobile = string.Empty
                                 },
+                                User = new User()
+                                {
+                                    UserId = Guid.NewGuid(),
+                                    UserName = "MyUser",
+                                    Password = "Password",
+                                    UserType = UserType.Organisation
+                                },
                                 FirstName = "Test",
                                 LastName = "Owner",
                                 MiddleName = "Middle",
@@ -95,6 +102,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                     ContactId = Guid.NewGuid(),
                                     Email = string.Empty,
                                     Mobile = string.Empty
+                                },
+                                User = new User()
+                                {
+                                    UserId = Guid.NewGuid(),
+                                    UserName = "MyUser",
+                                    Password = "Password",
+                                    UserType = UserType.Organisation
                                 },
                                 FirstName = "Test",
                                 LastName = "Owner",

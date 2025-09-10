@@ -3,7 +3,6 @@ using FluentValidation;
 using FluentValidation.Results;
 using VetCheckup.Application.Common.EntityRequests;
 using VetCheckup.Application.Common.EntityRequestValidators;
-using VetCheckup.Application.UseCases.Pets.CreatePet;
 using VetCheckup.Domain.Enums;
 using Xunit;
 
@@ -64,15 +63,15 @@ public class CreateUserRequestValidatorTests
 
 
     [Fact]
-    public void Name_ExceedsMaxLength_ValidationFailures()
+    public void UserName_ExceedsMaxLength_ValidationFailures()
     {
         // Arrange
         _createUserRequest.UserName = new string('a', 21);
         var expectedFailure = new ValidationFailure()
         {
-            PropertyName = nameof(CreatePetRequest.Name),
+            PropertyName = nameof(CreateUserRequest.UserName),
             AttemptedValue = _createUserRequest.UserName,
-            ErrorMessage = "The length of 'UserName' must be 20 characters or fewer. You entered 21 characters.",
+            ErrorMessage = "The length of 'User Name' must be 20 characters or fewer. You entered 21 characters.",
             ErrorCode = "MaximumLengthValidator"
         };
 
@@ -80,7 +79,7 @@ public class CreateUserRequestValidatorTests
         var result = _createUserRequestValidator.Validate(_createUserRequest);
 
         // Assert
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreatePetRequest.Name), StringComparison.OrdinalIgnoreCase))
+        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateUserRequest.UserName), StringComparison.OrdinalIgnoreCase))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
     #endregion
