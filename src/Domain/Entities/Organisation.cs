@@ -19,6 +19,8 @@ public class Organisation
 
     public required ICollection<VetOrganisation> VetOrganisations { get; set; }
     
+    public required OrganisationManager OrganisationManager { get; set; }
+    
     #endregion
 
 }

@@ -30,7 +30,8 @@ public class PetConfiguration : IEntityTypeConfiguration<Pet>
         
         builder.Property(e => e.PetId)
             .IsRequired()
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .HasDefaultValueSql("NEWID()");
 
         builder.Property(e => e.Sex)
             .HasConversion(propVal => (int)propVal, dbVal => (Sex)dbVal)

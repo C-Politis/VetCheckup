@@ -136,7 +136,33 @@ public class CreateVetInteractorTests
                     },
                     Name = String.Empty,
                     OrganisationType = OrganisationType.Clinic,
-                    VetOrganisations = new List<VetOrganisation>()
+                    VetOrganisations = new List<VetOrganisation>(),
+                    OrganisationManager = new OrganisationManager()
+                    {
+                        OrganisationManagerId = Guid.NewGuid(),
+                        FirstName = "Manager",
+                        LastName = "McManager",
+                        DateOfBirth = DateTime.MinValue,
+                        Address = new Address
+                        {
+                            AddressId = default,
+                            Country = String.Empty,
+                            PostalCode = String.Empty,
+                            State = String.Empty,
+                            StreetAddress = String.Empty,
+                            Suburb = String.Empty
+                        },
+                        ContactDetails = new Contact
+                        {
+                            ContactId = default,
+                            Email = String.Empty,
+                            Mobile = String.Empty
+                        },
+                        Title = Title.Dr,
+                        MiddleName = string.Empty,
+                        Suffix = Suffix.None,
+                        Organisation = null
+                    }
                 }
                 }.AsQueryable());
         

@@ -19,7 +19,8 @@ namespace VetCheckup.Infrastructure.Configurations
 
             builder.Property(e => e.AddressId)
                 .IsRequired()
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd()
+                .HasDefaultValueSql("NEWID()");
 
             builder.Property(e => e.Country)
                 .IsRequired()

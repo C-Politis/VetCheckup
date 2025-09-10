@@ -84,7 +84,33 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                     },
                                     Abn = "51824753556",
                                     OrganisationType = OrganisationType.Clinic,
-                                    VetOrganisations = new List<VetOrganisation>()
+                                    VetOrganisations = new List<VetOrganisation>(),
+                                    OrganisationManager = new OrganisationManager()
+                                    {
+                                        OrganisationManagerId = Guid.NewGuid(),
+                                        FirstName = "Bob",
+                                        LastName = "Bobson",
+                                        DateOfBirth = DateTime.MaxValue,
+                                        Address = new()
+                                        {
+                                            AddressId = Guid.NewGuid(),
+                                            Country = "Country",
+                                            PostalCode = "PostalCode",
+                                            State = "State",
+                                            StreetAddress = "StreetAddress",
+                                            Suburb = "Suburb"
+                                        },
+                                        ContactDetails = new()
+                                        {
+                                            ContactId = Guid.NewGuid(),
+                                            Email = string.Empty,
+                                            Mobile = string.Empty
+                                        },
+                                        Title = Title.Dr,
+                                        MiddleName = "A.",
+                                        Suffix = Suffix.II,
+                                        Organisation = null
+                                    }
                                 },
                                 IsPrimaryOrganisation = true,
                                 Vet = new Vet
