@@ -100,6 +100,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
                             Email = string.Empty,
                             Mobile = string.Empty
                         },
+                        User = new User()
+                        {
+                            UserId = Guid.NewGuid(),
+                            UserName = string.Empty,
+                            UserType = UserType.Organisation,
+                            Password = "Password"
+                        },
                         Organisation = null,
                         Title = Title.Dr,
                         MiddleName = "Joe",

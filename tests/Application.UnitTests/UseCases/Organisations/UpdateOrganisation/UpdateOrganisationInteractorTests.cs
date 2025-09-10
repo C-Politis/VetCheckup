@@ -75,6 +75,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
                                     StreetAddress = string.Empty,
                                     Suburb = string.Empty
                                  },
+                                 User = new User()
+                                 {
+                                    UserId = Guid.NewGuid(),
+                                    UserName = string.Empty,
+                                    UserType = UserType.Organisation,
+                                    Password = "Password"
+                                 },
                                  MiddleName = string.Empty,
                                  Suffix = Suffix.None,
                                  ContactDetails = new Contact()

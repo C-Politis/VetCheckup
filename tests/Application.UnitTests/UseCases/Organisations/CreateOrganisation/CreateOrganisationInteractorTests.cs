@@ -78,6 +78,13 @@ public class CreateOrganisationInteractorTests
                         Email = string.Empty,
                         Mobile = string.Empty
                     },
+                    User = new User()
+                    {   
+                        UserId = Guid.NewGuid(),
+                        UserName = string.Empty,
+                        UserType = UserType.Organisation,
+                        Password = "Password"
+                    },
                     Title = Title.Dr,
                     MiddleName = "A.",
                     Suffix = Suffix.II,
