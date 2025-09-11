@@ -21,7 +21,7 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
             .WithOne()
             .HasForeignKey<Vet>("UserId")
             .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.ClientCascade);
 
         builder.Property<Guid>("AddressId")
             .HasColumnType("uniqueidentifier")
