@@ -67,7 +67,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
                                 UserId = Guid.NewGuid(),
                                 UserName = "MyUser",
                                 Password = "Password",
-                                UserType = UserType.Organisation
+                                UserType = UserType.OrganisationManager
                             },
                             OwnerId = _updateOwnerRequest.OwnerId,
                             FirstName = "Old Owner",

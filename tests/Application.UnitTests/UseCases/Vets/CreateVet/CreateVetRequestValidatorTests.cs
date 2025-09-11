@@ -33,7 +33,7 @@ public class CreateVetRequestValidatorTests
         {
             UserName = "MyUser",
             Password = "Password",
-            UserType = UserType.Organisation
+            UserType = UserType.OrganisationManager
         },
         Title = Title.None,
         FirstName = "Test",

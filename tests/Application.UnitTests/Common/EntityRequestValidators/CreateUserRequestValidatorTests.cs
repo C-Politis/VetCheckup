@@ -16,7 +16,7 @@ public class CreateUserRequestValidatorTests
     private readonly CreateUserRequest _createUserRequest = new CreateUserRequest()
     {
         UserName = string.Empty,
-        UserType = UserType.Organisation,
+        UserType = UserType.OrganisationManager,
         Password = "Password"
     };
 
@@ -56,7 +56,7 @@ public class CreateUserRequestValidatorTests
     public static IEnumerable<object[]> UserType_ValidInput_NoValidationFailures_TestData()
         => new[]
         {
-                new object[] { UserType.Organisation },
+                new object[] { UserType.OrganisationManager },
                 new object[] { UserType.Vet },
                 new object[] { UserType.Owner }
         };

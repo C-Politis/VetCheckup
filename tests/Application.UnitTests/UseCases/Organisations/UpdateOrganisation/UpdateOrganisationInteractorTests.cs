@@ -79,7 +79,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
                                  {
                                     UserId = Guid.NewGuid(),
                                     UserName = string.Empty,
-                                    UserType = UserType.Organisation,
+                                    UserType = UserType.OrganisationManager,
                                     Password = "Password"
                                  },
                                  MiddleName = string.Empty,

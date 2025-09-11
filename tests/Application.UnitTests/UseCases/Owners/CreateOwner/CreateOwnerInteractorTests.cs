@@ -44,7 +44,7 @@ public class CreateOwnerInteractorTests
             User = new()
             {
                 UserName = "MyUser",
-                UserType = UserType.Organisation,
+                UserType = UserType.OrganisationManager,
                 Password = "Password"
             },
             FirstName = "Test",
@@ -63,7 +63,7 @@ public class CreateOwnerInteractorTests
                 Title = Title.None,
                 Address = new() { AddressId = Guid.NewGuid(), Country = string.Empty, PostalCode = string.Empty, State = string.Empty, StreetAddress = string.Empty, Suburb = string.Empty },
                 ContactDetails = new() { ContactId = Guid.NewGuid(), Email = string.Empty, Mobile = "1" },
-                User = new() { UserId = Guid.NewGuid(), UserName = string.Empty, Password = "Password", UserType = UserType.Organisation },
+                User = new() { UserId = Guid.NewGuid(), UserName = string.Empty, Password = "Password", UserType = UserType.OrganisationManager },
                 FirstName = _createOwnerRequest.FirstName,
                 LastName = _createOwnerRequest.LastName,
                 MiddleName = _createOwnerRequest.MiddleName,

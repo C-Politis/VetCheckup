@@ -57,7 +57,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                     UserId = Guid.NewGuid(),
                     UserName = "MyUser",
                     Password = "Password",
-                    UserType = UserType.Organisation
+                    UserType = UserType.OrganisationManager
                 },
                 Title = Title.Mr,
                 FirstName = "Gimli",

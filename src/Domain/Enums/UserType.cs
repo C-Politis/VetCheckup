@@ -5,7 +5,7 @@ public enum UserType
 
     #region Enums
 
-    Organisation = 0,
+    OrganisationManager = 0,
     Vet = 1,
     Owner = 2,
 

@@ -58,7 +58,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                             UserId = Guid.NewGuid(),
                             UserName = "MyUser",
                             Password = "Password",
-                            UserType = UserType.Organisation
+                            UserType = UserType.OrganisationManager
                         },
                         Title = Title.None,
                         FirstName = "Old First",
@@ -118,7 +118,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                             UserId = Guid.NewGuid(),
                                             UserName = "MyUser",
                                             Password = "Password",
-                                            UserType = UserType.Organisation
+                                            UserType = UserType.OrganisationManager
                                         },
                                         Title = Title.Dr,
                                         MiddleName = "A.",
@@ -150,7 +150,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                         UserId = Guid.NewGuid(),
                                         UserName = "MyUser",
                                         Password = "Password",
-                                        UserType = UserType.Organisation
+                                        UserType = UserType.OrganisationManager
                                     },
                                     Title = Title.None,
                                     FirstName = "Old First",

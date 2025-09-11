@@ -82,7 +82,7 @@ public class CreateOrganisationInteractorTests
                     {   
                         UserId = Guid.NewGuid(),
                         UserName = string.Empty,
-                        UserType = UserType.Organisation,
+                        UserType = UserType.OrganisationManager,
                         Password = "Password"
                     },
                     Title = Title.Dr,

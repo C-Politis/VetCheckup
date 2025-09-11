@@ -104,7 +104,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
                         {
                             UserId = Guid.NewGuid(),
                             UserName = string.Empty,
-                            UserType = UserType.Organisation,
+                            UserType = UserType.OrganisationManager,
                             Password = "Password"
                         },
                         Organisation = null,

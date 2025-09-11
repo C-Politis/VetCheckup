@@ -67,7 +67,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                     UserId = Guid.NewGuid(),
                                     UserName = "MyUser",
                                     Password = "Password",
-                                    UserType = UserType.Organisation
+                                    UserType = UserType.OrganisationManager
                                 },
                                 FirstName = "Test",
                                 LastName = "Owner",
@@ -108,7 +108,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
                                     UserId = Guid.NewGuid(),
                                     UserName = "MyUser",
                                     Password = "Password",
-                                    UserType = UserType.Organisation
+                                    UserType = UserType.OrganisationManager
                                 },
                                 FirstName = "Test",
                                 LastName = "Owner",
