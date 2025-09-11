@@ -11,6 +11,7 @@ public class CreateOwnerRequestValidator : AbstractValidator<CreateOwnerRequest>
     {
         _ = this.RuleFor(e => e.Address).SetValidator(new CreateAddressRequestValidator());
         _ = this.RuleFor(e => e.ContactDetails).SetValidator(new CreateContactRequestValidator());
+        _ = this.RuleFor(e => e.User).SetValidator(new CreateUserRequestValidator());
 
         _ = this.RuleFor(e => e.FirstName)
             .MaximumLength(100)

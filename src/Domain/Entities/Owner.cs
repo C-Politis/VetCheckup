@@ -5,6 +5,8 @@ public class Owner
 
     #region Properties
 
+    public required User User { get; set; }
+
     public required Address Address { get; set; }
 
     public required Contact ContactDetails { get; set; }

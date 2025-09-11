@@ -28,6 +28,12 @@ public class CreateOwnerRequestValidatorTests
             Email = string.Empty,
             Mobile = string.Empty
         },
+        User = new()
+        { 
+            UserName = "MyUser",
+            Password = "Password",
+            UserType = UserType.OrganisationManager
+        },
         FirstName = "Test",
         LastName = "Owner",
         MiddleName = "Middle",
@@ -169,6 +175,6 @@ public class CreateOwnerRequestValidatorTests
                     [Title.Other]
                 ];
 
-            #endregion
+    #endregion
 
 }

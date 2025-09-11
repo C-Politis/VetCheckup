@@ -23,6 +23,8 @@ namespace VetCheckup.Application.Common.Mappings
 
             _ = this.CreateMap<Pet, PetDto>();
 
+            _ = this.CreateMap<User, UserDto>();
+
             _ = this.CreateMap<Vet, VetDto>();
 
             _ = this.CreateMap<Organisation, OrganisationDto>();
