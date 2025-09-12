@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using VetCheckup.Application.Dtos;
 
-namespace VetCheckup.Application.UseCases.Organisations.GetOrganisationManager;
-internal class GetOrganisationManagerRequest
+namespace VetCheckup.Application.UseCases.Organisations.GetOrganisationManager
 {
+    public class GetOrganisationManagerRequest : IRequest<OrganisationManagerDto>
+    {
+
+        #region Properties
+
+        public required Guid OrganisationManagerId { get; set; }
+
+        #endregion
+
+    }
 }
