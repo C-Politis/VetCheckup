@@ -9,7 +9,15 @@ public class CreateOrganisationManagerInteractor(IDbContext context, IMapper map
 
     Task IRequestHandler<CreateOrganisationManagerRequest>.Handle(CreateOrganisationManagerRequest request, CancellationToken cancellationToken)
     {
-        context.Add(mapper.Map<OrganisationManager>(request));
+
+        var manager = mapper.Map<OrganisationManager>(request);
+
+        if (manager.Organisation != null)
+        {
+            manager.Organisation.OrganisationManager = manager;
+        }
+
+        context.Add(manager);
 
         return Task.CompletedTask;
     }

@@ -13,7 +13,7 @@ public class CreateOrganisationManagerRequest : IRequest
 
     public required CreateContactRequest ContactDetails { get; set; }
 
-    public DateTime? DateOfBirth { get; set; }
+    public required DateTime DateOfBirth { get; set; } // Conflicts with requeirement in spec: Configs currently require DOB but spec wants it nullable
 
     public required Title Title { get; set; }
 
