@@ -2,8 +2,6 @@
 using FluentValidation;
 using FluentValidation.Results;
 using VetCheckup.Application.UseCases.OrganisationManagers.DeleteOrganisationManager;
-using VetCheckup.Application.UseCases.Organisations.CreateOrganisation;
-using VetCheckup.Domain.Enums;
 using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.OrganisationManagers.DeleteOrganisationManager;
@@ -21,7 +19,7 @@ public class DeleteOrganisationManagerRequestValidatorTests
 
     #endregion
 
-    #region Constructor Tests
+    #region Handle Tests
 
     [Fact]
     public void OrganisationManagerId_ValidInput_NoValidationFailures()
