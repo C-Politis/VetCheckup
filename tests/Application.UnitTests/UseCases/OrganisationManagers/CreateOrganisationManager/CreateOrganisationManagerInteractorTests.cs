@@ -47,25 +47,6 @@ public class CreateOrganisationManagerInteractorTests
             Suffix = Suffix.Esq,
             Title = Title.Dr,
             DateOfBirth = new DateTime(2000, 01, 01),
-            Organisation = new()
-            {
-                Abn = "51824753556",
-                Address = new()
-                {
-                    StreetAddress = string.Empty,
-                    Country = string.Empty,
-                    PostalCode = string.Empty,
-                    State = string.Empty,
-                    Suburb = string.Empty,
-                },
-                ContactDetails = new()
-                {
-                    Email = string.Empty,
-                    Mobile = string.Empty
-                },
-                Name = "Giant Eagles Rescue",
-                OrganisationType = Domain.Enums.OrganisationType.Rescues
-            }
         };
 
         _mockMapper
@@ -104,20 +85,9 @@ public class CreateOrganisationManagerInteractorTests
     #region Interactor Tests
 
     [Fact]
-    public async Task CreateOrganisationManager_WithOrganisation_AddsNewOrganisationManagerToContext()
+    public async Task CreateOrganisationManager_AddsNewOrganisationManagerToContext()
     {
         //Act
-        await this._createOrganisationManagerInteractor.Handle(_createOrganisationManagerRequest, CancellationToken.None);
-
-        //Assert
-        this._mockContext.Verify(mock => mock.Add(It.IsAny<OrganisationManager>()), Times.Once);
-    }
-
-    [Fact]
-    public async Task CreateOrganisationManager_WithoutOrganisation_AddsNewOrganisationManagerToContext()
-    {
-        //Act
-        _createOrganisationManagerRequest.Organisation = null;
         await this._createOrganisationManagerInteractor.Handle(_createOrganisationManagerRequest, CancellationToken.None);
 
         //Assert

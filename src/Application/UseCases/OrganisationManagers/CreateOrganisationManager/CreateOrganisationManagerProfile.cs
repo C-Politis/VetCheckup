@@ -9,7 +9,8 @@ public class CreateOrganisationManagerProfile : Profile
     public CreateOrganisationManagerProfile()
     {
         _ = CreateMap<CreateOrganisationManagerRequest, OrganisationManager>()
-            .ForMember(destination => destination.OrganisationManagerId, source => source.Ignore());
+            .ForMember(destination => destination.OrganisationManagerId, source => source.Ignore())
+            .ForMember(destination => destination.Organisation, source => source.Ignore());
     }
 
     #endregion

@@ -25,7 +25,5 @@ public class CreateOrganisationManagerRequest : IRequest
 
     public required Suffix Suffix { get; set; }
 
-    public CreateOrganisationRequest? Organisation { get; set; }
-
     #endregion
 }

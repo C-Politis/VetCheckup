@@ -13,9 +13,6 @@ public class CreateOrganisationManagerRequestValidator : AbstractValidator<Creat
     {
         _ = this.RuleFor(e => e.Address).SetValidator(new CreateAddressRequestValidator());
         _ = this.RuleFor(e => e.ContactDetails).SetValidator(new CreateContactRequestValidator());
-        _ = this.RuleFor(e => e.Organisation)
-            .SetValidator(new CreateOrganisationRequestValidator()!) // I don't love this, give me your thoughts.
-            .When(e => e.Organisation != null);
 
         _ = this.RuleFor(e => e.FirstName)
             .MaximumLength(100)

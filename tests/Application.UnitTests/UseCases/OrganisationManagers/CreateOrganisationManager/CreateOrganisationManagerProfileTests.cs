@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using VetCheckup.Application.Common.Mappings;
 using VetCheckup.Application.UseCases.OrganisationManagers.CreateOrganisationManager;
-using VetCheckup.Application.UseCases.Organisations.CreateOrganisation;
 using Xunit;
 
 namespace VetCheckup.Application.UnitTests.UseCases.OrganisationManagers.CreateOrganisationManager;
@@ -15,7 +14,6 @@ public class CreateOrganisationManagerProfileTests
     public void CreateOrganisationManagerProfile_ProfileConfigurationValidation()
         => new MapperConfiguration(cfg =>
         {
-            cfg.AddProfile<CreateOrganisationProfile>();
             cfg.AddProfile<CreateOrganisationManagerProfile>();
             cfg.AddProfile<EntityRequestProfile>();
         }).AssertConfigurationIsValid();
