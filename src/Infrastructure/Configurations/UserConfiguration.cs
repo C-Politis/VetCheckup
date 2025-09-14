@@ -14,6 +14,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable(nameof(User));
 
         builder.Property(e => e.Password)
+            .HasMaxLength(32)
             .IsRequired();
 
         builder.Property(e => e.UserName)

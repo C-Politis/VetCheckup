@@ -12,7 +12,7 @@ using VetCheckup.Infrastructure.Data;
 namespace VetCheckup.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250911124830_ConfigureUsers")]
+    [Migration("20250914162000_ConfigureUsers")]
     partial class ConfigureUsers
     {
         /// <inheritdoc />
@@ -311,7 +311,8 @@ namespace VetCheckup.Infrastructure.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
