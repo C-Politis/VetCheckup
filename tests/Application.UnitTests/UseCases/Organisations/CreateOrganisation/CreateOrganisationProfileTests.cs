@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using VetCheckup.Application.Common.Mappings;
+using VetCheckup.Application.UseCases.OrganisationManagers.CreateOrganisationManager;
 using VetCheckup.Application.UseCases.Organisations.CreateOrganisation;
 using Xunit;
 
@@ -10,15 +11,13 @@ public class CreateOrganisationProfileTests
 
     #region Profile Configuration Tests
 
-    // TODO: Add other profiles that are used in the mapping
-    // [Fact]
-    // public void CreateOrganisationProfile_ProfileConfigurationValidation()
-    //     => new MapperConfiguration(cfg =>
-    //     {
-    //         cfg.AddProfile<CreateOrganisationProfile>();
-    //         cfg.AddProfile<>();
-    //         cfg.AddProfile<EntityRequestProfile>();
-    //     }).AssertConfigurationIsValid();
+    [Fact]
+     public void CreateOrganisationProfile_ProfileConfigurationValidation()
+         => new MapperConfiguration(cfg =>
+         {
+             cfg.AddProfile<CreateOrganisationProfile>();
+             cfg.AddProfile<EntityRequestProfile>();
+         }).AssertConfigurationIsValid();
 
     #endregion
 
