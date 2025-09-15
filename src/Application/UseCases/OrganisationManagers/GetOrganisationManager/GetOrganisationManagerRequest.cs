@@ -1,6 +1,6 @@
 ﻿using VetCheckup.Application.Dtos;
 
-namespace VetCheckup.Application.UseCases.Organisations.GetOrganisationManager
+namespace VetCheckup.Application.UseCases.OrganisationManagers.GetOrganisationManager
 {
     public class GetOrganisationManagerRequest : IRequest<OrganisationManagerDto>
     {

@@ -3,7 +3,7 @@ using MediatR;
 using Moq;
 using VetCheckup.Application.Dtos;
 using VetCheckup.Application.Services.Persistence;
-using VetCheckup.Application.UseCases.Organisations.GetOrganisationManager;
+using VetCheckup.Application.UseCases.OrganisationManagers.GetOrganisationManager;
 using VetCheckup.Domain.Enums;
 using VetCheckup.Domain.Entities;
 using Xunit;

@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="UseCases\Organisations\GetOrganisation\" />
+    <Folder Include="UseCases\Organisations\NewFolder\" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Domain.Entities;
 
-namespace VetCheckup.Application.UseCases.Organisations.GetOrganisationManager
+namespace VetCheckup.Application.UseCases.OrganisationManagers.GetOrganisationManager
 {
     public class GetOrganisationManagerInteractor(IDbContext dbContext, IMapper mapper) : IRequestHandler<GetOrganisationManagerRequest, OrganisationManagerDto>
     {
