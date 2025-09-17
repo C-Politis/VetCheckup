@@ -28,6 +28,12 @@ public class CreateOrganisationManagerRequestValidatorTests
             Email = string.Empty,
             Mobile = string.Empty
         },
+        User = new()
+        {
+            Password = string.Empty,
+            UserName = string.Empty,
+            UserType = UserType.OrganisationManager
+        },
         FirstName = "Test",
         LastName = "Owner",
         MiddleName = "Middle",
