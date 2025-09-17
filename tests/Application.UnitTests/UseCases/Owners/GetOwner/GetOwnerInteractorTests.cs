@@ -38,13 +38,6 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                 Email = string.Empty,
                 Mobile = string.Empty
             },
-            User = new()
-            {
-                UserId = Guid.NewGuid(),
-                UserName = "MyUser",
-                Password = "Password",
-                UserType = UserType.OrganisationManager
-            },
             FirstName = "Test",
             LastName = "Owner",
             MiddleName = "Middle",
@@ -87,7 +80,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.GetOwner
                     },
                     User = new()
                     {
-                        UserId =_ownerDto.User.UserId,
+                        UserId =Guid.NewGuid(),
                         UserName = "MyUser",
                         Password = "Password",
                         UserType = UserType.OrganisationManager

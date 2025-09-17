@@ -13,8 +13,6 @@ namespace VetCheckup.Application.Dtos
 
         #region Properties
 
-        public required User User { get; set; }
-
         public required AddressDto Address { get; set; }
 
         public required ContactDto ContactDetails { get; set; }

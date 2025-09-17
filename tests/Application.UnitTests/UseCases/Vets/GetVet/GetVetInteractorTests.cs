@@ -52,13 +52,6 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                     Email = "Gimli.Gloin@Erebor.mine",
                     Mobile = "0"
                 },
-                User = new User()
-                {
-                    UserId = Guid.NewGuid(),
-                    UserName = "MyUser",
-                    Password = "Password",
-                    UserType = UserType.OrganisationManager
-                },
                 Title = Title.Mr,
                 FirstName = "Gimli",
                 MiddleName = "son of",
@@ -75,7 +68,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                         VetId = _request.VetId,
                         Address = _vetDto.Address,
                         ContactDetails = _vetDto.ContactDetails,
-                        User = _vetDto.User,
+                        User = new()
+                        {
+                            UserId = Guid.NewGuid(),
+                            UserName = "MyUser",
+                            Password = "Password",
+                            UserType = UserType.OrganisationManager
+                        },
                         Title = Title.Mr,
                         FirstName = "Gimli",
                         MiddleName = "son of",
