@@ -39,6 +39,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
 
             Guid AddressId = Guid.NewGuid();
             Guid ContactId = Guid.NewGuid();
+            Guid UserId = Guid.NewGuid();
 
             _mockMapper
                 .Setup(e => e.Map<Pet>(It.IsAny<CreatePetRequest>()))
@@ -65,6 +66,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                             ContactId = ContactId,
                             Email = string.Empty,
                             Mobile = string.Empty
+                        },
+                        User = new()
+                        {
+                            UserId = UserId,
+                            UserName = "MyUser",
+                            Password = "Password",
+                            UserType = UserType.OrganisationManager
                         },
                         FirstName = "Test",
                         LastName = "Owner",
@@ -99,6 +107,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                             ContactId = ContactId,
                             Email = string.Empty,
                             Mobile = string.Empty
+                        },
+                        User = new()
+                        {
+                            UserId = UserId,
+                            UserName = "MyUser",
+                            Password = "Password",
+                            UserType = UserType.OrganisationManager
                         },
                         FirstName = "Test",
                         LastName = "Owner",
