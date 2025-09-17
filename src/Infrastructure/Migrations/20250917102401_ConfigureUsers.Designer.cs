@@ -12,7 +12,7 @@ using VetCheckup.Infrastructure.Data;
 namespace VetCheckup.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250914162000_ConfigureUsers")]
+    [Migration("20250917102401_ConfigureUsers")]
     partial class ConfigureUsers
     {
         /// <inheritdoc />
