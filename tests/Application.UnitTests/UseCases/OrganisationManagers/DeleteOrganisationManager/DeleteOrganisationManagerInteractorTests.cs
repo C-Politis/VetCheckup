@@ -33,6 +33,13 @@ public class DeleteOrganisationManagerInteractorTests
             .Setup(e => e.Get<OrganisationManager>())
             .Returns(new List<OrganisationManager> { new OrganisationManager
                 {
+                    User = new User()
+                        {
+                        Password = string.Empty,
+                        UserId = Guid.NewGuid(),
+                        UserName = string.Empty,
+                        UserType = UserType.OrganisationManager
+                        },
                     FirstName = "Bob",
                     LastName = "Bobson",
                     DateOfBirth = DateTime.MaxValue,
