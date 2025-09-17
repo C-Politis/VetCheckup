@@ -68,7 +68,7 @@ public class DeleteOrganisationManagerInteractorTests
     [Fact]
     public async Task DeleteOrganisationManager_OrganisationManagerExists()
     {
-        // Arrange
+        // Act
         await this._deleteOrganisationManagerInteractor.Handle(_deleteOrganisationManagerRequest, CancellationToken.None);
 
         // Assert
@@ -78,7 +78,7 @@ public class DeleteOrganisationManagerInteractorTests
     [Fact]
     public async Task DeleteOrganisationManager_OrganisationManagerNotFound()
     {
-        // Arrange
+        // Act
         var nonExistentOrganisationManagerRequest = new DeleteOrganisationManagerRequest()
         {
             OrganisationManagerId = Guid.NewGuid()
