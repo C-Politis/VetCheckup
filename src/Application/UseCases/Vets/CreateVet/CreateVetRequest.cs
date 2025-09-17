@@ -12,6 +12,8 @@ public class CreateVetRequest : IRequest
 
     public required CreateContactRequest ContactDetails { get; set; }
 
+    public required CreateUserRequest User { get; set; }
+
     public required DateTime DateOfBirth { get; set; }
 
     public required Title Title { get; set; }
