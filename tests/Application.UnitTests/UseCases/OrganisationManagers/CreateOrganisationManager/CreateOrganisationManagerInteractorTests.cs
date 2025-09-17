@@ -28,6 +28,12 @@ public class CreateOrganisationManagerInteractorTests
     {
         _createOrganisationManagerRequest = new CreateOrganisationManagerRequest()
         {
+            User = new()
+            {
+                Password = string.Empty,
+                UserName = string.Empty,
+                UserType = UserType.OrganisationManager
+            },
             Address = new()
             {
                 StreetAddress = string.Empty,
@@ -54,6 +60,13 @@ public class CreateOrganisationManagerInteractorTests
             .Returns(() => new OrganisationManager
             {
                 OrganisationManagerId = Guid.NewGuid(),
+                User = new()
+                {
+                    UserId = Guid.NewGuid(),
+                    Password = string.Empty,
+                    UserName = string.Empty,
+                    UserType = UserType.OrganisationManager
+                },
                 Address = new()
                 {
                     AddressId = Guid.NewGuid(),
