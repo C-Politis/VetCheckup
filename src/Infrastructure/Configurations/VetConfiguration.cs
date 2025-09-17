@@ -12,6 +12,17 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
     {
         builder.ToTable(nameof(Vet));
 
+        builder.Property<Guid>("UserId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
+
+        builder.HasOne(e => e.User)
+            .WithOne()
+            .HasForeignKey<Vet>("UserId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.ClientCascade);
+
         builder.Property<Guid>("AddressId")
             .HasColumnType("uniqueidentifier")
             .IsRequired()

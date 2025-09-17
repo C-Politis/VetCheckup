@@ -12,6 +12,17 @@ public class OwnerConfiguration : IEntityTypeConfiguration<Owner>
     {
         builder.ToTable(nameof(Owner));
 
+        builder.Property<Guid>("UserId")
+            .HasColumnType("uniqueidentifier")
+            .IsRequired()
+            .HasDefaultValueSql("NEWID()");
+
+        builder.HasOne(e => e.User)
+            .WithOne()
+            .HasForeignKey<Owner>("UserId")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
+
         builder.Property<Guid>("AddressId")
             .HasColumnType("uniqueidentifier")
             .IsRequired()

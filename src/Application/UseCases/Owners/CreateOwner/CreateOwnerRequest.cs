@@ -12,6 +12,8 @@ public class CreateOwnerRequest : IRequest
 
     public required CreateContactRequest ContactDetails { get; set; }
 
+    public required CreateUserRequest User { get; set; }
+
     public required DateTime DateOfBirth { get; set; }
 
     public required string FirstName { get; set; }

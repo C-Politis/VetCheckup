@@ -41,7 +41,8 @@ public class UpdateVetProfile : Profile
                 opts.MapFrom(src => src.DateOfBirth);
             })
             .ForMember(dest => dest.VetId, opts => opts.Ignore())
-            .ForMember(dest => dest.VetOrganisations, opts => opts.Ignore());
+            .ForMember(dest => dest.VetOrganisations, opts => opts.Ignore())
+            .ForMember(dest => dest.User, opts => opts.Ignore());
     }
 
     #endregion
