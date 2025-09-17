@@ -9,6 +9,8 @@ public class CreateOrganisationManagerRequest : IRequest
 
     #region Properties
 
+    public required CreateUserRequest User { get; set; }
+    
     public required CreateAddressRequest Address { get; set; }
 
     public required CreateContactRequest ContactDetails { get; set; }
