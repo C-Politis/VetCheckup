@@ -68,6 +68,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                         VetId = _request.VetId,
                         Address = _vetDto.Address,
                         ContactDetails = _vetDto.ContactDetails,
+                        User = new()
+                        {
+                            UserId = Guid.NewGuid(),
+                            UserName = "MyUser",
+                            Password = "Password",
+                            UserType = UserType.OrganisationManager
+                        },
                         Title = Title.Mr,
                         FirstName = "Gimli",
                         MiddleName = "son of",
