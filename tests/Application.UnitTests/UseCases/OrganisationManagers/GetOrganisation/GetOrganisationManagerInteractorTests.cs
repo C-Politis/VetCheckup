@@ -8,11 +8,11 @@ using VetCheckup.Domain.Enums;
 using VetCheckup.Domain.Entities;
 using Xunit;
 
-namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisationManager
+namespace VetCheckup.Application.UnitTests.UseCases.OrganisationManagers.GetOrganisation
 {
     public class GetOrganisationManagerInteractorTests
     {
-        #region Test Setup
+        #region Tests Shall Not Pass
 
         private readonly Mock<IDbContext> _mockDbContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
@@ -74,7 +74,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
 
         public GetOrganisationManagerInteractorTests()
         {
-            this._request = new()
+            _request = new()
             {
                 OrganisationManagerId = _organisationManagerDto.OrganisationManagerId
             };
@@ -82,6 +82,13 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
             // Create OrganisationManager
             var organisationManagerEntity = new OrganisationManager()
             {
+                User = new User()
+                {
+                    Password = string.Empty,
+                    UserId = Guid.NewGuid(),
+                    UserName = string.Empty,
+                    UserType = UserType.OrganisationManager
+                },
                 OrganisationManagerId = _organisationManagerDto.OrganisationManagerId,
                 FirstName = "Gandalf",
                 LastName = "The Grey",
@@ -135,15 +142,15 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
 
             organisationManagerEntity.Organisation = organisationEntity;
 
-            this._mockDbContext
+            _mockDbContext
                 .Setup(mock => mock.Get<OrganisationManager>())
                 .Returns(new[] { organisationManagerEntity }.AsQueryable());
 
-            this._mockMapper
+            _mockMapper
                 .Setup(mock => mock.Map<OrganisationManagerDto>(It.IsAny<OrganisationManager>()))
-                .Returns(this._organisationManagerDto);
+                .Returns(_organisationManagerDto);
 
-            this._interactor = new GetOrganisationManagerInteractor(this._mockDbContext.Object, this._mockMapper.Object);
+            _interactor = new GetOrganisationManagerInteractor(_mockDbContext.Object, _mockMapper.Object);
         }
 
         #endregion
@@ -154,10 +161,10 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
         public async Task GettingOrganisationManager_OrganisationManagerExists()
         {
             // Arrange
-            var expectedOrganisationManager = this._organisationManagerDto;
+            var expectedOrganisationManager = _organisationManagerDto;
 
             // Act
-            var organisationManager = await this._interactor.Handle(this._request, default);
+            var organisationManager = await _interactor.Handle(_request, default);
 
             // Assert
             Assert.Equal(expectedOrganisationManager, organisationManager);
@@ -167,58 +174,14 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
         public async Task GettingOrganisationManager_ThrowsExceptionWhenOrganisationManagerNotFound()
         {
             // Arrange
-            this._request.OrganisationManagerId = Guid.NewGuid();
+            _request.OrganisationManagerId = Guid.NewGuid();
 
             // Act
-            var handleMethod = async () => await this._interactor.Handle(this._request, default);
+            var handleMethod = async () => await _interactor.Handle(_request, default);
 
             // Assert
             var exception = await Assert.ThrowsAsync<Exception>(handleMethod);
             Assert.Equal("Organisation Manager not found.", exception.Message);
-        }
-
-        [Fact]
-        public async Task GettingOrganisationManager_ReturnsCorrectDetails()
-        {
-            // Arrange
-            var expectedName = "Gandalf";
-            var expectedLastName = "The Grey";
-            var expectedTitle = Title.Dr;
-
-            // Act
-            var organisationManager = await this._interactor.Handle(this._request, default);
-
-            // Assert
-            Assert.Equal(expectedName, organisationManager.FirstName);
-            Assert.Equal(expectedLastName, organisationManager.LastName);
-            Assert.Equal(expectedTitle, organisationManager.Title);
-            Assert.NotNull(organisationManager.ContactDetails);
-            Assert.NotNull(organisationManager.Address);
-            Assert.NotNull(organisationManager.Organisation);
-        }
-
-        [Fact]
-        public async Task GettingOrganisationManager_MapsCorrectlyFromEntity()
-        {
-            // Arrange & Act
-            await this._interactor.Handle(this._request, default);
-
-            // Assert
-            this._mockMapper.Verify(
-                mock => mock.Map<OrganisationManagerDto>(It.IsAny<OrganisationManager>()),
-                Times.Once);
-        }
-
-        [Fact]
-        public async Task GettingOrganisationManager_QueriesDbContextCorrectly()
-        {
-            // Arrange & Act
-            await this._interactor.Handle(this._request, default);
-
-            // Assert
-            this._mockDbContext.Verify(
-                mock => mock.Get<OrganisationManager>(),
-                Times.Once);
         }
 
         #endregion

@@ -28,6 +28,8 @@ namespace VetCheckup.Application.Common.Mappings
             _ = this.CreateMap<Vet, VetDto>();
 
             _ = this.CreateMap<Organisation, OrganisationDto>();
+
+            _ = this.CreateMap<OrganisationManager, OrganisationManagerDto>();
         } 
 
         #endregion
