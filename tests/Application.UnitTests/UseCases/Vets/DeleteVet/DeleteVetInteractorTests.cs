@@ -1,44 +1,41 @@
 ﻿using MediatR;
 using Moq;
 using VetCheckup.Application.Services.Persistence;
-using VetCheckup.Application.UseCases.Pets.DeletePet;
+using VetCheckup.Application.UseCases.Vets.DeleteVet;
 using VetCheckup.Domain.Entities;
 using VetCheckup.Domain.Enums;
 using Xunit;
 
-namespace VetCheckup.Application.UnitTests.UseCases.Pets.DeletePet;
+namespace VetCheckup.Application.UnitTests.UseCases.Vets.DeleteVet;
 
-public class DeletePetInteractorTests
+public class DeleteVetInteractorTests
 {
-    #region Secret Fire
+    #region Deeds will not be less valiant because they are unpraised
 
     private readonly Mock<IDbContext> _mockDbContext = new();
     
-    private readonly DeletePetRequest _request = new()
+    private readonly DeleteVetRequest _request = new()
     {
-        PetId = Guid.NewGuid()
+        VetId = Guid.NewGuid()
     };
-    private readonly IRequestHandler<DeletePetRequest> _interactor;
-    
+    private readonly IRequestHandler<DeleteVetRequest> _interactor;
+
     #endregion
     
-    #region Constructor
     
-    public DeletePetInteractorTests()
+    #region Constructors
+    
+    public DeleteVetInteractorTests()
     {
         this._mockDbContext
-            .Setup(mock => mock.Get<Pet>())
-            .Returns(new[] { new Pet()
+            .Setup(e => e.Get<Domain.Entities.Vet>())
+            .Returns(new List<Domain.Entities.Vet>
             {
-                PetId = this._request.PetId,
-                DateOfBirth = DateTime.Now,
-                MicrochipId = "123456",
-                Name = "Test Pet",
-                Sex = Sex.Male,
-                Species = "Test Species",
-                Owner = new()
+                new()
                 {
-                    OwnerId = Guid.NewGuid(),
+                    VetId = _request.VetId,
+                    FirstName = "John",
+                    LastName = "Doe",
                     Address = new()
                     {
                         AddressId = Guid.NewGuid(),
@@ -54,13 +51,7 @@ public class DeletePetInteractorTests
                         Email = string.Empty,
                         Mobile = string.Empty
                     },
-                    FirstName = "Test",
-                    LastName = "Owner",
-                    MiddleName = "Middle",
-                    Suffix = Suffix.Esq,
-                    Title = Title.Dr,
-                    Pets = new List<Pet>(),
-                    DateOfBirth = DateTime.MinValue,
+                    DateOfBirth = DateTime.Now,
                     User = new User()
                     {
                         UserId = default,
@@ -68,43 +59,42 @@ public class DeletePetInteractorTests
                         Password = "Password",
                         UserType = UserType.OrganisationManager
                     },
+                    Title = Title.None,
+                    MiddleName = "null",
+                    Suffix = Suffix.None,
+                    VetOrganisations = new List<VetOrganisation>(),
                 }
-            } }.AsQueryable());
-        
-        _interactor = new DeletePetInteractor(this._mockDbContext.Object);
+            }.AsQueryable());
+                        
+        _interactor = new DeleteVetInteractor(_mockDbContext.Object);
     }
     
     #endregion
-    
+
     #region Tests
 
     [Fact]
-    public async Task DeletePet_WhenPetExists()
+    public async Task Handle_Should_Delete_Vet()
     {
         // Act
         await _interactor.Handle(_request, CancellationToken.None);
         
         // Assert
-        this._mockDbContext.Verify(mock => mock.Remove(It.IsAny<Pet>()), Times.Once);
+        _mockDbContext.Verify(e => e.Remove(It.Is<Domain.Entities.Vet>(v => v.VetId == _request.VetId)), Times.Once);
     }
-
-
+    
     [Fact]
-    public async Task DeletePet_ThrowsExceptionWhenPetNotFound()
+    public async Task Handle_Should_Throw_Exception_When_Vet_Not_Found()
     {
         // Arrange
-        var invalidRequest = new DeletePetRequest
+        var invalidRequest = new DeleteVetRequest
         {
-            PetId = Guid.NewGuid()
+            VetId = Guid.NewGuid()
         };
-
-        //Act
+        
+        // Act & Assert
         await Assert.ThrowsAsync<Exception>(() => _interactor.Handle(invalidRequest, CancellationToken.None));
-
-        //Asset
-        this._mockDbContext.Verify(mock => mock.Remove(It.IsAny<Pet>()), Times.Never);
     }
 
     #endregion
-
 }
