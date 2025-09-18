@@ -60,7 +60,14 @@ public class DeletePetInteractorTests
                     Suffix = Suffix.Esq,
                     Title = Title.Dr,
                     Pets = new List<Pet>(),
-                    DateOfBirth = DateTime.MinValue
+                    DateOfBirth = DateTime.MinValue,
+                    User = new User()
+                    {
+                        UserId = default,
+                        UserName = "MyUser",
+                        Password = "Password",
+                        UserType = UserType.OrganisationManager
+                    },
                 }
             } }.AsQueryable());
         
@@ -68,7 +75,6 @@ public class DeletePetInteractorTests
     }
     
     #endregion
-    
     
     #region Tests
 
