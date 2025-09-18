@@ -10,6 +10,7 @@ public class CreateOrganisationProfile : Profile
     {
         _ = CreateMap<CreateOrganisationRequest, Organisation>()
             .ForMember(destination => destination.OrganisationId, source => source.Ignore())
+            .ForMember(destination => destination.OrganisationManager, source => source.Ignore())
             .ForMember(destination => destination.VetOrganisations, source => source.Ignore());
     }
 
