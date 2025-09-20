@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using VetCheckup.Application.UseCases.OrganisationManagers.DeleteOrganisationManager;
 using VetCheckup.Application.UseCases.OrganisationManagers.UpdateOrganisationManager;
 using VetCheckup.Domain.Enums;
 using Xunit;
