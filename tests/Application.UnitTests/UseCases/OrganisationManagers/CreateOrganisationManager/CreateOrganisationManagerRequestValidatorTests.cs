@@ -3,7 +3,6 @@ using FluentValidation;
 using VetCheckup.Domain.Enums;
 using VetCheckup.Application.UseCases.OrganisationManagers.CreateOrganisationManager;
 using Xunit;
-using VetCheckup.Application.UseCases.Owners.CreateOwner;
 
 namespace VetCheckup.Application.UnitTests.UseCases.OrganisationManagers.CreateOrganisationManager;
 
@@ -61,11 +60,11 @@ public class CreateOrganisationManagerRequestValidatorTests
         // Assert
         if (isValid)
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         else
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
     }
 
@@ -84,11 +83,11 @@ public class CreateOrganisationManagerRequestValidatorTests
         // Assert
         if (isValid)
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.LastName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.LastName), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         else
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.LastName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.LastName), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
     }
 
@@ -107,11 +106,11 @@ public class CreateOrganisationManagerRequestValidatorTests
         // Assert
         if (isValid)
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         else
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
     }
 
@@ -127,7 +126,7 @@ public class CreateOrganisationManagerRequestValidatorTests
 
         // Assert
         result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Title), StringComparison.OrdinalIgnoreCase))
+            .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.Title), StringComparison.OrdinalIgnoreCase))
             .Should().BeEmpty();
     }
 
@@ -143,7 +142,7 @@ public class CreateOrganisationManagerRequestValidatorTests
 
         // Assert
         result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateOwnerRequest.Suffix), StringComparison.OrdinalIgnoreCase))
+            .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.Suffix), StringComparison.OrdinalIgnoreCase))
             .Should().BeEmpty();
     }
     public static IEnumerable<object[]> Suffix_ValidInput_NoValidationFailures_TestData()
