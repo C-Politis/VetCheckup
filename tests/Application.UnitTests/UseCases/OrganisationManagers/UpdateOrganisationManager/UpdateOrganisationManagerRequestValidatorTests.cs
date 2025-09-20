@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using VetCheckup.Application.UseCases.OrganisationManagers.DeleteOrganisationManager;
 using VetCheckup.Application.UseCases.OrganisationManagers.UpdateOrganisationManager;
 using VetCheckup.Domain.Enums;
 using Xunit;
@@ -61,7 +60,7 @@ public class UpdateOrganisationManagerRequestValidatorTests
         _updateOrganisationManagerRequest.OrganisationManagerId = Guid.Empty;
         var expectedFailure = new ValidationFailure()
         {
-            PropertyName = nameof(DeleteOrganisationManagerRequest.OrganisationManagerId),
+            PropertyName = nameof(UpdateOrganisationManagerRequest.OrganisationManagerId),
             AttemptedValue = _updateOrganisationManagerRequest.OrganisationManagerId,
             ErrorMessage = "'Organisation Manager Id' must not be equal to '00000000-0000-0000-0000-000000000000'.",
             ErrorCode = "NotEqualValidator"
@@ -72,7 +71,7 @@ public class UpdateOrganisationManagerRequestValidatorTests
 
         // Assert
         result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(DeleteOrganisationManagerRequest.OrganisationManagerId), StringComparison.OrdinalIgnoreCase))
+            .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.OrganisationManagerId), StringComparison.OrdinalIgnoreCase))
             .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
     }
     
