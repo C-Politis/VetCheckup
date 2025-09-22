@@ -4,7 +4,7 @@ using VetCheckup.Domain.Enums;
 
 namespace VetCheckup.Application.UseCases.Users.UpdateUser;
 
-public class UpdateUserInteractor(IDbContext context, IMapper mapper) : IRequestHandler<UpdateUserRequest>
+public class UpdateUserInteractor(IApplicationDbContext context, IMapper mapper) : IRequestHandler<UpdateUserRequest>
 {
 
     #region Methods

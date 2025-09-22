@@ -14,7 +14,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.OrganisationManagers.GetOrga
     {
         #region Tests Shall Not Pass
 
-        private readonly Mock<IDbContext> _mockDbContext = new();
+        private readonly Mock<IApplicationDbContext> _mockDbContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
 
         private readonly GetOrganisationManagerRequest _request;

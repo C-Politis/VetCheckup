@@ -19,7 +19,7 @@ public static class DependencyInjection
         //services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         //services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
-        services.AddDbContext<IDbContext, ApplicationDbContext>((sp, options) =>
+        services.AddDbContext<IApplicationDbContext, ApplicationDbContext>((sp, options) =>
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
 

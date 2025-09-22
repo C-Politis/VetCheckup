@@ -15,7 +15,7 @@ public class DeleteOrganisationInteractorTests
 
     #region Treebeard
 
-    private readonly Mock<IDbContext> _mockDbContext = new();
+    private readonly Mock<IApplicationDbContext> _mockDbContext = new();
     private readonly DeleteOrganisationRequest _request = new()
     {
         OrganisationId = Guid.NewGuid()

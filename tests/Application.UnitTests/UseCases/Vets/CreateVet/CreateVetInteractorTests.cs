@@ -13,7 +13,7 @@ public class CreateVetInteractorTests
 {
     #region Gandalf
 
-    private readonly Mock<IDbContext> _mockContext = new();
+    private readonly Mock<IApplicationDbContext> _mockContext = new();
     private readonly Mock<IMapper> _mockMapper = new();
 
     private readonly IRequestHandler<CreateVetRequest> _createVetInteractor;

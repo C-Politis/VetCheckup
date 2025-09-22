@@ -14,7 +14,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
 
         #region Fields
 
-        private readonly Mock<IDbContext> _mockContext = new();
+        private readonly Mock<IApplicationDbContext> _mockContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
 
         private readonly IRequestHandler<UpdateVetRequest> _updateVetInteractor;

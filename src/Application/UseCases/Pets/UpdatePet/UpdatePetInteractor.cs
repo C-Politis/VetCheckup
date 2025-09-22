@@ -6,7 +6,7 @@ using VetCheckup.Domain.Entities;
 namespace VetCheckup.Application.UseCases.Pets.UpdatePet
 {
 
-    public class UpdatePetInteractor(IDbContext context, IMapper mapper) : IRequestHandler<UpdatePetRequest>
+    public class UpdatePetInteractor(IApplicationDbContext context, IMapper mapper) : IRequestHandler<UpdatePetRequest>
     {
         #region Methods
 

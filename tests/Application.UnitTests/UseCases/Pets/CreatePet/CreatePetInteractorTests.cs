@@ -15,7 +15,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
 
         #region Fields
 
-        private readonly Mock<IDbContext> _mockContext = new();
+        private readonly Mock<IApplicationDbContext> _mockContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
 
         private readonly IRequestHandler<CreatePetRequest> _createPetInteractor;

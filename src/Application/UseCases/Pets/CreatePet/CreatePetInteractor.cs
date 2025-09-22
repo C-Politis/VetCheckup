@@ -1,7 +1,7 @@
 ﻿using VetCheckup.Application.Services.Persistence;
 
 namespace VetCheckup.Application.UseCases.Pets.CreatePet;
-public class CreatePetInteractor(IDbContext context, IMapper mapper) : IRequestHandler<CreatePetRequest>
+public class CreatePetInteractor(IApplicationDbContext context, IMapper mapper) : IRequestHandler<CreatePetRequest>
 {
 
     #region Methods

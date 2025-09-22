@@ -16,7 +16,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
         // https://www.youtube.com/watch?v=0Z9rCMjEmfY
         #region A MINE!
 
-        private readonly Mock<IDbContext> _mockDbContext = new();
+        private readonly Mock<IApplicationDbContext> _mockDbContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
 
         private readonly GetVetRequest _request;

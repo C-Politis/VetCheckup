@@ -18,7 +18,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
     {
         #region Fly
 
-        private readonly Mock<IDbContext> _mockContext = new();
+        private readonly Mock<IApplicationDbContext> _mockContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
 
         private readonly IRequestHandler<UpdateOwnerRequest> _updateOwnerInteractor;

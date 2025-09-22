@@ -3,7 +3,7 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Vets.CreateVet;
 
-public class CreateVetInteractor(IDbContext context, IMapper mapper) : IRequestHandler<CreateVetRequest>
+public class CreateVetInteractor(IApplicationDbContext context, IMapper mapper) : IRequestHandler<CreateVetRequest>
 {
 
     #region Methods

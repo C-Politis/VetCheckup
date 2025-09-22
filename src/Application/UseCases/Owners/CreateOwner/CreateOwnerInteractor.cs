@@ -3,7 +3,7 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Owners.CreateOwner;
 
-public class CreateOwnerInteractor(IDbContext context, IMapper mapper) : IRequestHandler<CreateOwnerRequest>
+public class CreateOwnerInteractor(IApplicationDbContext context, IMapper mapper) : IRequestHandler<CreateOwnerRequest>
 {
 
     #region Methods

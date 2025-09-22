@@ -9,14 +9,14 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Owners.GetOwner
 {
-    public class GetOwnerInteractor(IDbContext dbContext, IMapper mapper) : IRequestHandler<GetOwnerRequest, OwnerDto>
+    public class GetOwnerInteractor(IApplicationDbContext applicationDbContext, IMapper mapper) : IRequestHandler<GetOwnerRequest, OwnerDto>
     {
 
         #region Methods
 
         Task<OwnerDto> IRequestHandler<GetOwnerRequest, OwnerDto>.Handle(GetOwnerRequest request, CancellationToken cancellationToken)
         {
-            var owner = dbContext.Get<Owner>().SingleOrDefault(o => o.OwnerId == request.OwnerID) ?? throw new Exception($"Owner not found.");
+            var owner = applicationDbContext.Get<Owner>().SingleOrDefault(o => o.OwnerId == request.OwnerID) ?? throw new Exception($"Owner not found.");
 
             return Task.FromResult(mapper.Map<OwnerDto>(owner));
         }

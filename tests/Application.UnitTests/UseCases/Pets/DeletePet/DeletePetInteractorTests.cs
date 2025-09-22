@@ -12,7 +12,7 @@ public class DeletePetInteractorTests
 {
     #region Secret Fire
 
-    private readonly Mock<IDbContext> _mockDbContext = new();
+    private readonly Mock<IApplicationDbContext> _mockDbContext = new();
     
     private readonly DeletePetRequest _request = new()
     {

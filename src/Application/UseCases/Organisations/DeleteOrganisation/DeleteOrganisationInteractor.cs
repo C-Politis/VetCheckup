@@ -3,7 +3,7 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Organisations.DeleteOrganisation;
 
-public class DeleteOrganisationInteractor(IDbContext context) : IRequestHandler<DeleteOrganisationRequest>
+public class DeleteOrganisationInteractor(IApplicationDbContext context) : IRequestHandler<DeleteOrganisationRequest>
 {
 
     #region Methods
