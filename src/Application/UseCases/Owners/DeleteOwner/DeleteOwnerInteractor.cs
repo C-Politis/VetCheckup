@@ -10,7 +10,7 @@ public class DeleteOwnerInteractor(IDbContext context) : IRequestHandler<DeleteO
 
     Task IRequestHandler<DeleteOwnerRequest>.Handle(DeleteOwnerRequest request, CancellationToken cancellationToken)
     {
-        var owner = context.Get<Owner>().FirstOrDefault(e => e.OwnerId == request.OwnerId) ?? throw new Exception("Owner not found");
+        var owner = context.Get<Owner>().SingleOrDefault(e => e.OwnerId == request.OwnerId) ?? throw new Exception("Owner not found");
         context.Remove(owner);
         return Task.CompletedTask;
     }
