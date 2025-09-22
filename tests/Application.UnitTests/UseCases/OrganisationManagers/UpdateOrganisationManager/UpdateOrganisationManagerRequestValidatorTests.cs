@@ -1,19 +1,18 @@
 ﻿using FluentAssertions;
 using FluentValidation;
+using FluentValidation.Results;
+using VetCheckup.Application.UseCases.OrganisationManagers.UpdateOrganisationManager;
 using VetCheckup.Domain.Enums;
-using VetCheckup.Application.UseCases.OrganisationManagers.CreateOrganisationManager;
 using Xunit;
 
-namespace VetCheckup.Application.UnitTests.UseCases.OrganisationManagers.CreateOrganisationManager;
+namespace VetCheckup.Application.UnitTests.UseCases.OrganisationManagers.UpdateOrganisationManager;
 
-public class CreateOrganisationManagerRequestValidatorTests
+public class UpdateOrganisationManagerRequestValidatorTests
 {
-    
     #region Fields
 
-    private readonly IValidator<CreateOrganisationManagerRequest> _createOrganisationManagerRequestValidator= new CreateOrganisationManagerRequestValidator();
-    private readonly CreateOrganisationManagerRequest _createOrganisationManagerRequest = new()
-    {
+    private readonly IValidator<UpdateOrganisationManagerRequest> _updateOrganisationManagerRequestValidator = new UpdateOrganisationManagerRequestValidator();
+    private readonly UpdateOrganisationManagerRequest _updateOrganisationManagerRequest = new UpdateOrganisationManagerRequest() {
         Address = new()
         {
             StreetAddress = string.Empty,
@@ -27,12 +26,6 @@ public class CreateOrganisationManagerRequestValidatorTests
             Email = string.Empty,
             Mobile = string.Empty
         },
-        User = new()
-        {
-            Password = string.Empty,
-            UserName = string.Empty,
-            UserType = UserType.OrganisationManager
-        },
         FirstName = "Test",
         LastName = "Owner",
         MiddleName = "Middle",
@@ -42,9 +35,46 @@ public class CreateOrganisationManagerRequestValidatorTests
     };
 
     #endregion
+    
+    #region Tests
+    
+    [Fact]
+    public void OrganisationManagerId_ValidInput_NoValidationFailures()
+    {
+        // Arrange
+        _updateOrganisationManagerRequest.OrganisationManagerId = Guid.NewGuid();
 
-    #region Happy Eleventy First!
+        // Act
+        var result = _updateOrganisationManagerRequestValidator.Validate(_updateOrganisationManagerRequest);
 
+        // Assert
+        result.Errors
+            .Where(e => e.PropertyName.Equals(nameof(_updateOrganisationManagerRequest.OrganisationManagerId), StringComparison.OrdinalIgnoreCase))
+            .Should().BeEmpty();
+    }
+
+    [Fact]
+    public void OrganisationManagerId_Empty_ValidationFailures()
+    {
+        // Arrange
+        _updateOrganisationManagerRequest.OrganisationManagerId = Guid.Empty;
+        var expectedFailure = new ValidationFailure()
+        {
+            PropertyName = nameof(UpdateOrganisationManagerRequest.OrganisationManagerId),
+            AttemptedValue = _updateOrganisationManagerRequest.OrganisationManagerId,
+            ErrorMessage = "'Organisation Manager Id' must not be equal to '00000000-0000-0000-0000-000000000000'.",
+            ErrorCode = "NotEqualValidator"
+        };
+
+        // Act
+        var result = _updateOrganisationManagerRequestValidator.Validate(_updateOrganisationManagerRequest);
+
+        // Assert
+        result.Errors
+            .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.OrganisationManagerId), StringComparison.OrdinalIgnoreCase))
+            .Should().ContainEquivalentOf(expectedFailure, cfg => cfg.Excluding(e => e.FormattedMessagePlaceholderValues));
+    }
+    
     [Theory]
     [InlineData("ValidName", true, "")]
     [InlineData("", false, "'First Name' must not be empty.")]
@@ -52,19 +82,19 @@ public class CreateOrganisationManagerRequestValidatorTests
     public void ValidateFirstName(string firstName, bool isValid, string expectedErrorMessage)
     {
         // Arrange
-        _createOrganisationManagerRequest.FirstName = firstName;
+        _updateOrganisationManagerRequest.FirstName = firstName;
 
         // Act
-        var result = _createOrganisationManagerRequestValidator.Validate(_createOrganisationManagerRequest);
+        var result = _updateOrganisationManagerRequestValidator.Validate(_updateOrganisationManagerRequest);
 
         // Assert
         if (isValid)
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         else
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.FirstName), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
     }
 
@@ -75,19 +105,19 @@ public class CreateOrganisationManagerRequestValidatorTests
     public void ValidateLastName(string lastName, bool isValid, string expectedErrorMessage)
     {
         // Arrange
-        _createOrganisationManagerRequest.LastName = lastName;
+        _updateOrganisationManagerRequest.LastName = lastName;
 
         // Act
-        var result = _createOrganisationManagerRequestValidator.Validate(_createOrganisationManagerRequest);
+        var result = _updateOrganisationManagerRequestValidator.Validate(_updateOrganisationManagerRequest);
 
         // Assert
         if (isValid)
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.LastName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.LastName), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         else
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.LastName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.LastName), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
     }
 
@@ -98,19 +128,19 @@ public class CreateOrganisationManagerRequestValidatorTests
     public void ValidateMiddleName(string middleName, bool isValid, string expectedErrorMessage)
     {
         // Arrange
-        _createOrganisationManagerRequest.MiddleName = middleName;
+        _updateOrganisationManagerRequest.MiddleName = middleName;
 
         // Act
-        var result = _createOrganisationManagerRequestValidator.Validate(_createOrganisationManagerRequest);
+        var result = _updateOrganisationManagerRequestValidator.Validate(_updateOrganisationManagerRequest);
 
         // Assert
         if (isValid)
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
                 .Should().BeEmpty();
         else
             result.Errors
-                .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
+                .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.MiddleName), StringComparison.OrdinalIgnoreCase))
                 .Should().ContainSingle(e => e.ErrorMessage == expectedErrorMessage);
     }
 
@@ -119,14 +149,14 @@ public class CreateOrganisationManagerRequestValidatorTests
     public void Title_ValidInput_NoValidationFailures(Title title)
     {
         // Arrange
-        _createOrganisationManagerRequest.Title = title;
+        _updateOrganisationManagerRequest.Title = title;
 
         // Act
-        var result = _createOrganisationManagerRequestValidator.Validate(_createOrganisationManagerRequest);
+        var result = _updateOrganisationManagerRequestValidator.Validate(_updateOrganisationManagerRequest);
 
         // Assert
         result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.Title), StringComparison.OrdinalIgnoreCase))
+            .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.Title), StringComparison.OrdinalIgnoreCase))
             .Should().BeEmpty();
     }
 
@@ -135,14 +165,14 @@ public class CreateOrganisationManagerRequestValidatorTests
     public void Suffix_ValidInput_NoValidationFailures(Suffix suffix)
     {
         // Arrange
-        _createOrganisationManagerRequest.Suffix = suffix;
+        _updateOrganisationManagerRequest.Suffix = suffix;
 
         // Act
-        var result = _createOrganisationManagerRequestValidator.Validate(_createOrganisationManagerRequest);
+        var result = _updateOrganisationManagerRequestValidator.Validate(_updateOrganisationManagerRequest);
 
         // Assert
         result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(CreateOrganisationManagerRequest.Suffix), StringComparison.OrdinalIgnoreCase))
+            .Where(e => e.PropertyName.Equals(nameof(UpdateOrganisationManagerRequest.Suffix), StringComparison.OrdinalIgnoreCase))
             .Should().BeEmpty();
     }
     public static IEnumerable<object[]> Suffix_ValidInput_NoValidationFailures_TestData()
@@ -172,6 +202,6 @@ public class CreateOrganisationManagerRequestValidatorTests
                     [Title.Hon],
                     [Title.Other]
         ];
-
+    
     #endregion
 }
