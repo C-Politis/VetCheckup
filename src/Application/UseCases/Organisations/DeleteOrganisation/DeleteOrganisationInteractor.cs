@@ -10,7 +10,7 @@ public class DeleteOrganisationInteractor(IDbContext context) : IRequestHandler<
 
     Task IRequestHandler<DeleteOrganisationRequest>.Handle(DeleteOrganisationRequest request, CancellationToken cancellationToken)
     {
-        var organisation = context.Get<Organisation>().FirstOrDefault(e => e.OrganisationId == request.OrganisationId) ?? throw new Exception("Organisation not found");
+        var organisation = context.Get<Organisation>().SingleOrDefault(e => e.OrganisationId == request.OrganisationId) ?? throw new Exception("Organisation not found");
         context.Remove(organisation);
         return Task.CompletedTask;
     }
