@@ -11,7 +11,7 @@ using VetCheckup.Infrastructure.Data;
 
 namespace VetCheckup.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationApplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250823054418_InitialMigration")]
     partial class InitialMigration
     {

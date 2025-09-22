@@ -3,13 +3,13 @@ using VetCheckup.Application.Services.Persistence;
 
 namespace VetCheckup.Infrastructure.Data;
 
-public class ApplicationApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     #region Constructors
 
-    public ApplicationApplicationDbContext() { }
+    public ApplicationDbContext() { }
 
-    public ApplicationApplicationDbContext(DbContextOptions<ApplicationApplicationDbContext> options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
 
@@ -33,7 +33,7 @@ public class ApplicationApplicationDbContext : DbContext, IApplicationDbContext
     }
     #endregion
 
-    #region IDbContext Implementation
+    #region IApplicationDbContext Implementation
 
     void IApplicationDbContext.Add<TEntity>(TEntity entity)
     {

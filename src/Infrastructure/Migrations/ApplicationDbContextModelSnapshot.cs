@@ -10,7 +10,7 @@ using VetCheckup.Infrastructure.Data;
 
 namespace VetCheckup.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationApplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

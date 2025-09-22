@@ -11,7 +11,7 @@ using VetCheckup.Infrastructure.Data;
 
 namespace VetCheckup.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationApplicationDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250909101015_OrganisationManager and DF Constraints")]
     partial class OrganisationManagerandDFConstraints
     {
