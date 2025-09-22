@@ -8,13 +8,13 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Owners.UpdateOwner
 {
-    public class UpdateOwnerInteractor(IDbContext dbContext, IMapper mapper) : IRequestHandler<UpdateOwnerRequest>
+    public class UpdateOwnerInteractor(IApplicationDbContext applicationDbContext, IMapper mapper) : IRequestHandler<UpdateOwnerRequest>
     {
         #region Methods
 
         Task IRequestHandler<UpdateOwnerRequest>.Handle(UpdateOwnerRequest request, CancellationToken cancellationToken)
         {
-            var owner = dbContext.Get<Owner>().SingleOrDefault(o => o.OwnerId == request.OwnerId) ?? throw new Exception("Owner not found.");
+            var owner = applicationDbContext.Get<Owner>().SingleOrDefault(o => o.OwnerId == request.OwnerId) ?? throw new Exception("Owner not found.");
 
             _ = mapper.Map(request, owner);
 

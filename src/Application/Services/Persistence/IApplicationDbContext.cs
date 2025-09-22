@@ -1,5 +1,5 @@
 ﻿namespace VetCheckup.Application.Services.Persistence;
-public interface IDbContext
+public interface IApplicationDbContext
 {
     #region Methods
 

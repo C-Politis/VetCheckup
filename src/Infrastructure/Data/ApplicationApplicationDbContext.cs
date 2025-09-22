@@ -3,13 +3,13 @@ using VetCheckup.Application.Services.Persistence;
 
 namespace VetCheckup.Infrastructure.Data;
 
-public class ApplicationDbContext : DbContext, IDbContext
+public class ApplicationApplicationDbContext : DbContext, IApplicationDbContext
 {
     #region Constructors
 
-    public ApplicationDbContext() { }
+    public ApplicationApplicationDbContext() { }
 
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    public ApplicationApplicationDbContext(DbContextOptions<ApplicationApplicationDbContext> options)
         : base(options)
     {
 
@@ -35,7 +35,7 @@ public class ApplicationDbContext : DbContext, IDbContext
 
     #region IDbContext Implementation
 
-    void IDbContext.Add<TEntity>(TEntity entity)
+    void IApplicationDbContext.Add<TEntity>(TEntity entity)
     {
         if (base.Model.FindEntityType(nameof(TEntity)) == null)
             throw new NotSupportedException($"{nameof(TEntity)} is not currently tracked in the DbContext Model");
@@ -43,7 +43,7 @@ public class ApplicationDbContext : DbContext, IDbContext
         base.Add(entity);
     }
 
-    IQueryable<TEntity> IDbContext.Get<TEntity>() where TEntity : class
+    IQueryable<TEntity> IApplicationDbContext.Get<TEntity>() where TEntity : class
     {
         if (base.Model.FindEntityType(nameof(TEntity)) == null)
             throw new NotSupportedException($"{nameof(TEntity)} is not currently tracked in the DbContext Model");
@@ -51,7 +51,7 @@ public class ApplicationDbContext : DbContext, IDbContext
         return base.Set<TEntity>();
     }
 
-    void IDbContext.Remove<TEntity>(TEntity entity)
+    void IApplicationDbContext.Remove<TEntity>(TEntity entity)
     {
         if (base.Model.FindEntityType(nameof(TEntity)) == null)
             throw new NotSupportedException($"{nameof(TEntity)} is not currently tracked in the DbContext Model");
@@ -59,7 +59,7 @@ public class ApplicationDbContext : DbContext, IDbContext
         base.Remove(entity);
     }
 
-    async Task IDbContext.SaveChangesAsync(CancellationToken cancellationToken)
+    async Task IApplicationDbContext.SaveChangesAsync(CancellationToken cancellationToken)
     {
         try
         {

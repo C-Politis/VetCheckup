@@ -3,7 +3,7 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Organisations.UpdateOrganisation;
 
-public class UpdateOrganisationInteractor(IDbContext context, IMapper mapper) : IRequestHandler<UpdateOrganisationRequest>
+public class UpdateOrganisationInteractor(IApplicationDbContext context, IMapper mapper) : IRequestHandler<UpdateOrganisationRequest>
 {
 
     #region Methods

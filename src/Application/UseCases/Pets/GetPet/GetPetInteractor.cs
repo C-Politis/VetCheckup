@@ -9,13 +9,13 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Pets.GetPet
 {
-    public class GetPetInteractor(IDbContext dbContext, IMapper mapper) : IRequestHandler<GetPetRequest, PetDto>
+    public class GetPetInteractor(IApplicationDbContext applicationDbContext, IMapper mapper) : IRequestHandler<GetPetRequest, PetDto>
     {
         #region Methods
         
         Task<PetDto> IRequestHandler<GetPetRequest, PetDto>.Handle(GetPetRequest request, CancellationToken cancellationToken)
         {
-            var pet = dbContext.Get<Pet>().SingleOrDefault(p => p.PetId == request.PetId) ?? throw new Exception($"Pet not found.");
+            var pet = applicationDbContext.Get<Pet>().SingleOrDefault(p => p.PetId == request.PetId) ?? throw new Exception($"Pet not found.");
 
             return Task.FromResult(mapper.Map<PetDto>(pet));
         } 

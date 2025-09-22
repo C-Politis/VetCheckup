@@ -14,7 +14,7 @@ public class CreateOrganisationManagerInteractorTests
 
     #region Fields
 
-    private readonly Mock<IDbContext> _mockContext = new();
+    private readonly Mock<IApplicationDbContext> _mockContext = new();
     private readonly Mock<IMapper> _mockMapper = new();
 
     private readonly IRequestHandler<CreateOrganisationManagerRequest> _createOrganisationManagerInteractor;

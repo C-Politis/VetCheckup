@@ -13,7 +13,7 @@ public class DeleteOrganisationManagerInteractorTests
 
     #region Fields
 
-    private readonly Mock<IDbContext> _mockContext = new();
+    private readonly Mock<IApplicationDbContext> _mockContext = new();
 
     private readonly IRequestHandler<DeleteOrganisationManagerRequest> _deleteOrganisationManagerInteractor;
     private readonly DeleteOrganisationManagerRequest _deleteOrganisationManagerRequest;

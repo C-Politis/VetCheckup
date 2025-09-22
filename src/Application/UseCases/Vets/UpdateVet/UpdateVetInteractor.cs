@@ -3,15 +3,15 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Vets.UpdateVet;
 
-public class UpdateVetInteractor(IDbContext dbContext, IMapper mapper) : IRequestHandler<UpdateVetRequest>
+public class UpdateVetInteractor(IApplicationDbContext applicationDbContext, IMapper mapper) : IRequestHandler<UpdateVetRequest>
 {
 
     #region Methods
 
     Task IRequestHandler<UpdateVetRequest>.Handle(UpdateVetRequest request, CancellationToken cancellationToken)
     {
-        var vet = dbContext.Get<Vet>().SingleOrDefault(v => v.VetId == request.VetId) ?? throw new Exception("Vet not found.");
-        var organisations = dbContext.Get<Organisation>().Where(o => request.OrganisationIds != null && request.OrganisationIds.Contains(o.OrganisationId)).ToList();
+        var vet = applicationDbContext.Get<Vet>().SingleOrDefault(v => v.VetId == request.VetId) ?? throw new Exception("Vet not found.");
+        var organisations = applicationDbContext.Get<Organisation>().Where(o => request.OrganisationIds != null && request.OrganisationIds.Contains(o.OrganisationId)).ToList();
         var existingOrganisationIds = organisations.Select(o => o.OrganisationId).ToList();
         if (request.OrganisationIds != null)
         {

@@ -3,7 +3,7 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Owners.DeleteOwner;
 
-public class DeleteOwnerInteractor(IDbContext context) : IRequestHandler<DeleteOwnerRequest>
+public class DeleteOwnerInteractor(IApplicationDbContext context) : IRequestHandler<DeleteOwnerRequest>
 {
 
     #region Methods

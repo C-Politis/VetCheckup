@@ -2,7 +2,7 @@
 using VetCheckup.Application.UseCases.OrganisationManagers.CreateOrganisationManager;
 using VetCheckup.Domain.Entities;
 
-public class CreateOrganisationManagerInteractor(IDbContext context, IMapper mapper) : IRequestHandler<CreateOrganisationManagerRequest>
+public class CreateOrganisationManagerInteractor(IApplicationDbContext context, IMapper mapper) : IRequestHandler<CreateOrganisationManagerRequest>
 {
 
     #region Methods

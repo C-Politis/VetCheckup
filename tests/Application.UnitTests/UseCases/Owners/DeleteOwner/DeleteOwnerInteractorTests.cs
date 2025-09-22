@@ -13,7 +13,7 @@ public class DeleteOwnerInteractorTests
 
     #region Mithril
 
-    private readonly Mock<IDbContext> _mockDbContext = new();
+    private readonly Mock<IApplicationDbContext> _mockDbContext = new();
     private readonly DeleteOwnerRequest _request = new()
     {
         OwnerId = Guid.NewGuid()

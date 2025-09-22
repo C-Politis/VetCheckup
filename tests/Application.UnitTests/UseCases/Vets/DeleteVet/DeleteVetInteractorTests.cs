@@ -12,7 +12,7 @@ public class DeleteVetInteractorTests
 {
     #region Deeds will not be less valiant because they are unpraised
 
-    private readonly Mock<IDbContext> _mockDbContext = new();
+    private readonly Mock<IApplicationDbContext> _mockDbContext = new();
     
     private readonly DeleteVetRequest _request = new()
     {

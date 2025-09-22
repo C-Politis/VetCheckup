@@ -11,7 +11,7 @@ using VetCheckup.Infrastructure.Data;
 
 namespace VetCheckup.Infrastructure.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ApplicationApplicationDbContext))]
     [Migration("20250917102401_ConfigureUsers")]
     partial class ConfigureUsers
     {

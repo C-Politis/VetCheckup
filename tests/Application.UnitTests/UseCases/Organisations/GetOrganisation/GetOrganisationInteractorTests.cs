@@ -15,7 +15,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
 
         #region Pipeweed Ganjalf
 
-        private readonly Mock<IDbContext> _mockDbContext = new();
+        private readonly Mock<IApplicationDbContext> _mockDbContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
 
         private readonly GetOrganisationRequest _request;

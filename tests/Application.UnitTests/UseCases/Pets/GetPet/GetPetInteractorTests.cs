@@ -15,7 +15,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
 
         #region Saurons
 
-        private readonly Mock<IDbContext> _mockDbContext = new();
+        private readonly Mock<IApplicationDbContext> _mockDbContext = new();
         private readonly Mock<IMapper> _mockMapper = new();
 
         private readonly GetPetRequest _request = new()

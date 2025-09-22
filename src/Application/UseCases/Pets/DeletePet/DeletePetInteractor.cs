@@ -3,7 +3,7 @@ using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.UseCases.Pets.DeletePet;
 
-public class DeletePetInteractor(IDbContext context) : IRequestHandler<DeletePetRequest>
+public class DeletePetInteractor(IApplicationDbContext context) : IRequestHandler<DeletePetRequest>
 {
     #region Methods
 
