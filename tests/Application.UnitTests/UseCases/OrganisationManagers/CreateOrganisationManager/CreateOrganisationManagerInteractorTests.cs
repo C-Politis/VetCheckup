@@ -62,10 +62,9 @@ public class CreateOrganisationManagerInteractorTests
                 OrganisationManagerId = Guid.NewGuid(),
                 User = new()
                 {
-                    UserId = Guid.NewGuid(),
-                    Password = string.Empty,
+                    Id = Guid.NewGuid().ToString(),
+                    PasswordHash = string.Empty,
                     UserName = string.Empty,
-                    UserType = UserType.OrganisationManager
                 },
                 Address = new()
                 {

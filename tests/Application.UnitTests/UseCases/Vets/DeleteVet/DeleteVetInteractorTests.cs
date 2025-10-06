@@ -54,10 +54,9 @@ public class DeleteVetInteractorTests
                     DateOfBirth = DateTime.Now,
                     User = new User()
                     {
-                        UserId = default,
+                        Id = Guid.NewGuid().ToString(),
                         UserName = "MyUser",
-                        Password = "Password",
-                        UserType = UserType.OrganisationManager
+                        PasswordHash = "Password",
                     },
                     Title = Title.None,
                     MiddleName = "null",

@@ -14,9 +14,6 @@ public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
 
         _ = this.RuleFor(e => e.Password)
             .MaximumLength(32);
-
-        _ = this.RuleFor(e => e.UserType)
-            .IsInEnum();
     }
 
     #endregion

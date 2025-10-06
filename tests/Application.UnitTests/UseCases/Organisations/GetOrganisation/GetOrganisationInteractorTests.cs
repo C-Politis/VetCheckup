@@ -102,10 +102,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.GetOrganisatio
                         },
                         User = new User()
                         {
-                            UserId = Guid.NewGuid(),
+                            Id = Guid.NewGuid().ToString(),
                             UserName = string.Empty,
-                            UserType = UserType.OrganisationManager,
-                            Password = "Password"
+                            PasswordHash = "Password"
                         },
                         Organisation = null,
                         Title = Title.Dr,

@@ -95,10 +95,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.GetPet
                         },
                         User = new()
                         {
-                            UserId = Guid.NewGuid(),
+                            Id = Guid.NewGuid().ToString(),
                             UserName = "MyUser",
-                            Password = "Password",
-                            UserType = UserType.OrganisationManager
+                            PasswordHash = "Password",
                         },
                         FirstName = "Test",
                         LastName = "Owner",

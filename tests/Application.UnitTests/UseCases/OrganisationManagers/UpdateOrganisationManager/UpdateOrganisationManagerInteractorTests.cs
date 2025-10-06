@@ -68,10 +68,9 @@ public class UpdateOrganisationManagerInteractorTests
                          },
                          User = new Domain.Entities.User()
                          {
-                             UserId = Guid.NewGuid(),
+                             Id = Guid.NewGuid().ToString(),
                              UserName = "OldUsername",
-                             Password = "OldPassword",
-                             UserType = UserType.OrganisationManager
+                             PasswordHash = "OldPassword",
                          },
                          FirstName = "First",
                          LastName = "Last",

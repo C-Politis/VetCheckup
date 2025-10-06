@@ -4,11 +4,11 @@ using VetCheckup.Infrastructure;
 
 var builder = Host.CreateDefaultBuilder(args);
 
-builder.ConfigureServices((hostContext, services) =>
+builder.ConfigureServices(async (hostContext, services) =>
 {
     var configuration = hostContext.Configuration;
 
-    services.AddInfrastructureServices(configuration);
+    await services.AddInfrastructureServices(configuration);
 
 });
 

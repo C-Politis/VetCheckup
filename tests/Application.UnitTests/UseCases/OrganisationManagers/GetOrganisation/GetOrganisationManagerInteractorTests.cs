@@ -84,10 +84,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.OrganisationManagers.GetOrga
             {
                 User = new User()
                 {
-                    Password = string.Empty,
-                    UserId = Guid.NewGuid(),
+                    PasswordHash = string.Empty,
+                    Id = Guid.NewGuid().ToString(),
                     UserName = string.Empty,
-                    UserType = UserType.OrganisationManager
                 },
                 OrganisationManagerId = _organisationManagerDto.OrganisationManagerId,
                 FirstName = "Gandalf",

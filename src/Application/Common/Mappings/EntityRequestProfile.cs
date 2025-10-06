@@ -17,7 +17,7 @@ public class EntityRequestProfile : Profile
             .ForMember(destination => destination.ContactId, source => source.Ignore());
 
         _ = this.CreateMap<CreateUserRequest, User>()
-            .ForMember(destination => destination.UserId, source => source.Ignore());
+            .ForMember(destination => destination.Id, source => source.Ignore());
         
         _ = this.CreateMap<UpdateAddressRequest, Address>()
             .ForMember(destination => destination.AddressId, source => source.Ignore())

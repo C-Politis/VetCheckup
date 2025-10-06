@@ -55,10 +55,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                         },
                         User = new User()
                         {
-                            UserId = Guid.NewGuid(),
+                            Id = Guid.NewGuid().ToString(),
                             UserName = "MyUser",
-                            Password = "Password",
-                            UserType = UserType.OrganisationManager
+                            PasswordHash = "Password",
                         },
                         Title = Title.None,
                         FirstName = "Old First",
@@ -115,10 +114,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                         },
                                         User = new User()
                                         {
-                                            UserId = Guid.NewGuid(),
+                                            Id = Guid.NewGuid().ToString(),
                                             UserName = "MyUser",
-                                            Password = "Password",
-                                            UserType = UserType.OrganisationManager
+                                            PasswordHash = "Password",
                                         },
                                         Title = Title.Dr,
                                         MiddleName = "A.",
@@ -147,10 +145,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                     },
                                     User = new User()
                                     {
-                                        UserId = Guid.NewGuid(),
+                                        Id = Guid.NewGuid().ToString(),
                                         UserName = "MyUser",
-                                        Password = "Password",
-                                        UserType = UserType.OrganisationManager
+                                        PasswordHash = "Password",
                                     },
                                     Title = Title.None,
                                     FirstName = "Old First",

@@ -12,14 +12,14 @@ public class VetConfiguration : IEntityTypeConfiguration<Vet>
     {
         builder.ToTable(nameof(Vet));
 
-        builder.Property<Guid>("UserId")
+        builder.Property<String>("Id")
             .HasColumnType("uniqueidentifier")
             .IsRequired()
             .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.User)
             .WithOne()
-            .HasForeignKey<Vet>("UserId")
+            .HasForeignKey<Vet>("Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.ClientCascade);
 

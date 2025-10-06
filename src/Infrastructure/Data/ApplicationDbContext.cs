@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using VetCheckup.Application.Services.Persistence;
 
 namespace VetCheckup.Infrastructure.Data;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbContext
 {
     #region Constructors
 
@@ -30,6 +31,12 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         modelBuilder.ApplyConfigurationsFromAssembly(AssemblyUtility.GetAssembly());
 
         base.OnModelCreating(modelBuilder);
+
+        // If we need to add properties to User Identity, we can configure here.
+        // modelBuilder.Entity<User>(entity =>
+        // {
+        //     entity.Property(e => e.PropertyToConfig).Something();
+        // });
     }
     #endregion
 

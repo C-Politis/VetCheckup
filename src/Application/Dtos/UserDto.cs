@@ -11,9 +11,7 @@ public class UserDto
 
     public required string Password { get; set; }
 
-    public required Guid UserId { get; set; }
-
-    public required UserType UserType { get; set; }
+    public required String Id { get; set; }
 
     #endregion
 

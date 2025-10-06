@@ -19,14 +19,14 @@ public class OrganisationManagerConfiguration : IEntityTypeConfiguration<Organis
             .ValueGeneratedOnAdd()
             .HasDefaultValueSql("NEWID()");
 
-        builder.Property<Guid>("UserId")
+        builder.Property<String>("Id")
             .HasColumnType("uniqueidentifier")
             .IsRequired()
             .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.User)
             .WithOne()
-            .HasForeignKey<OrganisationManager>("UserId")
+            .HasForeignKey<OrganisationManager>("Id")
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
