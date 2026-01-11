@@ -9,7 +9,7 @@ public class UpdateUserProfile: Profile
 
     public UpdateUserProfile()
         => CreateMap<UpdateUserRequest, User>()
-            .ForMember(dest => dest.UserId, opts => opts.Ignore());
+            .ForMember(dest => dest.Id, opts => opts.Ignore());
 
     #endregion
     

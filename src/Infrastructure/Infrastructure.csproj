@@ -16,15 +16,12 @@
     <Compile Remove="Data\Configurations\**" />
     <Compile Remove="Data\Interceptors\**" />
     <Compile Remove="Data\Migrations\**" />
-    <Compile Remove="Identity\**" />
     <EmbeddedResource Remove="Data\Configurations\**" />
     <EmbeddedResource Remove="Data\Interceptors\**" />
     <EmbeddedResource Remove="Data\Migrations\**" />
-    <EmbeddedResource Remove="Identity\**" />
     <None Remove="Data\Configurations\**" />
     <None Remove="Data\Interceptors\**" />
     <None Remove="Data\Migrations\**" />
-    <None Remove="Identity\**" />
   </ItemGroup>
 
   <ItemGroup>

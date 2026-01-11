@@ -70,9 +70,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                         ContactDetails = _vetDto.ContactDetails,
                         User = new()
                         {
-                            UserId = Guid.NewGuid(),
+                            Id = Guid.NewGuid(),
                             UserName = "MyUser",
-                            Password = "Password",
+                            PasswordHash = "Password",
                             UserType = UserType.OrganisationManager
                         },
                         Title = Title.Mr,

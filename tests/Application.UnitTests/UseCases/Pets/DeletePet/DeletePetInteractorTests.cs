@@ -63,9 +63,9 @@ public class DeletePetInteractorTests
                     DateOfBirth = DateTime.MinValue,
                     User = new User()
                     {
-                        UserId = default,
+                        Id = default,
                         UserName = "MyUser",
-                        Password = "Password",
+                        PasswordHash = "Password",
                         UserType = UserType.OrganisationManager
                     },
                 }

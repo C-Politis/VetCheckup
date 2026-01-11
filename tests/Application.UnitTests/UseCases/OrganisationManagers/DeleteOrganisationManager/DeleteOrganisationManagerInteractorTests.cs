@@ -35,8 +35,7 @@ public class DeleteOrganisationManagerInteractorTests
                 {
                     User = new User()
                         {
-                        Password = string.Empty,
-                        UserId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         UserName = string.Empty,
                         UserType = UserType.OrganisationManager
                         },
