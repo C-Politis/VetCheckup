@@ -1,4 +1,5 @@
 ﻿using VetCheckup.Application.Common.EntityRequests;
+using VetCheckup.Application.Common.Security.Accounts;
 using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Application.Common.Mappings;
@@ -17,8 +18,22 @@ public class EntityRequestProfile : Profile
             .ForMember(destination => destination.ContactId, source => source.Ignore());
 
         _ = this.CreateMap<CreateUserRequest, User>()
-            .ForMember(destination => destination.UserType, source => source.Ignore());
-        
+            .ForMember(destination => destination.UserType, source => source.Ignore())
+            .ForMember(destination => destination.Id, source => source.Ignore())
+            .ForMember(destination => destination.PasswordHash, source => source.MapFrom<PasswordHashResolver<CreateUserRequest>>())
+            .ForMember(destination => destination.NormalizedUserName, source => source.Ignore())
+            .ForMember(destination => destination.Email, source => source.Ignore())
+            .ForMember(destination => destination.NormalizedEmail, source => source.Ignore())
+            .ForMember(destination => destination.EmailConfirmed, source => source.Ignore())
+            .ForMember(destination => destination.SecurityStamp, source => source.Ignore())
+            .ForMember(destination => destination.ConcurrencyStamp, source => source.Ignore())
+            .ForMember(destination => destination.PhoneNumber, source => source.Ignore())
+            .ForMember(destination => destination.PhoneNumberConfirmed, source => source.Ignore())
+            .ForMember(destination => destination.TwoFactorEnabled, source => source.Ignore())
+            .ForMember(destination => destination.LockoutEnd, source => source.Ignore())
+            .ForMember(destination => destination.LockoutEnabled, source => source.Ignore())
+            .ForMember(destination => destination.AccessFailedCount, source => source.Ignore());
+
         _ = this.CreateMap<UpdateAddressRequest, Address>()
             .ForMember(destination => destination.AddressId, source => source.Ignore())
             .ForMember(destination => destination.Country, source =>
