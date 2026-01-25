@@ -82,9 +82,9 @@ public class CreateVetInteractorTests
             },
             User = new User()
             {
-                UserId = Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 UserName = "MyUser",
-                Password = "Password",
+                PasswordHash = "Password",
                 UserType = UserType.OrganisationManager
             },
             Title = Title.Dr,
@@ -118,9 +118,9 @@ public class CreateVetInteractorTests
                     },
                     User = new User()
                     {
-                        UserId = default,
+                        Id = default,
                         UserName = "MyUser",
-                        Password = "Password",
+                        PasswordHash = "Password",
                         UserType = UserType.OrganisationManager
                     },
                     Title = Title.Dr,
@@ -180,9 +180,9 @@ public class CreateVetInteractorTests
                         },
                         User = new User()
                         {
-                            UserId = default,
+                            Id = default,
                             UserName = "MyUser",
-                            Password = "Password",
+                            PasswordHash = "Password",
                             UserType = UserType.OrganisationManager
                         },
                         Title = Title.Dr,

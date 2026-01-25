@@ -75,10 +75,10 @@ public class DeleteOrganisationInteractorTests
                     },
                     User = new User()
                     {
-                        UserId = Guid.NewGuid(),
+                        Id = Guid.NewGuid(),
                         UserName = string.Empty,
                         UserType = UserType.OrganisationManager,
-                        Password = "Password"
+                        PasswordHash = "Password"
                     },
                     Title = Title.Dr,
                     MiddleName = "A.",

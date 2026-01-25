@@ -69,9 +69,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                         },
                         User = new()
                         {
-                            UserId = UserId,
+                            Id = UserId,
                             UserName = "MyUser",
-                            Password = "Password",
+                            PasswordHash = "Password",
                             UserType = UserType.OrganisationManager
                         },
                         FirstName = "Test",
@@ -110,9 +110,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                         },
                         User = new()
                         {
-                            UserId = UserId,
+                            Id = UserId,
                             UserName = "MyUser",
-                            Password = "Password",
+                            PasswordHash = "Password",
                             UserType = UserType.OrganisationManager
                         },
                         FirstName = "Test",

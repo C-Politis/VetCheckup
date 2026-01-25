@@ -55,9 +55,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                         },
                         User = new User()
                         {
-                            UserId = Guid.NewGuid(),
+                            Id = Guid.NewGuid(),
                             UserName = "MyUser",
-                            Password = "Password",
+                            PasswordHash = "Password",
                             UserType = UserType.OrganisationManager
                         },
                         Title = Title.None,
@@ -115,9 +115,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                         },
                                         User = new User()
                                         {
-                                            UserId = Guid.NewGuid(),
+                                            Id = Guid.NewGuid(),
                                             UserName = "MyUser",
-                                            Password = "Password",
+                                            PasswordHash = "Password",
                                             UserType = UserType.OrganisationManager
                                         },
                                         Title = Title.Dr,
@@ -147,9 +147,9 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
                                     },
                                     User = new User()
                                     {
-                                        UserId = Guid.NewGuid(),
+                                        Id = Guid.NewGuid(),
                                         UserName = "MyUser",
-                                        Password = "Password",
+                                        PasswordHash = "Password",
                                         UserType = UserType.OrganisationManager
                                     },
                                     Title = Title.None,

@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using VetCheckup.Application.Services.Persistence;
+using VetCheckup.Domain.Entities;
 
 namespace VetCheckup.Infrastructure.Data;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>, IApplicationDbContext
 {
     #region Constructors
 
@@ -20,17 +23,17 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     #region DbContext Methods
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-
     {
         base.OnConfiguring(optionsBuilder);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(AssemblyUtility.GetAssembly());
-
         base.OnModelCreating(modelBuilder);
+        
+        modelBuilder.ApplyConfigurationsFromAssembly(AssemblyUtility.GetAssembly());
     }
+
     #endregion
 
     #region IApplicationDbContext Implementation
@@ -92,5 +95,4 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     }
 
     #endregion
-
 }
