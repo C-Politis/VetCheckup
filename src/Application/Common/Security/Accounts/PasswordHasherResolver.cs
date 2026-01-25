@@ -24,16 +24,11 @@ public class PasswordHashResolver<TSource> : IValueResolver<TSource, User, strin
 
     public string? Resolve(TSource source, User destination, string? destMember, ResolutionContext context)
     {
-        var passwordProperty = typeof(TSource).GetProperty("Password");
-        if (passwordProperty == null)
-            return null;
+        var password = typeof(TSource).GetProperty("Password")?.GetValue(source) as string;
 
-        var password = passwordProperty.GetValue(source) as string;
-
-        if (string.IsNullOrWhiteSpace(password))
-            return null;
-
-        return this._passwordHasher.HashPassword(destination, password);
+        return string.IsNullOrWhiteSpace(password) 
+            ? null 
+            : _passwordHasher.HashPassword(destination, password);
     }
 
     #endregion
