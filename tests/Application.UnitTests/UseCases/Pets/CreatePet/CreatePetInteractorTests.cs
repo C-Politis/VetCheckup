@@ -72,7 +72,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                             Id = UserId,
                             UserName = "MyUser",
                             PasswordHash = "Password",
-                            UserType = UserType.OrganisationManager
+                            Role = Roles.OrganisationManager
                         },
                         FirstName = "Test",
                         LastName = "Owner",
@@ -113,7 +113,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
                             Id = UserId,
                             UserName = "MyUser",
                             PasswordHash = "Password",
-                            UserType = UserType.OrganisationManager
+                            Role = Roles.OrganisationManager
                         },
                         FirstName = "Test",
                         LastName = "Owner",

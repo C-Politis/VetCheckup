@@ -87,7 +87,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.OrganisationManagers.GetOrga
                     PasswordHash = string.Empty,
                     Id = Guid.NewGuid(),
                     UserName = string.Empty,
-                    UserType = UserType.OrganisationManager
+                    Role = Roles.OrganisationManager
                 },
                 OrganisationManagerId = _organisationManagerDto.OrganisationManagerId,
                 FirstName = "Gandalf",

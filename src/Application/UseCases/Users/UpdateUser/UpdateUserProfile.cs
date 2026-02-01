@@ -10,7 +10,7 @@ public class UpdateUserProfile: Profile
 
     public UpdateUserProfile()
         => CreateMap<UpdateUserRequest, User>()
-        .ForMember(destination => destination.UserType, source => source.Ignore())
+        .ForMember(destination => destination.Role, source => source.Ignore())
         .ForMember(destination => destination.Id, source => source.Ignore())
         .ForMember(destination => destination.PasswordHash, source => source.MapFrom<PasswordHashResolver<UpdateUserRequest>>())
         .ForMember(destination => destination.NormalizedUserName, source => source.Ignore())

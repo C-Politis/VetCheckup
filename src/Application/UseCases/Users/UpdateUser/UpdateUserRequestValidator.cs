@@ -18,7 +18,7 @@ public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
             .Must(p => p != null && IsHashed(p))
             .WithMessage("Password must be hashed.");
         
-        _ = this.RuleFor(e => e.UserType)
+        _ = this.RuleFor(e => e.Role)
             .IsInEnum();
 
         _ = this.RuleFor(e => e.Email)

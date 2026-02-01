@@ -10,7 +10,7 @@ public class CreateUserRequest
 
     public required string Password { get; set; }
 
-    public required UserType UserType { get; set; }
+    public required Roles Role { get; set; }
 
     #endregion
 

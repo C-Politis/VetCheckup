@@ -32,7 +32,7 @@ public class CreateOwnerRequestValidatorTests
         { 
             UserName = "MyUser",
             Password = "Password",
-            UserType = UserType.OrganisationManager
+            Role = Roles.OrganisationManager
         },
         FirstName = "Test",
         LastName = "Owner",

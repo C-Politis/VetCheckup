@@ -71,7 +71,7 @@ public class UpdateOrganisationManagerInteractorTests
                              Id = Guid.NewGuid(),
                              UserName = "OldUsername",
                              PasswordHash = "OldPassword",
-                             UserType = UserType.OrganisationManager
+                             Role = Roles.OrganisationManager
                          },
                          FirstName = "First",
                          LastName = "Last",

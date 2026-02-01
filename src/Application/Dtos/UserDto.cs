@@ -7,7 +7,7 @@ public class UserDto
 
     #region Properties
 
-    public required UserType UserType { get; set; }
+    public required Roles Role { get; set; }
 
     #endregion
 

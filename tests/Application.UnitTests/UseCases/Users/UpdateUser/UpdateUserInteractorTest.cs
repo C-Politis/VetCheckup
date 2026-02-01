@@ -28,7 +28,7 @@ public class UpdateUserInteractorTest
         _updateUserRequest = new UpdateUserRequest()
         {
             Username = "newusername",
-            UserType = UserType.OrganisationManager,
+            Role = Roles.OrganisationManager,
             Email = "bob@bobson.com",
             Password = "f4k3H4shV4lu3"
         };
@@ -56,7 +56,7 @@ public class UpdateUserInteractorTest
                     {
                         Id = Guid.NewGuid(),
                         UserName = string.Empty,
-                        UserType = UserType.OrganisationManager,
+                        Role = Roles.OrganisationManager,
                         PasswordHash = "Password"
                     },
                     MiddleName = string.Empty,
@@ -97,7 +97,7 @@ public class UpdateUserInteractorTest
         // Arrange
         var invalidRequest = new UpdateUserRequest
         {
-            Username = "newusername", UserType = UserType.OrganisationManager, Email = "", Password = ""
+            Username = "newusername", Role = Roles.OrganisationManager, Email = "", Password = ""
         };
         
         // Act & Assert

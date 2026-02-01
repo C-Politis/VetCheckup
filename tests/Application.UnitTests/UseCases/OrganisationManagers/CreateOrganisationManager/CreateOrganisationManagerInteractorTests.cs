@@ -32,7 +32,7 @@ public class CreateOrganisationManagerInteractorTests
             {
                 Password = string.Empty,
                 UserName = string.Empty,
-                UserType = UserType.OrganisationManager
+                Role = Roles.OrganisationManager
             },
             Address = new()
             {
@@ -65,7 +65,7 @@ public class CreateOrganisationManagerInteractorTests
                     Id = Guid.NewGuid(),
                     PasswordHash = string.Empty,
                     UserName = string.Empty,
-                    UserType = UserType.OrganisationManager
+                    Role = Roles.OrganisationManager
                 },
                 Address = new()
                 {

@@ -73,7 +73,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.GetVet
                             Id = Guid.NewGuid(),
                             UserName = "MyUser",
                             PasswordHash = "Password",
-                            UserType = UserType.OrganisationManager
+                            Role = Roles.OrganisationManager
                         },
                         Title = Title.Mr,
                         FirstName = "Gimli",

@@ -18,7 +18,7 @@ public class EntityRequestProfile : Profile
             .ForMember(destination => destination.ContactId, source => source.Ignore());
 
         _ = this.CreateMap<CreateUserRequest, User>()
-            .ForMember(destination => destination.UserType, source => source.Ignore())
+            .ForMember(destination => destination.Role, source => source.Ignore())
             .ForMember(destination => destination.Id, source => source.Ignore())
             .ForMember(destination => destination.PasswordHash, source => source.MapFrom<PasswordHashResolver<CreateUserRequest>>())
             .ForMember(destination => destination.NormalizedUserName, source => source.Ignore())

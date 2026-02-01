@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.DataProtection;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VetCheckup.Application.Services.Persistence;
-using VetCheckup.Domain.Entities;
 using VetCheckup.Infrastructure.Data;
+using VetCheckup.Application.Common.Authorization;
+using VetCheckup.Domain.Enums;
 
 namespace VetCheckup.Infrastructure;
 
@@ -14,7 +15,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        // The fallback of ConnectionStrings.DefaultConnection matches the JSON section in the consumers appsettings.json. If the file does not have it, this will be null.
         var connectionString = configuration.GetConnectionString("DefaultConnection") ?? configuration.GetSection("ConnectionStrings")["DefaultConnection"];
 
         Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
@@ -22,7 +22,6 @@ public static class DependencyInjection
         services.AddDbContext<IApplicationDbContext, ApplicationDbContext>((sp, options) =>
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
-
             options.UseSqlServer(connectionString);
         });
 
@@ -30,7 +29,11 @@ public static class DependencyInjection
         services.AddDataProtection();
 
         services.AddIdentityCore<User>()
+            .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+        
+        services.AddAuthorizationCore(ConfigurePolicies);
 
         using var _ServiceProvider = services.BuildServiceProvider();
         {
@@ -39,5 +42,24 @@ public static class DependencyInjection
         }
 
         return services;
+    }
+
+    private static void ConfigurePolicies(AuthorizationOptions options)
+    {
+        options.AddPolicy(Policies.CanManageVets, policy =>
+            policy.RequireRole(Roles.Administrator.ToString(), Roles.OrganisationManager.ToString()));
+
+        options.AddPolicy(Policies.CanManageOwners, policy =>
+            policy.RequireRole(Roles.Administrator.ToString(), Roles.OrganisationManager.ToString()));
+
+        options.AddPolicy(Policies.CanManagePets, policy =>
+            policy.RequireRole(Roles.Administrator.ToString(), Roles.OrganisationManager.ToString(), Roles.Owner.ToString()));
+
+        options.AddPolicy(Policies.CanManageOrganisations, policy =>
+            policy.RequireRole(Roles.Administrator.ToString()));
+
+        options.AddPolicy(Policies.CanViewMedicalRecords, policy =>
+            policy.RequireRole(Roles.Administrator.ToString(), Roles.Vet.ToString(), Roles.OrganisationManager.ToString()));
+
     }
 }

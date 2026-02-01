@@ -14,7 +14,7 @@ public class UpdateUserRequestValidatorTest
     private readonly UpdateUserRequest _updateUserRequest = new()
         {
             Username = "newusername",
-            UserType = UserType.OrganisationManager,
+            Role = Roles.OrganisationManager,
             Email = "bob@bobson.com",
             Password = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" // SHA-256 hash of an empty string
         };
@@ -178,24 +178,24 @@ public class UpdateUserRequestValidatorTest
     }
 
     [Theory]
-    [MemberData(nameof(UserType_ValidInput_NoValidationFailures_Data))]
-    public void UserType_ValidInput_NoValidationFailures(UserType userType)
+    [MemberData(nameof(Role_ValidInput_NoValidationFailures_Data))]
+    public void Role_ValidInput_NoValidationFailures(Roles Role)
     {
         //Arrange
-        _updateUserRequest.UserType = userType;
+        _updateUserRequest.Role = Role;
         
         //Act
         var result = _validator.Validate(_updateUserRequest);
         
         //Assert
         result.Errors
-            .Where(e => e.PropertyName.Equals(nameof(UpdateUserRequest.UserType), StringComparison.OrdinalIgnoreCase))
+            .Where(e => e.PropertyName.Equals(nameof(UpdateUserRequest.Role), StringComparison.OrdinalIgnoreCase))
             .Should().BeEmpty();
     }
     
-    public static IEnumerable<object[]> UserType_ValidInput_NoValidationFailures_Data()
+    public static IEnumerable<object[]> Role_ValidInput_NoValidationFailures_Data()
     {
-        foreach (UserType userType in Enum.GetValues(typeof(UserType)))
+        foreach (Roles userType in Enum.GetValues(typeof(Roles)))
             yield return new object[] { userType };
     }
     

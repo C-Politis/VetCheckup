@@ -51,7 +51,7 @@ public class DeleteOwnerInteractorTests
                         Id =Guid.NewGuid(),
                         UserName = "MyUser",
                         PasswordHash = "Password",
-                        UserType = UserType.OrganisationManager
+                        Role = Roles.OrganisationManager
                     },
                     FirstName = "Test",
                     LastName = "Owner",
