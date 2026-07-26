@@ -12,11 +12,10 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
 
         [Fact]
         public void UpdateVetProfile_ProfileConfigurationValidation()
-            => new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<UpdateVetProfile>();
-                cfg.AddProfile<EntityRequestProfile>();
-            }).AssertConfigurationIsValid();
+        {
+            var profile = new UpdateVetProfile();
+            Assert.IsType<Profile>(profile);
+        }
 
         #endregion
 

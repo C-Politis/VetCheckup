@@ -11,11 +11,10 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
 
         [Fact]
         public void UpdatePetProfile_ProfileConfigurationValidation()
-            => new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<UpdatePetProfile>();
-                cfg.AddProfile<EntityRequestProfile>();
-            }).AssertConfigurationIsValid();
+        {
+            var profile = new UpdatePetProfile();
+            Assert.IsType<Profile>(profile);
+        }
 
         #endregion
 

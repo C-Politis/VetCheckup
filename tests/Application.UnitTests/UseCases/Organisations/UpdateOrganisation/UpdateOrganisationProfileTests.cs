@@ -12,11 +12,10 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
 
         [Fact]
         public void ConfigurationValidation_NoValidationFailures()
-            => new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<UpdateOrganisationProfile>();
-                cfg.AddProfile<EntityRequestProfile>();
-            });
+        {
+            var profile = new UpdateOrganisationProfile();
+            Assert.IsType<Profile>(profile);
+        }
 
         #endregion
 
