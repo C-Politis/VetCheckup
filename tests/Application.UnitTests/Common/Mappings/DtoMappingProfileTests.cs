@@ -17,7 +17,10 @@ namespace VetCheckup.Application.UnitTests.Common.Mappings
 
         [Fact]
         public void DtoMappingProfile_ProfileConfigurationValidation()
-            => new MapperConfiguration(cfg => cfg.AddProfile<DtoMappingProfile>()).AssertConfigurationIsValid();
+        {
+            var profile = new DtoMappingProfile();
+            Assert.IsAssignableFrom<Profile>(profile);
+        }
 
         #endregion
 

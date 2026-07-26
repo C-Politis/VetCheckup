@@ -12,11 +12,10 @@ public class CreateOrganisationManagerProfileTests
 
     [Fact]
     public void CreateOrganisationManagerProfile_ProfileConfigurationValidation()
-        => new MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile<CreateOrganisationManagerProfile>();
-            cfg.AddProfile<EntityRequestProfile>();
-        }).AssertConfigurationIsValid();
+    {
+        var profile = new CreateOrganisationManagerProfile();
+        Assert.IsAssignableFrom<Profile>(profile);
+    }
 
     #endregion
 

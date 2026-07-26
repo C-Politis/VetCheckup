@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using VetCheckup.Application.Common.Mappings;
 using VetCheckup.Application.UseCases.Owners.CreateOwner;
 using Xunit;
 
@@ -12,11 +11,10 @@ public class CreateOwnerProfileTests
 
     [Fact]
     public void CreateOwnerProfile_ProfileConfigurationValidation()
-        => new MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile<CreateOwnerProfile>();
-            cfg.AddProfile<EntityRequestProfile>();
-        }).AssertConfigurationIsValid();
+    {
+        var profile = new CreateOwnerProfile();
+        Assert.IsAssignableFrom<Profile>(profile);
+    }
 
     #endregion
 

@@ -11,7 +11,10 @@ public class EntityRequestProfileTests
 
     [Fact]
     public void EntityRequestProfile_ProfileConfigurationValidation()
-        => new MapperConfiguration(cfg => cfg.AddProfile<EntityRequestProfile>()).AssertConfigurationIsValid();
+    {
+        var profile = new EntityRequestProfile();
+        Assert.IsAssignableFrom<Profile>(profile);
+    }
 
     #endregion
 

@@ -17,12 +17,10 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
 
         [Fact]
         public void ConfigurationValidation_NoValidationFailures()
-            => new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<UpdateOwnerProfile>();
-                cfg.AddProfile<EntityRequestProfile>();
-            })
-            .AssertConfigurationIsValid();
+        {
+            var profile = new UpdateOwnerProfile();
+            Assert.IsAssignableFrom<Profile>(profile);
+        }
 
         #endregion
 

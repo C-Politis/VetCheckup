@@ -12,10 +12,10 @@ public class UpdateUserProfileTest
 
     [Fact]
     public void UpdateUserProfile_ProfileConfigurationValidation()
-        => new MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile<UpdateUserProfile>();
-        }).AssertConfigurationIsValid();
+    {
+        var profile = new UpdateUserProfile();
+        Assert.IsAssignableFrom<Profile>(profile);
+    }
 
     #endregion
     

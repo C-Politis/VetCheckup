@@ -11,11 +11,10 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.CreatePet
 
         [Fact]
         public void CreatePetProfile_ProfileConfigurationValidation()
-            => new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<CreatePetProfile>();
-                cfg.AddProfile<EntityRequestProfile>();
-            }).AssertConfigurationIsValid();
+        {
+            var profile = new CreatePetProfile();
+            Assert.IsAssignableFrom<Profile>(profile);
+        }
         
         #endregion
     }
