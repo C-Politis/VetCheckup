@@ -31,7 +31,7 @@ public class CreateOrganisationManagerRequestValidatorTests
         {
             Password = string.Empty,
             UserName = string.Empty,
-            UserType = UserType.OrganisationManager
+            Role = Roles.OrganisationManager
         },
         FirstName = "Test",
         LastName = "Owner",

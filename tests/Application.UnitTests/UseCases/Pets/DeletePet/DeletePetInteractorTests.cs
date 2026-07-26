@@ -66,7 +66,7 @@ public class DeletePetInteractorTests
                         Id = default,
                         UserName = "MyUser",
                         PasswordHash = "Password",
-                        UserType = UserType.OrganisationManager
+                        Role = Roles.OrganisationManager
                     },
                 }
             } }.AsQueryable());

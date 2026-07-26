@@ -11,7 +11,7 @@ public class UpdateUserRequest : IRequest
     
     public string? Password { get; set; }
     
-    public UserType UserType { get; set; }
+    public Roles Role { get; set; }
     
     public required string Email { get; set; }
 

@@ -57,7 +57,7 @@ public class DeleteVetInteractorTests
                         Id = default,
                         UserName = "MyUser",
                         PasswordHash = "Password",
-                        UserType = UserType.OrganisationManager
+                        Role = Roles.OrganisationManager
                     },
                     Title = Title.None,
                     MiddleName = "null",

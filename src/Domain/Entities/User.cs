@@ -7,7 +7,7 @@ public class User : IdentityUser<Guid>
 
     #region Properties
 
-    public required UserType UserType { get; set; }
+    public required Roles Role { get; set; }
     
     #endregion
 

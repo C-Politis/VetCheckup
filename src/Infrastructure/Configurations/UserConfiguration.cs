@@ -10,8 +10,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.ToTable("Users");
         
-        builder.Property(e => e.UserType)
-            .HasConversion(propVal => (int)propVal, dbVal => (UserType)dbVal)
+        builder.Property(e => e.Role)
+            .HasConversion(propVal => (int)propVal, dbVal => (Roles)dbVal)
             .HasColumnType("int")
             .IsRequired();
     }

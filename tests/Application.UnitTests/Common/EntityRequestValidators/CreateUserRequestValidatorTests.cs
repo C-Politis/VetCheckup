@@ -16,7 +16,7 @@ public class CreateUserRequestValidatorTests
     private readonly CreateUserRequest _createUserRequest = new CreateUserRequest()
     {
         UserName = string.Empty,
-        UserType = UserType.OrganisationManager,
+        Role = Roles.OrganisationManager,
         Password = "Password"
     };
 
@@ -53,26 +53,26 @@ public class CreateUserRequestValidatorTests
     }
 
     [Theory]
-    [MemberData(nameof(UserType_ValidInput_NoValidationFailures_TestData))]
-    public void UserType_ValidInput_NoValidationFailures(UserType UserType)
+    [MemberData(nameof(Role_ValidInput_NoValidationFailures_TestData))]
+    public void Role_ValidInput_NoValidationFailures(Roles Role)
     {
         // Arrange
-        _createUserRequest.UserType = UserType;
+        _createUserRequest.Role = Role;
 
         // Act
         var result = _createUserRequestValidator.Validate(_createUserRequest);
 
         // Assert
-        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateUserRequest.UserType), StringComparison.OrdinalIgnoreCase))
+        result.Errors.Where(e => e.PropertyName.Equals(nameof(CreateUserRequest.Role), StringComparison.OrdinalIgnoreCase))
             .Should().BeEmpty();
     }
 
-    public static IEnumerable<object[]> UserType_ValidInput_NoValidationFailures_TestData()
+    public static IEnumerable<object[]> Role_ValidInput_NoValidationFailures_TestData()
         => new[]
         {
-                new object[] { UserType.OrganisationManager },
-                new object[] { UserType.Vet },
-                new object[] { UserType.Owner }
+                new object[] { Roles.OrganisationManager },
+                new object[] { Roles.Vet },
+                new object[] { Roles.Owner }
         };
 
 

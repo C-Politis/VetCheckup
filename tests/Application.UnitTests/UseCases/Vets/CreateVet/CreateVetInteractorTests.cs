@@ -45,7 +45,7 @@ public class CreateVetInteractorTests
             {
                 UserName = "MyUser",
                 Password = "Password",
-                UserType = UserType.OrganisationManager
+                Role = Roles.OrganisationManager
             },
             Title = Title.Dr,
             FirstName = "New",
@@ -85,7 +85,7 @@ public class CreateVetInteractorTests
                 Id = Guid.NewGuid(),
                 UserName = "MyUser",
                 PasswordHash = "Password",
-                UserType = UserType.OrganisationManager
+                Role = Roles.OrganisationManager
             },
             Title = Title.Dr,
             FirstName = "New",
@@ -121,7 +121,7 @@ public class CreateVetInteractorTests
                         Id = default,
                         UserName = "MyUser",
                         PasswordHash = "Password",
-                        UserType = UserType.OrganisationManager
+                        Role = Roles.OrganisationManager
                     },
                     Title = Title.Dr,
                     FirstName = "New",
@@ -183,7 +183,7 @@ public class CreateVetInteractorTests
                             Id = default,
                             UserName = "MyUser",
                             PasswordHash = "Password",
-                            UserType = UserType.OrganisationManager
+                            Role = Roles.OrganisationManager
                         },
                         Title = Title.Dr,
                         MiddleName = string.Empty,
