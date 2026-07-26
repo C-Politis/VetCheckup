@@ -14,7 +14,7 @@ public class CreateOrganisationManagerProfileTests
     public void CreateOrganisationManagerProfile_ProfileConfigurationValidation()
     {
         var profile = new CreateOrganisationManagerProfile();
-        Assert.IsType<Profile>(profile);
+        Assert.IsAssignableFrom<Profile>(profile);
     }
 
     #endregion

@@ -13,7 +13,7 @@ public class CreateOwnerProfileTests
     public void CreateOwnerProfile_ProfileConfigurationValidation()
     {
         var profile = new CreateOwnerProfile();
-        Assert.IsType<Profile>(profile);
+        Assert.IsAssignableFrom<Profile>(profile);
     }
 
     #endregion

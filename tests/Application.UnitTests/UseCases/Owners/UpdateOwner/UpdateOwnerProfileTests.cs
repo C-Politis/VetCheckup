@@ -19,7 +19,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Owners.UpdateOwner
         public void ConfigurationValidation_NoValidationFailures()
         {
             var profile = new UpdateOwnerProfile();
-            Assert.IsType<Profile>(profile);
+            Assert.IsAssignableFrom<Profile>(profile);
         }
 
         #endregion

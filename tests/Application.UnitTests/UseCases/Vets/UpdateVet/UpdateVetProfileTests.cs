@@ -14,7 +14,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Vets.UpdateVet
         public void UpdateVetProfile_ProfileConfigurationValidation()
         {
             var profile = new UpdateVetProfile();
-            Assert.IsType<Profile>(profile);
+            Assert.IsAssignableFrom<Profile>(profile);
         }
 
         #endregion

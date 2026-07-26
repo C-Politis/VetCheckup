@@ -13,7 +13,7 @@ public class EntityRequestProfileTests
     public void EntityRequestProfile_ProfileConfigurationValidation()
     {
         var profile = new EntityRequestProfile();
-        Assert.IsType<Profile>(profile);
+        Assert.IsAssignableFrom<Profile>(profile);
     }
 
     #endregion

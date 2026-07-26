@@ -14,7 +14,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Organisations.UpdateOrganisa
         public void ConfigurationValidation_NoValidationFailures()
         {
             var profile = new UpdateOrganisationProfile();
-            Assert.IsType<Profile>(profile);
+            Assert.IsAssignableFrom<Profile>(profile);
         }
 
         #endregion

@@ -13,7 +13,7 @@ namespace VetCheckup.Application.UnitTests.UseCases.Pets.UpdatePet
         public void UpdatePetProfile_ProfileConfigurationValidation()
         {
             var profile = new UpdatePetProfile();
-            Assert.IsType<Profile>(profile);
+            Assert.IsAssignableFrom<Profile>(profile);
         }
 
         #endregion

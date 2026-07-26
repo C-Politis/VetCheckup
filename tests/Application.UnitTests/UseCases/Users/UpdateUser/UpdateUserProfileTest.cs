@@ -14,7 +14,7 @@ public class UpdateUserProfileTest
     public void UpdateUserProfile_ProfileConfigurationValidation()
     {
         var profile = new UpdateUserProfile();
-        Assert.IsType<Profile>(profile);
+        Assert.IsAssignableFrom<Profile>(profile);
     }
 
     #endregion
