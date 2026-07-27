@@ -1,0 +1,104 @@
+name: Publish NuGet packages after merge
+
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ closed ]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  publish:
+    # A closed PR can also be declined; publish only after an actual merge.
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    environment: nuget
+    env:
+      NUGET_SOURCE: ${{ secrets.NUGET_SOURCE }}
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      GH_TOKEN: ${{ github.token }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          # A closed pull-request workflow otherwise checks out the PR ref.
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore, build, and test
+        run: |
+          dotnet restore
+          dotnet build --configuration Release --no-restore -p:GeneratePackageOnBuild=false
+          dotnet test --configuration Release --no-build
+
+      - name: Select packages and calculate version
+        id: packages
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          # The source PackageVersion is the release baseline. The commit height
+          # creates a new patch version for every publish without editing csproj files.
+          [xml]$project = Get-Content 'src/Domain/Domain.csproj'
+          $baseline = [version]$project.Project.PropertyGroup.PackageVersion
+          $height = [int](git rev-list --count HEAD)
+          $version = "$($baseline.Major).$($baseline.Minor).$($baseline.Build + $height)"
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+          # Query the PR itself rather than diffing main: another merge may land
+          # between this PR's merge and the workflow starting.
+          $changedFiles = @(gh api --paginate "repos/$env:GITHUB_REPOSITORY/pulls/$env:PR_NUMBER/files" --jq '.[].filename')
+
+          $packages = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+          if ($changedFiles -contains 'all' -or $changedFiles | Where-Object { $_ -match '^(Directory\.Build\.props|Directory\.Packages\.props|global\.json)$' }) {
+            @('Domain', 'Application', 'Infrastructure') | ForEach-Object { [void]$packages.Add($_) }
+          }
+          else {
+            # Publish dependants as well: Infrastructure -> Application -> Domain.
+            if ($changedFiles | Where-Object { $_ -like 'src/Domain/*' }) {
+              @('Domain', 'Application', 'Infrastructure') | ForEach-Object { [void]$packages.Add($_) }
+            }
+            if ($changedFiles | Where-Object { $_ -like 'src/Application/*' }) {
+              @('Application', 'Infrastructure') | ForEach-Object { [void]$packages.Add($_) }
+            }
+            if ($changedFiles | Where-Object { $_ -like 'src/Infrastructure/*' }) {
+              [void]$packages.Add('Infrastructure')
+            }
+          }
+
+          $selected = $packages | Sort-Object
+          "selected=$($selected -join ',')" >> $env:GITHUB_OUTPUT
+          "publish=$($selected.Count -gt 0)" >> $env:GITHUB_OUTPUT
+
+      - name: Pack libraries
+        if: steps.packages.outputs.publish == 'True'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($package in '${{ steps.packages.outputs.selected }}' -split ',') {
+            dotnet pack "src/$package/$package.csproj" --configuration Release --no-build --output ./packages -p:GeneratePackageOnBuild=false -p:PackageVersion=${{ steps.packages.outputs.version }}
+          }
+
+      - name: Push selected packages
+        if: steps.packages.outputs.publish == 'True'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_SOURCE) -or [string]::IsNullOrWhiteSpace($env:NUGET_API_KEY)) {
+            throw 'Set the NUGET_SOURCE and NUGET_API_KEY secrets before publishing.'
+          }
+
+          $selected = '${{ steps.packages.outputs.selected }}' -split ','
+          foreach ($package in $selected) {
+            $path = Get-ChildItem "packages/VetCheckup.$package.${{ steps.packages.outputs.version }}.nupkg" | Select-Object -First 1 -ExpandProperty FullName
+            dotnet nuget push $path --source $env:NUGET_SOURCE --api-key $env:NUGET_API_KEY --skip-duplicate
+          }
