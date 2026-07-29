@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using VetCheckup.Application.Services.Persistence;
-using VetCheckup.Infrastructure.Data;
 using VetCheckup.Application.Common.Authorization;
+using VetCheckup.Application.Common.Interfaces;
+using VetCheckup.Application.Services.Persistence;
 using VetCheckup.Domain.Enums;
+using VetCheckup.Infrastructure.Data;
+using VetCheckup.Infrastructure.Identity;
 
 namespace VetCheckup.Infrastructure;
 
@@ -27,19 +29,17 @@ public static class DependencyInjection
 
         services.AddSingleton(TimeProvider.System);
         services.AddDataProtection();
+        services.AddHttpContextAccessor();
 
         services.AddIdentityCore<User>()
             .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        
-        services.AddAuthorizationCore(ConfigurePolicies);
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddScoped<IIdentityService, IdentityService>();
+        services.AddScoped<IUser, CurrentUserService>();
 
-        using var _ServiceProvider = services.BuildServiceProvider();
-        {
-            var _DbContext = _ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            _DbContext.Database.Migrate();
-        }
+        services.AddAuthorizationCore(ConfigurePolicies);
 
         return services;
     }
