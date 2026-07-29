@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using VetCheckup.Domain.Entities;
+using VetCheckup.Application;
 using VetCheckup.Infrastructure;
-using VetCheckup.Infrastructure.Data;
 using VetCheckup.Infrastructure.Identity;
 
 var builder = Host.CreateDefaultBuilder(args);
@@ -12,11 +11,8 @@ builder.ConfigureServices((hostContext, services) =>
 {
     var configuration = hostContext.Configuration;
 
+    services.AddApplicationServices();
     services.AddInfrastructureServices(configuration);
-
-    services.AddIdentityCore<User>()
-        .AddRoles<IdentityRole<Guid>>()
-        .AddEntityFrameworkStores<ApplicationDbContext>();
 });
 
 var app = builder.Build();  

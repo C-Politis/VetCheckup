@@ -11,11 +11,11 @@ public class CreateVetProfileTests
     #region Profile Configuration Tests
 
     [Fact]
-        public void CreateVetProfile_ProfileConfigurationValidation()
-        {
-            var profile = new CreateVetProfile();
-            Assert.IsAssignableFrom<Profile>(profile);
-        }
+    public void CreateVetProfile_ProfileConfigurationValidation()
+    {
+        var profile = new CreateVetProfile();
+        Assert.IsAssignableFrom<Profile>(profile);
+    }
 
     #endregion
 
