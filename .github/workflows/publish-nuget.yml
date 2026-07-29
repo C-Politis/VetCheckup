@@ -46,12 +46,10 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
 
-          # The source PackageVersion is the release baseline. The commit height
-          # creates a new patch version for every publish without editing csproj files.
+          # Use the version defined in the project file directly. Update the
+          # PackageVersion property manually when you want the next release.
           [xml]$project = Get-Content 'src/Domain/Domain.csproj'
-          $baseline = [version]$project.Project.PropertyGroup.PackageVersion
-          $height = [int](git rev-list --count HEAD)
-          $version = "$($baseline.Major).$($baseline.Minor).$($baseline.Build + $height)"
+          $version = [string]$project.Project.PropertyGroup.PackageVersion
           "version=$version" >> $env:GITHUB_OUTPUT
 
           # Query the PR itself rather than diffing main: another merge may land
