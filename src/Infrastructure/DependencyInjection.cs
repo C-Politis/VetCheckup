@@ -41,12 +41,6 @@ public static class DependencyInjection
 
         services.AddAuthorizationCore(ConfigurePolicies);
 
-        using var _ServiceProvider = services.BuildServiceProvider();
-        {
-            var _DbContext = _ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            _DbContext.Database.Migrate();
-        }
-
         return services;
     }
 
