@@ -296,11 +296,6 @@ namespace VetCheckup.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<Guid>("OrganisationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
-
                     b.Property<string>("Suffix")
                         .IsRequired()
                         .HasColumnType("varchar(10)");
@@ -320,9 +315,6 @@ namespace VetCheckup.Infrastructure.Migrations
                         .IsUnique();
 
                     b.HasIndex("ContactId")
-                        .IsUnique();
-
-                    b.HasIndex("OrganisationId")
                         .IsUnique();
 
                     b.HasIndex("UserId")
@@ -660,7 +652,7 @@ namespace VetCheckup.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("VetCheckup.Domain.Entities.OrganisationManager", "OrganisationManager")
-                        .WithOne()
+                        .WithOne("Organisation")
                         .HasForeignKey("VetCheckup.Domain.Entities.Organisation", "OrganisationManagerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -686,12 +678,6 @@ namespace VetCheckup.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VetCheckup.Domain.Entities.Organisation", "Organisation")
-                        .WithOne()
-                        .HasForeignKey("VetCheckup.Domain.Entities.OrganisationManager", "OrganisationId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
                     b.HasOne("VetCheckup.Domain.Entities.User", "User")
                         .WithOne()
                         .HasForeignKey("VetCheckup.Domain.Entities.OrganisationManager", "UserId")
@@ -701,8 +687,6 @@ namespace VetCheckup.Infrastructure.Migrations
                     b.Navigation("Address");
 
                     b.Navigation("ContactDetails");
-
-                    b.Navigation("Organisation");
 
                     b.Navigation("User");
                 });
@@ -813,6 +797,11 @@ namespace VetCheckup.Infrastructure.Migrations
             modelBuilder.Entity("VetCheckup.Domain.Entities.Organisation", b =>
                 {
                     b.Navigation("VetOrganisations");
+                });
+
+            modelBuilder.Entity("VetCheckup.Domain.Entities.OrganisationManager", b =>
+                {
+                    b.Navigation("Organisation");
                 });
 
             modelBuilder.Entity("VetCheckup.Domain.Entities.Owner", b =>

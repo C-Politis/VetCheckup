@@ -25,6 +25,11 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
+
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=VetCheckupDb");
+        }
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
