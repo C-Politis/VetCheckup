@@ -6,7 +6,7 @@ on:
     types: [ closed ]
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: read
 
 jobs:
@@ -46,11 +46,49 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
 
-          # Use the shared version defined in Directory.Build.props directly.
-          # Update the PackageVersion property there when you want the next release.
+          function Get-VersionParts([string]$versionText) {
+            $cleanVersion = $versionText.TrimStart('v')
+            $parts = $cleanVersion.Split('.')
+
+            if ($parts.Count -ne 3) {
+              throw "Package version '$versionText' must use major.minor.patch format."
+            }
+
+            return [pscustomobject]@{
+              Major = [int]$parts[0]
+              Minor = [int]$parts[1]
+              Patch = [int]$parts[2]
+            }
+          }
+
+          function Format-Version($parts) {
+            return "{0}.{1}.{2}" -f $parts.Major, $parts.Minor, $parts.Patch
+          }
+
+          function Increment-Patch([string]$versionText) {
+            $parts = Get-VersionParts $versionText
+            $parts.Patch++
+            return Format-Version $parts
+          }
+
+          # Use the current package version as the seed for the first publish.
+          # After a successful publish we create a git tag for that version, and
+          # the next run increments from the latest published tag automatically.
           [xml]$project = Get-Content 'Directory.Build.props'
-          $version = [string]$project.Project.PropertyGroup.PackageVersion
+          $seedVersion = [string]$project.Project.PropertyGroup.PackageVersion
+
+          git fetch --tags --force
+          $latestTag = git tag --list 'v*' --sort=-version:refname | Select-Object -First 1
+
+          if ([string]::IsNullOrWhiteSpace($latestTag)) {
+            $version = $seedVersion
+          }
+          else {
+            $version = Increment-Patch $latestTag
+          }
+
           "version=$version" >> $env:GITHUB_OUTPUT
+          "tag=v$version" >> $env:GITHUB_OUTPUT
 
           # Query the PR itself rather than diffing main: another merge may land
           # between this PR's merge and the workflow starting.
@@ -100,3 +138,22 @@ jobs:
             $path = Get-ChildItem "packages/VetCheckup.$package.${{ steps.packages.outputs.version }}.nupkg" | Select-Object -First 1 -ExpandProperty FullName
             dotnet nuget push $path --source $env:NUGET_SOURCE --api-key $env:NUGET_API_KEY --skip-duplicate
           }
+
+      - name: Tag published version
+        if: steps.packages.outputs.publish == 'True'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          $tagName = '${{ steps.packages.outputs.tag }}'
+          git fetch --tags --force
+
+          if (git show-ref --tags --verify --quiet "refs/tags/$tagName") {
+            Write-Host "Tag $tagName already exists; skipping."
+            exit 0
+          }
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag $tagName
+          git push origin $tagName
