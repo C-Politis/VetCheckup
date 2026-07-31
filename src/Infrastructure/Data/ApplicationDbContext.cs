@@ -69,18 +69,17 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
 
     async Task IApplicationDbContext.SaveChangesAsync(CancellationToken cancellationToken)
     {
+        await using var transaction = await this.Database.BeginTransactionAsync(cancellationToken);
         try
         {
-            using var _Transaction = await this.Database.BeginTransactionAsync(cancellationToken);
-            {
-                DeleteVetAddressAndContact();
+            DeleteVetAddressAndContact();
 
-                await base.SaveChangesAsync(cancellationToken);
-            }
+            await base.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
         }
         catch
         {
-            await this.Database.RollbackTransactionAsync(cancellationToken);
+            await transaction.RollbackAsync(cancellationToken);
             throw;
         }
     }
