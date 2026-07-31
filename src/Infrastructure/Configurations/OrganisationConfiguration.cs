@@ -54,7 +54,7 @@ public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
             .HasDefaultValueSql("NEWID()");
 
         builder.HasOne(e => e.OrganisationManager)
-            .WithOne()
+            .WithOne(e => e.Organisation)
             .HasForeignKey<Organisation>("OrganisationManagerId")
             .IsRequired()
             .OnDelete(DeleteBehavior.NoAction);

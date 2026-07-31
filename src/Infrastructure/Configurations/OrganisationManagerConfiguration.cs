@@ -52,17 +52,6 @@ public class OrganisationManagerConfiguration : IEntityTypeConfiguration<Organis
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.Property<Guid>("OrganisationId")
-            .HasColumnType("uniqueidentifier")
-            .IsRequired()
-            .HasDefaultValueSql("NEWID()");
-        
-        builder.HasOne(e => e.Organisation)
-            .WithOne()
-            .HasForeignKey<OrganisationManager>("OrganisationId")
-            .IsRequired()
-            .OnDelete(DeleteBehavior.ClientCascade);
-        
         builder.Property(e => e.DateOfBirth)
             .IsRequired()
             .HasColumnType("datetime2");
