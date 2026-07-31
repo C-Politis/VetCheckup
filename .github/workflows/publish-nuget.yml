@@ -46,9 +46,9 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
 
-          # Use the version defined in the project file directly. Update the
-          # PackageVersion property manually when you want the next release.
-          [xml]$project = Get-Content 'src/Domain/Domain.csproj'
+          # Use the shared version defined in Directory.Build.props directly.
+          # Update the PackageVersion property there when you want the next release.
+          [xml]$project = Get-Content 'Directory.Build.props'
           $version = [string]$project.Project.PropertyGroup.PackageVersion
           "version=$version" >> $env:GITHUB_OUTPUT
 
