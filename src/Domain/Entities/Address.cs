@@ -3,7 +3,7 @@
 public class Address
 {
 
-    #region Properties
+    #region Properties 
 
     public required Guid AddressId { get; set; }
 
