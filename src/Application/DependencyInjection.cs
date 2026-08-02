@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using VetCheckup.Application.Common.Behaviours;
 
@@ -10,6 +10,7 @@ public static class DependencyInjection
     {
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly());
 
         services.AddMediatR(cfg =>
         {
@@ -23,3 +24,4 @@ public static class DependencyInjection
         return services;
     }
 }
+
